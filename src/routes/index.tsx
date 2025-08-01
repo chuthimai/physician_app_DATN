@@ -1,6 +1,8 @@
 import {createBrowserRouter} from "react-router";
 import {getRoleRoutes} from "./get_role_routes.ts";
 import App from "../App.tsx";
+import LoginPage from "../features/auth/pages/LoginPage.tsx";
+import ForgotPasswordPage from "../features/auth/pages/ForgotPasswordPage.tsx";
 
 export function generateRoutes(role: string) {
     return createBrowserRouter([
@@ -11,6 +13,10 @@ export function generateRoutes(role: string) {
                 {
                     path: "trang-chu",
                     element: <div>Trang chu</div>,
+                },
+                {
+                    path: "doi-mat-khau",
+                    element: <div>Đổi mật khẩu</div>,
                 },
                 {
                     path: "thong-tin-ca-nhan",
@@ -25,15 +31,15 @@ export function generateRoutes(role: string) {
         },
         {
             path: "/login",
-            element: <div>Login</div>
+            element: <LoginPage/>
         },
         {
             path: "/logout",
             element: <div>Logout</div>
         },
         {
-            path: "/doi-mat-khau",
-            element: <div>Doi mat khau</div>
+            path: "/quen-mat-khau",
+            element: <ForgotPasswordPage />
         }
     ])
 }

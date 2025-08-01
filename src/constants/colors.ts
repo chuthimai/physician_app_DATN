@@ -11,7 +11,12 @@ export const Colors = {
     TextNeutralLight: 'text-gray-400',
 
     // Button
-    BgButtonEdit: 'bg-teal-700',
+    BgButtonDelete: 'bg-red-600',
+    BgButtonSave: 'bg-lime-600',
+    BgButtonCancel: 'bg-gray-300',
+    ButtonDeleteHover: 'hover:bg-red-700',
+    ButtonSaveHover: 'hover:bg-lime-700',
+    ButtonCancelHover: 'hover:bg-gray-200',
 
     // Border
     BorderDefault: 'border-gray-300',
@@ -28,6 +33,8 @@ export const Colors = {
     TextTertiary: 'text-teal-700',
     TextWhite: 'text-white',
     TextBlack: 'text-black',
+    TextLink: 'text-lime-700',
+    TextLinkHover: 'text-lime-800',
 
     // States
     TextSuccess: 'text-teal-700',

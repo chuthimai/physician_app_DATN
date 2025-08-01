@@ -12,6 +12,7 @@ type RoleMenuConfig = {
 
 const generalItems: Item[] = [
     {label: "Trang chủ", path: "/trang-chu"},
+    {label: "Đổi mật khẩu", path: "/doi-mat-khau"},
     {
         label: "Cá nhân",
         children: [
