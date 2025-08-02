@@ -12,11 +12,24 @@ export const Colors = {
 
     // Button
     BgButtonDelete: 'bg-red-600',
-    BgButtonSave: 'bg-lime-600',
+    BgButtonSave: 'bg-lime-700',
     BgButtonCancel: 'bg-gray-300',
-    ButtonDeleteHover: 'hover:bg-red-700',
-    ButtonSaveHover: 'hover:bg-lime-700',
-    ButtonCancelHover: 'hover:bg-gray-200',
+    BgButtonSearch: 'bg-gray-600',
+    BgButtonScan: 'bg-lime-400',
+
+    // Button Hover
+    BgButtonDeleteHover: 'hover:bg-red-700',
+    BgButtonSaveHover: 'hover:bg-lime-800',
+    BgButtonCancelHover: 'hover:bg-gray-200',
+    BgButtonSearchHover: 'hover:bg-gray-700',
+    BgButtonScanHover: 'hover:bg-lime-500',
+
+    // Text Button
+    TextButtonDelete: 'text-white',
+    TextButtonSave: 'text-white',
+    TextButtonCancel: 'text-black',
+    TextButtonSearch: 'text-white',
+    TextButtonScan: 'text-white',
 
     // Border
     BorderDefault: 'border-gray-300',

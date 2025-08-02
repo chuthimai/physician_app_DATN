@@ -5,7 +5,7 @@ import SideBar from "./components/sidebar/SideBar.tsx";
 
 function App() {
     return (
-        <div className="flex h-screen min-w-[1024px] overflow-x-auto">
+        <div className="flex gap-8 h-screen min-w-[1024px] overflow-x-auto">
             <div className="w-1/5 h-screen bg-neutral-light rounded-r-2xl shadow-2xl flex-shrink-0">
                 <SideBar/>
             </div>

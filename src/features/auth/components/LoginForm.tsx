@@ -11,6 +11,7 @@ export function LoginForm() {
         register,
         handleSubmit,
         formState: {errors, isSubmitting},
+        reset
     } = useForm<LoginInputs>();
 
 
@@ -19,6 +20,7 @@ export function LoginForm() {
         // Giả lập API
         await new Promise((resolve) => setTimeout(resolve, 2000));
         console.log("Submitted!");
+        reset();
     };
 
     return (
@@ -43,7 +45,7 @@ export function LoginForm() {
                 <label className="block text-gray-600 mb-1">Mật khẩu</label>
                 <input
                     type="password"
-                    className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-dark-400"
+                    className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
                     {...register("password", {
                         required: "Mật khẩu không được để trống",
                         validate: (value) => value.length >= 8 || "Mật khẩu phải có ít nhất 8 ký tự"
@@ -55,7 +57,7 @@ export function LoginForm() {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full ${Colors.BgButtonSave} ${Colors.ButtonSaveHover} text-white py-2 rounded-md font-semibold`}
+                className={`w-full ${Colors.BgButtonSave} ${Colors.BgButtonSaveHover} text-white py-2 rounded-md font-semibold`}
             >
                 {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
             </button>

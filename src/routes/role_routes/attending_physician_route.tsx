@@ -1,10 +1,11 @@
 import type {Route} from "../types.ts";
+import {CreatePatientRecordPage} from "../../features/create_patient_record/pages/CreatePatientRecordPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
         {
             path: "tao-benh-an",
-            element: <div>Tạo bệnh án</div>
+            element: <CreatePatientRecordPage/>
         },
         {
             path: "kham-benh",
