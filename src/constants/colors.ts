@@ -34,6 +34,13 @@ export const Colors = {
     // Border
     BorderDefault: 'border-gray-300',
 
+    // DoubleButton
+    DoubleButtonPrimary: 'border-teal-800 text-teal-800',
+    DoubleButtonSecondary: 'border-gray-800 text-gray-800',
+    DoubleButtonPrimaryHover: 'hover:bg-teal-800 hover:text-white',
+    DoubleButtonSecondaryHover: 'hover:bg-gray-800 hover:text-white',
+
+
     // Sidebar
     BgSidebar: 'bg-white',
     BgSidebarActive: 'bg-gray-200',
@@ -43,11 +50,14 @@ export const Colors = {
     TextDefault: 'text-black',
     TextPrimary: 'text-black',
     TextSecondary: 'text-gray-500',
-    TextTertiary: 'text-teal-700',
+    TextTertiary: 'text-teal-800',
     TextWhite: 'text-white',
     TextBlack: 'text-black',
+    TextDetail: 'text-gray-500',
     TextLink: 'text-lime-700',
-    TextLinkHover: 'text-lime-800',
+    TextLinkHover: 'hover:text-lime-800',
+    TextLinkDetail: 'text-gray-400',
+    TextLinkDetailHover: 'hover:text-gray-600',
 
     // States
     TextSuccess: 'text-teal-700',

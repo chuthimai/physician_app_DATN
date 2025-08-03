@@ -1,5 +1,10 @@
 import type {Route} from "../types.ts";
 import {CreatePatientRecordPage} from "../../features/create_patient_record/pages/CreatePatientRecordPage.tsx";
+import DiagnosisPage from "../../features/diagnosis/pages/DiagnosisPage.tsx";
+import InitialDiagnosisPage from "../../features/diagnosis/pages/InitialDiagnosisPage.tsx";
+import ClinicalDiagnosisPage from "../../features/diagnosis/pages/ClinicalDiagnosisPage.tsx";
+import FinalDiagnosisPage from "../../features/diagnosis/pages/FinalDiagnosisPage.tsx";
+import PrescriptionPage from "../../features/diagnosis/pages/PrescriptionPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
@@ -9,23 +14,23 @@ export function getAttendingPhysicianRoute(): Route[] {
         },
         {
             path: "kham-benh",
-            element: <div>Kham benh</div>,
+            element: <DiagnosisPage/>,
             children: [
                 {
                     path: "chuan-doan/so-bo",
-                    element: <div>Chuan doan so bo</div>,
+                    element: <InitialDiagnosisPage/>,
                 },
                 {
                     path: "chuan-doan/lam-sang",
-                    element: <div>Chuan doan lam sang</div>,
+                    element: <ClinicalDiagnosisPage/>,
                 },
                 {
                     path: "chuan-doan/xac-dinh",
-                    element: <div>Chuan doan xac dinh</div>,
+                    element: <FinalDiagnosisPage/>,
                 },
                 {
                     path: "ke-thuoc",
-                    element: <div>Ke thuoc</div>,
+                    element: <PrescriptionPage/>,
                 },
             ]
         },

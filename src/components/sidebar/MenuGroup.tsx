@@ -1,6 +1,6 @@
 import {MenuItem} from "./MenuItem.tsx";
 import {useNavigate} from "react-router-dom";
-import type {Item} from "../../constants/sidebar.ts";
+import type {Item} from "../../constants/sidebar_menu.ts";
 
 type MenuGroupProps = {
     item: Item;

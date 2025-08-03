@@ -1,5 +1,5 @@
 import {ROLES} from "../../constants/roles.ts";
-import {roleMenus} from "../../constants/sidebar.ts";
+import {sideBarMenus} from "../../constants/sidebar_menu.ts";
 import {useLocation} from "react-router-dom";
 import {MenuGroup} from "./MenuGroup.tsx";
 import HeadSideBar from "./HeadSideBar.tsx";
@@ -7,7 +7,7 @@ import HeadSideBar from "./HeadSideBar.tsx";
 
 export default function SideBar() {
     const role = ROLES.ATTENDING_PHYSICIAN;
-    const items = roleMenus[role];
+    const items = sideBarMenus[role];
     const activePath = useLocation().pathname;
     return <div className="flex flex-col h-screen">
         <HeadSideBar name={"Nguyen Van A"}/>

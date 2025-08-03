@@ -8,7 +8,17 @@ export function getImagingPhysicianRoute(): Route[] {
         },
         {
             path: "ket-qua-hinh-anh",
-            element: <div>Nhap ket qua hinh anh</div>
+            element: <div>Nhap ket qua hinh anh</div>,
+            children: [
+                {
+                    path: "ket-qua",
+                    element: <div>Ket qua</div>
+                },
+                {
+                    path: "chuan-doan-can-lam-sang",
+                    element: <div>Chuan doan can lam sang</div>
+                }
+            ]
         }
     ];
 }

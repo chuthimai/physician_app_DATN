@@ -6,7 +6,7 @@ export type Item = {
     children?: Item[];
 };
 
-type RoleMenuConfig = {
+type SideBarMenuConfig = {
     [role: string]: Item[];
 };
 
@@ -22,7 +22,7 @@ const generalItems: Item[] = [
     },
 ];
 
-export const roleMenus: RoleMenuConfig = {
+export const sideBarMenus: SideBarMenuConfig = {
     [ROLES.ATTENDING_PHYSICIAN]: [
         ...generalItems,
         {
@@ -36,7 +36,7 @@ export const roleMenus: RoleMenuConfig = {
         }
     ],
 
-    [ROLES.IMAGING_PHYSICIAN]: [
+    [ROLES.LAB_PHYSICIAN]: [
         ...generalItems,
         {
             label: "Chức năng",

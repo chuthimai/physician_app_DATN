@@ -3,6 +3,7 @@ import {getRoleRoutes} from "./get_role_routes.ts";
 import App from "../App.tsx";
 import LoginPage from "../features/auth/pages/LoginPage.tsx";
 import ForgotPasswordPage from "../features/auth/pages/ForgotPasswordPage.tsx";
+import NotFoundPage from "../NotFoundPage.tsx";
 
 export function generateRoutes(role: string) {
     return createBrowserRouter([
@@ -40,6 +41,10 @@ export function generateRoutes(role: string) {
         {
             path: "/quen-mat-khau",
             element: <ForgotPasswordPage />
+        },
+        {
+            path: "/*",
+            element: <NotFoundPage/>
         }
     ])
 }
