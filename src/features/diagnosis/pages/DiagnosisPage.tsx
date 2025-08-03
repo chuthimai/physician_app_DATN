@@ -4,7 +4,7 @@ import DiagnosisMenu from "../../../components/diagnosis_menu/DiagnosisMenu.tsx"
 import ButtonScan from "../../../components/button/ButtonScan.tsx";
 
 export default function DiagnosisPage() {
-    return <div className="flex flex-col h-screen mx-4">
+    return <div className="flex flex-col h-screen">
         <PatientCurrent/>
         <div className="flex gap-4">
             <div className="flex-1">

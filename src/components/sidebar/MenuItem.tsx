@@ -1,20 +1,27 @@
 import {Colors} from "../../constants/colors.ts";
+import type {JSX} from "react";
 
 type MenuItemProps = {
     label: string;
+    icon?: JSX.Element;
     active: boolean;
     onClick: () => void;
 }
 
-export function MenuItem({ label, active, onClick }: MenuItemProps) {
+export function MenuItem({ label, icon, active, onClick }: MenuItemProps) {
     return (
         <div
-            className={`px-4 py-2 cursor-pointer hover:bg-gray-200 ${
-                active ?  Colors.BgSecondary : ""
+            className={`flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-muted ${
+                active ?  Colors.BgLight : ""
             }`}
             onClick={onClick}
         >
-            {label}
+            <div>
+                {icon ? icon : <div className="w-6 h-6" />    }
+            </div>
+            <div>
+                {label}
+            </div>
         </div>
     );
 }

@@ -1,67 +1,62 @@
 export const Colors = {
-    // Background
-    BgPrimary: 'bg-lime-500',
-    BgPrimaryDark: 'bg-lime-600',
-    BgPrimaryLight: 'bg-lime-100',
-    BgSecondary: 'bg-gray-300',
+    // Backgrounds (linked to CSS variables in theme)
+    BgPrimary: 'bg-primary',
+    BgSecondary: 'bg-secondary',
+    BgGrayLight: 'bg-muted',
+    BgGrayDark: 'bg-muted-foreground',
+    BgLight: 'bg-card',
+    BgDark: 'bg-background',
 
-    // Neutral
-    BgNeutral: 'bg-gray-100',
-    TextNeutralDark: 'text-gray-800',
-    TextNeutralLight: 'text-gray-400',
-
-    // Button
-    BgButtonDelete: 'bg-red-600',
-    BgButtonSave: 'bg-lime-700',
-    BgButtonCancel: 'bg-gray-300',
-    BgButtonSearch: 'bg-gray-600',
-    BgButtonScan: 'bg-lime-400',
+    // Buttons
+    BgButtonDelete: 'bg-destructive',
+    BgButtonSave: 'bg-primary',
+    BgButtonCancel: 'bg-muted',
+    BgButtonSearch: 'bg-muted',
+    BgButtonScan: 'bg-secondary',
 
     // Button Hover
-    BgButtonDeleteHover: 'hover:bg-red-700',
-    BgButtonSaveHover: 'hover:bg-lime-800',
-    BgButtonCancelHover: 'hover:bg-gray-200',
-    BgButtonSearchHover: 'hover:bg-gray-700',
-    BgButtonScanHover: 'hover:bg-lime-500',
+    BgButtonDeleteHover: 'hover:bg-destructive/90 hover:text-white',
+    BgButtonSaveHover: 'hover:bg-primary/90 hover:text-white',
+    BgButtonCancelHover: 'hover:bg-muted-foreground/100 hover:text-white',
+    BgButtonSearchHover: 'hover:bg-muted-foreground/90 hover:text-white',
+    BgButtonScanHover: 'hover:bg-secondary/90 hover:text-white',
 
-    // Text Button
-    TextButtonDelete: 'text-white',
-    TextButtonSave: 'text-white',
+    // Button Text
+    TextButtonDelete: 'text-destructive-foreground',
+    TextButtonSave: 'text-primary-foreground',
     TextButtonCancel: 'text-black',
-    TextButtonSearch: 'text-white',
-    TextButtonScan: 'text-white',
+    TextButtonSearch: 'text-muted-foreground',
+    TextButtonScan: 'text-secondary-foreground',
 
-    // Border
-    BorderDefault: 'border-gray-300',
+    // Borders
+    BorderDefault: 'border-border',
 
     // DoubleButton
-    DoubleButtonPrimary: 'border-teal-800 text-teal-800',
-    DoubleButtonSecondary: 'border-gray-800 text-gray-800',
-    DoubleButtonPrimaryHover: 'hover:bg-teal-800 hover:text-white',
-    DoubleButtonSecondaryHover: 'hover:bg-gray-800 hover:text-white',
-
+    DoubleButtonPrimary: 'border-primary text-primary',
+    DoubleButtonSecondary: 'border-secondary text-secondary',
+    DoubleButtonPrimaryHover: 'hover:bg-primary hover:text-primary-foreground',
+    DoubleButtonSecondaryHover: 'hover:bg-secondary hover:text-secondary-foreground',
 
     // Sidebar
-    BgSidebar: 'bg-white',
-    BgSidebarActive: 'bg-gray-200',
-    TextSidebar: 'text-black',
+    BgSidebar: 'bg-sidebar',
+    BgSidebarActive: 'bg-sidebar-accent',
+    TextSidebar: 'text-sidebar-foreground',
 
     // Text
-    TextDefault: 'text-black',
-    TextPrimary: 'text-black',
-    TextSecondary: 'text-gray-500',
-    TextTertiary: 'text-teal-800',
+    TextPrimary: 'text-foreground',
+    TextSecondary: 'text-muted-foreground',
+    TextTertiary: 'text-secondary',
     TextWhite: 'text-white',
     TextBlack: 'text-black',
-    TextDetail: 'text-gray-500',
-    TextLink: 'text-lime-700',
-    TextLinkHover: 'hover:text-lime-800',
-    TextLinkDetail: 'text-gray-400',
-    TextLinkDetailHover: 'hover:text-gray-600',
+    TextDetail: 'text-muted-foreground',
+    TextLink: 'text-primary',
+    TextLinkHover: 'hover:text-primary/80',
+    TextLinkDetail: 'text-muted',
+    TextLinkDetailHover: 'hover:text-muted-foreground',
 
     // States
-    TextSuccess: 'text-teal-700',
+    TextSuccess: 'text-green-600',
     TextError: 'text-red-600',
     TextWarning: 'text-yellow-400',
-    TextInfo: 'text-gray-500',
-}
+    TextInfo: 'text-blue-500',
+};

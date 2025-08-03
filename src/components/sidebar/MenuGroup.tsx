@@ -1,6 +1,6 @@
 import {MenuItem} from "./MenuItem.tsx";
 import {useNavigate} from "react-router-dom";
-import type {Item} from "../../constants/sidebar_menu.ts";
+import type {Item} from "../../constants/sidebar_menu.tsx";
 
 type MenuGroupProps = {
     item: Item;
@@ -13,6 +13,7 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
         return <div className={"font-extrabold"}>
             <MenuItem
                 label={item.label}
+                icon={item.icon}
                 active={item.path === activePath}
                 onClick={() => navigate(item.path || '')}
             />
@@ -27,6 +28,7 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
             <div className={"font-extrabold"}>
                 <MenuItem
                     label={item.label}
+                    icon={item.icon}
                     active={isAnyChildActive}
                     onClick={() => undefined}
                 />
@@ -36,6 +38,7 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
                 <MenuItem
                     key={item.path}
                     label={item.label}
+                    icon={item.icon}
                     active={item.path === activePath}
                     onClick={() => navigate(item.path || '')}
                 />
