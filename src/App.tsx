@@ -14,7 +14,7 @@ function App() {
                     Bệnh viện A
                 </div>
                 <div className="flex items-center justify-end font-bold mx-4">
-                    <ButtonCancel label="Đăng xuất" onClick={() => null} />
+                    <ButtonCancel label="Đăng xuất" onClick={() => null}/>
                 </div>
             </div>
 
@@ -22,12 +22,12 @@ function App() {
             <div className="flex flex-1 overflow-hidden min-w-[1200px]">
                 {/* Sidebar cuộn riêng */}
                 <div className="w-1/6 h-full overflow-y-auto bg-gray-50 shadow-md flex-shrink-0">
-                    <SideBar />
+                    <SideBar/>
                 </div>
 
                 {/* Nội dung chính cuộn riêng */}
-                <div className="flex-1 overflow-y-auto bg-neutral-light px-8 py-4">
-                    <Outlet />
+                <div className="flex-1 bg-neutral-light px-8 py-4">
+                    <Outlet/>
                 </div>
             </div>
         </div>

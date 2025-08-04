@@ -1,5 +1,5 @@
 import {Controller, type SubmitHandler, useForm} from "react-hook-form";
-import ButtonSave from "../../../components/button/ButtonSave.tsx";
+import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import {severityOptions} from "@/constants/diagnosis/severity.ts";
@@ -11,7 +11,7 @@ type DiagnosisInputs = {
     note: string;
 }
 
-export default function InitialDiagnosisForm() {
+export default function DiagnosisForm() {
     const {
         register,
         handleSubmit,
@@ -41,7 +41,7 @@ export default function InitialDiagnosisForm() {
                     />
                 </div>
 
-                <div className="col-span-6">
+                <div className="col-span-4">
                     <Controller
                         control={control}
                         name="severity"

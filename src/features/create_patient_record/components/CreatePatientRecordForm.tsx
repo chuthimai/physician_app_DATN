@@ -30,57 +30,69 @@ export default function CreatePatientRecordForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-                <TextInput
-                    label={"Số CCCD"}
-                    error={errors.citizenId}
-                    className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
-                    {...register("citizenId", {
-                        validate: (v) => v === "" || /^\d{12}$/.test(v) || "CCCD phải có đúng 12 số",
-                    })}
-                />
+            <div className="grid grid-cols-12 gap-4">
+                <div className="col-span-6">
+                    <TextInput
+                        label={"Số CCCD"}
+                        error={errors.citizenId}
+                        className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
+                        {...register("citizenId", {
+                            validate: (v) => v === "" || /^\d{12}$/.test(v) || "CCCD phải có đúng 12 số",
+                        })}
+                    />
+                </div>
 
-                <TextInput
-                    label={"Họ tên"}
-                    error={errors.name}
-                    {...register("name", { required: "Không được để trống họ tên" })}
-                />
+                <div className="col-span-6">
+                    <TextInput
+                        label={"Họ tên"}
+                        error={errors.name}
+                        {...register("name", { required: "Không được để trống họ tên" })}
+                    />
+                </div>
 
-                <DateInput
-                    label={"Ngày sinh"}
-                    error={errors.dob}
-                    {...register("dob", { required: "Chọn ngày sinh" })}
-                />
+                <div className="col-span-4">
+                    <DateInput
+                        label={"Ngày sinh"}
+                        error={errors.dob}
+                        {...register("dob", { required: "Chọn ngày sinh" })}
+                    />
+                </div>
 
-                <SelectInput
-                    label={"Giới tính"}
-                    error={errors.gender}
-                    options={[
-                        {
-                            label: "Nam",
-                            value: "male"
-                        },
-                        {
-                            label: "Nữ",
-                            value: "female"
-                        }
-                    ]}
-                />
+                <div className="col-span-2">
+                    <SelectInput
+                        label={"Giới tính"}
+                        error={errors.gender}
+                        options={[
+                            {
+                                label: "Nam",
+                                value: "male"
+                            },
+                            {
+                                label: "Nữ",
+                                value: "female"
+                            }
+                        ]}
+                    />
+                </div>
 
-                <TextInput
-                    label={"Số điện thoại"}
-                    error={errors.phone}
-                    {...register("phone", {
-                        required: "Không được để trống SĐT",
-                        validate: (v) => /^\d{10}$/.test(v) || "SĐT phải có 10 chữ số",
-                    })}
-                />
+                <div className="col-span-6">
+                    <TextInput
+                        label={"Số điện thoại"}
+                        error={errors.phone}
+                        {...register("phone", {
+                            required: "Không được để trống SĐT",
+                            validate: (v) => /^\d{10}$/.test(v) || "SĐT phải có 10 chữ số",
+                        })}
+                    />
+                </div>
 
-                <TextInput
-                    label={"Địa chỉ"}
-                    error={errors.address}
-                    {...register("address", { required: "Không được để trống địa chỉ" })}
-                />
+                <div className="col-span-12">
+                    <TextInput
+                        label={"Địa chỉ"}
+                        error={errors.address}
+                        {...register("address", { required: "Không được để trống địa chỉ" })}
+                    />
+                </div>
             </div>
 
             <div className="flex items-center justify-center mt-3">

@@ -1,3 +1,8 @@
+import DiagnosisForm from "@/components/diagnosis/DiagnosisForm.tsx";
+
 export default function ClinicalDiagnosisPage() {
-    return <div>Clinical Diagnosis</div>
+    return <div className="flex flex-col">
+        <h2 className="text-2xl font-bold text-center mb-4">Chuẩn đoán lâm sàng</h2>
+        <DiagnosisForm/>
+    </div>
 }

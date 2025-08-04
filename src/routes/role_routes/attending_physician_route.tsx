@@ -42,5 +42,9 @@ export function getAttendingPhysicianRoute(): Route[] {
             path: "xem-tat-ca-benh-an",
             element: <div>Xem tat ca benh an</div>
         },
+        {
+            path: "benh-an-hien-tai",
+            element: <div>Benh an hien tai</div>
+        },
     ]
 }

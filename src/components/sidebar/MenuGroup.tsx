@@ -14,14 +14,14 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
             <MenuItem
                 label={item.label}
                 icon={item.icon}
-                active={item.path === activePath}
+                active={activePath.includes(item.path as string) || false}
                 onClick={() => navigate(item.path || '')}
             />
         </div>
     }
 
     const items = item.children;
-    const isAnyChildActive = items.some(item => item.path === activePath);
+    const isAnyChildActive = items.some(item => activePath.includes(item.path as string) || false);
 
     return (
         <div>
@@ -39,7 +39,7 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
                     key={item.path}
                     label={item.label}
                     icon={item.icon}
-                    active={item.path === activePath}
+                    active={activePath.includes(item.path as string) || false}
                     onClick={() => navigate(item.path || '')}
                 />
             ))}

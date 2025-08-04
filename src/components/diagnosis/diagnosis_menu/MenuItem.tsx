@@ -1,5 +1,5 @@
-import {Colors} from "../../constants/colors.ts";
-import {LEVELS} from "../../constants/levels.ts";
+import {Colors} from "../../../constants/colors.ts";
+import {LEVELS} from "../../../constants/levels.ts";
 
 type MenuItemProps = {
     label: string;

@@ -1,9 +1,9 @@
-import {ROLES} from "../../constants/roles.ts";
-import {diagnosisMenus} from "../../constants/diagnosis_menu.ts";
+import {ROLES} from "../../../constants/roles.ts";
+import {diagnosisMenus} from "../../../constants/diagnosis_menu.ts";
 import {useLocation, useNavigate} from "react-router-dom";
-import {STEPS} from "../../constants/steps.ts";
+import {STEPS} from "../../../constants/steps.ts";
 import {MenuItem} from "./MenuItem.tsx";
-import {LEVELS} from "../../constants/levels.ts";
+import {LEVELS} from "../../../constants/levels.ts";
 
 export default function DiagnosisMenu() {
     const role = ROLES.ATTENDING_PHYSICIAN;

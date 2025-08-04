@@ -4,9 +4,9 @@ import CreatePatientRecordForm from "../components/CreatePatientRecordForm.tsx";
 export function CreatePatientRecordPage() {
     return <div className="flex flex-col h-full">
         <Header/>
-        <div className="flex-1 overflow-y-auto items-center justify-center ">
-            <div className="bg-white p-8 rounded-lg shadow-md border-2 border-gray-200">
-                <h2 className="text-2xl font-bold text-center">Tạo bệnh án</h2>
+        <div className="flex-1 items-center justify-center my-4">
+            <div className="bg-white py-8 px-16 rounded-lg shadow-md border-2 border-gray-200 overflow-y-auto">
+                <h2 className="text-2xl font-bold text-center mb-4">Tạo bệnh án</h2>
                 <CreatePatientRecordForm/>
             </div>
         </div>
