@@ -1,26 +1,31 @@
-import {Controller, type SubmitHandler, useForm} from "react-hook-form";
+import {type SubmitHandler, useForm} from "react-hook-form";
 import ButtonSave from "../../../components/button/ButtonSave.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
-import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
-import {severityOptions} from "@/constants/diagnosis/severity.ts";
+import TextInput from "@/components/input/TextInput.tsx";
 
-type DiagnosisInputs = {
-    onSet: string;
-    conclusion: string;
-    severity: string;
-    note: string;
+type InitialDiagnosisInputs = {
+    reasonForAdmission: string;
+    diseaseProgression: string;
+    personalHistory: string;
+    familyHistory: string;
+    generalExamination: string;
+    systemicExamination: string;
+    clinicalSummary: string;
+    initialDiagnosis: string;
+    initialTreatment: string;
+    departmentAdmission: string;
+    notes: string;
 }
 
 export default function InitialDiagnosisForm() {
     const {
         register,
         handleSubmit,
-        control,
         formState: { errors, isSubmitting },
         reset,
-    } = useForm<DiagnosisInputs>();
+    } = useForm<InitialDiagnosisInputs>();
 
-    const onSubmit: SubmitHandler<DiagnosisInputs> = async (data) => {
+    const onSubmit: SubmitHandler<InitialDiagnosisInputs> = async (data) => {
         console.log("Đang gửi dữ liệu:", data);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log("Gửi thành công!");
@@ -31,39 +36,64 @@ export default function InitialDiagnosisForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12">
-                    <TextAreaInput
-                        label={"Quá trình bệnh lý và diễn biến lâm sàng: (Đặc điểm khởi phát, các triệu chứng lâm sàng, diễn biến bệnh...)"}
-                        error={errors.onSet}
-                        // className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
-                        {...register("onSet", {
+                    <TextInput
+                        type={"text"}
+                        label={"Lý do vào viện"}
+                        error={errors.reasonForAdmission}
+                        {...register("reasonForAdmission", {
                             validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                         })}
                     />
                 </div>
 
-                <div className="col-span-6">
-                    <Controller
-                        control={control}
-                        name="severity"
-                        rules={{ required: "Vui lòng chọn mức độ" }}
-                        render={({ field }) => (
-                            <SelectSearchInput
-                                label="Mức độ nghiêm trọng của bệnh"
-                                value={severityOptions.find((opt) => opt.value === field.value)}
-                                onChange={(selected) => field.onChange(selected?.value ?? "")}
-                                options={severityOptions}
-                                error={errors.severity}
-                            />
-                        )}
+                <h2 className="col-span-12 text-xl font-bold">Hỏi bệnh</h2>
+                <div className="col-span-12">
+                    <TextAreaInput
+                        label={"Quá trình bệnh lý"}
+                        error={errors.diseaseProgression}
+                        {...register("diseaseProgression", {
+                            validate: (v) => v.trim() !== "" || "Trường này không được để trống",
+                        })}
                     />
                 </div>
 
+                <h3 className="col-span-12 text-lg font-bold">Tiền sử bệnh</h3>
+                <div className="col-span-12">
+                    <TextInput
+                        type={"text"}
+                        label={"Tiền sử bản thân"}
+                        error={errors.personalHistory}
+                        {...register("personalHistory", {
+                            validate: (v) => v.trim() !== "" || "Trường này không được để trống",
+                        })}
+                    />
+                </div>
+                <div className="col-span-12">
+                    <TextInput
+                        type={"text"}
+                        label={"Tiền sử gia đình"}
+                        error={errors.familyHistory}
+                        {...register("familyHistory", {
+                            validate: (v) => v.trim() !== "" || "Trường này không được để trống",
+                        })}
+                    />
+                </div>
+
+                <h2 className="col-span-12 text-xl font-bold">Khám xét</h2>
                 <div className="col-span-12">
                     <TextAreaInput
-                        label={"Chẩn đoán"}
-                        error={errors.conclusion}
-                        // className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
-                        {...register("conclusion", {
+                        label={"Khám toàn thân"}
+                        error={errors.generalExamination}
+                        {...register("generalExamination", {
+                            validate: (v) => v.trim() !== "" || "Trường này không được để trống",
+                        })}
+                    />
+                </div>
+                <div className="col-span-12">
+                    <TextAreaInput
+                        label={"Khám các bộ phận"}
+                        error={errors.systemicExamination}
+                        {...register("systemicExamination", {
                             validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                         })}
                     />
@@ -71,10 +101,19 @@ export default function InitialDiagnosisForm() {
 
                 <div className="col-span-12">
                     <TextAreaInput
-                        label={"Ghi chú"}
-                        error={errors.note}
-                        // className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
-                        {...register("note", {
+                        label={"Chẩn đoán vào viện"}
+                        error={errors.initialDiagnosis}
+                        {...register("initialDiagnosis", {
+                            validate: (v) => v.trim() !== "" || "Trường này không được để trống",
+                        })}
+                    />
+                </div>
+
+                <div className="col-span-12">
+                    <TextAreaInput
+                        label={"Đã xử lý (thuốc, chăm sóc...)"}
+                        error={errors.initialTreatment}
+                        {...register("initialTreatment", {
                             validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                         })}
                     />
