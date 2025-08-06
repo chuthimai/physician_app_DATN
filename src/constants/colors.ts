@@ -13,13 +13,17 @@ export const Colors = {
     BgButtonCancel: 'bg-muted',
     BgButtonSearch: 'bg-muted',
     BgButtonScan: 'bg-secondary',
+    BgButtonInfo: 'bg-gray-200',
+    BgButtonEdit: 'bg-card',
 
     // Button Hover
-    BgButtonDeleteHover: 'hover:bg-destructive/90 hover:text-white',
+    BgButtonDeleteHover: 'hover:bg-destructive/80 hover:text-white',
     BgButtonSaveHover: 'hover:bg-primary/90 hover:text-white',
     BgButtonCancelHover: 'hover:bg-muted-foreground/100 hover:text-white',
     BgButtonSearchHover: 'hover:bg-muted-foreground/90 hover:text-white',
     BgButtonScanHover: 'hover:bg-secondary/90 hover:text-white',
+    BgButtonInfoHover: 'hover:bg-gray-300 hover:text-black',
+    BgButtonEditHover: 'hover:bg-card-foreground hover:text-white',
 
     // Button Text
     TextButtonDelete: 'text-destructive-foreground',
@@ -27,6 +31,8 @@ export const Colors = {
     TextButtonCancel: 'text-black',
     TextButtonSearch: 'text-muted-foreground',
     TextButtonScan: 'text-secondary-foreground',
+    TextButtonInfo: 'text-info-foreground',
+    TextButtonEdit: 'text-black',
 
     // Borders
     BorderDefault: 'border-border',

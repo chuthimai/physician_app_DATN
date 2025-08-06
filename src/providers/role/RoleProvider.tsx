@@ -1,11 +1,5 @@
-import React, {createContext, useEffect, useState} from "react";
-
-type RoleContextType = {
-    role: string;
-    setRole: (r: string) => void;
-};
-
-export const RoleContext = createContext<RoleContextType | undefined>(undefined);
+import React, {useEffect, useState} from "react";
+import {RoleContext} from "@/providers/role/RoleContext.tsx";
 
 export const RoleProvider = ({ children }: { children: React.ReactNode }) => {
     const [role, setRole] = useState(() => localStorage.getItem("role") || "");
