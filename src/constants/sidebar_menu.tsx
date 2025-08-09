@@ -1,13 +1,20 @@
 import {ROLES} from "./roles";
 import {type JSX} from "react";
 import {
+    MdMedicalServices,
+    MdNoteAdd,
+} from "react-icons/md";
+
+import {
+    FaUserMd,
+} from "react-icons/fa";
+
+import {
     HomeIcon,
     KeyIcon,
     UserIcon,
     CalendarIcon,
-    FolderPlusIcon,
     HeartIcon,
-    PlusCircleIcon,
     FolderOpenIcon,
     BeakerIcon,
     ClipboardDocumentIcon
@@ -45,9 +52,10 @@ export const sideBarMenus: SideBarMenuConfig = {
         {
             label: "Chức năng",
             children: [
-                {label: "Tạo bệnh án", path: "/tao-benh-an", icon: <FolderPlusIcon className={iconStyle}/>},
+                {label: "Tạo bệnh án", path: "/tao-benh-an", icon: <MdNoteAdd className={iconStyle}/>},
+                {label: "Khám chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <FaUserMd className={iconStyle}/>},
                 {label: "Khám bệnh", path: "/kham-benh", icon: <HeartIcon className={iconStyle}/> },
-                {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <PlusCircleIcon className={iconStyle}/>},
+                {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <MdMedicalServices className={iconStyle}/>},
                 {label: "Xem hồ sơ bệnh án", path: "/xem-tat-ca-benh-an", icon: <FolderOpenIcon className={iconStyle}/>},
             ]
         }

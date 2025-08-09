@@ -11,7 +11,13 @@ export function generateRoutes(role: string) {
         {
             path: '/',
             element: <App />,
-            children: getRoleRoutes(role)
+            children: [
+                {
+                    path: '/',
+                    element: <div>Trang chu</div>
+                },
+            ...getRoleRoutes(role)
+            ]
         },
         {
             path: "/login",

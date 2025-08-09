@@ -6,12 +6,18 @@ import ClinicalDiagnosisPage from "../../features/diagnosis/pages/ClinicalDiagno
 import FinalDiagnosisPage from "../../features/diagnosis/pages/FinalDiagnosisPage.tsx";
 import PrescriptionPage from "../../features/diagnosis/pages/PrescriptionPage.tsx";
 import AddServicesPage from "@/features/add_services/pages/AddServicesPage.tsx";
+import CreateSpecialistAppointmentPage
+    from "@/features/create_specialist_appointment/pages/CreateSpecialistAppointmentPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
         {
             path: "tao-benh-an",
             element: <CreatePatientRecordPage/>
+        },
+        {
+            path: "tao-lich-kham-chuyen-khoa",
+            element: <CreateSpecialistAppointmentPage/>
         },
         {
             path: "kham-benh",
