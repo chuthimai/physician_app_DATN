@@ -98,7 +98,7 @@ export default function PrescriptionForm() {
         medicationsContext?.setMedications([...medicationList, payload]);
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        log.debug(payload);
+        log.debug("PrescriptionForm " + payload);
         reset();
     };
 

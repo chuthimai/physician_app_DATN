@@ -37,6 +37,7 @@ export default function PrescriptionTable({ open, onOpenChange }: Props) {
 
     const medicationEditingContext = useContext(MedicationEditingContext);
 
+    // -------------------- render ----------------------
     function deleteMedication(medicationId: number) {
         medicationsContext?.setMedications(presribedMedications.filter(
             (medication) => medication.medicationId !== medicationId)
@@ -51,6 +52,7 @@ export default function PrescriptionTable({ open, onOpenChange }: Props) {
         onOpenChange(false);
     }
 
+    // -------------------- view ----------------------
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="min-w-full md:min-w-2/3 max-h-4/5 overflow-x-auto overflow-y-auto">

@@ -25,6 +25,7 @@ export default function InitialDiagnosisForm() {
         reset,
     } = useForm<InitialDiagnosisInputs>();
 
+    // -------------------- render ----------------------
     const onSubmit: SubmitHandler<InitialDiagnosisInputs> = async (data) => {
         console.log("Đang gửi dữ liệu:", data);
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -32,6 +33,7 @@ export default function InitialDiagnosisForm() {
         reset();
     };
 
+    // -------------------- view ----------------------
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-12 gap-4">

@@ -5,6 +5,7 @@ import InitialDiagnosisPage from "../../features/diagnosis/pages/InitialDiagnosi
 import ClinicalDiagnosisPage from "../../features/diagnosis/pages/ClinicalDiagnosisPage.tsx";
 import FinalDiagnosisPage from "../../features/diagnosis/pages/FinalDiagnosisPage.tsx";
 import PrescriptionPage from "../../features/diagnosis/pages/PrescriptionPage.tsx";
+import AddServicesPage from "@/features/add_services/pages/AddServicesPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
@@ -36,7 +37,7 @@ export function getAttendingPhysicianRoute(): Route[] {
         },
         {
             path: "chi-dinh-dich-vu",
-            element: <div>Chi dinh dich vu</div>
+            element: <AddServicesPage/>
         },
         {
             path: "xem-tat-ca-benh-an",
