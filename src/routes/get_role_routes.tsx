@@ -5,6 +5,7 @@ import {getLabPhysicianRoute} from "./role_routes/lab_physician_route.tsx";
 import {getImagingPhysicianRoute} from "./role_routes/imaging_physician_route.tsx";
 import {getCashierRoutes} from "./role_routes/cashier_route.tsx";
 import ChangePasswordPage from "@/features/auth/pages/ChangePasswordPage.tsx";
+import WorkSchedulesPage from "@/features/work_schedules/pages/WorkSchedulesPage.tsx";
 
 export function getRoleRoutes(role: string): Route[] {
     const paths = [
@@ -22,7 +23,7 @@ export function getRoleRoutes(role: string): Route[] {
         },
         {
             path: "lich-lam-viec",
-            element: <div>Schedule</div>,
+            element: <WorkSchedulesPage/>,
         }
     ]
     switch (role) {

@@ -1,4 +1,5 @@
 export const Colors = {
+
     // Backgrounds (linked to CSS variables in theme)
     BgPrimary: 'bg-primary',
     BgSecondary: 'bg-secondary',
