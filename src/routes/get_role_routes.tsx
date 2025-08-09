@@ -4,6 +4,7 @@ import {getAttendingPhysicianRoute} from "./role_routes/attending_physician_rout
 import {getLabPhysicianRoute} from "./role_routes/lab_physician_route.tsx";
 import {getImagingPhysicianRoute} from "./role_routes/imaging_physician_route.tsx";
 import {getCashierRoutes} from "./role_routes/cashier_route.tsx";
+import ChangePasswordPage from "@/features/auth/pages/ChangePasswordPage.tsx";
 
 export function getRoleRoutes(role: string): Route[] {
     const paths = [
@@ -13,7 +14,7 @@ export function getRoleRoutes(role: string): Route[] {
         },
         {
             path: "doi-mat-khau",
-            element: <div>Đổi mật khẩu</div>,
+            element: <ChangePasswordPage />,
         },
         {
             path: "thong-tin-ca-nhan",

@@ -19,7 +19,7 @@ export function ForgotPasswordForm() {
     const onSubmit:SubmitHandler<LoginInputs>  = async (data: LoginInputs) => {
         console.log("Submitting...", data);
         // Giả lập API
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log("Submitted!");
         reset();
     };
