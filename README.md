@@ -1,69 +1,80 @@
-# React + TypeScript + Vite
+# Physician App
+Ứng dụng này sử dụng trong công việc khám chữa bệnh của bác sĩ.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tính năng chính
 
-Currently, two official plugins are available:
+- **Quản lý tài khoản**: Đăng nhập, đổi mật khẩu, quản lý thông tin cá nhân.
+- **Quản lý lịch làm việc**: Xem, thêm, chỉnh sửa lịch của bác sĩ.
+- **Chức năng theo vai trò**:
+    - **Bác sĩ điều trị (Attending Physician)**: Tạo bệnh án, khám bệnh, chỉ định dịch vụ, xem hồ sơ bệnh án.
+    - **Bác sĩ xét nghiệm (Lab Physician)**: Lấy mẫu, nhập kết quả xét nghiệm.
+    - **Bác sĩ chẩn đoán hình ảnh (Imaging Physician)**: Thực hiện kỹ thuật, nhập kết quả hình ảnh.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Cấu trúc thư mục
+```aiignore
+src/
+├── features/
+│   ├── auth/                       # Đăng nhập / đăng xuất
+│   ├── medical-records/           # Tạo và xem bệnh án điện tử
+│   ├── diagnosis/                 # Chuẩn đoán sơ bộ, lâm sàng, xác định, kê đơn thuốc 
+│		│   ├── components/          # Các UI component dùng trong tính năng này
+│		│   │   └── DiagnosisForm.tsx
+│		│   ├── pages/               # Các trang giao diện (mỗi trang tương ứng 1 route)
+│		│   │   ├── IndexPage.tsx
+│		│   │   └── DetailPage.tsx
+│		│   ├── hooks/               # Các custom hooks nội bộ
+│		│   │   └── useDiagnosisForm.ts
+│		│   ├── services/            # Gọi API riêng cho tính năng này (wrapper từ lib/api nếu cần)
+│		│   │   └── diagnosisService.ts
+│		│   ├── schemas/             # Zod/Yup schema cho validate form
+│		│   │   └── diagnosisSchema.ts
+│		│   ├── types.ts             # Interface/type riêng cho diagnosis
+│		│   └── index.ts             # File barrel (export các component/hook/service để import gọn)
+│   ├── services/                  # Chỉ định dịch vụ
+│   ├── lab/                       # Nhập kết quả xét nghiệm
+│   ├── imaging/                   # Nhập kết quả hình ảnh (bác sĩ chụp chiếu)
+│   ├── finance/                   # Thanh toán
+│   ├── reports/                   # Báo cáo thống kê
+│   └── schedule/                  # Xem lịch làm việc
+├── components/                    # UI dùng lại
+├── layouts/                       # Layout cho bác sĩ, thu ngân, kỹ thuật viên...
+├── hooks/                         # Chứa các hàm bắt đầu bằng use... giúp tái sử dụng logic 
+├── lib/                       # Logic hệ thống, tiện ích, cấu hình
+│   ├── api/                   # Các API gọi backend
+│   │   ├── http.ts            # Cấu hình axios
+│   │   ├── patientApi.ts
+│   │   └── authApi.ts
+│   ├── utils/                 # Hàm tiện ích (date, string,...)
+│   │   ├── date.ts
+│   │   └── string.ts
+│   └── config.ts              # ENV, BASE_URL,...
+├── constants/                 # Các hằng số hệ thống
+├── routes/                   # Sinh ra các đường dẫn được phép truy cập theo từng role
+├── providers/               # Các Provider sd để quản lý trạng thái toàn app
+├── stores/                        # Zustand/Redux store
+└── app.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Cài đặt & chạy dự án
+1. Clone repo
+```bash
+git clone https://github.com/chuthimai/physician_app_DATN.git
+```
+2. Cài dependencies
+```bash
+npm install
+```
+3. Tạo file môi trường
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+    Cập nhật các giá trị trong .env:
+```text
+VITE_API_BASE_URL=...
+```
+4. Chạy dự án
+```bash
+npm run dev
+```
+5. Build production
+```bash
+npm run build
 ```
