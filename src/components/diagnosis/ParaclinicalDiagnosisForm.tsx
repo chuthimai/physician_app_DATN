@@ -3,13 +3,10 @@ import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 
 type DiagnosisInputs = {
-    onSet: string;
     conclusion: string;
-    severity: string;
-    note: string;
 }
 
-export default function ClinicalDiagnosisForm() {
+export default function ParaclinicalDiagnosisForm() {
     const {
         register,
         handleSubmit,
@@ -29,20 +26,9 @@ export default function ClinicalDiagnosisForm() {
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12">
                     <TextAreaInput
-                        label={"Quá trình bệnh lý và diễn biến lâm sàng: (Đặc điểm khởi phát, các triệu chứng lâm sàng, diễn biến bệnh...)"}
-                        error={errors.onSet}
-                        className="w-full h-20 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
-                        {...register("onSet", {
-                            validate: (v) => v.trim() !== "" || "Trường này không được để trống",
-                        })}
-                    />
-                </div>
-
-                <div className="col-span-12">
-                    <TextAreaInput
-                        label={"Chẩn đoán"}
+                        label={"Chẩn đoán cận lâm sàng"}
                         error={errors.conclusion}
-                        className="w-full h-60 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
+                        className="w-full h-70 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
                         {...register("conclusion", {
                             validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                         })}

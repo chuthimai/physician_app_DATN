@@ -1,10 +1,12 @@
-import {ROLES} from "@/constants/roles.ts";
 import {diagnosisMenus} from "@/constants/diagnosis_menu.ts";
 import {useLocation, useNavigate} from "react-router-dom";
 import {MenuItem} from "./MenuItem.tsx";
+import {useContext} from "react";
+import {UserContext} from "@/providers/user/UserContext.tsx";
 
 export default function DiagnosisMenu() {
-    const role = ROLES.ATTENDING_PHYSICIAN;
+    const userContext = useContext(UserContext);
+    const role = userContext?.user?.role || "";
     const items = diagnosisMenus[role];
     const activePath = useLocation().pathname;
     const navigate = useNavigate();

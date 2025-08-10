@@ -1,4 +1,6 @@
 import type {Route} from "../types.ts";
+import ImageParaclinicalDiagnosisPage from "@/features/imaging/pages/ImageParaclinicalDiagnosisPage.tsx";
+import ImageResultPage from "@/features/imaging/pages/ImageResultPage.tsx";
 
 export function getImagingPhysicianRoute(): Route[] {
     return [
@@ -8,7 +10,7 @@ export function getImagingPhysicianRoute(): Route[] {
         },
         {
             path: "ket-qua-hinh-anh",
-            element: <div>Nhap ket qua hinh anh</div>,
+            element: <ImageResultPage/>,
             children: [
                 {
                     path: "ket-qua",
@@ -16,7 +18,7 @@ export function getImagingPhysicianRoute(): Route[] {
                 },
                 {
                     path: "chuan-doan-can-lam-sang",
-                    element: <div>Chuan doan can lam sang</div>
+                    element: <ImageParaclinicalDiagnosisPage/>
                 }
             ]
         }

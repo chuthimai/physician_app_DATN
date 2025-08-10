@@ -171,7 +171,7 @@ export default function PrescriptionForm() {
             </div>
 
             <div className="flex items-center justify-center mt-3 gap-4">
-                <ButtonSave label={isEditing ? "Lưu thay đổi" : "Thêm"} isSubmitting={isSubmitting} />
+                <ButtonSave label={isEditing ? "Lưu thay đổi" : "Thêm"} isSubmitting={isSubmitting}/>
                 <ButtonCancel
                     label="Huỷ"
                     onClick={cancel}

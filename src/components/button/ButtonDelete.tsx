@@ -1,4 +1,4 @@
-import { Colors } from "../../constants/colors.ts";
+import { Colors } from "@/constants/colors.ts";
 
 type Props = {
     label?: string;

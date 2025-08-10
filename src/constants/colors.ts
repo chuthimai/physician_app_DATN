@@ -18,16 +18,16 @@ export const Colors = {
     BgButtonEdit: 'bg-card',
 
     // Button Hover
-    BgButtonDeleteHover: 'hover:bg-destructive/80 hover:text-white',
-    BgButtonSaveHover: 'hover:bg-primary/90 hover:text-white',
-    BgButtonCancelHover: 'hover:bg-muted-foreground/100 hover:text-white',
-    BgButtonSearchHover: 'hover:bg-muted-foreground/90 hover:text-white',
-    BgButtonScanHover: 'hover:bg-secondary/90 hover:text-white',
-    BgButtonInfoHover: 'hover:bg-gray-300 hover:text-black',
-    BgButtonEditHover: 'hover:bg-card-foreground hover:text-white',
+    BgButtonDeleteHover: 'hover:bg-destructive/80 hover:text-white hover:cursor-pointer',
+    BgButtonSaveHover: 'hover:bg-primary/90 hover:text-white hover:cursor-pointer',
+    BgButtonCancelHover: 'hover:bg-muted-foreground/100 hover:text-white hover:cursor-pointer',
+    BgButtonSearchHover: 'hover:bg-muted-foreground/90 hover:text-white hover:cursor-pointer',
+    BgButtonScanHover: 'hover:bg-secondary/90 hover:text-white hover:cursor-pointer',
+    BgButtonInfoHover: 'hover:bg-gray-300 hover:text-black hover:cursor-pointer',
+    BgButtonEditHover: 'hover:bg-card-foreground hover:text-white hover:cursor-pointer',
 
     // Button Text
-    TextButtonDelete: 'text-destructive-foreground',
+    TextButtonDelete: 'text-white',
     TextButtonSave: 'text-primary-foreground',
     TextButtonCancel: 'text-black',
     TextButtonSearch: 'text-muted-foreground',

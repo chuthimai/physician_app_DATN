@@ -86,6 +86,7 @@ export default function DiagnosisForm() {
                 <ButtonSave
                     label={"Lưu"}
                     isSubmitting={isSubmitting}
+                    className={"w-full"}
                 />
             </div>
         </form>
