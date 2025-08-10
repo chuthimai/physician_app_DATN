@@ -1,10 +1,12 @@
-import {ROLES} from "../../constants/roles.ts";
 import {sideBarMenus} from "../../constants/sidebar_menu.tsx";
 import {useLocation} from "react-router-dom";
 import {MenuGroup} from "./MenuGroup.tsx";
+import {useContext} from "react";
+import {UserContext} from "@/providers/user/UserContext.tsx";
 
 export default function SideBar() {
-    const role = ROLES.ATTENDING_PHYSICIAN;
+    const userContext = useContext(UserContext);
+    const role = userContext?.user?.role || "";
     const items = sideBarMenus[role];
     const activePath = useLocation().pathname;
     return <div className="flex flex-col h-full py-4">

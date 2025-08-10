@@ -33,6 +33,7 @@ export default function CreatePatientRecordForm() {
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-6">
                     <TextInput
+                        type={"text"}
                         label={"Số CCCD"}
                         error={errors.citizenId}
                         className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
@@ -44,6 +45,7 @@ export default function CreatePatientRecordForm() {
 
                 <div className="col-span-6">
                     <TextInput
+                        type={"text"}
                         label={"Họ tên"}
                         error={errors.name}
                         {...register("name", { required: "Không được để trống họ tên" })}
@@ -77,6 +79,7 @@ export default function CreatePatientRecordForm() {
 
                 <div className="col-span-6">
                     <TextInput
+                        type={"text"}
                         label={"Số điện thoại"}
                         error={errors.phone}
                         {...register("phone", {
@@ -88,6 +91,7 @@ export default function CreatePatientRecordForm() {
 
                 <div className="col-span-12">
                     <TextInput
+                        type={"text"}
                         label={"Địa chỉ"}
                         error={errors.address}
                         {...register("address", { required: "Không được để trống địa chỉ" })}

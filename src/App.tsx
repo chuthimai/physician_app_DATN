@@ -3,9 +3,12 @@ import {Outlet} from "react-router-dom";
 import SideBar from "./components/sidebar/SideBar.tsx";
 import {Colors} from "@/constants/colors.ts";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
+import useAuth from "@/hooks/useAuth.ts";
 
 
 function App() {
+    const { logout } = useAuth();
+
     return (
         <div className="flex flex-col h-screen">
             {/* Header */}
@@ -14,7 +17,7 @@ function App() {
                     Bệnh viện A
                 </div>
                 <div className="flex items-center justify-end font-bold mx-4">
-                    <ButtonCancel label="Đăng xuất" onClick={() => null}/>
+                    <ButtonCancel label="Đăng xuất" onClick={logout}/>
                 </div>
             </div>
 

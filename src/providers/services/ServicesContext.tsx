@@ -1,5 +1,5 @@
+import type { Service } from "@/features/add_services/type";
 import {createContext} from "react";
-import type {Service} from "@/fake_data/services.ts";
 
 export type ServicesContextType = {
     services: Service[];

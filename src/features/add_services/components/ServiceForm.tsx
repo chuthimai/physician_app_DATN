@@ -54,7 +54,9 @@ export default function ServiceForm() {
     const onSubmit: SubmitHandler<AddServiceInputs> = async (data) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         const service = services.find((s) => s.identifier === parseInt(data.name));
-        const hasServiceInList = servicesContext?.services
+        if (service === undefined) return;
+
+        const hasServiceInList = (servicesContext?.services || [])
             .find((s) => s.identifier === service?.identifier) !== undefined;
         if (hasServiceInList) {
             alert("Không được thêm 2 dịch vụ trùng nhau");
