@@ -3,26 +3,29 @@ import {
     TableBody,
     TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow
 } from "@/components/ui/table.tsx";
 import ButtonDelete from "@/components/button/ButtonDelete.tsx";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
-import type {Service} from "@/features/add_services/type.ts";
-import usePrice from "@/hooks/usePrice.ts";
+import type {Service, ServiceSend} from "@/features/add_services/type.ts";
+import {useMapService} from "@/features/add_services/hooks/useMapService.ts";
 
 export default function ServicesTable() {
     const servicesContext = useContext(ServicesContext);
-    const services = servicesContext?.services || [];
-    const { formattedPrice } = usePrice();
+    const [ services, setServices ] = useState<Service[]>([]);
+    const {mappedServices} = useMapService()
 
     // -------------------- render ----------------------
+    useEffect(() => {
+        setServices(mappedServices);
+    }, [mappedServices]);
+
     function deleteService(serviceId: number) {
-        servicesContext?.setServices(services.filter(
-            (service: Service) => service.identifier !== serviceId)
+        servicesContext?.setServices(servicesContext?.services.filter(
+            (service: ServiceSend) => service.identifier !== serviceId)
         );
     }
 
@@ -39,9 +42,9 @@ export default function ServicesTable() {
             <TableRow>
                 <TableHead className="w-[150px] text-center">Tên dịch vụ</TableHead>
                 <TableHead className="w-[150px] text-center">Loại dịch vụ</TableHead>
-                <TableHead className="w-[300px] text-center">Thông tin chi tiết</TableHead>
-                <TableHead className="w-[50px] text-center">Địa điểm</TableHead>
-                <TableHead className="w-[50px] text-center">Giá</TableHead>
+                <TableHead className="w-[250px] text-center">Thông tin chi tiết</TableHead>
+                <TableHead className="w-[100px] text-center">Địa điểm</TableHead>
+                <TableHead className="w-[150px] text-center">Ghi chú</TableHead>
                 <TableHead className="text-center"></TableHead>
             </TableRow>
         </TableHeader>
@@ -61,8 +64,8 @@ export default function ServicesTable() {
                     <TableCell className="text-left whitespace-pre-wrap break-words">
                         {service.location}
                     </TableCell>
-                    <TableCell className="text-right">
-                        {formattedPrice(service.price) + " VND"}
+                    <TableCell className="text-left whitespace-pre-wrap break-words">
+                        {service.note}
                     </TableCell>
 
                     <TableCell className="text-left w-[50px]">
@@ -75,15 +78,5 @@ export default function ServicesTable() {
                 </TableRow>
             ))}
         </TableBody>
-        <TableFooter>
-            <TableRow className={services.length === 0 ? "hidden" : ""}>
-                <TableCell colSpan={4}>Tổng cộng</TableCell>
-                <TableCell className="text-right">
-                    {formattedPrice(
-                        services.reduce((acc: number, service: Service) => acc + service.price, 0)
-                    ) + " VND"}
-                </TableCell>
-            </TableRow>
-        </TableFooter>
     </Table>
 }

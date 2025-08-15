@@ -8,15 +8,15 @@ import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 export default function AddServicesPage() {
     const servicesContext = useContext(ServicesContext);
 
-    return <div className="grid grid-rows-12 h-screen">
-        <div className="row-span-2 flex flex-col bg-white px-4 my-2 rounded-lg border-gray-200">
+    return <div className="flex flex-col h-screen">
+        <div className="relative flex flex-col bg-white px-4 my-2 rounded-lg border-gray-200">
             <ServiceForm/>
         </div>
         <h2 className="text-2xl font-bold text-center my-2">Danh sách dịch vụ</h2>
-        <div className="row-span-6 overflow-auto items-center justify-center">
+        <div className="row-span-4 overflow-auto items-center justify-center mb-15">
             <ServicesTable/>
         </div>
-        <div className="row-span-1 flex gap-4 items-center justify-center my-2">
+        <div className="sticky bottom-0 p-2 bg-white row-span-1 flex gap-4 items-center justify-center my-2">
             <ButtonSave
                 label={"Lưu dịch vụ"}
                 onClick={() => {}}

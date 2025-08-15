@@ -53,8 +53,8 @@ export const sideBarMenus: SideBarMenuConfig = {
             label: "Chức năng",
             children: [
                 {label: "Tạo bệnh án", path: "/tao-benh-an", icon: <MdNoteAdd className={iconStyle}/>},
-                {label: "Khám chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <FaUserMd className={iconStyle}/>},
                 {label: "Khám bệnh", path: "/kham-benh", icon: <HeartIcon className={iconStyle}/> },
+                {label: "Chỉ định chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <FaUserMd className={iconStyle}/>},
                 {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <MdMedicalServices className={iconStyle}/>},
                 {label: "Xem hồ sơ bệnh án", path: "/xem-tat-ca-benh-an", icon: <FolderOpenIcon className={iconStyle}/>},
             ]

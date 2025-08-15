@@ -5,14 +5,17 @@ import SelectSearchInput, {type Option} from "@/components/input/SelectSearchInp
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {services, serviceTypes} from "@/fake_data/services.ts";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
+import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 
 type AddServiceInputs = {
     type: string;
     name: string;
+    note: string;
 };
 
 export default function ServiceForm() {
     const {
+        register,
         handleSubmit,
         control,
         watch,
@@ -62,7 +65,10 @@ export default function ServiceForm() {
             alert("Không được thêm 2 dịch vụ trùng nhau");
             return;
         }
-        servicesContext?.setServices([...(servicesContext?.services || []), service]);
+        servicesContext?.setServices(
+            [...(servicesContext?.services || []),
+                {identifier: service.identifier, note: data.note}
+            ]);
 
         log.debug("ServiceForm " + service);
         reset();
@@ -71,7 +77,7 @@ export default function ServiceForm() {
     // -------------------- view ----------------------
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-12 gap-2">
                 {/* Loại dịch vụ */}
                 <div className="col-span-5">
                     <Controller
@@ -105,9 +111,18 @@ export default function ServiceForm() {
                         )}
                     />
                 </div>
-                <div className="col-span-2 flex items-center justify-end gap-4">
+
+                <div className="col-span-2 flex items-center justify-center w-full">
                     <ButtonSave label={"Thêm"} isSubmitting={isSubmitting} />
                 </div>
+
+                <div className={ "col-span-10"}>
+                    <TextAreaInput
+                        label={"Ghi chú"}
+                        {...register("note", {})}
+                    />
+                </div>
+
             </div>
 
         </form>

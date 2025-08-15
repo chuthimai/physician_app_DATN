@@ -9,6 +9,7 @@ import log from "loglevel";
 import {MedicationsContext} from "@/providers/medications/MedicationsContext.tsx";
 import {MedicationEditingContext} from "@/providers/medications/MedicationEditingContext.tsx";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
+import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 
 type PrescriptionInputs = {
     name: string;
@@ -159,9 +160,9 @@ export default function PrescriptionForm() {
 
                 {/* Cách dùng */}
                 <div className="col-span-12">
-                    <TextInput
-                        type={"string"}
+                    <TextAreaInput
                         label="Cách dùng"
+                        className={"w-full h-30 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"}
                         error={errors.dosageInstruction}
                         {...register("dosageInstruction", {
                             validate: (v) => v.trim() !== "" || "Trường này không được để trống",

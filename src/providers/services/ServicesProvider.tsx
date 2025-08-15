@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { ServicesContext } from "./ServicesContext";
-import type {Service} from "@/features/add_services/type.ts";
+import type {ServiceSend} from "@/features/add_services/type.ts";
 
 export const ServicesProvider = ({ children }: { children: React.ReactNode }) => {
-    const [services, setServices] = useState<Service[]>(() => {
+    const [services, setServices] = useState<ServiceSend[]>(() => {
         const stored = localStorage.getItem("services");
         try {
             return stored ? JSON.parse(stored) : [];

@@ -6,4 +6,10 @@ export type Service = {
     extraDetails: string,
     price: number,
     location: string,
+    note?: string,
+}
+
+export type ServiceSend = {
+    identifier: number,
+    note?: string,
 }
