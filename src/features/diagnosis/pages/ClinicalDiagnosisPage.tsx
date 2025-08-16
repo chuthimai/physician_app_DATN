@@ -1,4 +1,4 @@
-import ClinicalDiagnosisForm from "../components/ClinicalDiagnosisForm.tsx";
+import ClinicalDiagnosisForm from "../components/form/ClinicalDiagnosisForm.tsx";
 
 export default function ClinicalDiagnosisPage() {
     return <div className="flex flex-col">

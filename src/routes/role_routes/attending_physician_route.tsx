@@ -8,6 +8,7 @@ import PrescriptionPage from "../../features/diagnosis/pages/PrescriptionPage.ts
 import AddServicesPage from "@/features/add_services/pages/AddServicesPage.tsx";
 import CreateSpecialistAppointmentPage
     from "@/features/create_specialist_appointment/pages/CreateSpecialistAppointmentPage.tsx";
+import FollowUpAppointmentPage from "@/features/diagnosis/pages/FollowUpAppointmentPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
@@ -38,6 +39,10 @@ export function getAttendingPhysicianRoute(): Route[] {
                 {
                     path: "ke-thuoc",
                     element: <PrescriptionPage/>,
+                },
+                {
+                    path: "hen-tai-kham",
+                    element: <FollowUpAppointmentPage/>,
                 },
             ]
         },

@@ -5,7 +5,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogClose
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog.tsx"
 
 import {
     Table,
@@ -15,7 +15,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table.tsx"
 
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";

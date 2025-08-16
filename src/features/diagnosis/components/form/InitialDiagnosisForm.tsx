@@ -1,5 +1,5 @@
 import {type SubmitHandler, useForm} from "react-hook-form";
-import ButtonSave from "../../../components/button/ButtonSave.tsx";
+import ButtonSave from "../../../../components/button/ButtonSave.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 import TextInput from "@/components/input/TextInput.tsx";
 

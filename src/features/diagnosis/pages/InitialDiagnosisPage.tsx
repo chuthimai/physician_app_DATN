@@ -1,4 +1,4 @@
-import InitialDiagnosisForm from "../components/InitialDiagnosisForm.tsx";
+import InitialDiagnosisForm from "../components/form/InitialDiagnosisForm.tsx";
 
 export default function InitialDiagnosisPage() {
     return <div className="flex flex-col">

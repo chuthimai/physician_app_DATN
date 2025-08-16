@@ -1,7 +1,7 @@
-import PrescriptionForm from "@/features/diagnosis/components/PrescriptionForm.tsx";
+import PrescriptionForm from "@/features/diagnosis/components/form/PrescriptionForm.tsx";
 import ButtonInfo from "@/components/button/ButtonInfo.tsx";
 import {useDialog} from "@/features/diagnosis/hooks/useDialog.ts";
-import PrescriptionTable from "@/features/diagnosis/components/PrescriptionTable.tsx";
+import PrescriptionTable from "@/features/diagnosis/components/table/PrescriptionTable.tsx";
 
 export default function PrescriptionPage() {
     const { open, openDialog, setOpen } = useDialog();

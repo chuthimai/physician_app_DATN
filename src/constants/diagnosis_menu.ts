@@ -15,6 +15,7 @@ export const diagnosisMenus: DiagnosisMenuConfig = {
         {label: "Lâm sàng", path: "/kham-benh/chuan-doan/lam-sang"},
         {label: "Xác định", path: "/kham-benh/chuan-doan/xac-dinh"},
         {label: "Kê thuốc", path: "/kham-benh/ke-thuoc"},
+        {label: "Hẹn tái khám", path: "/kham-benh/hen-tai-kham"},
     ],
 
     [ROLES.LAB_PHYSICIAN]: [

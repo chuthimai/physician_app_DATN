@@ -1,8 +1,12 @@
-import { useForm, type SubmitHandler } from "react-hook-form";
+import {useForm, type SubmitHandler, Controller} from "react-hook-form";
 import TextInput from "../../../components/input/TextInput.tsx";
 import DateInput from "../../../components/input/DateInput.tsx";
 import SelectInput from "../../../components/input/SelectInput.tsx";
 import ButtonSave from "../../../components/button/ButtonSave.tsx";
+import {useEffect, useState} from "react";
+import {Label} from "@/components/ui/label.tsx";
+import {Checkbox} from "@/components/ui/checkbox.tsx";
+import useDate from "@/hooks/useDate.ts";
 
 type PatientInputs = {
     citizenId: string;
@@ -11,15 +15,47 @@ type PatientInputs = {
     gender: string;
     address: string;
     phone: string;
+    hasTransferPaper: boolean;
 };
 
 export default function CreatePatientRecordForm() {
+    const { formattedDateOfBirth } = useDate();
+    const [patientInfo, setPatientInfo] = useState<string | null>(null);
+
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors, isSubmitting },
         reset,
     } = useForm<PatientInputs>();
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setPatientInfo(localStorage.getItem("patientInfo"));
+        };
+
+        document.addEventListener("scanned", handleStorageChange);
+        return () => {
+            document.removeEventListener("scanned", handleStorageChange);
+        };
+    }, []);
+
+    useEffect(() => {
+        reset();
+        if (patientInfo === undefined) return;
+        if (patientInfo !== null) {
+            const [citizenId, ,name, dob, gender, address] = patientInfo.split("|") || [];
+
+            reset({
+                citizenId,
+                name,
+                dob: formattedDateOfBirth(dob),
+                gender: gender === "Nam" ? "male" : "female",
+                address,
+            });
+        }
+    }, [patientInfo]);
 
     const onSubmit: SubmitHandler<PatientInputs> = async (data) => {
         console.log("Đang gửi dữ liệu:", data);
@@ -74,6 +110,7 @@ export default function CreatePatientRecordForm() {
                                 value: "female"
                             }
                         ]}
+                        {...register("gender")}
                     />
                 </div>
 
@@ -96,6 +133,23 @@ export default function CreatePatientRecordForm() {
                         error={errors.address}
                         {...register("address", { required: "Không được để trống địa chỉ" })}
                     />
+                </div>
+                <div className="col-span-12">
+                    <Controller
+                        name="hasTransferPaper"
+                        control={control}
+                        render={({ field }) => (
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="hasReferralDocument"
+                                    checked={field.value}
+                                    onCheckedChange={(checked) => field.onChange(checked === true)}
+                                />
+                                <Label htmlFor="hasTransferPaper">Có giấy chuyển viện</Label>
+                            </div>
+                        )}
+                    />
+
                 </div>
             </div>
 

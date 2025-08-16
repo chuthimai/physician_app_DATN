@@ -1,6 +1,6 @@
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import {useContext, useEffect} from "react";
-import ButtonSave from "../../../components/button/ButtonSave.tsx";
+import ButtonSave from "../../../../components/button/ButtonSave.tsx";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import {doseFormMap, medications} from "@/fake_data/medications.ts";
 import TextInput from "@/components/input/TextInput.tsx";
