@@ -3,6 +3,7 @@ import {type JSX} from "react";
 import {
     MdMedicalServices,
     MdNoteAdd,
+    MdDescription
 } from "react-icons/md";
 
 import {
@@ -57,6 +58,7 @@ export const sideBarMenus: SideBarMenuConfig = {
                 {label: "Chỉ định chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <FaUserMd className={iconStyle}/>},
                 {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <MdMedicalServices className={iconStyle}/>},
                 {label: "Xem hồ sơ bệnh án", path: "/xem-tat-ca-benh-an", icon: <FolderOpenIcon className={iconStyle}/>},
+                {label: "Giấy chuyển viện", path: "/giay-chuyen-vien", icon: <MdDescription className={iconStyle}/>},
             ]
         }
     ],

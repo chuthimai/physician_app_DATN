@@ -1,4 +1,4 @@
-import { ROLES } from "./roles";
+import { ROLES } from "../roles.ts";
 
 export type Item = {
     label: string;

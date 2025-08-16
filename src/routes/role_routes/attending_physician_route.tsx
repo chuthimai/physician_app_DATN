@@ -9,6 +9,9 @@ import AddServicesPage from "@/features/add_services/pages/AddServicesPage.tsx";
 import CreateSpecialistAppointmentPage
     from "@/features/create_specialist_appointment/pages/CreateSpecialistAppointmentPage.tsx";
 import FollowUpAppointmentPage from "@/features/diagnosis/pages/FollowUpAppointmentPage.tsx";
+import TransferLetterPage from "@/features/transfer_letter/pages/TransferLetterPage.tsx";
+import ApproveTransferLetterPage from "@/features/transfer_letter/pages/ApproveTransferLetterPage.tsx";
+import CreateTransferLetterPage from "@/features/transfer_letter/pages/CreateTransferLetterPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
@@ -57,6 +60,24 @@ export function getAttendingPhysicianRoute(): Route[] {
         {
             path: "benh-an-hien-tai",
             element: <div>Benh an hien tai</div>
+        },
+        {
+            path: "giay-chuyen-vien",
+            element: <TransferLetterPage/>,
+            children: [
+                {
+                    path: "/giay-chuyen-vien",
+                    element: <CreateTransferLetterPage/>
+                },
+                {
+                    path: "tao-giay-chuyen-vien",
+                    element: <CreateTransferLetterPage/>
+                },
+                {
+                    path: "duyet-giay-chuyen-vien",
+                    element: <ApproveTransferLetterPage/>
+                },
+            ]
         },
     ]
 }
