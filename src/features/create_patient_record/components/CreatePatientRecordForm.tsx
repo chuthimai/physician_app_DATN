@@ -7,6 +7,8 @@ import {useEffect, useState} from "react";
 import {Label} from "@/components/ui/label.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import useDate from "@/hooks/useDate.ts";
+import log from "loglevel";
+import {toast} from "react-toastify";
 
 type PatientInputs = {
     citizenId: string;
@@ -43,24 +45,30 @@ export default function CreatePatientRecordForm() {
 
     useEffect(() => {
         reset();
-        if (patientInfo === undefined) return;
-        if (patientInfo !== null) {
-            const [citizenId, ,name, dob, gender, address] = patientInfo.split("|") || [];
+        try {
+            if (patientInfo === undefined) return;
+            if (patientInfo !== null) {
+                const [citizenId, ,name, dob, gender, address] = patientInfo.split("|") || [];
 
-            reset({
-                citizenId,
-                name,
-                dob: formattedDateOfBirth(dob),
-                gender: gender === "Nam" ? "male" : "female",
-                address,
-            });
+                reset({
+                    citizenId,
+                    name,
+                    dob: formattedDateOfBirth(dob),
+                    gender: gender === "Nam" ? "male" : "female",
+                    address,
+                });
+            }
+        } catch (e) {
+            log.error(e);
+            toast.error("Dữ liệu không hợp lệ");
+            return;
         }
     }, [patientInfo]);
 
     const onSubmit: SubmitHandler<PatientInputs> = async (data) => {
         console.log("Đang gửi dữ liệu:", data);
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log("Gửi thành công!");
+        toast.success("Gửi thành công!");
         reset();
     };
 
