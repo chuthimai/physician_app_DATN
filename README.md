@@ -10,7 +10,7 @@
     - **Bác sĩ xét nghiệm (Lab Physician)**: Lấy mẫu, nhập kết quả xét nghiệm.
     - **Bác sĩ chẩn đoán hình ảnh (Imaging Physician)**: Thực hiện kỹ thuật, nhập kết quả hình ảnh.
 
-## Cấu trúc thư mục
+## Cấu trúc thư mục kiểu feature-based architecture (tổ chức theo tính năng)
 ```aiignore
 src/
 ├── features/
@@ -36,6 +36,7 @@ src/
 │   ├── finance/                   # Thanh toán
 │   ├── reports/                   # Báo cáo thống kê
 │   └── schedule/                  # Xem lịch làm việc
+├── api/                           # Config API dùng chung
 ├── components/                    # UI dùng lại
 ├── layouts/                       # Layout cho bác sĩ, thu ngân, kỹ thuật viên...
 ├── hooks/                         # Chứa các hàm bắt đầu bằng use... giúp tái sử dụng logic 
@@ -69,6 +70,7 @@ npm install
     Cập nhật các giá trị trong .env:
 ```text
 VITE_API_BASE_URL=...
+VITE_NODE_ENV=development
 ```
 4. Chạy dự án
 ```bash
