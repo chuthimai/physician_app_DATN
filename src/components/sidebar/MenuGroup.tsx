@@ -21,7 +21,6 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
     }
 
     const items = item.children;
-    const isAnyChildActive = items.some(item => activePath.includes(item.path as string) || false);
 
     return (
         <div>
@@ -29,7 +28,7 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
                 <MenuItem
                     label={item.label}
                     icon={item.icon}
-                    active={isAnyChildActive}
+                    active={false}
                     onClick={() => undefined}
                 />
             </div>
