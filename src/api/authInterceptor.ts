@@ -6,6 +6,7 @@ import {
 } from "axios";
 import { tokenStorage } from "./secureTokenStorage";
 import { TokenManager } from "./tokenManager";
+import {logout} from "@/api/logout.ts";
 
 let isRefreshing = false;
 // Danh sách các callback, chứa những request bị 401 đang chờ token mới để được gọi lại.
@@ -52,7 +53,7 @@ export function setupAuthInterceptor(api: AxiosInstance, tokenManager: TokenMana
                         originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
                         return api(originalRequest);
                     } else {
-                        await tokenStorage.deleteTokens();
+                        await logout();
                     }
                 } finally {
                     isRefreshing = false;

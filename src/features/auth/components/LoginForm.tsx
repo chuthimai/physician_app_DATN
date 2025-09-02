@@ -1,6 +1,8 @@
 import {type SubmitHandler, useForm} from "react-hook-form";
 import {Colors} from "@/constants/colors.ts";
-import useAuth from "@/hooks/useAuth.ts";
+import useAuth from "@/features/auth/hooks/useAuth.ts";
+import type {LoginParams} from "@/features/auth/types.ts";
+import {toast} from "react-toastify";
 
 type LoginInputs = {
     citizenId: string;
@@ -15,16 +17,25 @@ export function LoginForm() {
         reset
     } = useForm<LoginInputs>();
 
-    const {checkLogin} = useAuth();
+    const {login} = useAuth();
 
 
     const onSubmit:SubmitHandler<LoginInputs>  = async (data: LoginInputs) => {
-        console.log("Submitting...", data);
-        // Giả lập API
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        checkLogin(Number.parseInt(data.citizenId), data.password);
-        console.log("Submitted!");
-        reset();
+        const loginPrams: LoginParams = {
+            identifier: Number.parseInt(data.citizenId),
+            password: data.password,
+        };
+
+        try {
+            await login(loginPrams);
+            reset();
+            toast.success("Đăng nhập thành công");
+        } catch(e) {
+            if (e instanceof Error) {
+                toast.error(e.message);
+            }
+        }
+
     };
 
     return (

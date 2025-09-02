@@ -1,9 +1,8 @@
-import './App.css';
 import {Outlet} from "react-router-dom";
 import SideBar from "./components/sidebar/SideBar.tsx";
 import {Colors} from "@/constants/colors.ts";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
-import useAuth from "@/hooks/useAuth.ts";
+import useAuth from "@/features/auth/hooks/useAuth.ts";
 import ToastContainerCustom from "@/components/toast/ToastContainerCustom.tsx";
 
 

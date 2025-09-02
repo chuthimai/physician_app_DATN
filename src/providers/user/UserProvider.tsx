@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {UserContext} from "@/providers/user/UserContext.tsx";
-import type {User} from "@/features/auth/types.ts";
+import type {User} from "@/types/user.ts";
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | undefined>(() => {

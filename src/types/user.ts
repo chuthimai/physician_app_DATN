@@ -1,10 +1,5 @@
-export interface LoginParams {
-    identifier: number,
-    password: string,
-}
-
-export interface LoginResponse {
-    identifier: number,
+export interface User {
+    id: number,
     name: string,
     telecom: string | null,
     email: string | null,
@@ -12,5 +7,4 @@ export interface LoginResponse {
     birthDate: Date,
     photo: string | null,
     role: string,
-    token: string,
 }

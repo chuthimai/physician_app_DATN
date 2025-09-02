@@ -1,19 +1,26 @@
 import type {RouteObject} from "react-router";
-import App from "../App.tsx";
-import LoginPage from "../features/auth/pages/LoginPage.tsx";
+// import App from "../App.tsx";
+// import LoginPage from "../features/auth/pages/LoginPage.tsx";
 import ForgotPasswordPage from "../features/auth/pages/ForgotPasswordPage.tsx";
 import NotFoundPage from "../NotFoundPage.tsx";
 import {getRoleRoutes} from "@/routes/get_role_routes.tsx";
 import ProtectedRoute from "@/components/ProtectedRoute.tsx";
+import WithSuspense from "@/components/loading/WithSuspense.tsx";
+import {lazy} from "react";
+
+const LoginPage = lazy(() => import("../features/auth/pages/LoginPage.tsx"));
+const App = lazy(() => import("../App.tsx"))
 
 export function generateRoutes(role: string): RouteObject[] {
     return [
         {
             path: '/',
             element: (
-                <ProtectedRoute>
-                    <App />
-                </ProtectedRoute>
+                <WithSuspense>
+                    <ProtectedRoute>
+                        <App />
+                    </ProtectedRoute>
+                </WithSuspense>
             ),
             children: [
                 {
@@ -25,7 +32,12 @@ export function generateRoutes(role: string): RouteObject[] {
         },
         {
             path: "/login",
-            element: <LoginPage />
+            element: (
+                <WithSuspense>
+                    <LoginPage />
+                </WithSuspense>
+            ),
+
         },
         {
             path: "/logout",
