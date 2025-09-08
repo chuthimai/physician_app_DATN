@@ -1,14 +1,12 @@
 import {ROLES} from "./roles";
 import {type JSX} from "react";
 import {
-    MdMedicalServices,
-    MdNoteAdd,
-    MdDescription
+    MdOutlineMedicalServices,
+    MdOutlineNoteAdd,
+    MdOutlineDescription
 } from "react-icons/md";
 
-import {
-    FaUserMd,
-} from "react-icons/fa";
+import { CiMedicalCross } from "react-icons/ci";
 
 import {
     HomeIcon,
@@ -53,12 +51,12 @@ export const sideBarMenus: SideBarMenuConfig = {
         {
             label: "Chức năng",
             children: [
-                {label: "Tạo bệnh án", path: "/tao-benh-an", icon: <MdNoteAdd className={iconStyle}/>},
+                {label: "Tạo bệnh án", path: "/tao-benh-an", icon: <MdOutlineNoteAdd className={iconStyle}/>},
                 {label: "Khám bệnh", path: "/kham-benh", icon: <HeartIcon className={iconStyle}/> },
-                {label: "Chỉ định chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <FaUserMd className={iconStyle}/>},
-                {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <MdMedicalServices className={iconStyle}/>},
+                {label: "Chỉ định chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <CiMedicalCross className={iconStyle}/>},
+                {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <MdOutlineMedicalServices className={iconStyle}/>},
                 {label: "Xem hồ sơ bệnh án", path: "/xem-tat-ca-benh-an", icon: <FolderOpenIcon className={iconStyle}/>},
-                {label: "Giấy chuyển viện", path: "/giay-chuyen-vien", icon: <MdDescription className={iconStyle}/>},
+                {label: "Giấy chuyển viện", path: "/giay-chuyen-vien", icon: <MdOutlineDescription className={iconStyle}/>},
             ]
         }
     ],

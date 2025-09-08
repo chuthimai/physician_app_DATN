@@ -9,7 +9,7 @@ export default function SideBar() {
     const role = userContext?.user?.role || "";
     const items = sideBarMenus[role];
     const activePath = useLocation().pathname;
-    return <div className="flex flex-col h-full py-4">
+    return <div className="flex flex-col h-full">
         <div className="flex-1 overflow-y-auto">
             {items.map((item) => (
                 <MenuGroup

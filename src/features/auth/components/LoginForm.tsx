@@ -2,7 +2,6 @@ import {type SubmitHandler, useForm} from "react-hook-form";
 import {Colors} from "@/constants/colors.ts";
 import useAuth from "@/features/auth/hooks/useAuth.ts";
 import type {LoginParams} from "@/features/auth/types.ts";
-import {toast} from "react-toastify";
 
 type LoginInputs = {
     citizenId: string;
@@ -26,15 +25,8 @@ export function LoginForm() {
             password: data.password,
         };
 
-        try {
-            await login(loginPrams);
-            reset();
-            toast.success("Đăng nhập thành công");
-        } catch(e) {
-            if (e instanceof Error) {
-                toast.error(e.message);
-            }
-        }
+        await login(loginPrams);
+        reset();
 
     };
 
@@ -72,7 +64,7 @@ export function LoginForm() {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full ${Colors.BgButtonSave} ${Colors.BgButtonSaveHover} text-white py-2 rounded-md font-semibold`}
+                className={`w-full ${Colors.BgButtonSave} ${Colors.BgButtonSaveHover} text-white py-2 rounded-md font-semibold disabled:bg-muted disabled:cursor-not-allowed`}
             >
                 {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
             </button>

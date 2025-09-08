@@ -55,6 +55,12 @@ src/
 ├── stores/                        # Zustand/Redux store
 └── app.tsx
 ```
+## Rule code
+- Code chia theo các features với ý nghĩa như sơ đồ trên
+- Để gọi API:
+  - Cần code hook để gọi API riêng cho từng tính năng sử dụng lại hookApi chung trong hook
+  - Xử lý lỗi trong hook
+  - Xử lý loading ở UI
 
 ## Cài đặt & chạy dự án
 1. Clone repo

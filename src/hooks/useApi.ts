@@ -1,9 +1,11 @@
-import {useState, useCallback} from "react";
-import {axiosClient} from "../api/axiosClient";
+import { useState, useCallback } from "react";
+import { axiosClient } from "../api/axiosClient";
+import type { AxiosError } from "axios";
 
 export function useApi<T>() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
+
 
     const request = useCallback(
         async (
@@ -23,13 +25,25 @@ export function useApi<T>() {
                 });
                 return res.data;
             } catch (err) {
+                // --- Xử lý riêng AxiosError ---
+                if ((err as AxiosError)?.response) {
+                    const axiosErr = err as AxiosError<{ statusCode: number; message: string }>;
+                    const msg = axiosErr.response?.data?.message || axiosErr.message;
+                    const e = new Error(msg);
+                    setError(e);
+                    throw e;
+                }
+
+                // --- fallback ---
                 const e = err instanceof Error ? err : new Error("Unknown error");
                 setError(e);
                 throw e;
             } finally {
                 setLoading(false);
             }
-        }, []);
+        },
+        []
+    );
 
-    return {request, loading, error};
+    return { request, loading, error };
 }

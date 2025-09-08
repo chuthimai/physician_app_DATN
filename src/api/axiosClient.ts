@@ -1,6 +1,7 @@
 import axios from "axios";
 import { setupAuthInterceptor } from "./authInterceptor";
 import { TokenManager } from "./tokenManager";
+import log from "loglevel";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://api.example.com";
 
@@ -16,12 +17,12 @@ const tokenManager = new TokenManager(BASE_URL);
 // Log request/response khi ở dev
 if (import.meta.env.VITE_NODE_ENV === "development") {
     axiosClient.interceptors.request.use(req => {
-        console.log("Request:", req);
+        log.info("Request:", req);
         return req;
     });
 
     axiosClient.interceptors.response.use(res => {
-        console.log("Response:", res.data);
+        // log.info("Response:", res.data);
         return res;
     });
 }

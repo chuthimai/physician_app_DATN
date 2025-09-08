@@ -9,6 +9,7 @@ import {Checkbox} from "@/components/ui/checkbox.tsx";
 import useDate from "@/hooks/useDate.ts";
 import log from "loglevel";
 import {toast} from "react-toastify";
+import {useToast} from "@/hooks/useToast.ts";
 
 type PatientInputs = {
     citizenId: string;
@@ -23,6 +24,7 @@ type PatientInputs = {
 export default function CreatePatientRecordForm() {
     const { formattedDateOfBirth } = useDate();
     const [patientInfo, setPatientInfo] = useState<string | null>(null);
+    const {showToastError} = useToast();
 
     const {
         register,
@@ -60,7 +62,7 @@ export default function CreatePatientRecordForm() {
             }
         } catch (e) {
             log.error(e);
-            toast.error("Dữ liệu không hợp lệ");
+            showToastError("Dữ liệu không hợp lệ")
             return;
         }
     }, [patientInfo]);

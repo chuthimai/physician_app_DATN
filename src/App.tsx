@@ -3,7 +3,6 @@ import SideBar from "./components/sidebar/SideBar.tsx";
 import {Colors} from "@/constants/colors.ts";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
 import useAuth from "@/features/auth/hooks/useAuth.ts";
-import ToastContainerCustom from "@/components/toast/ToastContainerCustom.tsx";
 
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
                     <ButtonCancel label="Đăng xuất" onClick={logout}/>
                 </div>
             </div>
-            <ToastContainerCustom/>
 
             {/* Main layout: Sidebar + Content */}
             <div className="flex flex-1 overflow-hidden min-w-[1200px]">

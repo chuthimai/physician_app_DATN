@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "react-big-calendar/lib/css/react-big-calendar.css";
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -9,4 +10,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.Toastify__toast-icon {
+  margin: 8px; 
+}
+.Toastify__toast-body {
+  align-items: center; /* căn giữa icon với chữ */
 }

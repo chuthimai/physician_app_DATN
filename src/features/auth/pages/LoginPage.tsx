@@ -1,7 +1,7 @@
 // pages/LoginPage.tsx
 import { Link } from "react-router-dom";
 import {LoginForm} from "../components/LoginForm.tsx";
-import {Colors} from "../../../constants/colors.ts";
+import {Colors} from "@/constants/colors.ts";
 
 
 export default function LoginPage() {

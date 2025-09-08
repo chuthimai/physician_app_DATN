@@ -6,7 +6,7 @@ export default function ToastContainerCustom() {
             position="top-center"
             autoClose={3000}
             hideProgressBar={false}
-            newestOnTop={false}
+            newestOnTop={true}
             closeOnClick={true}
             rtl={false}
             pauseOnFocusLoss
