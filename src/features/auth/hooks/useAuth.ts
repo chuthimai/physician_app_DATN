@@ -34,9 +34,10 @@ export default function useAuth() {
             await navigator("/");
             showToastSuccess("Đăng nhập thành công")
         } catch (e) {
-            if (e instanceof Error) {
-                log.error(`useAuth: ${e.message}`);
-                showToastError("Sai số CCCD hoặc mật khẩu")
+            if (!(e instanceof Error)) return;
+            log.error(`useAuth: ${e.message}`);
+            if (e.message === "User not found") {
+                showToastError("Sai thông tin đăng nhập");
             }
         }
 
@@ -44,6 +45,7 @@ export default function useAuth() {
 
     const logoutAuth = async () => {
         await logout();
+        showToastSuccess("Đăng xuất thành công")
     }
 
     return {

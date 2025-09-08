@@ -3,7 +3,7 @@ import ScanCard from "./ScanCard.tsx";
 import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
 import {useState} from "react";
 
-export default function Header(){
+export default function PatientSearchBar(){
     const [openScan, setOpenScan] = useState(false);
 
     return (

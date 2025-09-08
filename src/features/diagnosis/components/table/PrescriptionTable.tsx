@@ -25,6 +25,8 @@ import ButtonEdit from "@/components/button/ButtonEdit.tsx";
 import ButtonDelete from "@/components/button/ButtonDelete.tsx";
 import {doseFormMap, medications} from "@/fake_data/medications.ts";
 import {MedicationEditingContext} from "@/providers/medications/MedicationEditingContext.tsx";
+import {useForm} from "react-hook-form";
+import {useToast} from "@/hooks/useToast.ts";
 
 type Props = {
     open: boolean;
@@ -33,22 +35,41 @@ type Props = {
 
 export default function PrescriptionTable({ open, onOpenChange }: Props) {
     const medicationsContext = useContext(MedicationsContext);
-    const presribedMedications = medicationsContext?.medications || [];
-
+    const prescribedMedications = medicationsContext?.medications || [];
+    const {
+        handleSubmit,
+        formState: { isSubmitting }
+    } = useForm();
+    const {showToastError} = useToast();
     const medicationEditingContext = useContext(MedicationEditingContext);
 
     // -------------------- render ----------------------
     function deleteMedication(medicationId: number) {
-        medicationsContext?.setMedications(presribedMedications.filter(
+        medicationsContext?.setMedications(prescribedMedications.filter(
             (medication) => medication.medicationId !== medicationId)
         );
     }
 
     function editMedication(medicationId: number) {
         medicationEditingContext?.setMedicationEditing(
-            presribedMedications.find(
+            prescribedMedications.find(
                 (medication) => medication.medicationId === medicationId)
         )
+        onOpenChange(false);
+    }
+
+    const onSubmit = async () => {
+        // TODO: delete
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        if (medicationsContext?.medications === undefined || medicationsContext?.medications.length === 0) {
+            onOpenChange(false);
+            showToastError("Chưa có thuốc nào được thêm");
+            return;
+        }
+
+        // TODO: Thêm logic api lưu danh sách thuốc trên server
+        console.log("Submitted!");
+        medicationsContext?.setMedications([]);
         onOpenChange(false);
     }
 
@@ -62,7 +83,7 @@ export default function PrescriptionTable({ open, onOpenChange }: Props) {
                     <Table>
                         <TableCaption>
                             {
-                                presribedMedications.length === 0 ?
+                                prescribedMedications.length === 0 ?
                                     "Chưa có thuốc nào được thêm" :
                                     "Danh sách thuốc đã thêm"
                             }
@@ -78,7 +99,7 @@ export default function PrescriptionTable({ open, onOpenChange }: Props) {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {presribedMedications.map((medication) => (
+                            {prescribedMedications.map((medication) => (
                                 <TableRow key={ medication.medicationId }>
                                     <TableCell className="font-medium text-center whitespace-pre-wrap break-words">
                                         {
@@ -121,10 +142,12 @@ export default function PrescriptionTable({ open, onOpenChange }: Props) {
                 </DialogHeader>
                 <div className="grid gap-4">
                     <DialogFooter className="flex items-end space-x-4">
-                        <ButtonSave
-                            label={"Lưu đơn thuốc"}
-                            onClick={() => {}}
-                        />
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <ButtonSave
+                                label={"Lưu đơn thuốc"}
+                                isSubmitting={isSubmitting}
+                            />
+                        </form>
                         <DialogClose asChild>
                             <ButtonCancel
                                 label={"Huỷ"}

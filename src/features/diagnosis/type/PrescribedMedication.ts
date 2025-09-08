@@ -1,4 +1,4 @@
-export default interface PresribedMedication {
+export default interface PrescribedMedication {
     quantity: number;
     dosageInstruction: string;
     medicationId: number;

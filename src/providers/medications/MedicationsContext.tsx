@@ -1,9 +1,9 @@
 import {createContext} from "react";
-import type PresribedMedication from "@/features/diagnosis/type/PresribedMedication.ts";
+import type PrescribedMedication from "@/features/diagnosis/type/PrescribedMedication.ts";
 
 export type MedicationsContextType = {
-    medications: PresribedMedication[];
-    setMedications: (r: PresribedMedication[]) => void;
+    medications: PrescribedMedication[];
+    setMedications: (r: PrescribedMedication[]) => void;
 };
 
 export const MedicationsContext = createContext<MedicationsContextType | undefined>(undefined);

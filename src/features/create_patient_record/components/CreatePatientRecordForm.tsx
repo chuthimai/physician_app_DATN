@@ -19,6 +19,7 @@ type PatientInputs = {
     address: string;
     phone: string;
     hasTransferPaper: boolean;
+    hasInsurance: boolean;
 };
 
 export default function CreatePatientRecordForm() {
@@ -46,7 +47,10 @@ export default function CreatePatientRecordForm() {
     }, []);
 
     useEffect(() => {
-        reset();
+        reset({
+            hasTransferPaper: false,
+            hasInsurance: false,
+        });
         try {
             if (patientInfo === undefined) return;
             if (patientInfo !== null) {
@@ -58,6 +62,8 @@ export default function CreatePatientRecordForm() {
                     dob: formattedDateOfBirth(dob),
                     gender: gender === "Nam" ? "male" : "female",
                     address,
+                    hasTransferPaper: false,
+                    hasInsurance: false,
                 });
             }
         } catch (e) {
@@ -71,7 +77,10 @@ export default function CreatePatientRecordForm() {
         console.log("Đang gửi dữ liệu:", data);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         toast.success("Gửi thành công!");
-        reset();
+        reset({
+            hasTransferPaper: false,
+            hasInsurance: false,
+        });
     };
 
     return (
@@ -101,6 +110,7 @@ export default function CreatePatientRecordForm() {
                 <div className="col-span-4">
                     <DateInput
                         label={"Ngày sinh"}
+                        max={new Date().toISOString().split("T")[0]}
                         error={errors.dob}
                         {...register("dob", { required: "Chọn ngày sinh" })}
                     />
@@ -144,28 +154,47 @@ export default function CreatePatientRecordForm() {
                         {...register("address", { required: "Không được để trống địa chỉ" })}
                     />
                 </div>
-                <div className="col-span-12">
+
+                <div className="col-span-3">
+                    <Controller
+                        name="hasInsurance"
+                        control={control}
+                        render={({ field }) => (
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="hasInsurance"
+                                    checked={field.value === undefined ? false : field.value}
+                                    onCheckedChange={(checked) => field.onChange(checked === true)}
+                                />
+                                <Label htmlFor="hasInsurance">Có bảo hiểm</Label>
+                            </div>
+                        )}
+                    />
+                </div>
+
+                <div className="col-span-3">
                     <Controller
                         name="hasTransferPaper"
                         control={control}
                         render={({ field }) => (
                             <div className="flex items-center space-x-2">
                                 <Checkbox
-                                    id="hasReferralDocument"
-                                    checked={field.value}
+                                    id="hasTransferPaper"
+                                    checked={field.value === undefined ? false : field.value}
                                     onCheckedChange={(checked) => field.onChange(checked === true)}
                                 />
                                 <Label htmlFor="hasTransferPaper">Có giấy chuyển viện</Label>
                             </div>
                         )}
                     />
-
                 </div>
+
             </div>
 
-            <div className="flex items-center justify-center mt-3">
+            <div className="flex items-center justify-center pt-1">
                 <ButtonSave
                     label={"Lưu"}
+                    className={"w-full"}
                     isSubmitting={isSubmitting}
                 />
             </div>

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { MedicationsContext } from "./MedicationsContext";
-import type PresribedMedication from "@/features/diagnosis/type/PresribedMedication.ts";
+import type PrescribedMedication from "@/features/diagnosis/type/PrescribedMedication.ts";
 
 export const MedicationsProvider = ({ children }: { children: React.ReactNode }) => {
-    const [medications, setMedications] = useState<PresribedMedication[]>(() => {
+    const [medications, setMedications] = useState<PrescribedMedication[]>(() => {
         const stored = localStorage.getItem("medications");
         try {
             return stored ? JSON.parse(stored) : [];

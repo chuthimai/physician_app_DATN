@@ -1,9 +1,9 @@
 import {createContext} from "react";
-import type PresribedMedication from "@/features/diagnosis/type/PresribedMedication.ts";
+import type PrescribedMedication from "@/features/diagnosis/type/PrescribedMedication.ts";
 
 export type MedicationEditingContextType = {
-    medicationEditing: PresribedMedication | undefined;
-    setMedicationEditing: (r: PresribedMedication | undefined) => void;
+    medicationEditing: PrescribedMedication | undefined;
+    setMedicationEditing: (r: PrescribedMedication | undefined) => void;
 };
 
 export const MedicationEditingContext = createContext<MedicationEditingContextType | undefined>(undefined);

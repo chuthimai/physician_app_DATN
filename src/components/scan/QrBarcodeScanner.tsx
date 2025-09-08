@@ -7,37 +7,41 @@ interface QrBarcodeScannerProps {
     resultName: string;
     open: boolean;
     onOpenChange: (open: boolean) => void;
+    onLoadingChange: (loading: boolean) => void;
 }
 
-export function QrBarcodeScanner({resultName, open, onOpenChange}: QrBarcodeScannerProps) {
+export function QrBarcodeScanner({resultName, open, onOpenChange, onLoadingChange}: QrBarcodeScannerProps) {
     const scannerRef = useRef<Html5Qrcode | null>(null);
 
     useEffect(() => {
-        startScanner();
+        startScanner().then(r => {console.log(r)});
     }, []);
 
     useEffect(() => {
         if (!open) {
-            stopScanner();
+            stopScanner().then(r => {console.log(r)});
         }
     }, [open]);
 
-    const startScanner = () => {
+    const startScanner = async () => {
+        onLoadingChange(true);
         const html5QrCode = new Html5Qrcode("reader");
         scannerRef.current = html5QrCode;
 
         const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
-        html5QrCode
-            .start(
+        try {
+            await html5QrCode.start(
                 { facingMode: "environment" },
                 config,
                 qrCodeSuccessCallback,
                 qrCodeErrorCallback
-            )
-            .catch((err) => {
-                console.error("Lỗi khi bật camera:", err);
-            });
+            );
+        } catch (err) {
+            console.error("Lỗi khi bật camera:", err);
+        } finally {
+            onLoadingChange?.(false);
+        }
     };
 
     const qrCodeSuccessCallback = async (decodedText: string) => {

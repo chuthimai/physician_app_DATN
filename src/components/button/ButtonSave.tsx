@@ -13,7 +13,7 @@ export default function ButtonSave({ label = "Lưu", isSubmitting, onClick, clas
             type="submit"
             disabled={isSubmitting}
             onClick={onClick}
-            className={`${Colors.BgButtonSave} ${Colors.BgButtonSaveHover} ${Colors.TextButtonSave} py-2 px-8 rounded-md font-semibold disabled:opacity-50 ${className || ""}`}
+            className={`${Colors.BgButtonSave} ${Colors.BgButtonSaveHover} ${Colors.TextButtonSave} py-2 px-8 rounded-md font-semibold disabled:bg-muted-foreground disabled:cursor-not-allowed ${className || ""}`}
         >
             {isSubmitting ? "Đang lưu..." : label}
         </button>

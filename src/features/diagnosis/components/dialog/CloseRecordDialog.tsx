@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/dialog.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
+import {useForm} from "react-hook-form";
+import {useToast} from "@/hooks/useToast.ts";
 
 interface CloseRecordDialogProps {
     open: boolean;
@@ -15,8 +17,20 @@ interface CloseRecordDialogProps {
 }
 
 export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) {
-    //TODO: Thêm API để đóng bệnh án
-    const onConfirm = () => {
+    const {
+        handleSubmit,
+        formState: { isSubmitting }
+    } = useForm();
+    const {showToastSuccess} = useToast();
+
+    const onSubmit = async () => {
+        // TODO: delete
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // TODO: Thêm logic đóng bệnh án
+        console.log("Submitted!");
+        showToastSuccess("Đóng bệnh án thành công");
+        onOpenChange(false);
     }
 
     return (
@@ -33,10 +47,12 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
                         label={"Huỷ"}
                         onClick={() => onOpenChange(false)}
                     />
-                    <ButtonSave
-                        label={"Xác nhận"}
-                        onClick={onConfirm}
-                    />
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <ButtonSave
+                            label={"Xác nhận"}
+                            isSubmitting={isSubmitting}
+                        />
+                    </form>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

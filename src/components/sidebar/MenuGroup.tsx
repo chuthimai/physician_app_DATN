@@ -13,7 +13,7 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
         return <div className={"font-extrabold"}>
             <MenuItem
                 label={item.label}
-                icon={item.icon}
+                icon={activePath.includes(item.path as string) ? item.iconFill : item.icon}
                 active={activePath.includes(item.path as string) || false}
                 onClick={() => navigate(item.path || '')}
             />
@@ -37,7 +37,7 @@ export function MenuGroup({item, activePath}: MenuGroupProps) {
                 <MenuItem
                     key={item.path}
                     label={item.label}
-                    icon={item.icon}
+                    icon={activePath.includes(item.path as string) ? item.iconFill : item.icon}
                     active={activePath.includes(item.path as string) || false}
                     onClick={() => navigate(item.path || '')}
                 />

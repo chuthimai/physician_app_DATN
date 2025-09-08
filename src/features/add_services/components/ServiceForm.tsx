@@ -55,7 +55,6 @@ export default function ServiceForm() {
     }, [selectedServiceType]);
 
     const onSubmit: SubmitHandler<AddServiceInputs> = async (data) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
         const service = services.find((s) => s.identifier === parseInt(data.name));
         if (service === undefined) return;
 

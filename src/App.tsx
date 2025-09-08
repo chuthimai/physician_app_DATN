@@ -10,7 +10,7 @@ function App() {
 
     return (
         <div className="flex flex-col h-screen">
-            {/* Header */}
+            {/* PatientSearchBar */}
             <div className={`${Colors.BgSecondary} h-16 w-full grid grid-cols-2 flex-shrink-0`}>
                 <div className="flex items-center justify-start text-white font-bold mx-4">
                     Bệnh viện A

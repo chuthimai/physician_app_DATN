@@ -64,7 +64,7 @@ export function LoginForm() {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full ${Colors.BgButtonSave} ${Colors.BgButtonSaveHover} text-white py-2 rounded-md font-semibold disabled:bg-muted disabled:cursor-not-allowed`}
+                className={`w-full ${Colors.BgButtonSave} ${Colors.BgButtonSaveHover} text-white py-2 rounded-md font-semibold disabled:bg-muted-foreground disabled:cursor-not-allowed`}
             >
                 {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
             </button>

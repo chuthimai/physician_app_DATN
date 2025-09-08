@@ -4,7 +4,7 @@ import ButtonSave from "../../../../components/button/ButtonSave.tsx";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import {doseFormMap, medications} from "@/fake_data/medications.ts";
 import TextInput from "@/components/input/TextInput.tsx";
-import type PresribedMedication from "@/features/diagnosis/type/PresribedMedication.ts";
+import type PrescribedMedication from "@/features/diagnosis/type/PrescribedMedication.ts";
 import log from "loglevel";
 import {MedicationsContext} from "@/providers/medications/MedicationsContext.tsx";
 import {MedicationEditingContext} from "@/providers/medications/MedicationEditingContext.tsx";
@@ -77,7 +77,7 @@ export default function PrescriptionForm() {
             return;
         }
 
-        const payload: PresribedMedication = {
+        const payload: PrescribedMedication = {
             quantity: data.quantity,
             dosageInstruction: data.dosageInstruction,
             medicationId: selectedMedication.identifier,
@@ -97,7 +97,6 @@ export default function PrescriptionForm() {
 
         // Xử lý khi thêm
         medicationsContext?.setMedications([...medicationList, payload]);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         log.debug("PrescriptionForm " + payload);
         reset();

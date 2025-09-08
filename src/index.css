@@ -13,7 +13,7 @@
 }
 
 .Toastify__toast-icon {
-  margin: 8px; 
+  margin: 1rem;
 }
 .Toastify__toast-body {
   align-items: center; /* căn giữa icon với chữ */

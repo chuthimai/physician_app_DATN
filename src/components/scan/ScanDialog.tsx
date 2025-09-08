@@ -1,5 +1,6 @@
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
 import {QrBarcodeScanner} from "@/components/scan/QrBarcodeScanner.tsx";
+import {useState} from "react";
 
 interface ScanDialogProps {
     open: boolean;
@@ -8,10 +9,11 @@ interface ScanDialogProps {
 }
 
 export function ScanDialog({ open, resultName, onOpenChange }: ScanDialogProps) {
+    const [loading, setLoading] = useState(false);
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px]" showCloseButton={!loading}>
                 <DialogHeader>
                     <DialogTitle>Quét QR / Mã vạch</DialogTitle>
                 </DialogHeader>
@@ -19,6 +21,7 @@ export function ScanDialog({ open, resultName, onOpenChange }: ScanDialogProps) 
                     resultName={resultName}
                     open={open}
                     onOpenChange={onOpenChange}
+                    onLoadingChange={setLoading}
                 />
             </DialogContent>
         </Dialog>
