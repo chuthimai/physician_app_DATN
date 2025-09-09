@@ -32,7 +32,7 @@ export default function useAuth() {
                 role: response.role,
             };
             userContext?.setUser(user);
-            await navigator("/");
+            navigator("/");
             showToastSuccess("Đăng nhập thành công")
         } catch (e) {
             if (!(e instanceof Error)) return;

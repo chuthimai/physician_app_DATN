@@ -1,3 +1,7 @@
+import TransferLetterForm from "@/features/transfer_letter/components/TransferLetterForm.tsx";
+
 export default function CreateTransferLetterPage() {
-    return <div>CreateTransferLetterPage</div>
+    return <div>
+        <TransferLetterForm/>
+    </div>
 }

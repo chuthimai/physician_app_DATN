@@ -62,7 +62,6 @@ export default function DiagnosisForm() {
                     <TextAreaInput
                         label={"Chẩn đoán"}
                         error={errors.conclusion}
-                        // className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
                         {...register("conclusion", {
                             validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                         })}
