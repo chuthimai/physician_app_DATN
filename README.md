@@ -28,7 +28,7 @@ src/
 │		│   │   └── diagnosisService.ts
 │		│   ├── schemas/             # Zod/Yup schema cho validate form
 │		│   │   └── diagnosisSchema.ts
-│		│   ├── types.ts             # Interface/type riêng cho diagnosis
+│		│   ├── types/             # Interface/type riêng cho diagnosis
 │		│   └── index.ts             # File barrel (export các component/hook/service để import gọn)
 │   ├── services/                  # Chỉ định dịch vụ
 │   ├── lab/                       # Nhập kết quả xét nghiệm
@@ -58,7 +58,9 @@ src/
 ## Rule code
 - Code chia theo các features với ý nghĩa như sơ đồ trên
 - Để gọi API:
-  - Cần code hook để gọi API riêng cho từng tính năng sử dụng lại hookApi chung trong hook
+  - Cần code hook để gọi API riêng cho từng tính năng (sử dụng lại hookApi chung trong src/hooks)
+  - Kiểu dữ liệu nhận/gửi khai báo trong /types của từng tính năng
+- Xử lý lỗi/loading:
   - Xử lý lỗi trong hook
   - Xử lý loading ở UI
 

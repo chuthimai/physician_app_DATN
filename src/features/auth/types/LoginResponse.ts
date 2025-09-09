@@ -1,8 +1,3 @@
-export interface LoginParams {
-    identifier: number,
-    password: string,
-}
-
 export interface LoginResponse {
     identifier: number,
     name: string,

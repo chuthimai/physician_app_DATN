@@ -8,8 +8,3 @@ export type Service = {
     location: string,
     note?: string,
 }
-
-export type ServiceSend = {
-    identifier: number,
-    note?: string,
-}

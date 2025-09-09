@@ -1,7 +1,7 @@
 import {type SubmitHandler, useForm} from "react-hook-form";
 import {Colors} from "@/constants/colors.ts";
 import useAuth from "@/features/auth/hooks/useAuth.ts";
-import type {LoginParams} from "@/features/auth/types.ts";
+import type {LoginParams} from "@/features/auth/types/LoginParams.ts";
 
 type LoginInputs = {
     citizenId: string;

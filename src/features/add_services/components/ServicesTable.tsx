@@ -10,8 +10,9 @@ import {
 import ButtonDelete from "@/components/button/ButtonDelete.tsx";
 import {useContext, useEffect, useState} from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
-import type {Service, ServiceSend} from "@/features/add_services/type.ts";
+import type {Service} from "@/features/add_services/types/Service.ts";
 import {useMapService} from "@/features/add_services/hooks/useMapService.ts";
+import type {ServiceSend} from "@/features/add_services/types/ServiceSend.ts";
 
 export default function ServicesTable() {
     const servicesContext = useContext(ServicesContext);

@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
-import type { Service } from "../type";
+import type { Service } from "../types/Service.ts";
 import {services} from "@/fake_data/services.ts";
 
 export function useMapService() {

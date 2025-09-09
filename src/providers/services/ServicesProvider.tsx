@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { ServicesContext } from "./ServicesContext";
-import type {ServiceSend} from "@/features/add_services/type.ts";
+import type {ServiceSend} from "@/features/add_services/types/ServiceSend.ts";
 
 export const ServicesProvider = ({ children }: { children: React.ReactNode }) => {
     const [services, setServices] = useState<ServiceSend[]>(() => {

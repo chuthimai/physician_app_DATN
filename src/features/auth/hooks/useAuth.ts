@@ -3,12 +3,13 @@ import {UserContext} from "@/providers/user/UserContext.tsx";
 import {useContext} from "react";
 import type {User} from "@/types/user.ts";
 import {useApi} from "@/hooks/useApi.ts";
-import type {LoginParams, LoginResponse} from "@/features/auth/types.ts";
+import type {LoginResponse} from "@/features/auth/types/LoginResponse.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import {tokenStorage} from "@/api/secureTokenStorage.ts";
 import {logout} from "@/api/logout.ts";
 import log from "loglevel";
 import {useToast} from "@/hooks/useToast.ts";
+import type {LoginParams} from "@/features/auth/types/LoginParams.ts";
 
 export default function useAuth() {
     const navigator = useNavigate();

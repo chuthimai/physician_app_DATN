@@ -1,4 +1,4 @@
-import type {Service} from "@/features/add_services/type.ts";
+import type {Service} from "@/features/add_services/types/Service.ts";
 
 export const serviceTypes = [
     "--- Tất cả ---",

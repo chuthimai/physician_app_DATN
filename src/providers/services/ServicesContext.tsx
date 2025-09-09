@@ -1,5 +1,5 @@
 import {createContext} from "react";
-import type {ServiceSend} from "@/features/add_services/type.ts";
+import type {ServiceSend} from "@/features/add_services/types/ServiceSend.ts";
 
 export type ServicesContextType = {
     services: ServiceSend[];
