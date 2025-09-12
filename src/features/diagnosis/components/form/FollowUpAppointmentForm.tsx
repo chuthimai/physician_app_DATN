@@ -17,13 +17,13 @@ type PatientInputs = {
     gender: string;
     address: string;
 
-    diagnosis: string;
-    comorbidity: string;
-    doctorNote: string;
-    admissionDate: string;
-    dischargeDate: string;
-    followUpDate: string;
-    locationFollowUp: string;
+    diagnosis: string;        // Chẩn đoán chính khi ra viện
+    comorbidity: string;      // Các bệnh kèm theo (nếu có)
+    doctorNote: string;       // Lời dặn dò của bác sĩ cho bệnh nhân
+    admissionDate: string;    // Ngày vào viện (thời điểm nhập viện điều trị)
+    dischargeDate: string;    // Ngày ra viện (thời điểm kết thúc điều trị)
+    followUpDate: string;     // Ngày hẹn tái khám
+    locationFollowUp: string; // Địa điểm/phòng khám hẹn tái khám
 };
 
 export default function FollowUpAppointmentForm() {
