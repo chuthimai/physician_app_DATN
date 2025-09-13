@@ -7,12 +7,14 @@ import FinalDiagnosisPage from "../../features/diagnosis/pages/FinalDiagnosisPag
 import PrescriptionPage from "../../features/diagnosis/pages/PrescriptionPage.tsx";
 import AddServicesPage from "@/features/add_services/pages/AddServicesPage.tsx";
 import CreateSpecialistAppointmentPage
-    from "@/features/create_specialist_appointment/pages/CreateSpecialistAppointmentPage.tsx";
+    from "@/features/specialist_appointment/pages/CreateSpecialistAppointmentPage.tsx";
 import FollowUpAppointmentPage from "@/features/diagnosis/pages/FollowUpAppointmentPage.tsx";
 import TransferLetterPage from "@/features/transfer_letter/pages/TransferLetterPage.tsx";
 import ApproveTransferLetterPage from "@/features/transfer_letter/pages/ApproveTransferLetterPage.tsx";
 import CreateTransferLetterPage from "@/features/transfer_letter/pages/CreateTransferLetterPage.tsx";
 import CurrentPatientRecordPage from "@/features/diagnosis/pages/CurrentPatientRecordPage.tsx";
+import SpecialistAppointmentPage from "@/features/specialist_appointment/pages/SpecialistAppointmentPage.tsx";
+import BookedAppointmentPage from "@/features/specialist_appointment/pages/BookedAppointmentPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
@@ -22,7 +24,17 @@ export function getAttendingPhysicianRoute(): Route[] {
         },
         {
             path: "tao-lich-kham-chuyen-khoa",
-            element: <CreateSpecialistAppointmentPage/>
+            element: <SpecialistAppointmentPage/>,
+            children: [
+                {
+                    path: "/tao-lich-kham-chuyen-khoa",
+                    element: <CreateSpecialistAppointmentPage/>
+                },
+                {
+                    path: "cuoc-hen-dat-truoc",
+                    element: <BookedAppointmentPage/>
+                }
+            ]
         },
         {
             path: "kham-benh",
