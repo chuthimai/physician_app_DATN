@@ -41,7 +41,7 @@ export default function DiagnosisForm() {
                     />
                 </div>
 
-                <div className="col-span-4">
+                <div className="col-span-6">
                     <Controller
                         control={control}
                         name="severity"

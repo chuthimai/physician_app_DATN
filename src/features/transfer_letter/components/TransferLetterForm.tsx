@@ -1,5 +1,5 @@
 // import { useEffect } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import {useForm, type SubmitHandler, Controller} from "react-hook-form";
 import { toast } from "react-toastify";
 import TextInput from "@/components/input/TextInput.tsx";
 import DateInput from "@/components/input/DateInput.tsx";
@@ -34,6 +34,7 @@ export default function TransferLetterForm() {
         handleSubmit,
         formState: { errors, isSubmitting },
         reset,
+        control,
     } = useForm<PatientInputs>();
 
     const onSubmit: SubmitHandler<PatientInputs> = async (data) => {
@@ -76,23 +77,39 @@ export default function TransferLetterForm() {
                 </div>
 
                 <div className="col-span-2">
-                    <SelectInput
-                        label="Giới tính"
-                        options={[
-                            { label: "Nam", value: "male" },
-                            { label: "Nữ", value: "female" },
-                        ]}
-                        {...register("gender", { required: "Chọn giới tính" })}
-                        error={errors.gender}
+                    <Controller
+                        control={control}
+                        name="gender"
+                        rules={{ required: "Chọn giới tính" }}
+                        render={({ field }) => (
+                            <SelectInput
+                                label="Giới tính"
+                                error={errors.gender}
+                                options={[
+                                    { label: "Nam", value: "male" },
+                                    { label: "Nữ", value: "female" },
+                                ]}
+                                value={field.value ? { label: field.value === "male" ? "Nam" : "Nữ", value: field.value } : undefined}
+                                onChange={(opt) => field.onChange(opt?.value)}
+                            />
+                        )}
                     />
                 </div>
 
                 <div className="col-span-4">
-                    <DateInput
-                        label="Ngày sinh"
-                        max={new Date().toISOString().split("T")[0]}
-                        error={errors.dob}
-                        {...register("dob", { required: "Chọn ngày sinh" })}
+                    <Controller
+                        control={control}
+                        name="dob"
+                        rules={{required: "Chọn ngày sinh"}}
+                        render={({ field }) => (
+                            <DateInput
+                                label="Ngày sinh"
+                                error={errors.dob}
+                                value={field.value}
+                                onChange={field.onChange}
+                                max={new Date().toISOString().split("T")[0]}
+                            />
+                        )}
                     />
                 </div>
 
@@ -125,21 +142,35 @@ export default function TransferLetterForm() {
                 </div>
 
                 <div className="col-span-6">
-                    <DateInput
-                        label="Ngày vào viện"
-                        max={new Date().toISOString().split("T")[0]}
-                        error={errors.admissionDate}
-                        {...register("admissionDate", { required: "Chọn ngày vào viện" })}
+                    <Controller
+                        control={control}
+                        name="admissionDate"
+                        rules={{required: "Chọn ngày vào viện"}}
+                        render={({ field }) => (
+                            <DateInput
+                                label="Ngày vào viện"
+                                error={errors.admissionDate}
+                                value={field.value}
+                                onChange={field.onChange}
+                                max={new Date().toISOString().split("T")[0]}
+                            />
+                        )}
                     />
                 </div>
 
                 <div className="col-span-6">
-                    <DateInput
-                        label="Ngày ra viện"
-                        value={new Date().toISOString().split("T")[0]}
-                        max={new Date().toISOString().split("T")[0]}
-                        error={errors.dischargeDate}
-                        {...register("dischargeDate", { required: "Chọn ngày ra viện" })}
+                    <Controller
+                        control={control}
+                        name="dischargeDate"
+                        render={({ field }) => (
+                            <DateInput
+                                label="Ngày ra viện"
+                                error={errors.dischargeDate}
+                                value={field.value ?? new Date().toISOString().split("T")[0]}
+                                onChange={field.onChange}
+                                min={new Date().toISOString().split("T")[0]}
+                            />
+                        )}
                     />
                 </div>
 

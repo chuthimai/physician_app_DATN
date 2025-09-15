@@ -14,7 +14,7 @@ export default function TextInput({ type="string", label, error, ...rest }: Prop
             <input
                 type={type}
                 {...rest}
-                className={`w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 ${error ? 'border-red-500' : ''}`}
+                className={`text-sm w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 ${error ? 'border-red-500' : ''}`}
             />
             {error && <p className="text-sm text-red-500">{error.message}</p>}
         </div>

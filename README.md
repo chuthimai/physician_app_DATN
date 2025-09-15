@@ -38,7 +38,6 @@ src/
 │   └── schedule/                  # Xem lịch làm việc
 ├── api/                           # Config API dùng chung
 ├── components/                    # UI dùng lại
-├── layouts/                       # Layout cho bác sĩ, thu ngân, kỹ thuật viên...
 ├── hooks/                         # Chứa các hàm bắt đầu bằng use... giúp tái sử dụng logic 
 ├── lib/                       # Logic hệ thống, tiện ích, cấu hình
 │   ├── api/                   # Các API gọi backend

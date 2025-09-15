@@ -6,7 +6,22 @@ export default function useDate() {
         return `${year}-${month}-${day}`;
     }
 
+    function formatLocalDate(d: Date) {
+        return [
+            d.getFullYear(),
+            String(d.getMonth() + 1).padStart(2, "0"),
+            String(d.getDate()).padStart(2, "0"),
+        ].join("-") // YYYY-MM-DD
+    }
+
+    function parseLocalDate(iso: string) {
+        const [year, month, day] = iso.split("-").map(Number)
+        return new Date(year, month - 1, day) // constructor local
+    }
+
     return {
-        formattedDateOfBirth
+        formattedDateOfBirth,
+        formatLocalDate,
+        parseLocalDate,
     }
 }

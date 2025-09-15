@@ -1,7 +1,7 @@
 import useDate from "@/hooks/useDate.ts";
 import {useEffect, useState} from "react";
 import {useToast} from "@/hooks/useToast.ts";
-import {type SubmitHandler, useForm} from "react-hook-form";
+import {Controller, type SubmitHandler, useForm} from "react-hook-form";
 import log from "loglevel";
 import {toast} from "react-toastify";
 import TextInput from "@/components/input/TextInput.tsx";
@@ -38,6 +38,7 @@ export default function FollowUpAppointmentForm() {
         formState: { errors, isSubmitting },
         reset,
         setValue,
+        control
     } = useForm<PatientInputs>({
         defaultValues: {
             doctorNote:
@@ -109,7 +110,7 @@ export default function FollowUpAppointmentForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-12 gap-4">
                 {/* --- Thông tin hành chính --- */}
-                <div className="col-span-6">
+                <div className="col-span-12">
                     <TextInput
                         type="text"
                         label="Số CCCD"
@@ -130,24 +131,40 @@ export default function FollowUpAppointmentForm() {
                     />
                 </div>
 
-                <div className="col-span-4">
-                    <DateInput
-                        label="Ngày sinh"
-                        max={new Date().toISOString().split("T")[0]}
-                        error={errors.dob}
-                        {...register("dob", { required: "Chọn ngày sinh" })}
+                <div className="col-span-2">
+                    <Controller
+                        control={control}
+                        name="gender"
+                        rules={{ required: "Chọn giới tính" }}
+                        render={({ field }) => (
+                            <SelectInput
+                                label="Giới tính"
+                                error={errors.gender}
+                                options={[
+                                    { label: "Nam", value: "male" },
+                                    { label: "Nữ", value: "female" },
+                                ]}
+                                value={field.value ? { label: field.value === "male" ? "Nam" : "Nữ", value: field.value } : undefined}
+                                onChange={(opt) => field.onChange(opt?.value)}
+                            />
+                        )}
                     />
                 </div>
 
-                <div className="col-span-2">
-                    <SelectInput
-                        label="Giới tính"
-                        error={errors.gender}
-                        options={[
-                            { label: "Nam", value: "male" },
-                            { label: "Nữ", value: "female" },
-                        ]}
-                        {...register("gender")}
+                <div className="col-span-4">
+                    <Controller
+                        control={control}
+                        rules={{required: "Chọn ngày sinh"}}
+                        name="dob"
+                        render={({ field }) => (
+                            <DateInput
+                                label="Ngày sinh"
+                                error={errors.dob}
+                                value={field.value}
+                                onChange={field.onChange}
+                                max={new Date().toISOString().split("T")[0]}
+                            />
+                        )}
                     />
                 </div>
 
@@ -162,21 +179,35 @@ export default function FollowUpAppointmentForm() {
 
                 {/* --- Thông tin khám bệnh --- */}
                 <div className="col-span-6">
-                    <DateInput
-                        label="Ngày vào viện"
-                        max={new Date().toISOString().split("T")[0]}
-                        error={errors.admissionDate}
-                        {...register("admissionDate", { required: "Chọn ngày vào viện" })}
+                    <Controller
+                        control={control}
+                        name="admissionDate"
+                        rules={{required: "Chọn ngày vào viện"}}
+                        render={({ field }) => (
+                            <DateInput
+                                label="Ngày vào viện"
+                                error={errors.admissionDate}
+                                value={field.value}
+                                onChange={field.onChange}
+                                max={new Date().toISOString().split("T")[0]}
+                            />
+                        )}
                     />
                 </div>
 
                 <div className="col-span-6">
-                    <DateInput
-                        label="Ngày ra viện"
-                        value={new Date().toISOString().split("T")[0]}
-                        max={new Date().toISOString().split("T")[0]}
-                        error={errors.dischargeDate}
-                        {...register("dischargeDate", { required: "Chọn ngày ra viện" })}
+                    <Controller
+                        control={control}
+                        name="dischargeDate"
+                        render={({ field }) => (
+                            <DateInput
+                                label="Ngày ra viện"
+                                error={errors.dischargeDate}
+                                value={field.value ?? new Date().toISOString().split("T")[0]}
+                                onChange={field.onChange}
+                                min={new Date().toISOString().split("T")[0]}
+                            />
+                        )}
                     />
                 </div>
 
@@ -200,11 +231,19 @@ export default function FollowUpAppointmentForm() {
                 </div>
 
                 <div className="col-span-6">
-                    <DateInput
-                        label="Ngày hẹn tái khám"
-                        min={new Date().toISOString().split("T")[0]}
-                        error={errors.followUpDate}
-                        {...register("followUpDate", { required: "Chọn ngày tái khám" })}
+                    <Controller
+                        control={control}
+                        name="followUpDate"
+                        rules={{required: "Chọn ngày tái khám"}}
+                        render={({ field }) => (
+                            <DateInput
+                                label="Ngày hẹn tái khám"
+                                error={errors.followUpDate}
+                                value={field.value}
+                                onChange={field.onChange}
+                                min={new Date().toISOString().split("T")[0]}
+                            />
+                        )}
                     />
                 </div>
                 <div className="col-span-6">

@@ -108,29 +108,39 @@ export default function CreatePatientRecordForm() {
                 </div>
 
                 <div className="col-span-4">
-                    <DateInput
-                        label={"Ngày sinh"}
-                        max={new Date().toISOString().split("T")[0]}
-                        error={errors.dob}
-                        {...register("dob", { required: "Chọn ngày sinh" })}
+                    <Controller
+                        control={control}
+                        name="dob"
+                        rules={{required: "Chọn ngày sinh"}}
+                        render={({ field }) => (
+                            <DateInput
+                                label="Ngày sinh"
+                                error={errors.dob}
+                                value={field.value}
+                                onChange={field.onChange}
+                                max={new Date().toISOString().split("T")[0]}
+                            />
+                        )}
                     />
                 </div>
 
                 <div className="col-span-2">
-                    <SelectInput
-                        label={"Giới tính"}
-                        error={errors.gender}
-                        options={[
-                            {
-                                label: "Nam",
-                                value: "male"
-                            },
-                            {
-                                label: "Nữ",
-                                value: "female"
-                            }
-                        ]}
-                        {...register("gender")}
+                    <Controller
+                        control={control}
+                        name="gender"
+                        rules={{ required: "Chọn giới tính" }}
+                        render={({ field }) => (
+                            <SelectInput
+                                label="Giới tính"
+                                error={errors.gender}
+                                options={[
+                                    { label: "Nam", value: "male" },
+                                    { label: "Nữ", value: "female" },
+                                ]}
+                                value={field.value ? { label: field.value === "male" ? "Nam" : "Nữ", value: field.value } : undefined}
+                                onChange={(opt) => field.onChange(opt?.value)}
+                            />
+                        )}
                     />
                 </div>
 

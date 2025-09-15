@@ -11,7 +11,7 @@ export function TextAreaInput({ label, error, ...props }: TextAreaInputProps) {
         <div>
             <label className="block text-gray-600 mb-1">{label}</label>
             <textarea
-                className={`w-full h-20 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 ${error ? "border-red-500" : ""}`}
+                className={`text-sm w-full h-20 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 ${error ? "border-red-500" : ""}`}
                 {...props}
             />
             {error && <p className="text-sm text-red-500">{error.message}</p>}

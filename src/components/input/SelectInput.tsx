@@ -1,4 +1,13 @@
-import type {FieldError} from "react-hook-form";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import type { FieldError } from "react-hook-form";
 
 type Option = {
     label: string;
@@ -9,23 +18,46 @@ type Props = {
     label: string;
     options: Option[];
     error?: FieldError;
-} & React.SelectHTMLAttributes<HTMLSelectElement>;
+    value?: Option;
+    onChange?: (value: Option | null) => void;
+};
 
-export default function SelectInput({ label, options, error, ...rest }: Props) {
+export default function SelectInput({
+                                        label,
+                                        options,
+                                        error,
+                                        value,
+                                        onChange,
+                                    }: Props) {
     return (
-        <div>
+        <div className="">
             <label className="block text-gray-600 mb-1">{label}</label>
-            <select
-                {...rest}
-                className={`w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 ${error ? 'border-red-500' : ''}`}
+            <Select
+                value={value?.value}
+                onValueChange={(val) => {
+                    const selected = options.find((opt) => opt.value === val) || null;
+                    onChange?.(selected);
+                }}
             >
-                {options.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                    </option>
-                ))}
-            </select>
-            {error && <p className="text-sm text-red-500">{error.message}</p>}
+                <SelectTrigger
+                    className={`w-full ${error ? "border-red-500" : ""}`}
+                >
+                    <SelectValue placeholder={`Chọn ${label.toLowerCase()}...`} />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                        <SelectLabel>{label}</SelectLabel>
+                        {options.map((opt) => (
+                            <SelectItem key={opt.value} value={opt.value}>
+                                {opt.label}
+                            </SelectItem>
+                        ))}
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
+            {error?.message && (
+                <p className="text-sm text-red-500 mt-1">{error.message}</p>
+            )}
         </div>
     );
 }
