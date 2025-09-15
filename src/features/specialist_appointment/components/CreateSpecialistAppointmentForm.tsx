@@ -4,16 +4,22 @@ import SelectSearchInput, {type Option} from "@/components/input/SelectSearchInp
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {toast} from "react-toastify";
 import {specialties, physicians} from "@/fake_data/create_specialist_appointment.ts";
-import {useLocation} from "react-router-dom";
+import type Appointment from "@/features/specialist_appointment/types/Appointment.ts";
+import type {ServiceSend} from "@/features/specialist_appointment/types/ServiceSend.ts";
 
 type AddSpecialistAppointmentInputs = {
     specialist: string; // lưu identifier của chuyên khoa
     physician: string;  // lưu identifier của bác sĩ
 };
 
-export default function CreateSpecialistAppointmentForm() {
-    const location = useLocation();
-    const {appointment} = location.state || {};
+type CreateSpecialistAppointmentFormProps = {
+    selectedAppointment: Appointment | null | undefined;
+    onClickSaveAppointment: (serviceSend: ServiceSend) => void;
+};
+
+export default function CreateSpecialistAppointmentForm(
+    {selectedAppointment, onClickSaveAppointment}: CreateSpecialistAppointmentFormProps
+) {
     const {
         control,
         handleSubmit,
@@ -28,13 +34,14 @@ export default function CreateSpecialistAppointmentForm() {
     // ------------------------- function ------------------------------
     // Prefill dữ liệu khi có appointment
     useEffect(() => {
-        if (appointment && appointment.physician) {
+        if (!selectedAppointment) return;
+        if (selectedAppointment.physician) {
             reset({
-                specialist: appointment.physician.medicalSpecialty.identifier.toString(),
-                physician: appointment.physician.identifier.toString(),
+                specialist: selectedAppointment.physician.medicalSpecialty.identifier.toString(),
+                physician: selectedAppointment.physician.identifier.toString(),
             });
         }
-    }, [appointment, reset]);
+    }, [selectedAppointment, reset]);
 
     // Cập nhật danh sách bác sĩ khi chọn chuyên khoa
     useEffect(() => {
@@ -66,12 +73,10 @@ export default function CreateSpecialistAppointmentForm() {
             return;
         }
 
-        console.log("Đặt lịch:", {
-            specialist: selectedSpecialist,
-            physician: selectedPhysician,
-        });
-
-        toast.success(`Đã chọn ${selectedPhysician.name} (${selectedSpecialist.name})`);
+        const serviceSend: ServiceSend = {
+            identifier: 1
+        }
+        onClickSaveAppointment(serviceSend);
         reset();
     };
 
@@ -116,7 +121,7 @@ export default function CreateSpecialistAppointmentForm() {
                 </div>
 
                 <div className="col-span-2 flex items-center justify-center w-full">
-                    <ButtonSave label="Đặt lịch" isSubmitting={isSubmitting}/>
+                    <ButtonSave label="Đặt" isSubmitting={isSubmitting}/>
                 </div>
             </div>
         </form>

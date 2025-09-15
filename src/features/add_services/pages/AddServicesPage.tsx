@@ -6,9 +6,11 @@ import {useContext} from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 import {useForm} from "react-hook-form";
 import {useToast} from "@/hooks/useToast.ts";
+import {PatientContext} from "@/providers/patient/PatientContext.tsx";
 
 export default function AddServicesPage() {
     const servicesContext = useContext(ServicesContext);
+    const patientContext = useContext(PatientContext);
     const {
         handleSubmit,
         formState: { isSubmitting }
@@ -26,6 +28,12 @@ export default function AddServicesPage() {
         // TODO: Thêm logic api lưu danh sách dịch vụ trên server
         console.log("Submitted!");
         servicesContext?.setServices([]);
+    }
+
+    if (!patientContext?.patient) {
+        return <div className="w-full h-full flex items-center justify-center">
+            Chưa xác định bệnh nhân
+        </div>
     }
 
     return <div className="flex flex-col h-screen">

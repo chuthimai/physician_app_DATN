@@ -13,8 +13,6 @@ import TransferLetterPage from "@/features/transfer_letter/pages/TransferLetterP
 import ApproveTransferLetterPage from "@/features/transfer_letter/pages/ApproveTransferLetterPage.tsx";
 import CreateTransferLetterPage from "@/features/transfer_letter/pages/CreateTransferLetterPage.tsx";
 import CurrentPatientRecordPage from "@/features/diagnosis/pages/CurrentPatientRecordPage.tsx";
-import SpecialistAppointmentPage from "@/features/specialist_appointment/pages/SpecialistAppointmentPage.tsx";
-import BookedAppointmentPage from "@/features/specialist_appointment/pages/BookedAppointmentPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
@@ -24,17 +22,7 @@ export function getAttendingPhysicianRoute(): Route[] {
         },
         {
             path: "tao-lich-kham-chuyen-khoa",
-            element: <SpecialistAppointmentPage/>,
-            children: [
-                {
-                    path: "/tao-lich-kham-chuyen-khoa",
-                    element: <CreateSpecialistAppointmentPage/>
-                },
-                {
-                    path: "cuoc-hen-dat-truoc",
-                    element: <BookedAppointmentPage/>
-                }
-            ]
+            element: <CreateSpecialistAppointmentPage/>,
         },
         {
             path: "kham-benh",

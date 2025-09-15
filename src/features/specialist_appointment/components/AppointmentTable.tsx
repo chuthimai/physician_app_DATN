@@ -7,23 +7,34 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table.tsx";
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import type Appointment from "../types/Appointment.ts";
-import {useNavigate} from "react-router-dom";
+import type {ServiceSend} from "@/features/specialist_appointment/types/ServiceSend.ts";
+import {toast} from "react-toastify";
 
 type AppointmentTableProps = {
     appointments: Appointment[];
+    setSelectedAppointment: (appointment: Appointment) => void;
+    onClickSaveAppointment: (serviceSend: ServiceSend) => void;
 };
 
-export default function AppointmentTable({ appointments }: AppointmentTableProps) {
-    const navigate = useNavigate();
+export default function AppointmentTable({
+                                             appointments,
+                                             setSelectedAppointment,
+                                             onClickSaveAppointment,
+                                         }: AppointmentTableProps) {
 
-    function handlePrefillAppointment(appointment: Appointment) {
-        navigate("/tao-lich-kham-chuyen-khoa", {
-            state: {
-                appointment: appointment,
-            },
-        });
+    function handleHasPhysician(appointment: Appointment) {
+        const serviceSend: ServiceSend = {
+            identifier: 1
+        }
+        onClickSaveAppointment(serviceSend);
+        console.log(appointment);
+    }
+
+    function handleUpdate(appointment: Appointment) {
+        setSelectedAppointment(appointment);
+        toast.info(`Thêm thông tin bác sỹ chuyên khoa`);
     }
 
     return (
@@ -33,8 +44,7 @@ export default function AppointmentTable({ appointments }: AppointmentTableProps
                 <TableRow>
                     <TableHead className="text-center w-[50px]">STT</TableHead>
                     <TableHead className="text-center w-[200px]">Tên bệnh nhân</TableHead>
-                    <TableHead className="text-center w-[150px]">Số CCCD</TableHead>
-                    <TableHead className="text-center w-[200px]">Địa chỉ</TableHead>
+                    <TableHead className="text-center w-[250px]">Địa chỉ</TableHead>
                     <TableHead className="text-center w-[250px]">Ca hẹn</TableHead>
                     <TableHead className="text-center w-[200px]">Bác sĩ hẹn</TableHead>
                     <TableHead className="text-center w-[200px]">Khoa</TableHead>
@@ -45,24 +55,30 @@ export default function AppointmentTable({ appointments }: AppointmentTableProps
                 {appointments.map((appointment, index) => (
                     <TableRow key={appointment.identifier}>
                         <TableCell className="text-center">{index + 1}</TableCell>
-                        <TableCell className="text-left">{appointment.patient.name}</TableCell>
-                        <TableCell className="text-center">
-                            {appointment.patient.identifier.toString().padStart(12, "0")}
-                        </TableCell>
+                        <TableCell className="text-center">{appointment.patient.name}</TableCell>
                         <TableCell className="text-left">{appointment.patient.address}</TableCell>
-                        <TableCell className="text-left">
+                        <TableCell className="text-center">
                             {`${appointment.workSchedule.shift.name} (${appointment.workSchedule.shift.startTime} - ${appointment.workSchedule.shift.endTime})`}
                         </TableCell>
-                        <TableCell className="text-left">
+                        <TableCell className="text-center">
                             {appointment.physician?.name ?? ""}
                         </TableCell>
-                        <TableCell className="text-left">
+                        <TableCell className="text-center">
                             {appointment.physician?.medicalSpecialty.name ?? ""}
                         </TableCell>
                         <TableCell className="text-center">
-                            <Button variant="default" onClick={() => handlePrefillAppointment(appointment)}>
-                                Khám
-                            </Button>
+                            {appointment.physician &&
+                                <Button variant="default" className={"w-full"}
+                                        onClick={() => handleHasPhysician(appointment)}>
+                                    Khám
+                                </Button>
+                            }
+                            {!appointment.physician &&
+                                <Button variant="default" className={"w-full"}
+                                        onClick={() => handleUpdate(appointment)}>
+                                    Cập nhật
+                                </Button>
+                            }
                         </TableCell>
                     </TableRow>
                 ))}

@@ -3,13 +3,15 @@ import TextInput from "../../../components/input/TextInput.tsx";
 import DateInput from "../../../components/input/DateInput.tsx";
 import SelectInput from "../../../components/input/SelectInput.tsx";
 import ButtonSave from "../../../components/button/ButtonSave.tsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {Label} from "@/components/ui/label.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import useDate from "@/hooks/useDate.ts";
 import log from "loglevel";
 import {toast} from "react-toastify";
 import {useToast} from "@/hooks/useToast.ts";
+import {PatientContext} from "@/providers/patient/PatientContext.tsx";
+import type Patient from "@/types/patient.ts";
 
 type PatientInputs = {
     citizenId: string;
@@ -25,6 +27,7 @@ type PatientInputs = {
 export default function CreatePatientRecordForm() {
     const { formattedDateOfBirth } = useDate();
     const [patientInfo, setPatientInfo] = useState<string | null>(null);
+    const patientContext = useContext(PatientContext);
     const {showToastError} = useToast();
 
     const {
@@ -77,6 +80,15 @@ export default function CreatePatientRecordForm() {
         console.log("Đang gửi dữ liệu:", data);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         toast.success("Gửi thành công!");
+
+        const patient: Patient = {
+            identifier: Number(data.citizenId),
+            name: data.name,
+            gender: data.gender == "male",
+            birthDate: new Date(data.dob),
+            address: data.address,
+        };
+        patientContext?.setPatient(patient);
         reset({
             hasTransferPaper: false,
             hasInsurance: false,

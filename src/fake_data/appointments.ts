@@ -47,6 +47,14 @@ export const fakeAppointments: Appointment[] = [
         physician: physicians[0]
     },
     {
+        identifier: 107, status: "Đã đặt", workSchedule: fakeSchedules[0], patient: fakePatients[0],
+        physician: physicians[2]
+    },
+    {
+        identifier: 108, status: "Đã đặt", workSchedule: fakeSchedules[0], patient: fakePatients[0],
+        physician: null
+    },
+    {
         identifier: 102, status: "Đã đặt", workSchedule: fakeSchedules[1], patient: fakePatients[1],
         physician: physicians[1]
     },

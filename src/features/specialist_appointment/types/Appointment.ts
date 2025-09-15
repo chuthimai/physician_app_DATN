@@ -3,7 +3,7 @@ import type Patient from "./Patient.ts";
 import type Physician from "./Physician.ts";
 
 export default interface Appointment {
-    identifier: number,
+    identifier: number | null,
     status: string,
     workSchedule: WorkSchedule,
     patient: Patient,
