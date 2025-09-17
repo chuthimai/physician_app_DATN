@@ -12,7 +12,7 @@ import {useToast} from "@/hooks/useToast.ts";
 import type {CreatePatientRecordParams} from "../types/CreatePatientRecordParams.ts";
 import usePatientRecord from "@/features/create_patient_record/hooks/usePatientRecord.ts";
 import useNumber from "@/hooks/useNumber.ts";
-// import {usePassword} from "@/hooks/usePassword.ts";
+import {usePassword} from "@/hooks/usePassword.ts";
 
 type PatientInputs = {
     citizenId: string;
@@ -31,7 +31,7 @@ export default function CreatePatientRecordForm() {
     const {showToastError} = useToast();
     const {createPatientRecord} = usePatientRecord();
     const {toTwelveDigitString} = useNumber();
-    // const {generatePassword} = usePassword();
+    const {generatePassword} = usePassword();
 
     const {
         register,
@@ -88,7 +88,7 @@ export default function CreatePatientRecordForm() {
             gender: data.gender === "male",
             birthDate: data.dob,
             address: data.address,
-            password: "12345678",
+            password: generatePassword(),
         }
 
         await createPatientRecord(createPatientParams);
