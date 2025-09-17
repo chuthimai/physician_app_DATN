@@ -11,6 +11,7 @@ import log from "loglevel";
 import {useToast} from "@/hooks/useToast.ts";
 import type {CreatePatientRecordParams} from "../types/CreatePatientRecordParams.ts";
 import usePatientRecord from "@/features/create_patient_record/hooks/usePatientRecord.ts";
+import useNumber from "@/hooks/useNumber.ts";
 // import {usePassword} from "@/hooks/usePassword.ts";
 
 type PatientInputs = {
@@ -29,6 +30,7 @@ export default function CreatePatientRecordForm() {
     const [patientInfo, setPatientInfo] = useState<string | null>(null);
     const {showToastError} = useToast();
     const {createPatientRecord} = usePatientRecord();
+    const {toTwelveDigitString} = useNumber();
     // const {generatePassword} = usePassword();
 
     const {
@@ -51,18 +53,18 @@ export default function CreatePatientRecordForm() {
     }, []);
 
     useEffect(() => {
-        resetForm();
         try {
             if (patientInfo === undefined) return;
             if (patientInfo !== null) {
-                const [citizenId, ,name, dob, gender, address] = patientInfo.split("|") || [];
+                const [citizenId, ,name, dob, gender, address, ,phone] = patientInfo.split("|") || [];
 
                 reset({
-                    citizenId,
+                    citizenId: toTwelveDigitString(Number(citizenId)),
                     name,
                     dob: formattedDateOfBirth(dob),
                     gender: gender === "Nam" ? "male" : "female",
                     address,
+                    phone: phone === undefined ? "" : phone.toString(),
                     hasTransferPaper: false,
                     hasInsurance: false,
                 });

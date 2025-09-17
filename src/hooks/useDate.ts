@@ -19,9 +19,15 @@ export default function useDate() {
         return new Date(year, month - 1, day) // constructor local
     }
 
+    function compactDateOfBirth(iso: string) {
+        const [year, month, day] = iso.split("-");
+        return `${day}${month}${year}`;
+    }
+
     return {
         formattedDateOfBirth,
         formatLocalDate,
         parseLocalDate,
+        compactDateOfBirth,
     }
 }
