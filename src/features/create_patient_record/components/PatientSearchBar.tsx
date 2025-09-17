@@ -21,26 +21,27 @@ export default function PatientSearchBar(){
     const [openOverlay, setOpenOverlay] = useState(false);
     const [mode, setMode] = useState<"inline" | "modal">("inline");
 
-    useEffect(() => {
-        const fetchPatients = async () => {
-            const cleanKeyword = keyword.trim();
-            if (cleanKeyword.length < 2) {
+    const fetchPatients = async () => {
+        const cleanKeyword = keyword.trim();
+        if (cleanKeyword.length < 2) {
+            setLocalResults([]);
+            return;
+        }
+        try {
+            const data = await searchPatients(cleanKeyword);
+            if (!data) {
                 setLocalResults([]);
                 return;
             }
-            try {
-                const data = await searchPatients(cleanKeyword);
-                if (!data) {
-                    setLocalResults([]);
-                    return;
-                }
-                setLocalResults(data.slice(0, 3));
+            setLocalResults(data.slice(0, 3));
 
-            } catch (error) {
-                console.error("Search error:", error);
-                setLocalResults([]);
-            }
-        };
+        } catch (error) {
+            console.error("Search error:", error);
+            setLocalResults([]);
+        }
+    };
+
+    useEffect(() => {
         fetchPatients().then(() => null);
     }, [keyword]);
 

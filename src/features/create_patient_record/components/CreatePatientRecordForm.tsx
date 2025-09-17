@@ -41,11 +41,11 @@ export default function CreatePatientRecordForm() {
         reset,
     } = useForm<PatientInputs>();
 
-    useEffect(() => {
-        const handleStorageChange = () => {
-            setPatientInfo(localStorage.getItem("patientInfo"));
-        };
+    const handleStorageChange = () => {
+        setPatientInfo(localStorage.getItem("patientInfo"));
+    };
 
+    useEffect(() => {
         document.addEventListener("scanned", handleStorageChange);
         return () => {
             document.removeEventListener("scanned", handleStorageChange);

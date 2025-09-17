@@ -51,6 +51,10 @@ export default function FollowUpAppointmentForm() {
     const locationFollowUp = watch("locationFollowUp");
 
     //--------------------------------- action ---------------------------------
+    const handleStorageChange = () => {
+        setPatientInfo(localStorage.getItem("patientInfo"));
+    };
+
     useEffect(() => {
         if (followUpDate && locationFollowUp) {
             const dateParts = followUpDate.split("-");
@@ -66,10 +70,6 @@ export default function FollowUpAppointmentForm() {
     }, [followUpDate, locationFollowUp, setValue]);
 
     useEffect(() => {
-        const handleStorageChange = () => {
-            setPatientInfo(localStorage.getItem("patientInfo"));
-        };
-
         document.addEventListener("scanned", handleStorageChange);
         return () => {
             document.removeEventListener("scanned", handleStorageChange);
