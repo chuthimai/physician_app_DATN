@@ -30,6 +30,9 @@ export default function useAuth() {
                 gender: response.gender,
                 photo: response.photo,
                 role: response.role,
+                address: response.address,
+                startDate: new Date(response.startDate),
+                specialtyIdentifier: response.identifier,
             };
             userContext?.setUser(user);
             navigator("/");

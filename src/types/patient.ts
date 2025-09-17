@@ -3,5 +3,6 @@ export default interface Patient {
     name: string,
     gender: boolean,
     birthDate: Date,
-    address: string,
+    // address: string,
+    telecom: string | null,
 }

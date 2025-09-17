@@ -1,8 +1,8 @@
 import {createContext} from "react";
 
 export type PatientRecordIdContextType = {
-    patientRecordId: string | null;
-    setPatientRecordId: (r: string | null) => void;
+    patientRecordId: number | null;
+    setPatientRecordId: (r: number | null) => void;
 };
 
 export const PatientRecordIdContext = createContext<PatientRecordIdContextType | null>(null);

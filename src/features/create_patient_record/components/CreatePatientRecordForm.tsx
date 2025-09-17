@@ -3,15 +3,15 @@ import TextInput from "../../../components/input/TextInput.tsx";
 import DateInput from "../../../components/input/DateInput.tsx";
 import SelectInput from "../../../components/input/SelectInput.tsx";
 import ButtonSave from "../../../components/button/ButtonSave.tsx";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Label} from "@/components/ui/label.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import useDate from "@/hooks/useDate.ts";
 import log from "loglevel";
-import {toast} from "react-toastify";
 import {useToast} from "@/hooks/useToast.ts";
-import {PatientContext} from "@/providers/patient/PatientContext.tsx";
-import type Patient from "@/types/patient.ts";
+import type {CreatePatientRecordParams} from "../types/CreatePatientRecordParams.ts";
+import usePatientRecord from "@/features/create_patient_record/hooks/usePatientRecord.ts";
+// import {usePassword} from "@/hooks/usePassword.ts";
 
 type PatientInputs = {
     citizenId: string;
@@ -27,8 +27,9 @@ type PatientInputs = {
 export default function CreatePatientRecordForm() {
     const { formattedDateOfBirth } = useDate();
     const [patientInfo, setPatientInfo] = useState<string | null>(null);
-    const patientContext = useContext(PatientContext);
     const {showToastError} = useToast();
+    const {createPatientRecord} = usePatientRecord();
+    // const {generatePassword} = usePassword();
 
     const {
         register,
@@ -50,10 +51,7 @@ export default function CreatePatientRecordForm() {
     }, []);
 
     useEffect(() => {
-        reset({
-            hasTransferPaper: false,
-            hasInsurance: false,
-        });
+        resetForm();
         try {
             if (patientInfo === undefined) return;
             if (patientInfo !== null) {
@@ -69,6 +67,7 @@ export default function CreatePatientRecordForm() {
                     hasInsurance: false,
                 });
             }
+            setPatientInfo(null);
         } catch (e) {
             log.error(e);
             showToastError("Dữ liệu không hợp lệ")
@@ -77,23 +76,35 @@ export default function CreatePatientRecordForm() {
     }, [patientInfo]);
 
     const onSubmit: SubmitHandler<PatientInputs> = async (data) => {
-        console.log("Đang gửi dữ liệu:", data);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        toast.success("Gửi thành công!");
-
-        const patient: Patient = {
-            identifier: Number(data.citizenId),
+        const createPatientParams: CreatePatientRecordParams = {
+            patientIdentifier: data.citizenId.length === 12
+                ? Number(data.citizenId)
+                : null,
             name: data.name,
-            gender: data.gender == "male",
-            birthDate: new Date(data.dob),
+            email: null,
+            telecom: data.phone,
+            gender: data.gender === "male",
+            birthDate: data.dob,
             address: data.address,
-        };
-        patientContext?.setPatient(patient);
+            password: "12345678",
+        }
+
+        await createPatientRecord(createPatientParams);
+        resetForm();
+    };
+
+    function resetForm() {
         reset({
+            citizenId: "",
+            name: "",
+            dob: "",
+            gender:"male",
+            address: "",
+            phone: "",
             hasTransferPaper: false,
             hasInsurance: false,
         });
-    };
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -149,7 +160,11 @@ export default function CreatePatientRecordForm() {
                                     { label: "Nam", value: "male" },
                                     { label: "Nữ", value: "female" },
                                 ]}
-                                value={field.value ? { label: field.value === "male" ? "Nam" : "Nữ", value: field.value } : undefined}
+                                value={
+                                field.value ?
+                                    { label: field.value === "male" ? "Nam" : "Nữ", value: field.value }
+                                    : { label: "Nam", value: "male" }
+                                }
                                 onChange={(opt) => field.onChange(opt?.value)}
                             />
                         )}

@@ -6,6 +6,11 @@ export interface LoginResponse {
     gender: boolean,
     birthDate: Date,
     photo: string | null,
+    address: string,
+    active: boolean,
+    startDate: Date,
+    endDate: Date,
+    specialtyIdentifier: number,
     role: string,
     token: string,
 }

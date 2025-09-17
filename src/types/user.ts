@@ -7,4 +7,7 @@ export interface User {
     birthDate: Date,
     photo: string | null,
     role: string,
+    address: string,
+    startDate: Date,
+    specialtyIdentifier: number,
 }
