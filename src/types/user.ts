@@ -4,10 +4,10 @@ export interface User {
     telecom: string | null,
     email: string | null,
     gender: boolean,
-    birthDate: Date,
+    birthDate: Date | undefined,
     photo: string | null,
     role: string,
     address: string,
-    startDate: Date,
+    startDate: Date | undefined,
     specialtyIdentifier: number,
 }

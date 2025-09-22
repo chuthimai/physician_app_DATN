@@ -3,7 +3,7 @@ export interface LoginResponse {
     name: string,
     telecom: string | null,
     email: string | null,
-    gender: boolean,
+    gender: string,
     birthDate: Date,
     photo: string | null,
     address: string,

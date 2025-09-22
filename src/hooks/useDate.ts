@@ -24,6 +24,7 @@ export default function useDate() {
         return `${day}${month}${year}`;
     }
 
+
     return {
         formattedDateOfBirth,
         formatLocalDate,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface AvatarProps {
-    src?: string;
+    src?: string | null;
     alt?: string;
     size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
     name?: string;

@@ -1,0 +1,22 @@
+import { useContext } from "react";
+import {UserContext} from "@/providers/user/UserContext.tsx";
+import useDate from "@/hooks/useDate.ts";
+
+export default function ProfileInfo() {
+    const userContext = useContext(UserContext);
+    const { formatLocalDate } = useDate();
+    console.log(typeof userContext?.user?.birthDate);
+
+    return (
+        <div className="my-2">
+            <h3 className="font-semibold mb-1">Thông tin cá nhân</h3>
+            <p>
+                Ngày sinh: {userContext?.user?.birthDate ? formatLocalDate(userContext?.user?.birthDate): "Chưa có"}
+            </p>
+            <p>
+                Giới tính: {userContext?.user?.gender === true ? "Nam" : "Nữ"}
+            </p>
+            <p>Địa chỉ: {userContext?.user?.address || "Chưa có"}</p>
+        </div>
+    );
+}
