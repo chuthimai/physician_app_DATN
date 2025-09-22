@@ -4,4 +4,7 @@ export const ENDPOINTS = {
 
     // Records
     RECORDS: "records",
+
+    // Patients
+    SEARCH_PATIENT: "users/search/by-name",
 }

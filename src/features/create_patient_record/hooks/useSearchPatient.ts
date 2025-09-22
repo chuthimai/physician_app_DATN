@@ -2,6 +2,7 @@ import {useApi} from "@/hooks/useApi.ts";
 import type {PatientResponse} from "@/features/create_patient_record/types/PatientResponse.ts";
 import {useState} from "react";
 import log from "loglevel";
+import {ENDPOINTS} from "@/constants/endpoints.ts";
 
 export default function useSearchPatient() {
     const { request, loading, error } = useApi<PatientResponse[]>();
@@ -9,7 +10,7 @@ export default function useSearchPatient() {
 
     const searchPatients = async (name: string) => {
         try {
-            const data = await request("get", "/users/search", undefined, {
+            const data = await request("get", ENDPOINTS.SEARCH_PATIENT, undefined, {
                 name: name.trim(),
             });
             setResults(data);
