@@ -1,6 +1,6 @@
 import type WorkSchedule from "./WorkSchedule.ts";
-import type Patient from "./Patient.ts";
-import type Physician from "./Physician.ts";
+import type Physician from "../../../types/Physician.ts";
+import type Patient from "@/types/Patient.ts";
 
 export default interface Appointment {
     identifier: number | null,

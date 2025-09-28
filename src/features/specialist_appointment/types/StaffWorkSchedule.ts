@@ -1,4 +1,4 @@
-import type Physician from "./Physician.ts";
+import type Physician from "../../../types/Physician.ts";
 
 export default interface StaffWorkSchedule {
     identifier: number,

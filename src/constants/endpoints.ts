@@ -7,4 +7,10 @@ export const ENDPOINTS = {
 
     // Patients
     SEARCH_PATIENT: "users/search/by-name",
+
+    // Specializations
+    SPECIALIZATIONS: "specializations",
+
+    // Shift
+    SHIFTS: "shifts",
 }

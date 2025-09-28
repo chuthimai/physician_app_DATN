@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import type Patient from "@/features/specialist_appointment/types/Patient.ts";
 import { PatientContext } from "./PatientContext.tsx";
+import type Patient from "@/types/Patient.ts";
 
 
 export const PatientProvider = ({children}: { children: React.ReactNode }) => {

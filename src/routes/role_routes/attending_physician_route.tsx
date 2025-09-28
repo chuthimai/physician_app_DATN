@@ -71,10 +71,6 @@ export function getAttendingPhysicianRoute(): Route[] {
                     element: <CreateTransferLetterPage/>
                 },
                 {
-                    path: "tao-giay-chuyen-vien",
-                    element: <CreateTransferLetterPage/>
-                },
-                {
                     path: "duyet-giay-chuyen-vien",
                     element: <ApproveTransferLetterPage/>
                 },

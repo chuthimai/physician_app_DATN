@@ -7,7 +7,7 @@ import type {CreatePatientRecordParams} from "@/features/create_patient_record/t
 import {useContext} from "react";
 import {PatientContext} from "@/providers/patient/PatientContext.tsx";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
-import type Patient from "@/types/patient.ts";
+import type Patient from "@/types/Patient.ts";
 
 export default function usePatientRecord() {
     const { request, loading, error } = useApi<CreatePatientRecordResponse>();
@@ -30,9 +30,9 @@ export default function usePatientRecord() {
             showToastSuccess("Tạo bệnh án thành công")
         } catch (e) {
             if (!(e instanceof Error)) return;
-            log.error(`useAuth: ${e.message}`);
-            if (e.message === "User not found") {
-                showToastError("Sai thông tin đăng nhập");
+            log.error(`create patient record: ${e.message}`);
+            if (e.message) {
+                showToastError("Tạo bệnh án thất bại");
             }
         }
 

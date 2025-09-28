@@ -1,8 +1,8 @@
-import type Patient from "@/features/specialist_appointment/types/Patient.ts";
 import type WorkSchedule from "@/features/specialist_appointment/types/WorkSchedule.ts";
 import type Appointment from "@/features/specialist_appointment/types/Appointment.ts";
-import type MedicalSpecialty from "@/features/specialist_appointment/types/MedicalSpecialty.ts";
-import type Physician from "@/features/specialist_appointment/types/Physician.ts";
+import type Physician from "@/types/Physician.ts";
+import type MedicalSpecialty from "@/types/MedicalSpecialty";
+import type Patient from "@/types/Patient.ts";
 
 const specialties: MedicalSpecialty[] = [
     { identifier: 1, name: "Nội tổng quát" },

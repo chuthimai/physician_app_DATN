@@ -9,7 +9,7 @@ function App() {
     const { logout } = useAuth();
 
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen min-w-[768px] min-h-[600px]">
             {/* PatientSearchBar */}
             <div className={`${Colors.BgSecondary} h-16 w-full grid grid-cols-2 flex-shrink-0`}>
                 <div className="flex items-center justify-start text-white font-bold mx-4">
@@ -21,9 +21,9 @@ function App() {
             </div>
 
             {/* Main layout: Sidebar + Content */}
-            <div className="flex flex-1 overflow-hidden min-w-[1200px]">
+            <div className="flex flex-1 overflow-hidden">
                 {/* Sidebar cuộn riêng */}
-                <div className="w-1/6 h-full overflow-y-auto bg-gray-50 shadow-md flex-shrink-0">
+                <div className="md:w-[200px] h-full overflow-y-auto bg-gray-50 shadow-md flex-shrink-0">
                     <SideBar/>
                 </div>
 

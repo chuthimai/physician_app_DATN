@@ -1,5 +1,5 @@
-import type Physician from "@/features/specialist_appointment/types/Physician.ts";
-import type MedicalSpecialty from "@/features/specialist_appointment/types/MedicalSpecialty.ts";
+import type Physician from "@/types/Physician.ts";
+import type MedicalSpecialty from "@/types/MedicalSpecialty.ts";
 
 export const specialties: MedicalSpecialty[] = [
     { identifier: 1, name: "Nội tổng quát" },
