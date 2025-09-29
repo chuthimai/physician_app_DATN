@@ -32,7 +32,8 @@ export default function useAuth() {
                 role: response.role,
                 address: response.address,
                 startDate: new Date(response.startDate),
-                specialtyIdentifier: response.identifier,
+                specialty: response.specialty,
+                qualifications: response.qualifications,
             };
             userContext?.setUser(user);
             navigator("/");

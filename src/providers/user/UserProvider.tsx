@@ -11,7 +11,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
             return {
                 ...parsed,
                 birthDate: parsed.birthDate ? new Date(parsed.birthDate) : undefined,
-                startDate: parsed.startDate ? new Date(parsed.startDate) : undefined,
+                startDate: new Date(parsed.startDate),
             };
         } catch {
             return undefined;

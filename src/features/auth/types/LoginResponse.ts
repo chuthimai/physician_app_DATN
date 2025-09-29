@@ -1,3 +1,6 @@
+import type MedicalSpecialty from "@/types/MedicalSpecialty.ts";
+import type Qualification from "@/types/Qualification.ts";
+
 export interface LoginResponse {
     identifier: number,
     name: string,
@@ -6,11 +9,11 @@ export interface LoginResponse {
     gender: string,
     birthDate: Date,
     photo: string | null,
-    address: string,
-    active: boolean,
+    role: string,
+    address: string | null,
     startDate: Date,
     endDate: Date,
-    specialtyIdentifier: number,
-    role: string,
+    qualifications: Qualification[],
+    specialty: MedicalSpecialty,
     token: string,
 }
