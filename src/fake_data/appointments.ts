@@ -1,4 +1,4 @@
-import type WorkSchedule from "@/features/specialist_appointment/types/WorkSchedule.ts";
+import type WorkSchedule from "@/types/WorkSchedule.ts";
 import type Appointment from "@/features/specialist_appointment/types/Appointment.ts";
 import type Physician from "@/types/Physician.ts";
 import type MedicalSpecialty from "@/types/MedicalSpecialty";
@@ -29,13 +29,13 @@ const fakePatients: Patient[] = [
 const fakeSchedules: WorkSchedule[] = [
     {
         identifier: 1,
-        day: "2025-09-15",
+        date: "2025-09-15",
         shift: { identifier: 1, name: "Ca sáng", startTime: "08:00", endTime: "12:00" },
         location: { identifier: 1, name: "Phòng Khám Nội", type: "room" },
     },
     {
         identifier: 2,
-        day: "2025-09-16",
+        date: "2025-09-16",
         shift: { identifier: 2, name: "Ca chiều", startTime: "13:00", endTime: "17:00" },
         location: { identifier: 2, name: "Phòng Khám Tim Mạch", type: "room" },
     },

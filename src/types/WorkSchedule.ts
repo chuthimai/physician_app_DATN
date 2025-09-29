@@ -1,9 +1,9 @@
-import type Shift from "./Shift.ts";
 import type Location from "./Location.ts";
+import type Shift from "@/types/Shift.ts";
 
 export default interface WorkSchedule {
     identifier: number,
-    day: string,
+    date: string,
     shift: Shift,
     location: Location,
 }

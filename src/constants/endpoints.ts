@@ -13,4 +13,7 @@ export const ENDPOINTS = {
 
     // Shift
     SHIFTS: "shifts",
+
+    // Staff work schedule
+    STAFF_WORK_SCHEDULES: "schedules/staff-work-schedules-by-condition",
 }

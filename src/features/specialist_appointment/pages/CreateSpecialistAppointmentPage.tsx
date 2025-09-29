@@ -14,7 +14,7 @@ export default function CreateSpecialistAppointmentPage() {
     const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
 
     useEffect(() => {
-        const apps = fakeAppointments.filter((app) => app.patient.identifier === patientContext?.patient?.identifier);
+        const apps = fakeAppointments.filter((app) => app.patient.identifier === 3);
         setAppointments(apps);
     }, []);
 

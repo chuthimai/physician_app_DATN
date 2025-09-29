@@ -1,4 +1,4 @@
-import type WorkSchedule from "./WorkSchedule.ts";
+import type WorkSchedule from "../../../types/WorkSchedule.ts";
 import type Physician from "../../../types/Physician.ts";
 import type Patient from "@/types/Patient.ts";
 
