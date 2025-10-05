@@ -64,7 +64,7 @@ export default function AppointmentTable({
                             {appointment.physician?.name ?? ""}
                         </TableCell>
                         <TableCell className="text-center">
-                            {appointment.physician?.medicalSpecialty.name ?? ""}
+                            {appointment.physician?.medicalSpecialty?.name ?? ""}
                         </TableCell>
                         <TableCell className="text-center">
                             {appointment.physician &&

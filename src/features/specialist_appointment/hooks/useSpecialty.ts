@@ -4,24 +4,25 @@ import {ENDPOINTS} from "@/constants/endpoints.ts";
 import type MedicalSpecialty from "@/types/MedicalSpecialty.ts";
 import log from "loglevel";
 
-export default function useSpecialization() {
+export default function useSpecialty() {
     const {request, loading, error} = useApi<MedicalSpecialty[]>();
     const {showToastError} = useToast();
 
-    const getSpecializations = async (): Promise<MedicalSpecialty[] | undefined> => {
+    const getSpecialties = async (): Promise<MedicalSpecialty[]> => {
         try {
             return await request("get", ENDPOINTS.SPECIALIZATIONS);
         } catch (e) {
             if (!(e instanceof Error)) return [];
-            log.error(`get specializations : ${e.message}`);
+            log.error(`Get specializations : ${e.message}`);
             if (e.message) {
                 showToastError("Có lỗi xảy ra");
             }
+            return [];
         }
     };
 
     return {
-        getSpecializations,
+        getSpecialties,
         loading,
         error,
     };

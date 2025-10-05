@@ -65,9 +65,19 @@ export default function SelectSearchInput({
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                    className="p-0"
+                    className="p-0 w-[var(--radix-popover-trigger-width)]"
+                    align="start"
                 >
-                    <Command>
+                    <Command
+                        filter={(value, search) => {
+                            // Lấy label của option tương ứng
+                            const opt = options.find((o) => o.value === value);
+                            if (!opt) return 0;
+
+                            // Chuyển về lowercase để tìm kiếm không phân biệt hoa thường
+                            return opt.label.toLowerCase().includes(search.toLowerCase()) ? 1 : 0;
+                        }}
+                    >
                         <CommandInput placeholder="Tìm kiếm..." className="h-9" />
                         <CommandList>
                             <CommandEmpty>Không tìm thấy.</CommandEmpty>

@@ -3,13 +3,17 @@ import {useEffect, useState} from "react";
 import SelectSearchInput, {type Option} from "@/components/input/SelectSearchInput.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {toast} from "react-toastify";
-import {specialties, physicians} from "@/fake_data/create_specialist_appointment.ts";
 import type Appointment from "@/features/specialist_appointment/types/Appointment.ts";
 import type {ServiceSend} from "@/features/specialist_appointment/types/ServiceSend.ts";
+import useSpecialty from "@/features/specialist_appointment/hooks/useSpecialty.ts";
+import usePhysiciansWorkScheduleBySpecialty from "@/features/specialist_appointment/hooks/usePhysiciansWorkScheduleBySpecialty.ts";
+import type PhysiciansWorkScheduleBySpecialtyParams
+    from "@/features/specialist_appointment/types/PhysiciansWorkScheduleBySpecialtyParams.ts";
+import type StaffWorkSchedule from "@/types/StaffWorkSchedule.ts";
 
 type AddSpecialistAppointmentInputs = {
-    specialist: string; // lưu identifier của chuyên khoa
-    physician: string;  // lưu identifier của bác sĩ
+    specialist: string;
+    physicianWorkSchedule: string;
 };
 
 type CreateSpecialistAppointmentFormProps = {
@@ -29,16 +33,40 @@ export default function CreateSpecialistAppointmentForm(
     } = useForm<AddSpecialistAppointmentInputs>();
 
     const [physicianOptions, setPhysicianOptions] = useState<Option[]>([]);
+    const [specialistOptions, setSpecialistOptions] = useState<Option[]>([]);
+    const [physiciansWorkScheduleBySpecialty, setPhysiciansWorkScheduleBySpecialty] = useState<StaffWorkSchedule[]>([]);
     const specialistSelected = watch("specialist");
+    const {getSpecialties} = useSpecialty();
+    const {getPhysiciansWorkScheduleBySpecialty} = usePhysiciansWorkScheduleBySpecialty();
 
     // ------------------------- function ------------------------------
+    // Gọi tất cả chuyên khoa khi khởi tạo
+    useEffect(() => {
+        const fetchSpecialties = async () => {
+            try {
+                const specialties = await getSpecialties();
+
+                const specialtyOptions: Option[] = specialties.map((s) => ({
+                    label: s.name,
+                    value: s.identifier.toString(),
+                }));
+
+                setSpecialistOptions(specialtyOptions);
+            } catch (error) {
+                console.error("Failed to fetch specialties:", error);
+            }
+        };
+
+        fetchSpecialties();
+    }, []);
+
     // Prefill dữ liệu khi có appointment
     useEffect(() => {
         if (!selectedAppointment) return;
         if (selectedAppointment.physician) {
             reset({
-                specialist: selectedAppointment.physician.medicalSpecialty.identifier.toString(),
-                physician: selectedAppointment.physician.identifier.toString(),
+                specialist: selectedAppointment.physician.medicalSpecialty?.identifier.toString(),
+                physicianWorkSchedule: selectedAppointment.physician.identifier.toString(),
             });
         }
     }, [selectedAppointment, reset]);
@@ -49,26 +77,30 @@ export default function CreateSpecialistAppointmentForm(
             setPhysicianOptions([]);
             return;
         }
+        const fetchPhysiciansWorkScheduleBySpecialty = async () => {
+            try {
+                const params: PhysiciansWorkScheduleBySpecialtyParams = {specialtyIdentifier: Number.parseInt(specialistSelected)};
+                const physiciansWorkScheduleBySpecialty = await getPhysiciansWorkScheduleBySpecialty(params);
 
-        const options = physicians
-            .filter((p) => p.medicalSpecialty.identifier.toString() === specialistSelected)
-            .map((p) => ({
-                label: `${p.name} (${p.gender ? "Nam" : "Nữ"})`,
-                value: p.identifier.toString(),
-            }));
-        setPhysicianOptions(options);
+                const options: Option[] = physiciansWorkScheduleBySpecialty.map((s) => ({
+                    label: `BS.${s.staff?.name} (${s.workSchedule.shift.name} ${s.workSchedule.date})`,
+                    value: s.identifier.toString(),
+                }));
+
+                setPhysicianOptions(options);
+                setPhysiciansWorkScheduleBySpecialty(physiciansWorkScheduleBySpecialty);
+            } catch (error) {
+                console.error("Failed to fetch specialties:", error);
+            }
+        };
+        fetchPhysiciansWorkScheduleBySpecialty();
     }, [specialistSelected]);
 
-    const specialistOptions: Option[] = specialties.map((s) => ({
-        label: s.name,
-        value: s.identifier.toString(),
-    }));
-
     const onSubmit: SubmitHandler<AddSpecialistAppointmentInputs> = async (data) => {
-        const selectedSpecialist = specialties.find((s) => s.identifier === parseInt(data.specialist));
-        const selectedPhysician = physicians.find((p) => p.identifier === parseInt(data.physician));
+        const selectedSpecialist = specialistOptions.find((s) => s.value === data.specialist);
+        const selectedPhysicianWorkSchedule = physiciansWorkScheduleBySpecialty.find((p) => p.identifier === parseInt(data.physicianWorkSchedule));
 
-        if (!selectedSpecialist || !selectedPhysician) {
+        if (!selectedSpecialist || !selectedPhysicianWorkSchedule) {
             toast.error("Vui lòng chọn chuyên khoa và bác sĩ");
             return;
         }
@@ -106,7 +138,7 @@ export default function CreateSpecialistAppointmentForm(
                 <div className="col-span-5">
                     <Controller
                         control={control}
-                        name="physician"
+                        name="physicianWorkSchedule"
                         rules={{required: "Chọn bác sĩ"}}
                         render={({field}) => (
                             <SelectSearchInput
@@ -114,7 +146,7 @@ export default function CreateSpecialistAppointmentForm(
                                 value={physicianOptions.find((opt) => opt.value === field.value)}
                                 onChange={(selected) => field.onChange(selected?.value ?? "")}
                                 options={physicianOptions}
-                                error={errors.physician}
+                                error={errors.physicianWorkSchedule}
                             />
                         )}
                     />
