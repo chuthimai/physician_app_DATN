@@ -31,13 +31,11 @@ const fakeSchedules: WorkSchedule[] = [
         identifier: 1,
         date: "2025-09-15",
         shift: { identifier: 1, name: "Ca sáng", startTime: "08:00", endTime: "12:00" },
-        location: { identifier: 1, name: "Phòng Khám Nội", type: "room" },
     },
     {
         identifier: 2,
         date: "2025-09-16",
         shift: { identifier: 2, name: "Ca chiều", startTime: "13:00", endTime: "17:00" },
-        location: { identifier: 2, name: "Phòng Khám Tim Mạch", type: "room" },
     },
 ];
 

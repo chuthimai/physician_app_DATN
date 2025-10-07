@@ -27,7 +27,7 @@ export default function WorkSchedulesPage() {
             setEvents(staffWorkSchedules.map((sws) => {
                 return {
                     // title: "",
-                    title: `<b>${dutyToVietnamese(sws.duty)} (${sws.workSchedule.shift.name})</b><br/>Tại ${sws.workSchedule.location.name}`,
+                    title: `<b>${dutyToVietnamese(sws.duty)} (${sws.workSchedule.shift.name})</b><br/>Tại ${sws.location}`,
                     start: new Date(`${sws.workSchedule.date}T${sws.workSchedule.shift.startTime}`),
                     end: new Date(`${sws.workSchedule.date}T${sws.workSchedule.shift.endTime}`),
                     allDay: false,
