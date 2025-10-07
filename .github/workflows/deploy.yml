@@ -46,6 +46,9 @@ jobs:
             # Xóa mọi container đang dùng port 5173
             docker ps -q --filter "publish=5173" | xargs -r docker stop
             docker ps -aq --filter "publish=5173" | xargs -r docker rm
+            
+            # Xóa container cũ (dù đã stop)
+            docker rm -f physician_app
 
             # Chạy container mới
             docker run -d -p 5173:5173 \
