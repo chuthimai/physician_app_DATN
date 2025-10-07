@@ -43,9 +43,9 @@ jobs:
             # Pull image mới nhất
             docker pull ${{ secrets.DOCKER_USERNAME }}/physician_app:latest
 
-            # Dừng và xóa container cũ (nếu có)
-            docker stop physician_app || true
-            docker rm physician_app || true
+            # Xóa mọi container đang dùng port 5173
+            docker ps -q --filter "publish=5173" | xargs -r docker stop
+            docker ps -aq --filter "publish=5173" | xargs -r docker rm
 
             # Chạy container mới
             docker run -d -p 5173:5173 \
