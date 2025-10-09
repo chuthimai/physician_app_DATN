@@ -3,7 +3,7 @@ name: CI/CD Front-end to AWS EC2
 
 on:
   push:
-    branches: [ deploy ]  # Chạy mỗi khi push lên nhánh deploy
+    branches: [ deploy ]
 
 jobs:
   build_and_push_docker_image:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
-      # 2. Chuẩn bị Docker Buildx (tối ưu build image)
+      # 2. Chuẩn bị Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -25,18 +25,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # 4. Build và push image lên Docker Hub
+      # 4. Build và push image lên Docker Hub (ĐÃ SỬA)
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/physician_app:latest
+          # Truyền biến vào lúc build
+          build-args: |
+            VITE_API_BASE_URL=http://${{ secrets.EC2_HOST }}:3000
+            VITE_NODE_ENV=production
 
   deploy_ec2:
     runs-on: ubuntu-latest
     needs: build_and_push_docker_image
     steps:
-      # 5. SSH vào EC2 để deploy
+      # 5. SSH vào EC2 để deploy (ĐÃ SỬA)
       - name: Deploy to AWS EC2 via SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -47,18 +51,13 @@ jobs:
             # Pull image mới nhất
             docker pull ${{ secrets.DOCKER_USERNAME }}/physician_app:latest
 
-            # Xóa mọi container đang dùng port 5173
-            docker ps -q --filter "publish=5173" | xargs -r docker stop
-            docker ps -aq --filter "publish=5173" | xargs -r docker rm
+            # Dọn dẹp container cũ
+            docker stop physician_app || true
+            docker rm physician_app || true
             
-            # Xóa container cũ (dù đã stop)
-            docker rm -f physician_app
-
-            # Chạy container mới
+            # Chạy container mới (ĐÃ BỎ --env=VITE_API_BASE_URL)
             docker run -d -p 5173:5173 \
               --name physician_app \
-              --env=VITE_API_BASE_URL="http://${{ secrets.EC2_HOST }}:3000" \
-              --env=VITE_NODE_ENV=production \
               ${{ secrets.DOCKER_USERNAME }}/physician_app:latest
             
             # Xoá tất cả images ko có container đi kèm

@@ -13,7 +13,7 @@ RUN npm install
 # 5. Copy toàn bộ source code
 COPY . .
 
-# 6. Build (nếu cần)
+# 6. Build
 RUN npm run build
 
 # 7. Mở cổng
