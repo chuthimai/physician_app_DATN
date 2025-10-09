@@ -1,6 +1,14 @@
 # 1. Base image
 FROM node:20
 
+#  Khai báo ARG để nhận giá trị từ lệnh docker build
+ARG VITE_API_BASE_URL
+ARG VITE_NODE_ENV
+
+# Thiết lập ENV để Vite có thể đọc được trong quá trình build
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
+ENV VITE_NODE_ENV=${VITE_NODE_ENV}
+
 # 2. Tạo thư mục làm việc trong container
 WORKDIR /app
 
