@@ -40,23 +40,40 @@ export default function CreateSpecialistAppointmentForm(
     const {getPhysiciansWorkScheduleBySpecialty} = usePhysiciansWorkScheduleBySpecialty();
 
     // ------------------------- function ------------------------------
+    const fetchSpecialties = async () => {
+        try {
+            const specialties = await getSpecialties();
+
+            const specialtyOptions: Option[] = specialties.map((s) => ({
+                label: s.name,
+                value: s.identifier.toString(),
+            }));
+
+            setSpecialistOptions(specialtyOptions);
+        } catch (error) {
+            console.error("Failed to fetch specialties:", error);
+        }
+    };
+
+    const fetchPhysiciansWorkScheduleBySpecialty = async () => {
+        try {
+            const params: PhysiciansWorkScheduleBySpecialtyParams = {specialtyIdentifier: Number.parseInt(specialistSelected)};
+            const physiciansWorkScheduleBySpecialty = await getPhysiciansWorkScheduleBySpecialty(params);
+
+            const options: Option[] = physiciansWorkScheduleBySpecialty.map((s) => ({
+                label: `BS.${s.staff?.name} (${s.workSchedule.shift.name} ${s.workSchedule.date})`,
+                value: s.identifier.toString(),
+            }));
+
+            setPhysicianOptions(options);
+            setPhysiciansWorkScheduleBySpecialty(physiciansWorkScheduleBySpecialty);
+        } catch (error) {
+            console.error("Failed to fetch specialties:", error);
+        }
+    };
+
     // Gọi tất cả chuyên khoa khi khởi tạo
     useEffect(() => {
-        const fetchSpecialties = async () => {
-            try {
-                const specialties = await getSpecialties();
-
-                const specialtyOptions: Option[] = specialties.map((s) => ({
-                    label: s.name,
-                    value: s.identifier.toString(),
-                }));
-
-                setSpecialistOptions(specialtyOptions);
-            } catch (error) {
-                console.error("Failed to fetch specialties:", error);
-            }
-        };
-
         fetchSpecialties();
     }, []);
 
@@ -77,22 +94,6 @@ export default function CreateSpecialistAppointmentForm(
             setPhysicianOptions([]);
             return;
         }
-        const fetchPhysiciansWorkScheduleBySpecialty = async () => {
-            try {
-                const params: PhysiciansWorkScheduleBySpecialtyParams = {specialtyIdentifier: Number.parseInt(specialistSelected)};
-                const physiciansWorkScheduleBySpecialty = await getPhysiciansWorkScheduleBySpecialty(params);
-
-                const options: Option[] = physiciansWorkScheduleBySpecialty.map((s) => ({
-                    label: `BS.${s.staff?.name} (${s.workSchedule.shift.name} ${s.workSchedule.date})`,
-                    value: s.identifier.toString(),
-                }));
-
-                setPhysicianOptions(options);
-                setPhysiciansWorkScheduleBySpecialty(physiciansWorkScheduleBySpecialty);
-            } catch (error) {
-                console.error("Failed to fetch specialties:", error);
-            }
-        };
         fetchPhysiciansWorkScheduleBySpecialty();
     }, [specialistSelected]);
 
