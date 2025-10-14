@@ -1,4 +1,4 @@
-import {Colors} from "../../../constants/colors.ts";
+import {Colors} from "@/constants/colors.ts";
 import DoubleButton from "../../../components/button/DoubleButton.tsx";
 import {Link} from "react-router-dom";
 

@@ -1,0 +1,7 @@
+export const DIAGNOSIS_SERVICE = {
+    INITIAL: 1,
+    CLINICAL: 'CLINICAL',
+    FINAL: 'FINAL',
+    FOLLOW_UP: 'FOLLOW_UP',
+    DIAGNOSIS: 'DIAGNOSIS',
+}

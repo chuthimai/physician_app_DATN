@@ -6,10 +6,11 @@ import type AssessmentItem from "@/types/AssessmentItem.ts";
 type DynamicFormInputs = Record<string, string>;
 
 type DynamicFormProps = {
-    assessmentItems: AssessmentItem[];
+    assessmentItems: AssessmentItem[],
+    onClickSubmit?: (data: DynamicFormInputs) => void;
 };
 
-export default function DynamicForm({ assessmentItems }: DynamicFormProps) {
+export default function DynamicForm({ assessmentItems, onClickSubmit }: DynamicFormProps) {
     const {
         register,
         handleSubmit,

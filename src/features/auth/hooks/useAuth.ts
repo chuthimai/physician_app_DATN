@@ -43,7 +43,9 @@ export default function useAuth() {
             log.error(`useAuth: ${e.message}`);
             if (e.message === "User not found") {
                 showToastError("Sai thông tin đăng nhập");
+                return;
             }
+            showToastError("Có lỗi xảy ra");
         }
 
     };
