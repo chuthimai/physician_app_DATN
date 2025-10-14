@@ -9,13 +9,16 @@ import {
 } from "@/components/ui/table.tsx";
 import {Button} from "@/components/ui/button";
 import type Appointment from "../types/Appointment.ts";
-import type {ServiceSend} from "@/features/specialist_appointment/types/ServiceSend.ts";
 import {toast} from "react-toastify";
+import type CreateSpecialtyServiceRecordParams
+    from "@/features/specialist_appointment/types/CreateSpecialtyServiceRecordParams.ts";
+import {useContext} from "react";
+import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 
 type AppointmentTableProps = {
     appointments: Appointment[];
     setSelectedAppointment: (appointment: Appointment) => void;
-    onClickSaveAppointment: (serviceSend: ServiceSend) => void;
+    onClickSaveAppointment: (params: CreateSpecialtyServiceRecordParams) => void;
 };
 
 export default function AppointmentTable({
@@ -24,11 +27,15 @@ export default function AppointmentTable({
                                              onClickSaveAppointment,
                                          }: AppointmentTableProps) {
 
+    const patientRecordIdContext = useContext(PatientRecordIdContext);
+
     function handleHasPhysician(appointment: Appointment) {
-        const serviceSend: ServiceSend = {
-            identifier: 1
+        const params: CreateSpecialtyServiceRecordParams = {
+            patientRecordIdentifier: Number(patientRecordIdContext?.patientRecordId),
+            workScheduleIdentifier: appointment.workSchedule.identifier,
+            physicianIdentifier: appointment.physician?.identifier,
         }
-        onClickSaveAppointment(serviceSend);
+        onClickSaveAppointment(params);
         console.log(appointment);
     }
 

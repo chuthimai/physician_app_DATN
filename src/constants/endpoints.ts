@@ -16,4 +16,7 @@ export const ENDPOINTS = {
 
     // Staff work schedule
     STAFF_WORK_SCHEDULES: "schedules/staff-work-schedules-by-condition",
+
+    // Create Specialty Service
+    CREATE_SPECIALTY_SERVICE: "records/update-specialty-consultation",
 }
