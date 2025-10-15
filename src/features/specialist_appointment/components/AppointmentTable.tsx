@@ -62,8 +62,8 @@ export default function AppointmentTable({
                 {appointments.map((appointment, index) => (
                     <TableRow key={appointment.identifier}>
                         <TableCell className="text-center">{index + 1}</TableCell>
-                        <TableCell className="text-center">{appointment.patient.name}</TableCell>
-                        <TableCell className="text-left">{appointment.patient.address}</TableCell>
+                        <TableCell className="text-center">{appointment.user.name}</TableCell>
+                        <TableCell className="text-left">{appointment.user.address}</TableCell>
                         <TableCell className="text-center">
                             {`${appointment.workSchedule.shift.name} (${appointment.workSchedule.shift.startTime} - ${appointment.workSchedule.shift.endTime})`}
                         </TableCell>

@@ -77,7 +77,7 @@ export default function CreateSpecialistAppointmentForm(
 
     // Gọi tất cả chuyên khoa khi khởi tạo
     useEffect(() => {
-        fetchSpecialties();
+        fetchSpecialties().then(() => null);
     }, []);
 
     // Prefill dữ liệu khi có appointment

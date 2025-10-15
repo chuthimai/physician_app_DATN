@@ -3,9 +3,9 @@ import type Physician from "../../../types/Physician.ts";
 import type Patient from "@/types/Patient.ts";
 
 export default interface Appointment {
-    identifier: number | null,
-    status: string,
+    identifier: number,
+    status: boolean,
     workSchedule: WorkSchedule,
-    patient: Patient,
-    physician: Physician | undefined | null,
+    user: Patient,
+    physician: Physician,
 }

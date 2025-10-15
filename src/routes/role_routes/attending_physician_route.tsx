@@ -6,8 +6,9 @@ import ClinicalDiagnosisPage from "../../features/diagnosis/pages/ClinicalDiagno
 import FinalDiagnosisPage from "../../features/diagnosis/pages/FinalDiagnosisPage.tsx";
 import PrescriptionPage from "../../features/diagnosis/pages/PrescriptionPage.tsx";
 import AddServicesPage from "@/features/add_services/pages/AddServicesPage.tsx";
-import CreateSpecialistAppointmentPage
-    from "@/features/specialist_appointment/pages/CreateSpecialistAppointmentPage.tsx";
+import {
+    CreateSpecialistAppointmentPage
+} from "@/features/specialist_appointment/pages/CreateSpecialistAppointmentPage.tsx";
 import FollowUpAppointmentPage from "@/features/diagnosis/pages/FollowUpAppointmentPage.tsx";
 import TransferLetterPage from "@/features/transfer_letter/pages/TransferLetterPage.tsx";
 import ApproveTransferLetterPage from "@/features/transfer_letter/pages/ApproveTransferLetterPage.tsx";
