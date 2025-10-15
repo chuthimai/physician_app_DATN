@@ -17,7 +17,7 @@ export default function usePatientRecord() {
 
     const createPatientRecord = async (payload: CreatePatientRecordParams) => {
         try {
-            const response = await request("post", ENDPOINTS.RECORDS, payload);
+            const response = await request("post", ENDPOINTS.CREATE_RECORDS, payload);
             const patient: Patient = {
                 identifier: response.patientIdentifier,
                 name: response.patient.name,

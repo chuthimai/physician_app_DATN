@@ -3,10 +3,10 @@ export const ENDPOINTS = {
     LOGIN: "auth/login?role=PHYSICIAN",
 
     // Records
-    RECORDS: "records",
+    CREATE_RECORDS: "records/",
 
     // Patients
-    SEARCH_PATIENT: "users/search/by-name",
+    SEARCH_PATIENT: "users/by-name",
 
     // Specializations
     SPECIALIZATIONS: "specializations",
