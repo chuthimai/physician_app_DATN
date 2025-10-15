@@ -1,15 +1,17 @@
 import {Controller, type SubmitHandler, useForm} from "react-hook-form";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import SelectSearchInput, {type Option} from "@/components/input/SelectSearchInput.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {toast} from "react-toastify";
 import type Appointment from "@/features/specialist_appointment/types/Appointment.ts";
-import type {ServiceSend} from "@/features/specialist_appointment/types/ServiceSend.ts";
 import useSpecialty from "@/features/specialist_appointment/hooks/useSpecialty.ts";
 import usePhysiciansWorkScheduleBySpecialty from "@/features/specialist_appointment/hooks/usePhysiciansWorkScheduleBySpecialty.ts";
 import type PhysiciansWorkScheduleBySpecialtyParams
     from "@/features/specialist_appointment/types/PhysiciansWorkScheduleBySpecialtyParams.ts";
 import type StaffWorkSchedule from "@/types/StaffWorkSchedule.ts";
+import type CreateSpecialtyServiceRecordParams
+    from "@/features/specialist_appointment/types/CreateSpecialtyServiceRecordParams.ts";
+import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 
 type AddSpecialistAppointmentInputs = {
     specialist: string;
@@ -18,7 +20,7 @@ type AddSpecialistAppointmentInputs = {
 
 type CreateSpecialistAppointmentFormProps = {
     selectedAppointment: Appointment | null | undefined;
-    onClickSaveAppointment: (serviceSend: ServiceSend) => void;
+    onClickSaveAppointment: (params: CreateSpecialtyServiceRecordParams) => void;
 };
 
 export default function CreateSpecialistAppointmentForm(
@@ -38,6 +40,7 @@ export default function CreateSpecialistAppointmentForm(
     const specialistSelected = watch("specialist");
     const {getSpecialties} = useSpecialty();
     const {getPhysiciansWorkScheduleBySpecialty} = usePhysiciansWorkScheduleBySpecialty();
+    const patientRecordIdContext = useContext(PatientRecordIdContext);
 
     // ------------------------- function ------------------------------
     const fetchSpecialties = async () => {
@@ -106,10 +109,12 @@ export default function CreateSpecialistAppointmentForm(
             return;
         }
 
-        const serviceSend: ServiceSend = {
-            identifier: 1
+        const params: CreateSpecialtyServiceRecordParams = {
+            workScheduleIdentifier: selectedPhysicianWorkSchedule.identifier,
+            physicianIdentifier: selectedPhysicianWorkSchedule.staff?.identifier,
+            patientRecordIdentifier: Number(patientRecordIdContext?.patientRecordId),
         }
-        onClickSaveAppointment(serviceSend);
+        onClickSaveAppointment(params);
         reset();
     };
 

@@ -1,3 +1,5 @@
 export interface ServiceSend {
-    identifier: 1,
+    patientRecordIdentifier: number,
+    workScheduleIdentifier: number,
+    physicianIdentifier?: number
 }
