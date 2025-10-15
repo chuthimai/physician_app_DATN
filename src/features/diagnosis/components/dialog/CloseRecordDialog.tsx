@@ -9,7 +9,7 @@ import {
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
 import {useForm} from "react-hook-form";
-import {useToast} from "@/hooks/useToast.ts";
+import {useClosePatientRecord} from "@/features/diagnosis/hooks/useClosePatientRecord.ts";
 
 interface CloseRecordDialogProps {
     open: boolean;
@@ -21,15 +21,10 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
         handleSubmit,
         formState: { isSubmitting }
     } = useForm();
-    const {showToastSuccess} = useToast();
+    const {closePatientRecord} = useClosePatientRecord();
 
     const onSubmit = async () => {
-        // TODO: delete
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        // TODO: Thêm logic đóng bệnh án
-        console.log("Submitted!");
-        showToastSuccess("Đóng bệnh án thành công");
+        await closePatientRecord();
         onOpenChange(false);
     }
 

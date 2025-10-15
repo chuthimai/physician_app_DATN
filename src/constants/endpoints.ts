@@ -4,6 +4,7 @@ export const ENDPOINTS = {
 
     // Records
     CREATE_RECORDS: "records/",
+    CLOSE_RECORDS: "",
 
     // Patients
     SEARCH_PATIENT: "users/by-name",
