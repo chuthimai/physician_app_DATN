@@ -29,6 +29,7 @@ type Props = {
     error?: { message?: string }; // tương thích FieldError
     value?: Option;
     onChange?: (value: Option | null) => void;
+    disabled?: boolean;
 };
 
 export default function SelectSearchInput({
@@ -37,10 +38,12 @@ export default function SelectSearchInput({
                                               error,
                                               value,
                                               onChange,
+                                              disabled = false,
                                           }: Props) {
     const [open, setOpen] = React.useState(false);
 
     const handleSelect = (val: string) => {
+        if (disabled) return;
         const selected = options.find((opt) => opt.value === val) || null;
         onChange?.(selected);
         setOpen(false);
@@ -49,12 +52,13 @@ export default function SelectSearchInput({
     return (
         <div className="mb-4">
             <label className="block text-gray-600 mb-1">{label}</label>
-            <Popover open={open} onOpenChange={setOpen}>
+            <Popover open={open && !disabled} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
                         variant="outline"
                         role="combobox"
                         aria-expanded={open}
+                        disabled={disabled}
                         className={cn(
                             "w-full justify-between opacity-50",
                             error && "border-red-500"
