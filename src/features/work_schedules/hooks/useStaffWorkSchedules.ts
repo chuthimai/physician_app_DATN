@@ -4,7 +4,6 @@ import type StaffWorkSchedule from "@/types/StaffWorkSchedule.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type GetStaffWorkSchedulesParams from "@/features/work_schedules/types/GetStaffWorkSchedulesParams.ts";
-import {dutyFromString} from "@/features/work_schedules/types/Duty.ts";
 
 export default function useStaffWorkSchedules() {
     const { request, loading, error } = useApi<StaffWorkSchedule[]>();
@@ -16,7 +15,7 @@ export default function useStaffWorkSchedules() {
             return response.map((sws) => {
                 return {
                     ...sws,
-                    duty: dutyFromString(sws.duty),
+                    duty: sws.duty,
                 }
             });
         } catch (e) {

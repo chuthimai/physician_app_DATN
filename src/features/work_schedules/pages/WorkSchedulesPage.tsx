@@ -4,7 +4,6 @@ import {UserContext} from "@/providers/user/UserContext.tsx";
 import useStaffWorkSchedules from "@/features/work_schedules/hooks/useStaffWorkSchedules.ts";
 import type GetStaffWorkSchedulesParams from "@/features/work_schedules/types/GetStaffWorkSchedulesParams.ts";
 import type EventCalendar from "@/features/work_schedules/types/EventCalendar.ts";
-import {dutyToVietnamese} from "@/features/work_schedules/types/Duty.ts";
 
 export default function WorkSchedulesPage() {
     const userContext = useContext(UserContext);
@@ -26,7 +25,7 @@ export default function WorkSchedulesPage() {
             }
             setEvents(staffWorkSchedules.map((sws) => {
                 return {
-                    title: `${dutyToVietnamese(sws.duty)}`,
+                    title: `${sws.duty}`,
                     location: sws.location?.name,
                     start: new Date(`${sws.workSchedule.date}T${sws.workSchedule.shift.startTime}`),
                     end: new Date(`${sws.workSchedule.date}T${sws.workSchedule.shift.endTime}`),
