@@ -1,6 +1,5 @@
 export const ROLES = {
     ATTENDING_PHYSICIAN: "PHYSICIAN",
-    LAB_PHYSICIAN: "labPhysician",
-    IMAGING_PHYSICIAN: "imagingPhysician",
-    CASHIER: "cashier",
+    LAB_PHYSICIAN: "LAB_PHYSICIAN",
+    IMAGING_PHYSICIAN: "IMAGE_PHYSICIAN",
 }

@@ -19,7 +19,7 @@ export const ENDPOINTS = {
     STAFF_WORK_SCHEDULES: "schedules/staff-work-schedules-by-condition",
 
     // Report
-    GET_SERVICE_FORM: "reports/test",
+    GET_SERVICE_FORM: "reports",
     SEND_SERVICE_FORM: "reports/update-diagnosis-report-result",
 
     // Service

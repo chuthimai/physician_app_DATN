@@ -1,25 +1,30 @@
 import DynamicForm from "@/components/form/DynamicForm.tsx";
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import type AssessmentItem from "@/types/AssessmentItem.ts";
 import type ServiceFormSubmitParams from "@/types/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
-// import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
+import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 
 export default function ClinicalDiagnosisForm() {
     const {getServiceForm, sendServiceForm} = useServiceForm();
     const [form, setForm] = useState<AssessmentItem[]>([]);
-    // const patientRecordIdContext = useContext(PatientRecordIdContext);
-    // const [serviceRecordId, setServiceRecordId] = useState<number | undefined>(undefined);
-    const serviceRecordId = 58 // TODO: Just for test
+    const [serviceRecordId, setServiceRecordId] = useState<number | undefined>(undefined);
+    const patientRecordIdContext = useContext(PatientRecordIdContext);
 
     const fetchForm = async () => {
-        const data = await getServiceForm(serviceRecordId);
+        const data = await getServiceForm(patientRecordIdContext?.patientRecordId);
         if (!data) {
             setForm([]);
             return;
         }
+        if (data.serviceReport.service.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION) {
+            setForm([]);
+            return;
+        }
+
         setForm(data.serviceReport.service.assessmentItems);
+        setServiceRecordId(data.identifier);
     };
 
     useEffect(() => {
@@ -29,6 +34,8 @@ export default function ClinicalDiagnosisForm() {
     const onSubmit = async (data: ServiceFormSubmitParams) => {
         await sendServiceForm(data);
     };
+
+    if (!serviceRecordId) return <div/>;
 
     return (
         <DynamicForm

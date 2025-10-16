@@ -4,6 +4,8 @@ export default interface ServiceFormResponse {
     identifier: number,
     serviceReport: {
         service: {
+            type: string,
+            name: string,
             assessmentItems: AssessmentItem[]
         }
     }

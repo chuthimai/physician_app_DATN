@@ -111,7 +111,7 @@ export default function CreatePatientRecordForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-6">
+                <div className="col-span-6 hidden">
                     <TextInput
                         type={"text"}
                         label={"Số CCCD"}
@@ -123,7 +123,7 @@ export default function CreatePatientRecordForm() {
                     />
                 </div>
 
-                <div className="col-span-6">
+                <div className="col-span-12">
                     <TextInput
                         type={"text"}
                         label={"Họ tên"}
