@@ -12,7 +12,7 @@ export default function LabGetSpecimenPage() {
     const [labType, setLabType] = useState<Option | undefined>(undefined);
 
     return <div className="flex flex-col h-screen">
-        <div className="flex gap-4 items-center justify-center px-8">
+        <div className="flex gap-4 items-center justify-center px-8 pb-4">
             <div>Lấy mẫu xét nghiệm</div>
             <div className={"flex-1"}>
                 <SelectSearchInput
@@ -41,7 +41,7 @@ export default function LabGetSpecimenPage() {
             </div>
 
         </div>
-        <div className="flex-1 overflow-y-auto items-center justify-center px-8 pt-4 pb-32 rounded-lg">
+        <div className="flex-1 overflow-y-auto items-center justify-center px-8 pb-32 rounded-lg">
             <div className="flex flex-col gap-4">
                 <div>
                     <ConfirmService/>
