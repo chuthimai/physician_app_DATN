@@ -26,15 +26,19 @@ type Props = {
     value?: Option;
     onChange?: (value: Option | null) => void;
     disabled?: boolean;
+    className?: string;
+    subtitle?: string;
 };
 
 export default function SelectSearchInput({
                                               label,
+                                              subtitle,
                                               options,
                                               error,
                                               value,
                                               onChange,
                                               disabled = false,
+                                              className,
                                           }: Props) {
     const [open, setOpen] = React.useState(false);
 
@@ -46,7 +50,7 @@ export default function SelectSearchInput({
     };
 
     return (
-        <div className="mb-4">
+        <div className={`${className || "mb-4"}`}>
             <label className="block text-gray-600 mb-1">{label}</label>
             <Popover open={open && !disabled} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
@@ -60,7 +64,7 @@ export default function SelectSearchInput({
                             error && "border-red-500"
                         )}
                     >
-                        {value?.label || `Chọn ${label.toLowerCase()}...`}
+                        {value?.label || `Chọn ${subtitle === undefined ? label.toLowerCase() : subtitle.toLowerCase()}...`}
                         <ChevronsUpDown className="h-4 w-4 opacity-50" />
                     </Button>
                 </PopoverTrigger>

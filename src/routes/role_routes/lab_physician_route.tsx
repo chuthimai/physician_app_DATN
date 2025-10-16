@@ -1,12 +1,13 @@
 import type {Route} from "../types.ts";
-import LabResultPage from "@/features/lab/pages/LabResultPage.tsx";
-import LabParaclinicalDiagnosisPage from "@/features/lab/pages/LabParaclinicalDiagnosisPage.tsx";
+import LabResultPage from "@/features/lab_result/pages/LabResultPage.tsx";
+import LabParaclinicalDiagnosisPage from "@/features/lab_result/pages/LabParaclinicalDiagnosisPage.tsx";
+import LabGetSpecimenPage from "@/features/lab_get_specimens/pages/LabGetSpecimenPage.tsx";
 
 export function getLabPhysicianRoute(): Route[] {
     return [
         {
             path: "lay-mau-xet-nghiem",
-            element: <div>Lay mau xet nghiem</div>
+            element: <LabGetSpecimenPage/>
         },
         {
             path: "ket-qua-xet-nghiem",

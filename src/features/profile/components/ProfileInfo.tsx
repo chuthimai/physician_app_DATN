@@ -5,7 +5,6 @@ import useDate from "@/hooks/useDate.ts";
 export default function ProfileInfo() {
     const userContext = useContext(UserContext);
     const { formatLocalDate } = useDate();
-    console.log(typeof userContext?.user?.birthDate);
 
     return (
         <div className="my-2">
