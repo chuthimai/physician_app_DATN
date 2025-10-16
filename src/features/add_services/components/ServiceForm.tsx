@@ -1,21 +1,22 @@
 import {Controller, type SubmitHandler, useForm} from "react-hook-form";
 import {useContext, useEffect, useState} from "react";
-import log from "loglevel";
-import SelectSearchInput, {type Option} from "@/components/input/SelectSearchInput.tsx";
+import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
-import {services, serviceTypes} from "@/fake_data/services.ts";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
-import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
+import { serviceTypeOptions } from "@/constants/add_services/options";
+import type {Option} from "@/types/option.ts";
+import {useService} from "@/features/add_services/hooks/useService.ts";
+import {useToast} from "@/hooks/useToast.ts";
+import type {Service} from "@/features/add_services/types/Service.ts";
+import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 
 type AddServiceInputs = {
     type: string;
-    name: string;
-    note: string;
+    serviceId: string;
 };
 
 export default function ServiceForm() {
     const {
-        register,
         handleSubmit,
         control,
         watch,
@@ -24,52 +25,51 @@ export default function ServiceForm() {
     } = useForm<AddServiceInputs>();
 
     const [ serviceOptions, setServiceOptions ] = useState<Option[]>([]);
+    const [services, setServices] = useState<Service[]>([]);
     const servicesContext = useContext(ServicesContext);
-
-    const servicesTypeOptions = serviceTypes.map((v) => {
-        return {
-            label: v,
-            value: v,
-        };
-    })
-
     const selectedServiceType = watch("type");
+    const {getServiceByType} = useService();
+    const {showToastWarning} = useToast();
 
     // -------------------- render ----------------------
-    useEffect(() => {
-        let options: Option[] = [];
-        if (selectedServiceType === undefined || selectedServiceType === "--- Tất cả ---") {
-            options = services.map((s) => ({
+    const fetchServices = async (type?: string) => {
+        const servicesResponse = await getServiceByType(type);
+        if (!servicesResponse) return;
+        const services = servicesResponse.filter((s) => s.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION
+                && s.type !== SERVICE_TYPES.GENERAL_CONSULTATION)
+            || [];
+
+        setServices(services);
+
+        const options: Option[] = services.map((s) => ({
                 label: s.name,
                 value: s.identifier.toString(),
             }));
-        } else {
-            options = services
-                .filter((s) => s.type === selectedServiceType)
-                .map((s) => ({
-                    label: s.name,
-                    value: s.identifier.toString(),
-                }));
-        }
         setServiceOptions(options);
+    };
+
+    useEffect(() => {
+        if (selectedServiceType === undefined || selectedServiceType === "--- Tất cả ---") {
+            fetchServices().then(() => null);
+        } else {
+            fetchServices(selectedServiceType).then(() => null);
+        }
     }, [selectedServiceType]);
 
     const onSubmit: SubmitHandler<AddServiceInputs> = async (data) => {
-        const service = services.find((s) => s.identifier === parseInt(data.name));
-        if (service === undefined) return;
-
         const hasServiceInList = (servicesContext?.services || [])
-            .find((s) => s.identifier === service?.identifier) !== undefined;
+            .find((s) => s.identifier === Number(data.serviceId));
         if (hasServiceInList) {
-            alert("Không được thêm 2 dịch vụ trùng nhau");
+            showToastWarning("Không được thêm 2 dịch vụ trùng nhau");
             return;
         }
+
+        const service = services.find((s) => s.identifier === Number(data.serviceId));
+        if (!service) return;
         servicesContext?.setServices(
             [...(servicesContext?.services || []),
-                {identifier: service.identifier, note: data.note}
+                service
             ]);
-
-        log.debug("ServiceForm " + service);
         reset();
     };
 
@@ -85,9 +85,9 @@ export default function ServiceForm() {
                         render={({ field }) => (
                             <SelectSearchInput
                                 label="Loại dịch vụ"
-                                value={servicesTypeOptions.find((opt) => opt.value === field.value)}
+                                value={serviceTypeOptions.find((opt) => opt.value === field.value)}
                                 onChange={(selected) => field.onChange(selected?.value ?? "")}
-                                options={servicesTypeOptions}
+                                options={serviceTypeOptions}
                             />
                         )}
                     />
@@ -97,15 +97,15 @@ export default function ServiceForm() {
                 <div className={`col-span-5`}>
                     <Controller
                         control={control}
-                        name="name"
+                        name="serviceId"
                         rules={{ required: "Chọn dịch vụ" }}
                         render={({ field }) => (
                             <SelectSearchInput
-                                label="Tên dịch vụ"
+                                label="Dịch vụ"
                                 value={serviceOptions.find((opt) => opt.value === field.value)}
                                 onChange={(selected) => field.onChange(selected?.value ?? "")}
                                 options={serviceOptions}
-                                error={errors.name}
+                                error={errors.serviceId}
                             />
                         )}
                     />
@@ -113,13 +113,6 @@ export default function ServiceForm() {
 
                 <div className="col-span-2 flex items-center justify-center w-full">
                     <ButtonSave label={"Thêm"} isSubmitting={isSubmitting} />
-                </div>
-
-                <div className={ "col-span-10"}>
-                    <TextAreaInput
-                        label={"Ghi chú"}
-                        {...register("note", {})}
-                    />
                 </div>
 
             </div>

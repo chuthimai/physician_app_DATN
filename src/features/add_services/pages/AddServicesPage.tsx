@@ -6,11 +6,15 @@ import {useContext} from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 import {useForm} from "react-hook-form";
 import {useToast} from "@/hooks/useToast.ts";
-import {PatientContext} from "@/providers/patient/PatientContext.tsx";
+import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
+import {useService} from "@/features/add_services/hooks/useService.ts";
+import type {AddServiceParams} from "@/features/add_services/types/AddServiceParams.ts";
 
 export default function AddServicesPage() {
     const servicesContext = useContext(ServicesContext);
-    const patientContext = useContext(PatientContext);
+    const recordIdContext = useContext(PatientRecordIdContext);
+    const {addService} = useService();
+
     const {
         handleSubmit,
         formState: { isSubmitting }
@@ -18,21 +22,24 @@ export default function AddServicesPage() {
     const {showToastError} = useToast();
 
     const onSubmit = async () => {
-        // TODO: delete
-        await new Promise((resolve) => setTimeout(resolve, 1000));
         if (servicesContext?.services === undefined || servicesContext?.services.length === 0) {
             showToastError("Chưa có dịch vụ nào được thêm");
             return;
         }
+        if (!recordIdContext?.patientRecordId) return;
 
-        // TODO: Thêm logic api lưu danh sách dịch vụ trên server
-        console.log("Submitted!");
+        const params: AddServiceParams = {
+            patientRecordIdentifier: recordIdContext.patientRecordId,
+            serviceIdentifiers: servicesContext.services.map((s) => s.identifier),
+        }
+
+        await addService(params);
         servicesContext?.setServices([]);
     }
 
-    if (!patientContext?.patient) {
+    if (!recordIdContext?.patientRecordId) {
         return <div className="w-full h-full flex items-center justify-center">
-            Chưa xác định bệnh nhân
+            Chưa xác định bệnh án
         </div>
     }
 

@@ -17,11 +17,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-
-export type Option = {
-    label: string;
-    value: string;
-};
+import type {Option} from "@/types/option.ts";
 
 type Props = {
     label: string;

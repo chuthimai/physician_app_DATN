@@ -12,7 +12,6 @@ import {useContext, useEffect, useState} from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 import type {Service} from "@/features/add_services/types/Service.ts";
 import {useMapService} from "@/features/add_services/hooks/useMapService.ts";
-import type {ServiceSend} from "@/features/add_services/types/ServiceSend.ts";
 
 export default function ServicesTable() {
     const servicesContext = useContext(ServicesContext);
@@ -26,7 +25,7 @@ export default function ServicesTable() {
 
     function deleteService(serviceId: number) {
         servicesContext?.setServices(servicesContext?.services.filter(
-            (service: ServiceSend) => service.identifier !== serviceId)
+            (service: Service) => service.identifier !== serviceId)
         );
     }
 
@@ -45,7 +44,6 @@ export default function ServicesTable() {
                 <TableHead className="w-[150px] text-center">Loại dịch vụ</TableHead>
                 <TableHead className="w-[250px] text-center">Thông tin chi tiết</TableHead>
                 <TableHead className="w-[100px] text-center">Địa điểm</TableHead>
-                <TableHead className="w-[150px] text-center">Ghi chú</TableHead>
                 <TableHead className="text-center"></TableHead>
             </TableRow>
         </TableHeader>
@@ -53,22 +51,18 @@ export default function ServicesTable() {
 
         </div>
         <TableBody>
-            {services.map((service: Service) => (
+            {servicesContext?.services.map((service: Service) => (
                 <TableRow key={ service.identifier }>
-                    <TableCell className="font-medium text-left whitespace-pre-wrap break-words">
+                    <TableCell className="font-medium text-center whitespace-pre-wrap break-words">
                         {service.name}
                     </TableCell>
                     <TableCell className="text-center">{service.type}</TableCell>
                     <TableCell className="text-left whitespace-pre-wrap break-words">
-                        {service.extraDetails}
+                        {service.detailDescription}
                     </TableCell>
                     <TableCell className="text-left whitespace-pre-wrap break-words">
                         {service.location}
                     </TableCell>
-                    <TableCell className="text-left whitespace-pre-wrap break-words">
-                        {service.note}
-                    </TableCell>
-
                     <TableCell className="text-left w-[50px]">
                         <ButtonDelete
                             label={"Xoá"}

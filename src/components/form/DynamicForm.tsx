@@ -4,7 +4,7 @@ import { TextAreaInput } from "@/components/input/TextAreaInput.tsx";
 import type AssessmentItem from "@/types/AssessmentItem.ts";
 import type AssessmentItemParams from "@/types/AssessmentItemParams.ts";
 import type ServiceFormSubmitParams from "@/types/ServiceFormSubmitParams.ts";
-import {SERVICE_TYPES} from "@/constants/service_types.ts";
+import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import {categoryOptions, methodOptions, severityOptions} from "@/constants/diagnosis/options.ts";
 import {OBSERVATION_METHOD} from "@/constants/diagnosis/observation_method.ts";

@@ -3,8 +3,8 @@ export type Service = {
     name: string,
     active: boolean,
     type: string,
-    extraDetails: string,
+    detailDescription?: string | null,
     price: number,
-    location: string,
+    location?: string,
     note?: string,
 }
