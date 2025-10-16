@@ -23,6 +23,8 @@ import {
     ClipboardDocumentIcon as ClipboardDocumentOutline,
 } from "@heroicons/react/24/outline";
 
+import { RiTestTubeLine, RiTestTubeFill } from "react-icons/ri";
+
 import {
     HomeIcon as HomeSolid,
     KeyIcon as KeySolid,
@@ -87,7 +89,8 @@ export const sideBarMenus: SideBarMenuConfig = {
             label: "Chức năng",
             children: [
                 {label: "Lấy mẫu xét nghiệm", path: "/lay-mau-xet-nghiem", icon: <BeakerOutline className={iconStyle}/>, iconFill: <BeakerSolid className={iconStyle}/>,},
-                {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem", icon: <ClipboardDocumentOutline className={iconStyle}/>, iconFill: <ClipboardDocumentSolid className={iconStyle}/>,},
+                {label: "Kiểm tra mẫu xét nghiệm", path: "/kiem-tra-mau-xet-nghiem", icon: <RiTestTubeLine className={iconStyle}/>, iconFill: <RiTestTubeFill className={iconStyle}/>,},
+                {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem/ket-qua", icon: <ClipboardDocumentOutline className={iconStyle}/>, iconFill: <ClipboardDocumentSolid className={iconStyle}/>,},
             ]
         }
     ],
@@ -102,14 +105,4 @@ export const sideBarMenus: SideBarMenuConfig = {
             ]
         }
     ],
-
-    [ROLES.CASHIER]: [
-        ...generalItems,
-        {
-            label: "Chức năng",
-            children: [
-                {label: "Thanh toán", path: "/thanh-toan"},
-            ]
-        }
-    ]
 };
