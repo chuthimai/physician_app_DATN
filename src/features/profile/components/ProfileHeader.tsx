@@ -14,7 +14,7 @@ export default function ProfileHeader() {
             />
             <div>
                 <h2 className="text-2xl font-semibold">{userContext?.user?.name}</h2>
-                <p className="text-md text-muted-foreground">Bác sĩ khoa {userContext?.user?.specialty.name}</p>
+                <p className="text-md text-muted-foreground">Bác sĩ khoa {userContext?.user?.specialty?.name ?? "Không có thông tin"}</p>
             </div>
         </div>
     );

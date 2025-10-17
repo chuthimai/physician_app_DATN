@@ -5,7 +5,7 @@ import {UserContext} from "@/providers/user/UserContext.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import BarCodeDialog from "@/features/lab_get_specimens/components/BarCodeDialog.tsx";
 
-export default function ConfirmService() {
+export default function ConfirmLabService() {
     // TODO: delete data
     const patient: Patient = {
         identifier: 1,
@@ -25,24 +25,24 @@ export default function ConfirmService() {
             <h3 className="font-bold mb-1">Thông tin bệnh nhân</h3>
             <div className="space-y-1">
                 <div className="flex">
-                    <div className="w-40 text-gray-700">Họ tên</div>
+                    <div className="w-50 text-gray-700">Họ tên</div>
                     <div className="flex-1">{patient.name}</div>
                 </div>
 
                 <div className="flex">
-                    <div className="w-40 text-gray-700">Ngày sinh</div>
+                    <div className="w-50 text-gray-700">Ngày sinh</div>
                     <div className="flex-1">
                         {patient.birthDate ? formatLocalDate(patient.birthDate) : "Chưa có thông tin"}
                     </div>
                 </div>
 
                 <div className="flex">
-                    <div className="w-40 text-gray-700">Giới tính</div>
+                    <div className="w-50 text-gray-700">Giới tính</div>
                     <div className="flex-1">{patient.gender ? "Nam" : "Nữ"}</div>
                 </div>
 
                 <div className="flex">
-                    <div className="w-40 text-gray-700">Địa chỉ</div>
+                    <div className="w-50 text-gray-700">Địa chỉ</div>
                     <div className="flex-1">{patient.address || "Chưa có thông tin"}</div>
                 </div>
             </div>
@@ -50,19 +50,19 @@ export default function ConfirmService() {
             <h3 className="font-bold mb-1">Thông tin dịch vụ</h3>
             <div className="space-y-1">
                 <div className="flex">
-                    <div className="w-40 text-gray-700">Người chỉ đinh</div>
+                    <div className="w-50 text-gray-700">Người chỉ đinh</div>
                     <div className="flex-1">BS. Nguyen Van A</div>
                 </div>
 
                 <div className="flex">
-                    <div className="w-40 text-gray-700">Người thực hiện</div>
+                    <div className="w-50 text-gray-700">Người thực hiện</div>
                     <div className="flex-1">
                         BS. {userContext?.user?.name}
                     </div>
                 </div>
 
                 <div className="flex">
-                    <div className="w-40 text-gray-700">Thanh toán</div>
+                    <div className="w-50 text-gray-700">Trạng thái thanh toán</div>
                     <div className="flex-1">Đã thanh toán</div>
                 </div>
             </div>

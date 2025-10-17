@@ -1,8 +1,8 @@
 import {Outlet} from "react-router-dom";
 import SideBar from "./components/sidebar/SideBar.tsx";
 import {Colors} from "@/constants/colors.ts";
-import ButtonCancel from "@/components/button/ButtonCancel.tsx";
 import useAuth from "@/features/auth/hooks/useAuth.ts";
+import ButtonLogout from "@/components/button/ButtonLogout.tsx";
 
 
 function App() {
@@ -16,7 +16,9 @@ function App() {
                     Bệnh viện A
                 </div>
                 <div className="flex items-center justify-end font-bold mx-4">
-                    <ButtonCancel label="Đăng xuất" onClick={logout}/>
+                    <ButtonLogout
+                        onClick={logout}
+                    />
                 </div>
             </div>
 
