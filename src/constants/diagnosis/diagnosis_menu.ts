@@ -19,11 +19,10 @@ export const diagnosisMenus: DiagnosisMenuConfig = {
     ],
 
     [ROLES.LAB_PHYSICIAN]: [
-        {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem/ket-qua"},
+        {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem"},
     ],
 
     [ROLES.IMAGING_PHYSICIAN]: [
-        {label: "Kết quả hình ảnh", path: "/ket-qua-hinh-anh/ket-qua"},
-        {label: "Chuẩn đoán cận lâm sàng", path: "/ket-qua-hinh-anh/chuan-doan-can-lam-sang"},
+        {label: "Báo cáo hình ảnh", path: "/ket-qua-hinh-anh"},
     ],
 };

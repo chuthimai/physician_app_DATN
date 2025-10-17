@@ -90,7 +90,7 @@ export const sideBarMenus: SideBarMenuConfig = {
             children: [
                 {label: "Lấy mẫu xét nghiệm", path: "/lay-mau-xet-nghiem", icon: <BeakerOutline className={iconStyle}/>, iconFill: <BeakerSolid className={iconStyle}/>,},
                 {label: "Kiểm tra mẫu xét nghiệm", path: "/kiem-tra-mau-xet-nghiem", icon: <RiTestTubeLine className={iconStyle}/>, iconFill: <RiTestTubeFill className={iconStyle}/>,},
-                {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem/ket-qua", icon: <ClipboardDocumentOutline className={iconStyle}/>, iconFill: <ClipboardDocumentSolid className={iconStyle}/>,},
+                {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem", icon: <ClipboardDocumentOutline className={iconStyle}/>, iconFill: <ClipboardDocumentSolid className={iconStyle}/>,},
             ]
         }
     ],

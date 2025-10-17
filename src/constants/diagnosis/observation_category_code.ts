@@ -1,7 +1,7 @@
 export const OBSERVATION_CATEGORY_CODE = {
     SOCIAL_HISTORY: 'social-history',
     VITAL_SIGNS: 'vital-signs',
-    IMAGING: 'imaging',
+    IMAGING: 'image_result',
     LABORATORY: 'laboratory',
     PROCEDURE: 'procedure',
     SURVEY: 'survey',

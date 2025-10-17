@@ -12,12 +12,6 @@ export function getLabPhysicianRoute(): Route[] {
         {
             path: "ket-qua-xet-nghiem",
             element: <LabResultPage/>,
-            children: [
-                {
-                    path: "ket-qua",
-                    element: <div>Ket qua</div>
-                },
-            ]
         },
         {
             path: "kiem-tra-mau-xet-nghiem",

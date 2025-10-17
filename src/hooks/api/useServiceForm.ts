@@ -26,6 +26,23 @@ export default function useServiceForm() {
         }
     }
 
+    const getServiceFormByReportId = async (reportId?: number | null) => {
+        if (!reportId) {
+            showToastError("Chưa xác định báo cáo")
+            return;
+        }
+        try {
+            return await request("get", `${ENDPOINTS.GET_SERVICE_FORM_BY_REPORT_ID}/${reportId}`);
+        } catch (e) {
+            if (!(e instanceof Error)) return;
+            log.error(`getServiceForm: ${e.message}`);
+            if (e.message) {
+                showToastError("Có lỗi xảy ra");
+                return;
+            }
+        }
+    }
+
     const sendServiceForm = async (payload: ServiceFormSubmitParams) => {
         try {
             await request("post", ENDPOINTS.SEND_SERVICE_FORM, payload);
@@ -40,5 +57,11 @@ export default function useServiceForm() {
         }
     }
 
-    return {getServiceForm, sendServiceForm, loading, error}
+    return {
+        getServiceForm,
+        getServiceFormByReportId,
+        sendServiceForm,
+        loading,
+        error
+    }
 }

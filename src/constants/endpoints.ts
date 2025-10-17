@@ -21,6 +21,7 @@ export const ENDPOINTS = {
     // Report
     GET_SERVICE_FORM: "reports",
     SEND_SERVICE_FORM: "reports/update-diagnosis-report-result",
+    GET_SERVICE_FORM_BY_REPORT_ID: "reports/test",
 
     // Service
     CREATE_SPECIALTY_SERVICE: "records/update-specialty-consultation",

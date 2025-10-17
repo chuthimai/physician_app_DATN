@@ -1,5 +1,5 @@
 import type AssessmentItemParams from "@/types/AssessmentItemParams.ts";
-import type ImageStudy from "@/features/imaging/types/ImageStudy.ts";
+import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
 
 export default interface ServiceFormSubmitParams {
     // ServiceReport

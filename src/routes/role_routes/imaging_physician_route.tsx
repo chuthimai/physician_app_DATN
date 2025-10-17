@@ -1,7 +1,8 @@
 import type {Route} from "../types.ts";
-import ImageParaclinicalDiagnosisPage from "@/features/imaging/pages/ImageParaclinicalDiagnosisPage.tsx";
-import ImageResultPage from "@/features/imaging/pages/ImageResultPage.tsx";
+import ImageReportsPage from "@/features/image_result/pages/ImageReportsPage.tsx";
+import ImageResultPage from "@/features/image_result/pages/ImageResultPage.tsx";
 import AddImagePage from "@/features/add_image/pages/AddImagePage.tsx";
+import DoImageResultPage from "@/features/image_result/pages/DoImageResultPage.tsx";
 
 export function getImagingPhysicianRoute(): Route[] {
     return [
@@ -14,13 +15,13 @@ export function getImagingPhysicianRoute(): Route[] {
             element: <ImageResultPage/>,
             children: [
                 {
-                    path: "ket-qua",
-                    element: <div>Ket qua</div>
+                    path: "",
+                    element: <ImageReportsPage/>
                 },
                 {
-                    path: "chuan-doan-can-lam-sang",
-                    element: <ImageParaclinicalDiagnosisPage/>
-                }
+                    path: "ket-qua/:reportId",
+                    element: <DoImageResultPage/>
+                },
             ]
         }
     ];

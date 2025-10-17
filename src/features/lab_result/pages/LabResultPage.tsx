@@ -14,7 +14,7 @@ export default function LabResultPage() {
                 className="font-bold"
             />
         </div>
-        <div className="flex-1 overflow-y-auto items-center justify-center bg-white px-16 pt-8 mt-8 pb-32 rounded-lg shadow-md border-2 border-gray-200">
+        <div className="flex-1 overflow-y-auto items-center justify-center bg-white px-16 pt-8 mt-4 pb-32 rounded-lg shadow-md border-2 border-gray-200">
             <div className="">
                 <LabResultForm/>
             </div>
