@@ -1,6 +1,6 @@
 import DiagnosisMenu from "@/components/diagnosis/diagnosis_menu/DiagnosisMenu.tsx";
 import ButtonScan from "@/components/button/ButtonScan.tsx";
-import {Outlet} from "react-router-dom";
+import LabResultForm from "@/features/lab_result/components/LabResultForm.tsx";
 
 export default function LabResultPage() {
     return <div className="flex flex-col h-screen">
@@ -16,7 +16,7 @@ export default function LabResultPage() {
         </div>
         <div className="flex-1 overflow-y-auto items-center justify-center bg-white px-16 pt-8 mt-8 pb-32 rounded-lg shadow-md border-2 border-gray-200">
             <div className="">
-                <Outlet/>
+                <LabResultForm/>
             </div>
         </div>
     </div>
