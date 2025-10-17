@@ -1,8 +1,9 @@
 import type Patient from "@/types/Patient.ts";
 import useDate from "@/hooks/useDate.ts";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {UserContext} from "@/providers/user/UserContext.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
+import BarCodeDialog from "@/features/lab_get_specimens/components/BarCodeDialog.tsx";
 
 export default function ConfirmService() {
     // TODO: delete data
@@ -17,6 +18,7 @@ export default function ConfirmService() {
 
     const { formatLocalDate } = useDate();
     const userContext = useContext(UserContext);
+    const [openBarCodeDialog, setOpenBarCodeDialog] = useState(false);
 
     return (
         <div className={"flex flex-col border border-gray-300 rounded-md py-4 px-12 my-2 bg-card"}>
@@ -67,8 +69,12 @@ export default function ConfirmService() {
             <div className={"flex justify-end"}>
                 <ButtonSave
                     label={"In mã mẫu xét nghiệm"}
-                    onClick={() => {}}
+                    onClick={() => {setOpenBarCodeDialog(true)}}
                     isSubmitting={false}
+                />
+                <BarCodeDialog
+                    open={openBarCodeDialog}
+                    onOpenChange={setOpenBarCodeDialog}
                 />
             </div>
         </div>
