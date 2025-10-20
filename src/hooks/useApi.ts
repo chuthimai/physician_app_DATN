@@ -8,7 +8,6 @@ type ApiError = {
     statusCode: number;
 };
 
-
 export function useApi<T>() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<ApiError | null>(null);
@@ -20,16 +19,12 @@ export function useApi<T>() {
             const statusCode = err.statusCode;
 
             switch (statusCode) {
-                case 400:
-                    showToastError("Yêu cầu không hợp lệ (400).");
-                    break;
-
                 case 401:
-                    showToastError("Bạn chưa đăng nhập hoặc phiên đăng nhập đã hết hạn (401).");
+                    showToastError("Chưa đăng nhập hoặc phiên đăng nhập đã hết hạn (401).");
                     break;
 
                 case 403:
-                    showToastError("Bạn không có quyền truy cập (403).");
+                    showToastError("Không có quyền truy cập (403).");
                     break;
 
                 case 404:
@@ -43,9 +38,6 @@ export function useApi<T>() {
                 case 500:
                     showToastError("Lỗi server nội bộ (500).");
                     break;
-
-                default:
-                    showToastError(err?.message || "Đã có lỗi xảy ra");
             }
         },
         [showToastError],
@@ -91,7 +83,7 @@ export function useApi<T>() {
 
                 setError(apiError);
                 handleGeneralError(apiError);
-                throw apiError;
+                throw new Error(apiError.message);
             } finally {
                 setLoading(false);
             }

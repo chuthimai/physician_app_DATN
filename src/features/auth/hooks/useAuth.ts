@@ -40,8 +40,9 @@ export default function useAuth() {
             showToastSuccess("Đăng nhập thành công")
         } catch (e) {
             if (!(e instanceof Error)) return;
+
             log.error(`useAuth: ${e.message}`);
-            if (e.message === "User not found") {
+            if (e.message === "User not found" || e.message === "Invalid password") {
                 showToastError("Sai thông tin đăng nhập");
                 return;
             }
