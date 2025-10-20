@@ -1,7 +1,7 @@
 import {useApi} from "@/hooks/useApi.ts";
 import {useToast} from "@/hooks/useToast.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
-import type MedicalSpecialty from "@/types/MedicalSpecialty.ts";
+import type MedicalSpecialty from "@/types/models/MedicalSpecialty.ts";
 import log from "loglevel";
 
 export default function useSpecialty() {

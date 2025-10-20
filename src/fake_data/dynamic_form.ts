@@ -1,4 +1,4 @@
-import type AssessmentItem from "@/types/AssessmentItem.ts";
+import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 
 export const dynamicForm: AssessmentItem[] = [
     {

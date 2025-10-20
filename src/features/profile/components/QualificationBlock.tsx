@@ -1,4 +1,4 @@
-import type Qualification from "@/types/Qualification.ts";
+import type Qualification from "@/types/models/Qualification.ts";
 
 type Props = {
     qualification: Qualification;

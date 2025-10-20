@@ -1,4 +1,4 @@
-export default interface MeasurementIndicator {
+export default interface MeasurementItem {
     identifier: number,
     type: string,
     unit: string,

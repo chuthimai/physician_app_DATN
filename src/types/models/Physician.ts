@@ -1,4 +1,4 @@
-import type MedicalSpecialty from "@/types/MedicalSpecialty.ts";
+import type MedicalSpecialty from "@/types/models/MedicalSpecialty.ts";
 
 export default interface Physician {
     identifier: number,

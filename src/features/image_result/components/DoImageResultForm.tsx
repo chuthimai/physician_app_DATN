@@ -1,7 +1,7 @@
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
 import {useEffect, useState} from "react";
-import type AssessmentItem from "@/types/AssessmentItem.ts";
-import type ServiceFormSubmitParams from "@/types/ServiceFormSubmitParams.ts";
+import type AssessmentItem from "@/types/models/AssessmentItem.ts";
+import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import DynamicForm from "@/components/form/DynamicForm";
 // import { useParams } from "react-router-dom";

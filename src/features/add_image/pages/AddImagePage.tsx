@@ -2,7 +2,7 @@ import {useState} from "react";
 import ButtonScan from "@/components/button/ButtonScan.tsx";
 import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
-import type {Option} from "@/types/option.ts";
+import type {Option} from "@/types/others/Option.ts";
 import ConfirmImageService from "@/features/add_image/components/ConfirmImageService.tsx";
 import AddImageForm from "@/features/add_image/components/AddImageForm.tsx";
 import {imageTypeOptions} from "@/constants/add_image/options.ts";

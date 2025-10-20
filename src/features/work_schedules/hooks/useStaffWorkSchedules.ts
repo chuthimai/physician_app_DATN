@@ -1,6 +1,6 @@
 import {useApi} from "@/hooks/useApi.ts";
 import {useToast} from "@/hooks/useToast.ts";
-import type StaffWorkSchedule from "@/types/StaffWorkSchedule.ts";
+import type StaffWorkSchedule from "@/types/models/StaffWorkSchedule.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type GetStaffWorkSchedulesParams from "@/features/work_schedules/types/GetStaffWorkSchedulesParams.ts";

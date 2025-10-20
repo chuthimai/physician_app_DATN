@@ -1,9 +1,9 @@
 import {useApi} from "@/hooks/useApi.ts";
 import {useToast} from "@/hooks/useToast.ts";
-import type ServiceFormResponse from "@/types/ServiceFormResponse.ts";
+import type ServiceFormResponse from "@/types/responses/ServiceFormResponse.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
-import type ServiceFormSubmitParams from "@/types/ServiceFormSubmitParams.ts";
+import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 
 export default function useServiceForm() {
     const {request, loading, error} = useApi<ServiceFormResponse>();

@@ -1,4 +1,4 @@
-import type {Option} from "@/types/option.ts";
+import type {Option} from "@/types/others/Option.ts";
 
 export const imageTypeOptions: Option[] = [
     {

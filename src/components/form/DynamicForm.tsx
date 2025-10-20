@@ -1,8 +1,8 @@
 import {useForm, type SubmitHandler} from "react-hook-form";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
-import type AssessmentItem from "@/types/AssessmentItem.ts";
-import type AssessmentItemParams from "@/types/AssessmentItemParams.ts";
-import type ServiceFormSubmitParams from "@/types/ServiceFormSubmitParams.ts";
+import type AssessmentItem from "@/types/models/AssessmentItem.ts";
+import type AssessmentItemParams from "@/types/params/AssessmentItemParams.ts";
+import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import useDate from "@/hooks/useDate.ts";
 import RenderFormServiceType from "@/components/form/RenderFormServiceType.tsx";
 import RenderAssessmentItems from "@/components/form/RenderAssessmentItems.tsx";

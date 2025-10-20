@@ -4,7 +4,7 @@ import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 import { serviceTypeOptions } from "@/constants/add_services/options";
-import type {Option} from "@/types/option.ts";
+import type {Option} from "@/types/others/Option.ts";
 import {useService} from "@/features/add_services/hooks/useService.ts";
 import {useToast} from "@/hooks/useToast.ts";
 import type {Service} from "@/features/add_services/types/Service.ts";

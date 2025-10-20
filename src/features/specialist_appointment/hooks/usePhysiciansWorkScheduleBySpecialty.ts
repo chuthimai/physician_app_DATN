@@ -3,7 +3,7 @@ import {useToast} from "@/hooks/useToast.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type PhysiciansWorkScheduleBySpecialtyParams from "@/features/specialist_appointment/types/PhysiciansWorkScheduleBySpecialtyParams.ts";
-import type StaffWorkSchedule from "@/types/StaffWorkSchedule.ts";
+import type StaffWorkSchedule from "@/types/models/StaffWorkSchedule.ts";
 
 export default function usePhysiciansWorkScheduleBySpecialty() {
     const {request, loading, error} = useApi<StaffWorkSchedule[]>();

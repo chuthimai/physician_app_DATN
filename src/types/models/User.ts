@@ -1,5 +1,5 @@
-import type MedicalSpecialty from "@/types/MedicalSpecialty.ts";
-import type Qualification from "@/types/Qualification.ts";
+import type MedicalSpecialty from "@/types/models/MedicalSpecialty.ts";
+import type Qualification from "@/types/models/Qualification.ts";
 
 export interface User {
     id: number,

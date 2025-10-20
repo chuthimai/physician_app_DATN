@@ -1,4 +1,4 @@
-import type AssessmentItem from "@/types/AssessmentItem.ts";
+import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 import {type FieldErrors, type UseFormRegister} from "react-hook-form";
 import { TextAreaInput } from "@/components/input/TextAreaInput.tsx";
 import TextInput from "@/components/input/TextInput.tsx";
@@ -26,11 +26,11 @@ export default function RenderAssessmentItems({
         const hasChildren = children && children.length > 0;
 
         const indicatorChildren = children.filter(
-            (child) => !!child.measurementIndicator
+            (child) => !!child.measurementItem
         );
 
         const textChildren = children.filter(
-            (child) => !child.measurementIndicator
+            (child) => !child.measurementItem
         );
 
         return (
@@ -101,11 +101,11 @@ export default function RenderAssessmentItems({
                                     )}
                                 </td>
                                 <td className="border px-3 py-2">
-                                    {child.measurementIndicator?.unit || "-"}
+                                    {child.measurementItem?.unit || "-"}
                                 </td>
                                 <td className="border px-3 py-2">
-                                    {child.measurementIndicator
-                                        ? `${child.measurementIndicator.minimum} - ${child.measurementIndicator.maximum}`
+                                    {child.measurementItem
+                                        ? `${child.measurementItem.minimum} - ${child.measurementItem.maximum}`
                                         : "-"}
                                 </td>
                             </tr>

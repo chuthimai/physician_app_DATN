@@ -24,7 +24,7 @@ export default function CurrentPatientRecordDialog({open, onOpenChange}: Current
                         </div>
                     </DialogTitle>
                     <DialogDescription>
-                        // TODO: Thêm các dịch vụ
+                        // TODO: Thêm các báo cáo dịch vụ
                     </DialogDescription>
                 </DialogHeader>
             </DialogContent>

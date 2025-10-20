@@ -1,8 +1,8 @@
 import DynamicForm from "@/components/form/DynamicForm.tsx";
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
 import {useContext, useEffect, useState} from "react";
-import type AssessmentItem from "@/types/AssessmentItem.ts";
-import type ServiceFormSubmitParams from "@/types/ServiceFormSubmitParams.ts";
+import type AssessmentItem from "@/types/models/AssessmentItem.ts";
+import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 

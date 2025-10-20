@@ -1,4 +1,4 @@
-import type {Option} from "@/types/option.ts";
+import type {Option} from "@/types/others/Option.ts";
 import {SPECIMEN_TYPE, specimenTypeToVn} from "@/constants/lab_get_specimens/specimen_type.ts";
 import {SPECIMEN_CONDITION, specimenConditionToVn} from "@/constants/lab_get_specimens/specimen_condition.ts";
 import {SPECIMEN_STATUS, specimenStatusToVn} from "@/constants/lab_get_specimens/speciment_status.ts";

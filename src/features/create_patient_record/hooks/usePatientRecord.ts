@@ -7,7 +7,7 @@ import type {CreatePatientRecordParams} from "@/features/create_patient_record/t
 import {useContext} from "react";
 import {PatientContext} from "@/providers/patient/PatientContext.tsx";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
-import type Patient from "@/types/Patient.ts";
+import type Patient from "@/types/models/Patient.ts";
 
 export default function usePatientRecord() {
     const { request, loading, error } = useApi<CreatePatientRecordResponse>();

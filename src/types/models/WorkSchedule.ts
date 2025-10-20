@@ -1,4 +1,4 @@
-import type Shift from "@/types/Shift.ts";
+import type Shift from "@/types/models/Shift.ts";
 
 export default interface WorkSchedule {
     identifier: number,

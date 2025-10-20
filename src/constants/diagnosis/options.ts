@@ -4,7 +4,7 @@ import {
 } from "@/constants/diagnosis/condition_diagnosis_severity.ts";
 import {OBSERVATION_CATEGORY_CODE, observationCategoryCodeToVn} from "@/constants/diagnosis/observation_category_code.ts";
 import {OBSERVATION_METHOD, observationMethodToVn} from "@/constants/diagnosis/observation_method.ts";
-import type {Option} from "@/types/option.ts";
+import type {Option} from "@/types/others/Option.ts";
 
 export const severityOptions: Option[] = Object.values(CONDITION_DIAGNOSIS_SEVERITY).map(value => ({
     label: conditionDiagnosisSeverityToVn(value),

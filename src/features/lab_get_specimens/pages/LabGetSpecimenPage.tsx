@@ -5,7 +5,7 @@ import CreateSpecimenForm from "@/features/lab_get_specimens/components/CreateSp
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import {labTypeOptions} from "@/constants/lab_get_specimens/options.ts";
 import ConfirmLabService from "@/features/lab_get_specimens/components/ConfirmLabService.tsx";
-import type {Option} from "@/types/option.ts";
+import type {Option} from "@/types/others/Option.ts";
 
 export default function LabGetSpecimenPage() {
     const [openScan, setOpenScan] = useState(false);

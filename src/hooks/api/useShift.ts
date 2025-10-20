@@ -2,7 +2,7 @@ import {useApi} from "@/hooks/useApi.ts";
 // import {useToast} from "@/hooks/useToast.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
-import type Shift from "@/types/Shift.ts";
+import type Shift from "@/types/models/Shift.ts";
 
 export default function useShift() {
     const {request, loading, error} = useApi<Shift[]>();

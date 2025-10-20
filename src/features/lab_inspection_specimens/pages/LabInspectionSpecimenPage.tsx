@@ -1,5 +1,5 @@
 import {useState} from "react";
-import type {Option} from "@/types/option.ts";
+import type {Option} from "@/types/others/Option.ts";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import {labTypeOptions} from "@/constants/lab_get_specimens/options.ts";
 import {specimens} from "@/fake_data/specimens.ts";

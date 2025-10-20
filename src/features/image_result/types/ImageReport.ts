@@ -1,4 +1,4 @@
-import type Physician from "@/types/Physician.ts";
+import type Physician from "@/types/models/Physician.ts";
 import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
 
 export default interface ImageReport {

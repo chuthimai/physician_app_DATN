@@ -8,7 +8,7 @@ import useSpecialty from "@/features/specialist_appointment/hooks/useSpecialty.t
 import usePhysiciansWorkScheduleBySpecialty from "@/features/specialist_appointment/hooks/usePhysiciansWorkScheduleBySpecialty.ts";
 import type PhysiciansWorkScheduleBySpecialtyParams
     from "@/features/specialist_appointment/types/PhysiciansWorkScheduleBySpecialtyParams.ts";
-import type StaffWorkSchedule from "@/types/StaffWorkSchedule.ts";
+import type StaffWorkSchedule from "@/types/models/StaffWorkSchedule.ts";
 import type CreateSpecialtyServiceRecordParams
     from "@/features/specialist_appointment/types/CreateSpecialtyServiceRecordParams.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";

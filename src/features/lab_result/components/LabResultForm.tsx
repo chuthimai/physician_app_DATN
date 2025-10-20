@@ -1,13 +1,13 @@
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
 import {useContext, useEffect, useState} from "react";
-import type AssessmentItem from "@/types/AssessmentItem.ts";
+import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
-import type ServiceFormSubmitParams from "@/types/ServiceFormSubmitParams.ts";
+import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import DynamicForm from "@/components/form/DynamicForm.tsx";
 
 export default function LabResultForm() {
-    const {getServiceForm, sendServiceForm} = useServiceForm();
+    const {getServiceForm, sendServiceForm, getServiceFormByReportId} = useServiceForm();
     const [form, setForm] = useState<AssessmentItem[]>([]);
     const [serviceRecordId, setServiceRecordId] = useState<number | undefined>(undefined);
     const patientRecordIdContext = useContext(PatientRecordIdContext);
@@ -18,7 +18,7 @@ export default function LabResultForm() {
         if (!patientRecordIdContext?.patientRecordId) {
             id = 36;
         }
-        const data = await getServiceForm(id === 0 ? patientRecordIdContext?.patientRecordId : id);
+        const data = await getServiceFormByReportId(id === 0 ? patientRecordIdContext?.patientRecordId : id);
         if (!data) {
             setForm([]);
             return;

@@ -1,4 +1,4 @@
-import type Patient from "@/types/Patient.ts";
+import type Patient from "@/types/models/Patient.ts";
 import useDate from "@/hooks/useDate.ts";
 import {useContext} from "react";
 import {UserContext} from "@/providers/user/UserContext.tsx";

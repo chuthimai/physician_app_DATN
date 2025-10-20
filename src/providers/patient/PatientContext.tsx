@@ -1,5 +1,5 @@
 import {createContext} from "react";
-import type Patient from "@/types/Patient.ts";
+import type Patient from "@/types/models/Patient.ts";
 
 export type PatientContextType = {
     patient: Patient | undefined,
