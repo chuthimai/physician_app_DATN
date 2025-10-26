@@ -76,10 +76,10 @@ export default function RenderAssessmentItems({
                                 Chỉ số xét nghiệm
                             </th>
                             <th className="border px-3 py-2 text-left w-1/4">Kết quả</th>
-                            <th className="border px-3 py-2 text-left w-1/4">Đơn vị</th>
                             <th className="border px-3 py-2 text-left w-1/4">
                                 Chỉ số bình thường
                             </th>
+                            <th className="border px-3 py-2 text-left w-1/4">Đơn vị</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -101,12 +101,12 @@ export default function RenderAssessmentItems({
                                     )}
                                 </td>
                                 <td className="border px-3 py-2">
-                                    {child.measurementItem?.unit || "-"}
-                                </td>
-                                <td className="border px-3 py-2">
                                     {child.measurementItem
                                         ? `${child.measurementItem.minimum} - ${child.measurementItem.maximum}`
                                         : "-"}
+                                </td>
+                                <td className="border px-3 py-2">
+                                    {child.measurementItem?.unit || "-"}
                                 </td>
                             </tr>
                         ))}

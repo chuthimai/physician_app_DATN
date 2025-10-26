@@ -2,7 +2,7 @@ import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import {useContext, useEffect} from "react";
 import ButtonSave from "../../../../components/button/ButtonSave.tsx";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
-import {doseFormMap, medications} from "@/fake_data/medications.ts";
+import {medications} from "@/fake_data/medications.ts";
 import TextInput from "@/components/input/TextInput.tsx";
 import type PrescribedMedication from "@/features/diagnosis/type/PrescribedMedication.ts";
 import log from "loglevel";
@@ -10,6 +10,7 @@ import {MedicationsContext} from "@/providers/medications/MedicationsContext.tsx
 import {MedicationEditingContext} from "@/providers/medications/MedicationEditingContext.tsx";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
+import {SNOMEDCT_FORM_CODES} from "@/constants/prescription/snomedct_form_codes.ts";
 
 type PrescriptionInputs = {
     name: string;
@@ -18,7 +19,7 @@ type PrescriptionInputs = {
     dosageInstruction: string;
 };
 
-export default function PrescriptionForm() {
+export default function PrescribedMedicationForm() {
     const {
         register,
         handleSubmit,
@@ -54,12 +55,12 @@ export default function PrescriptionForm() {
 
             setValue("name", m.name ?? "");
             setValue("quantity", medicationEditing?.quantity);
-            setValue("doseForm", doseFormMap[m.doseForm] || "");
+            setValue("doseForm", SNOMEDCT_FORM_CODES[m.doseForm] || "");
             setValue("dosageInstruction", medicationEditing?.dosageInstruction);
             return;
         }
         if (selectedMedication) {
-            setValue("doseForm", doseFormMap[selectedMedication.doseForm] || "");
+            setValue("doseForm", SNOMEDCT_FORM_CODES[selectedMedication.doseForm] || "");
         }
     }, [isEditing, medicationEditing, selectedMedication, setValue]);
 
@@ -81,6 +82,7 @@ export default function PrescriptionForm() {
             quantity: data.quantity,
             dosageInstruction: data.dosageInstruction,
             medicationId: selectedMedication.identifier,
+            note: "",
         };
         const medicationList = medicationsContext?.medications || [];
 
@@ -98,7 +100,7 @@ export default function PrescriptionForm() {
         // Xử lý khi thêm
         medicationsContext?.setMedications([...medicationList, payload]);
 
-        log.debug("PrescriptionForm " + payload);
+        log.debug("PrescribedMedicationForm " + payload);
         reset();
     };
 
@@ -134,7 +136,8 @@ export default function PrescriptionForm() {
                             min: {value: 1, message: "Tối thiểu là 1"},
                         })}
                         placeholder="Số lượng"
-                        className="w-full border px-4 py-2 rounded-md"                    />
+                        className="w-full border px-4 py-2 rounded-md"
+                    />
                     {errors.quantity && (
                         <p className="text-red-500 text-sm mt-1">{errors.quantity.message}</p>
                     )}

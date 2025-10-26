@@ -1,7 +1,7 @@
-import PrescriptionForm from "@/features/diagnosis/components/form/PrescriptionForm.tsx";
+import PrescribedMedicationForm from "@/features/diagnosis/components/form/PrescribedMedicationForm.tsx";
 import ButtonInfo from "@/components/button/ButtonInfo.tsx";
 import {useDialog} from "@/features/diagnosis/hooks/useDialog.ts";
-import PrescriptionTable from "@/features/diagnosis/components/table/PrescriptionTable.tsx";
+import PrescriptionDialog from "@/features/diagnosis/components/dialog/PrescriptionDialog.tsx";
 
 export default function PrescriptionPage() {
     const { open, openDialog, setOpen } = useDialog();
@@ -21,9 +21,9 @@ export default function PrescriptionPage() {
 
         {/*Hiển thị 1 lớp phủ để xem đơn thuốc*/}
         <div className="w-full">
-            <PrescriptionTable open={open} onOpenChange={setOpen}/>
+            <PrescriptionDialog open={open} onOpenChange={setOpen}/>
         </div>
 
-        <PrescriptionForm/>
+        <PrescribedMedicationForm/>
     </div>
 }
