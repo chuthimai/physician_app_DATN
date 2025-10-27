@@ -2,6 +2,7 @@ import {type SubmitHandler, useForm} from "react-hook-form";
 import {Colors} from "@/constants/colors.ts";
 import useAuth from "@/features/auth/hooks/useAuth.ts";
 import type {LoginParams} from "@/features/auth/types/LoginParams.ts";
+import {ROLES} from "@/constants/roles.ts";
 
 type LoginInputs = {
     citizenId: string;
@@ -23,6 +24,7 @@ export function LoginForm() {
         const loginPrams: LoginParams = {
             identifier: Number.parseInt(data.citizenId),
             password: data.password,
+            role: ROLES.DEFAULT,
         };
 
         await login(loginPrams);

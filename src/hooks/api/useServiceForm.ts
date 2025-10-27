@@ -15,7 +15,7 @@ export default function useServiceForm() {
             return;
         }
         try {
-            return await request("get", `${ENDPOINTS.GET_SERVICE_FORM}/${patientRecordId}`);
+            return await request("get", `${ENDPOINTS.GET_SERVICE_FORM_BY_PATIENT_RECORD_ID}/${patientRecordId}`);
         } catch (e) {
             if (!(e instanceof Error)) return;
             log.error(`getServiceForm: ${e.message}`);
@@ -45,7 +45,7 @@ export default function useServiceForm() {
 
     const sendServiceForm = async (payload: ServiceFormSubmitParams) => {
         try {
-            await request("post", ENDPOINTS.SEND_SERVICE_FORM, payload);
+            await request("post", `${ENDPOINTS.SEND_SERVICE_FORM}/${payload.serviceReportIdentifier}`, payload);
             showToastSuccess("Gửi thành công");
         } catch (e) {
             if (!(e instanceof Error)) return;

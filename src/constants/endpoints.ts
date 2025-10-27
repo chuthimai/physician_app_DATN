@@ -1,6 +1,6 @@
 export const ENDPOINTS = {
     // Authentication
-    LOGIN: "auth/login?role=PHYSICIAN",
+    LOGIN: "auth/login?role",
 
     // Records
     CREATE_RECORDS: "records/",
@@ -19,9 +19,9 @@ export const ENDPOINTS = {
     STAFF_WORK_SCHEDULES: "schedules/staff-work-schedules-by-condition",
 
     // Report
-    GET_SERVICE_FORM: "reports",
+    GET_SERVICE_FORM_BY_PATIENT_RECORD_ID: "reports/by-patient-record-identifier",
     SEND_SERVICE_FORM: "reports/update-diagnosis-report-result",
-    GET_SERVICE_FORM_BY_REPORT_ID: "reports/test",
+    GET_SERVICE_FORM_BY_REPORT_ID: "reports/by-service-report-identifier",
 
     // Service
     CREATE_SPECIALTY_SERVICE: "records/update-specialty-consultation",
