@@ -27,6 +27,7 @@ export default function BarCodeDialog({open, onOpenChange} : BarCodeDialogProps)
                                     value={`XN${toTwelveDigitString(1234567891012)}`}
                                     displayValue
                                     fontSize={14}
+                                    format="CODE128"
                                 />
                             </div>
                         </div>
