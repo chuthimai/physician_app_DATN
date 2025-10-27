@@ -6,7 +6,10 @@ export default function useDate() {
         return `${year}-${month}-${day}`;
     }
 
-    const formattedFullDateTime = (date: Date) => {
+    const formattedFullDateTime = (date: Date | string) => {
+        if (typeof date === "string") {
+            date = new Date(date);
+        }
         return date.toLocaleString("vi-VN", {
             year: "numeric",
             month: "2-digit",
@@ -17,9 +20,12 @@ export default function useDate() {
         });
     }
 
-    function formatLocalDate(d: Date) {
+    function formatLocalDate(d: Date | string) {
+        if (typeof d === "string") {
+            d = new Date(d);
+        }
         return [
-            d.getFullYear(),
+            String(d.getFullYear()),
             String(d.getMonth() + 1).padStart(2, "0"),
             String(d.getDate()).padStart(2, "0"),
         ].join("-") // YYYY-MM-DD

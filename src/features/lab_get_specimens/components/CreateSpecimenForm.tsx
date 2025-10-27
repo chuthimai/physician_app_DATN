@@ -8,7 +8,11 @@ import {
 } from "@/constants/lab_get_specimens/options.ts";
 import {SPECIMEN_CONDITION} from "@/constants/lab_get_specimens/specimen_condition.ts";
 import {SPECIMEN_STATUS} from "@/constants/lab_get_specimens/speciment_status.ts";
-import { useToast } from "@/hooks/useToast";
+import {useContext} from "react";
+import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
+import type Specimen from "@/features/lab_get_specimens/types/Specimen.ts";
+import useSpecimen from "@/features/lab_get_specimens/hooks/useSpecimen.ts";
+import type UpdateSpecimenParams from "@/features/lab_get_specimens/types/UpdateSpecimenParams.ts";
 
 type SpecimenInputs = {
     type: string;
@@ -16,7 +20,14 @@ type SpecimenInputs = {
     status: string;
 };
 
-export default function CreateSpecimenForm() {
+type CreateSpecimenProps = {
+    specimen: Specimen;
+    setSpecimen: (specimen: Specimen | undefined) => void;
+}
+
+export default function CreateSpecimenForm({specimen, setSpecimen}: CreateSpecimenProps) {
+    const patientRecordId = useContext(PatientRecordIdContext)?.patientRecordId;
+
     const {
         handleSubmit,
         control,
@@ -24,18 +35,26 @@ export default function CreateSpecimenForm() {
         reset,
     } = useForm<SpecimenInputs>();
 
-    const {showToastSuccess} = useToast();
+    const {updateSpecimen} = useSpecimen();
 
     const onSubmit: SubmitHandler<SpecimenInputs> = async (data) => {
-        console.log("Submitting...", data);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        showToastSuccess("Submitted!")
+        const params: UpdateSpecimenParams = {
+            identifier: specimen.identifier,
+            type: data.type,
+            condition: data.type,
+            state: data.status,
+            close: false,
+        }
+        await updateSpecimen(params);
+        setSpecimen(undefined);
         resetForm();
     };
 
     function resetForm() {
         reset({});
     }
+
+    if (patientRecordId === undefined) return null;
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

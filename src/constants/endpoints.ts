@@ -8,6 +8,7 @@ export const ENDPOINTS = {
 
     // Patients
     SEARCH_PATIENT: "users/by-name",
+    GET_PATIENT_BY_PATIENT_RECORD_ID: "users/by-patient-record-identifier",
 
     // Specializations
     SPECIALIZATIONS: "specializations",
@@ -27,6 +28,14 @@ export const ENDPOINTS = {
     CREATE_SPECIALTY_SERVICE: "records/update-specialty-consultation",
     GET_SERVICE_BY_TYPE: "billing/services-by-type",
     ADD_SERVICE_TO_RECORD: "records/update-test-and-scan",
+
+    // Specimen
+    CREATE_SPECIMEN: "/reports/specimens",
+    UPDATE_SPECIMEN: "/reports/specimens",
+
+    // Reporter/Performer
+    UPDATE_REPORTER: "reports/update-reporter-physician",
+    UPDATE_PERFORMER: "reports/update-performer-physician",
 
     // Appointment
     GET_APPOINTMENTS: "appointments/by-user",

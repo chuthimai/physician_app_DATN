@@ -1,7 +1,8 @@
 export default interface Specimen {
-    identifier?: number;
+    identifier: number;
     type: string;
     condition: string;
     status: string;
+    state: string;
     receivedTime: string;
 }

@@ -2,9 +2,14 @@ import React, {useEffect, useState} from "react";
 import { PatientRecordIdContext } from "./PatientRecordIdContext.tsx";
 
 export const PatientRecordIdProvider = ({ children }: { children: React.ReactNode }) => {
-    const [patientRecordId, setPatientRecordId] = useState<number | null | undefined>(() => {
-        if (!localStorage.getItem("patientRecordId")) return undefined;
-        return Number(localStorage.getItem("patientRecordId"));
+    const [patientRecordId, setPatientRecordId] = useState<number | null | undefined | string>(() => {
+        const stored = localStorage.getItem("patientRecordId");
+        if (!stored) return undefined;
+
+        if (!isNaN(Number(stored)) && stored.trim() !== "") {
+            return Number(stored);
+        }
+        return stored;
     });
 
     useEffect(() => {

@@ -9,7 +9,7 @@ export default function useServiceForm() {
     const {request, loading, error} = useApi<ServiceFormResponse>();
     const {showToastError, showToastSuccess} = useToast();
 
-    const getServiceForm = async (patientRecordId?: number | null) => {
+    const getServiceForm = async (patientRecordId?: number | null | string) => {
         if (!patientRecordId) {
             showToastError("Chưa xác định bệnh nhân")
             return;
