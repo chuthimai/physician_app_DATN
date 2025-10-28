@@ -52,8 +52,6 @@ export default function useSpecimen() {
         }
     }
 
-    // const getSpecimenByType = async (type?: string) => {}
-
     return {
         createSpecimen,
         updateSpecimen,

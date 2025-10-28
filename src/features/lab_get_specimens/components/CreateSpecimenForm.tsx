@@ -17,7 +17,7 @@ import type UpdateSpecimenParams from "@/features/lab_get_specimens/types/Update
 type SpecimenInputs = {
     type: string;
     condition: string;
-    status: string;
+    state: string;
 };
 
 type CreateSpecimenProps = {
@@ -42,7 +42,7 @@ export default function CreateSpecimenForm({specimen, setSpecimen}: CreateSpecim
             identifier: specimen.identifier,
             type: data.type,
             condition: data.type,
-            state: data.status,
+            state: data.state,
             close: false,
         }
         await updateSpecimen(params);
@@ -97,7 +97,7 @@ export default function CreateSpecimenForm({specimen, setSpecimen}: CreateSpecim
                 <div className="col-span-4">
                     <Controller
                         control={control}
-                        name="status"
+                        name="state"
                         rules={{ required: "Vui lòng chọn tình trạng hiện tại của mẫu" }}
                         defaultValue={SPECIMEN_STATUS.AVAILABLE}
                         render={({ field }) => (
@@ -106,7 +106,7 @@ export default function CreateSpecimenForm({specimen, setSpecimen}: CreateSpecim
                                 value={specimenStatusOptions.find((opt) => opt.value === field.value)}
                                 onChange={(selected) => field.onChange(selected?.value ?? "")}
                                 options={specimenStatusOptions}
-                                error={errors.status}
+                                error={errors.state}
                             />
                         )}
                     />

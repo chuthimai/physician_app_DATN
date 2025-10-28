@@ -3,5 +3,5 @@ export default interface UpdateSpecimenParams {
     type: string,
     condition: string,
     state: string,
-    close: false,
+    close: boolean,
 }

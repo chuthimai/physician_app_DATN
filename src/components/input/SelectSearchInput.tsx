@@ -60,7 +60,10 @@ export default function SelectSearchInput({
                         aria-expanded={open}
                         disabled={disabled}
                         className={cn(
-                            "w-full justify-between opacity-50",
+                            "w-full justify-between border transition-all",
+                            disabled
+                                ? "opacity-50 cursor-not-allowed"
+                                : "border-gray-400 font-medium hover:border-gray-600 hover:text-black",
                             error && "border-red-500"
                         )}
                     >
