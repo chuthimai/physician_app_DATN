@@ -43,19 +43,9 @@ export default function useSpecimen() {
 
     }
 
-    const updateReporter = async (serviceReportId: number) => {
-        try {
-            await request("post", `${ENDPOINTS.UPDATE_REPORTER}/${serviceReportId}`)
-        } catch (e) {
-            if (!(e instanceof Error)) return;
-            log.error(`updatePerformer: ${e.message}`);
-        }
-    }
-
     return {
         createSpecimen,
         updateSpecimen,
-        updateReporter,
         loading,
         error
     }

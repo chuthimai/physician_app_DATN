@@ -16,7 +16,7 @@ interface BarCodeDialogProps {
 }
 
 export default function BarCodeDialog({open, onOpenChange, specimen} : BarCodeDialogProps) {
-    const { toTwelveDigitString } = useNumber();
+    const { toFiveDigitString } = useNumber();
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -27,7 +27,7 @@ export default function BarCodeDialog({open, onOpenChange, specimen} : BarCodeDi
                         <div className={"flex justify-center"}>
                             <div>
                                 <Barcode
-                                    value={`XN${toTwelveDigitString(specimen?.identifier || 0)}`}
+                                    value={`XN${toFiveDigitString(specimen?.identifier || 0)}`}
                                     displayValue
                                     fontSize={14}
                                     format="CODE128"

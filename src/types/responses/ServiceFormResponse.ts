@@ -2,6 +2,7 @@ import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 import type Physician from "@/types/models/Physician.ts";
 
 export default interface ServiceFormResponse {
+    identifier: number,
     serviceReport: {
         identifier: number,
         service: {

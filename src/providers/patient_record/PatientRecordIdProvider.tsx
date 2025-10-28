@@ -17,6 +17,7 @@ export const PatientRecordIdProvider = ({ children }: { children: React.ReactNod
             localStorage.setItem("patientRecordId", patientRecordId.toString());
         } else {
             localStorage.removeItem("patientInfo");
+            localStorage.removeItem("patientRecordId");
         }
     }, [patientRecordId]);
 
