@@ -1,6 +1,6 @@
 import {Controller, type SubmitHandler, useForm} from "react-hook-form";
 import {useContext, useEffect, useState} from "react";
-import SelectSearchInput, {type Option} from "@/components/input/SelectSearchInput.tsx";
+import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {toast} from "react-toastify";
 import type Appointment from "@/features/specialist_appointment/types/Appointment.ts";
@@ -12,6 +12,7 @@ import type StaffWorkSchedule from "@/types/models/StaffWorkSchedule.ts";
 import type CreateSpecialtyServiceRecordParams
     from "@/features/specialist_appointment/types/CreateSpecialtyServiceRecordParams.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
+import type {Option} from "@/types/others/Option.ts";
 
 type AddSpecialistAppointmentInputs = {
     specialist: string;

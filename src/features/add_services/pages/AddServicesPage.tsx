@@ -29,7 +29,7 @@ export default function AddServicesPage() {
         if (!recordIdContext?.patientRecordId) return;
 
         const params: AddServiceParams = {
-            patientRecordIdentifier: recordIdContext.patientRecordId,
+            patientRecordIdentifier: Number(recordIdContext?.patientRecordId),
             serviceIdentifiers: servicesContext.services.map((s) => s.identifier),
         }
 

@@ -48,8 +48,6 @@ export default function DynamicForm({ assessmentItems, onClickSubmit, type, serv
             interpretation: data.interpretation || "demo",
             media: undefined,
         }
-        console.log("1 >>>>>>>>.");
-        console.log(serviceFormSubmit);
         onClickSubmit(serviceFormSubmit);
         reset();
     };

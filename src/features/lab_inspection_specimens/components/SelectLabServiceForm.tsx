@@ -56,6 +56,7 @@ export default function SelectLabServiceForm({setSpecimens} : SelectLabServiceFo
             <SelectSearchInput
                 label=""
                 subtitle={"Loại xét nghiệm"}
+                value={serviceSelected}
                 onChange={(select) => select === null ? setServiceSelected(undefined) : setServiceSelected(select)}
                 options={labServiceOptions}
                 className={"mb-0 w-full"}

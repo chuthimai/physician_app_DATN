@@ -1,34 +1,37 @@
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
-import {useEffect, useState} from "react";
 import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import DynamicForm from "@/components/form/DynamicForm";
-// import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import useSpecimenReport from "@/features/lab_result/hooks/useSpecimenReport.ts";
+import {useToast} from "@/hooks/useToast.ts";
 
-export default function DoImageResultForm() {
-    const {getServiceFormByReportId, sendServiceForm} = useServiceForm();
-    const [form, setForm] = useState<AssessmentItem[]>([]);
-    // const params = useParams();
-    // const serviceRecordId = Number(params.recordId);
-    const serviceRecordId = 58;
+type DoImageResultFormProps = {
+    form: AssessmentItem[];
+}
 
-    const fetchForm = async () => {
-        // TODO: đang lấy form theo mã service report
-        const data = await getServiceFormByReportId(serviceRecordId);
-        if (!data) {
-            setForm([]);
-            return;
-        }
-        setForm(data.serviceReport.service.assessmentItems);
-    };
+export default function DoImageResultForm({form}: DoImageResultFormProps) {
+    const params = useParams();
+    const serviceRecordId = Number(params.reportId);
+    const navigator = useNavigate();
 
-    useEffect(() => {
-        fetchForm().then(() => null);
-    }, []);
+    const {sendServiceForm} = useServiceForm();
+    const {updateReporter, error} = useSpecimenReport();
+
+    const {showToastError} = useToast();
 
     const onSubmit = async (data: ServiceFormSubmitParams) => {
+        if (!serviceRecordId) return;
+
+        await updateReporter(serviceRecordId);
+        if (error) {
+            showToastError('Có lỗi xảy ra');
+            return;
+        }
+
         await sendServiceForm(data);
+        navigator("/ket-qua-hinh-anh");
     };
 
     if (!serviceRecordId) return <div/>;
