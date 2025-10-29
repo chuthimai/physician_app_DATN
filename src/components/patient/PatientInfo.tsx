@@ -1,7 +1,7 @@
 import useDate from "@/hooks/useDate.ts";
-import usePatientInfo from "@/features/lab_get_specimens/hooks/usePatientInfo.ts";
+import usePatientInfo from "@/hooks/api/usePatientInfo.ts";
 import {useContext, useEffect} from "react";
-import { PatientContext } from "@/providers/patient/PatientContext";
+import { PatientContext } from "@/providers/patient/PatientContext.tsx";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 
 type PatientInfoProps = {

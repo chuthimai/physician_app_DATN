@@ -35,6 +35,9 @@ export const ENDPOINTS = {
     UPDATE_SPECIMEN: "/reports/specimens",
     GET_SPECIMEN_BY_SERVICE_ID: "/reports/specimens",
 
+    // Image
+    UPLOAD_IMAGES: "/reports/images",
+
     // Reporter/Performer
     UPDATE_REPORTER: "reports/update-reporter-physician",
     UPDATE_PERFORMER: "reports/update-performer-physician",

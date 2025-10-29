@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
-import PatientInfo from "./PatientInfo";
-import ServiceInfo from "./ServiceInfo";
+import PatientInfo from "../../../components/patient/PatientInfo.tsx";
+import ServiceInfo from "../../../components/service/ServiceInfo.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import BarCodeDialog from "@/features/lab_get_specimens/components/BarCodeDialog.tsx";
 import useSpecimen from "@/features/lab_get_specimens/hooks/useSpecimen.ts";
@@ -45,7 +45,7 @@ export default function ConfirmLabService({
             laboratoryReportIdentifier: laboratoryReportId,
         }
         const specimen = await createSpecimen(params);
-        console.log(specimen);
+
         if (!specimen) return;
         setSpecimen(specimen);
         setOpenBarCodeDialog(true);
@@ -63,7 +63,7 @@ export default function ConfirmLabService({
                 setLoading={setLoadingServiceInfo}
                 setIsPaymentDone={setIsPaymentDone}
                 isPaymentDone={isPaymentDone}
-                setLaboratoryReportId={setLaboratoryReportId}
+                setReportId={setLaboratoryReportId}
             />
             {isPaymentDone && (
                 <div className={"flex justify-end"}>

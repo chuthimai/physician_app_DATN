@@ -1,13 +1,13 @@
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "@/providers/user/UserContext.tsx";
-import useServiceInfo from "@/features/lab_get_specimens/hooks/useServiceInfo.ts";
+import useServiceInfo from "@/hooks/api/useServiceInfo.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import type ServiceFormResponse from "@/types/responses/ServiceFormResponse.ts";
 
 type ServiceInfoProps = {
     setLoading: (loading: boolean) => void;
     setIsPaymentDone: (isPaymentDone: boolean) => void;
-    setLaboratoryReportId: (laboratoryReportId: number) => void;
+    setReportId: (reportId: number) => void;
     isPaymentDone: boolean;
 }
 
@@ -15,7 +15,7 @@ export default function ServiceInfo({
                                         setLoading,
                                         setIsPaymentDone,
                                         isPaymentDone,
-                                        setLaboratoryReportId
+                                        setReportId
                                     } : ServiceInfoProps) {
 
     const userContext = useContext(UserContext);
@@ -67,7 +67,7 @@ export default function ServiceInfo({
         );
     }
 
-    setLaboratoryReportId(serviceInfo.serviceReport.identifier);
+    setReportId(serviceInfo.serviceReport.identifier);
     return (
         <div>
             <h3 className="font-bold mb-1">Thông tin dịch vụ</h3>
