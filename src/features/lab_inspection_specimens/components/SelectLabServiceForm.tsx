@@ -1,10 +1,11 @@
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
-import type Specimen from "@/features/lab_get_specimens/types/Specimen";
-import {useEffect, useState} from "react";
+import type Specimen from "@/features/lab_taking_specimens/types/Specimen";
+import {useContext, useEffect, useState} from "react";
 import type {Option} from "@/types/others/Option.ts";
 import {useService} from "@/features/add_services/hooks/useService.ts";
 import useSpecimen from "@/features/lab_inspection_specimens/hooks/useSpecimen.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
+import {ServiceLabIdContext} from "@/providers/services/ServiceLabIdContext.tsx";
 
 type SelectLabServiceFormProps = {
     setSpecimens: (specimens: Specimen[]) => void;
@@ -13,7 +14,10 @@ type SelectLabServiceFormProps = {
 export default function SelectLabServiceForm({setSpecimens} : SelectLabServiceFormProps) {
     const labType = SERVICE_TYPES.LABORATORY_TEST;
     const [labServiceOptions, setLabServiceOptions] = useState<Option[]>([]);
-    const [serviceSelected, setServiceSelected] = useState<Option | undefined>(undefined);
+
+    const serviceLabIdContext = useContext(ServiceLabIdContext);
+    const serviceLabId = serviceLabIdContext?.serviceLabId;
+
     const {getServiceByType} = useService();
     const {getSpecimenByService} = useSpecimen();
 
@@ -32,10 +36,8 @@ export default function SelectLabServiceForm({setSpecimens} : SelectLabServiceFo
 
     };
 
-    const fetchSpecimens = async (serviceId?: string) => {
-        if (isNaN(Number(serviceId))) return;
-        if (!serviceId) serviceId = undefined;
-        const specimensResponse = await getSpecimenByService(Number(serviceId));
+    const fetchSpecimens = async (serviceId: number) => {
+        const specimensResponse = await getSpecimenByService(serviceId);
         if (!specimensResponse) return;
         setSpecimens(specimensResponse);
     }
@@ -45,9 +47,14 @@ export default function SelectLabServiceForm({setSpecimens} : SelectLabServiceFo
     }, []);
 
     useEffect(() => {
-        if (serviceSelected === undefined) return;
-        fetchSpecimens(serviceSelected.value).then(() => null);
-    }, [serviceSelected]);
+        if (!serviceLabId) return;
+        fetchSpecimens(serviceLabId).then(() => null);
+    }, [serviceLabId]);
+
+    const handleSelect = (selected: Option | null) => {
+        if (!selected) return;
+        serviceLabIdContext?.setServiceLabId(Number(selected.value));
+    }
 
     return (
         <div className="flex gap-4 items-center justify-center px-8 pb-4">
@@ -56,8 +63,11 @@ export default function SelectLabServiceForm({setSpecimens} : SelectLabServiceFo
             <SelectSearchInput
                 label=""
                 subtitle={"Loại xét nghiệm"}
-                value={serviceSelected}
-                onChange={(select) => select === null ? setServiceSelected(undefined) : setServiceSelected(select)}
+                value={labServiceOptions.find(
+                    (opt) =>
+                        opt.value === serviceLabIdContext?.serviceLabId?.toString()
+                )}
+                onChange={handleSelect}
                 options={labServiceOptions}
                 className={"mb-0 w-full"}
             />

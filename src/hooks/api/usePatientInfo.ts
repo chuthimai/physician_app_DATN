@@ -4,7 +4,7 @@ import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type Patient from "@/types/models/Patient.ts";
 import {PatientContext} from "@/providers/patient/PatientContext.tsx";
-import type {PatientResponse} from "@/features/lab_get_specimens/types/PatientResponse.ts";
+import type {PatientResponse} from "@/features/lab_taking_specimens/types/PatientResponse.ts";
 
 export default function usePatientInfo() {
     const patientContext = useContext(PatientContext);

@@ -1,4 +1,4 @@
-import type Specimen from "@/features/lab_get_specimens/types/Specimen.ts";
+import type Specimen from "@/features/lab_taking_specimens/types/Specimen.ts";
 import {SPECIMEN_TYPE} from "@/constants/lab_get_specimens/specimen_type.ts";
 import {SPECIMEN_CONDITION} from "@/constants/lab_get_specimens/specimen_condition.ts";
 import {SPECIMEN_STATUS} from "@/constants/lab_get_specimens/speciment_status.ts";

@@ -10,9 +10,9 @@ import {SPECIMEN_CONDITION} from "@/constants/lab_get_specimens/specimen_conditi
 import {SPECIMEN_STATUS} from "@/constants/lab_get_specimens/speciment_status.ts";
 import {useContext} from "react";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
-import type Specimen from "@/features/lab_get_specimens/types/Specimen.ts";
-import useSpecimen from "@/features/lab_get_specimens/hooks/useSpecimen.ts";
-import type UpdateSpecimenParams from "@/features/lab_get_specimens/types/UpdateSpecimenParams.ts";
+import type Specimen from "@/features/lab_taking_specimens/types/Specimen.ts";
+import useSpecimen from "@/features/lab_taking_specimens/hooks/useSpecimen.ts";
+import type UpdateSpecimenParams from "@/features/lab_taking_specimens/types/UpdateSpecimenParams.ts";
 
 type SpecimenInputs = {
     type: string;

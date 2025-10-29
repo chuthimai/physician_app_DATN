@@ -1,6 +1,6 @@
 import {useState} from "react";
 import SpecimenView from "@/features/lab_inspection_specimens/components/SpecimenView.tsx";
-import type Specimen from "@/features/lab_get_specimens/types/Specimen";
+import type Specimen from "@/features/lab_taking_specimens/types/Specimen";
 import SelectLabServiceForm from "@/features/lab_inspection_specimens/components/SelectLabServiceForm.tsx";
 
 export default function LabInspectionSpecimenPage() {

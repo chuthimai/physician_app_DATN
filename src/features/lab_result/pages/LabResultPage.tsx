@@ -16,7 +16,7 @@ export default function LabResultPage() {
     const [loading, setLoading] = useState(false);
 
     const handleStorageChange = () => {
-        const specimenIdRaw = localStorage.getItem("serviceImageId");
+        const specimenIdRaw = localStorage.getItem("serviceLabId");
         if (specimenIdRaw?.startsWith("XN")) {
             const newSpecimenId = Number(specimenIdRaw?.split("XN")[1]);
 
@@ -55,7 +55,7 @@ export default function LabResultPage() {
                 />
                 <ScanDialog
                     open={openScan}
-                    resultName={"serviceImageId"}
+                    resultName={"serviceLabId"}
                     onOpenChange={setOpenScan}
                 />
             </div>

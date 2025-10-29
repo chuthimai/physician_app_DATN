@@ -3,10 +3,10 @@ import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordId
 import PatientInfo from "../../../components/patient/PatientInfo.tsx";
 import ServiceInfo from "../../../components/service/ServiceInfo.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
-import BarCodeDialog from "@/features/lab_get_specimens/components/BarCodeDialog.tsx";
-import useSpecimen from "@/features/lab_get_specimens/hooks/useSpecimen.ts";
-import type CreateSpecimenParams from "@/features/lab_get_specimens/types/CreateSpecimenParams.ts";
-import type Specimen from "@/features/lab_get_specimens/types/Specimen.ts";
+import BarCodeDialog from "@/features/lab_taking_specimens/components/BarCodeDialog.tsx";
+import useSpecimen from "@/features/lab_taking_specimens/hooks/useSpecimen.ts";
+import type CreateSpecimenParams from "@/features/lab_taking_specimens/types/CreateSpecimenParams.ts";
+import type Specimen from "@/features/lab_taking_specimens/types/Specimen.ts";
 
 type ConfirmLabServiceProps = {
     setLoading: (loading: boolean) => void;

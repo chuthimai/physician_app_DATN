@@ -1,10 +1,10 @@
 import {useContext, useEffect, useState} from "react";
 import ButtonScan from "@/components/button/ButtonScan.tsx";
 import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
-import CreateSpecimenForm from "@/features/lab_get_specimens/components/CreateSpecimenForm.tsx";
-import ConfirmLabService from "@/features/lab_get_specimens/components/ConfirmLabService.tsx";
+import CreateSpecimenForm from "@/features/lab_taking_specimens/components/CreateSpecimenForm.tsx";
+import ConfirmLabService from "@/features/lab_taking_specimens/components/ConfirmLabService.tsx";
 import Loading from "@/components/loading/Loading.tsx";
-import type Specimen from "@/features/lab_get_specimens/types/Specimen.ts";
+import type Specimen from "@/features/lab_taking_specimens/types/Specimen.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {useToast} from "@/hooks/useToast.ts";
 

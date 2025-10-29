@@ -9,7 +9,6 @@ import {ServiceImageIdContext} from "@/providers/services/ServiceImageIdContext.
 export default function SelectImageServiceForm() {
     const labType = SERVICE_TYPES.IMAGING_SCAN;
     const [imageServiceOptions, setImageServiceOptions] = useState<Option[]>([]);
-    const [, setServiceSelected] = useState<Option | undefined>(undefined);
     const serviceImageIdContext = useContext(ServiceImageIdContext);
     const {getServiceByType} = useService();
 
@@ -34,7 +33,6 @@ export default function SelectImageServiceForm() {
     const handleSelect = (selected: Option | null) => {
         if (!selected) return;
         serviceImageIdContext?.setServiceImageId(Number(selected.value));
-        setServiceSelected(selected);
     }
 
     return (

@@ -1,4 +1,4 @@
-import type Specimen from "@/features/lab_get_specimens/types/Specimen.ts";
+import type Specimen from "@/features/lab_taking_specimens/types/Specimen.ts";
 import {Controller, type SubmitHandler, useForm} from "react-hook-form";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import {
@@ -10,7 +10,7 @@ import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {useState} from "react";
 import ButtonEdit from "@/components/button/ButtonEdit.tsx";
 import useSpecimen from "@/features/lab_inspection_specimens/hooks/useSpecimen.ts";
-import type UpdateSpecimenParams from "@/features/lab_get_specimens/types/UpdateSpecimenParams.ts";
+import type UpdateSpecimenParams from "@/features/lab_taking_specimens/types/UpdateSpecimenParams.ts";
 
 type SpecimenViewProps = {
     specimen: Specimen,
