@@ -1,19 +1,20 @@
-import { Controller, useForm, type SubmitHandler } from "react-hook-form";
-import {useContext, useEffect} from "react";
+import {Controller, useForm, type SubmitHandler} from "react-hook-form";
+import {useContext, useEffect, useState} from "react";
 import ButtonSave from "../../../../components/button/ButtonSave.tsx";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
-import {medications} from "@/fake_data/medications.ts";
 import TextInput from "@/components/input/TextInput.tsx";
 import type PrescribedMedication from "@/features/diagnosis/type/PrescribedMedication.ts";
-import log from "loglevel";
 import {MedicationsContext} from "@/providers/medications/MedicationsContext.tsx";
 import {MedicationEditingContext} from "@/providers/medications/MedicationEditingContext.tsx";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 import {SNOMEDCT_FORM_CODES} from "@/constants/prescription/snomedct_form_codes.ts";
+import type {Option} from "@/types/others/Option.ts";
+import useMedication from "@/features/diagnosis/hooks/useMedication.ts";
+import type Medication from "@/features/diagnosis/type/Medication.ts";
 
 type PrescriptionInputs = {
-    name: string;
+    medicationIdentifier: number;
     quantity: number;
     doseForm: string;
     dosageInstruction: string;
@@ -26,15 +27,15 @@ export default function PrescribedMedicationForm() {
         control,
         watch,
         setValue,
-        formState: { errors, isSubmitting },
+        formState: {errors, isSubmitting},
         reset,
     } = useForm<PrescriptionInputs>();
 
-    const medicationsOptions = medications.map((med) => ({
-        label: med.name,
-        value: med.name,
-        ...med,
-    }));
+    const [medicationsOptions, setMedicationsOptions] = useState<Option[]>([]);
+    const [medications, setMedications] = useState<Medication[]>([]);
+    const [selectedMedication, setSelectedMedication] = useState<Medication | undefined>(undefined);
+
+    const {getAllMedicationsFromDb} = useMedication();
 
     const medicationsContext = useContext(MedicationsContext);
     const medicationEditingContext = useContext(MedicationEditingContext);
@@ -42,18 +43,37 @@ export default function PrescribedMedicationForm() {
     const isEditing = !!medicationEditing;
 
     // Lấy đối tượng thuốc dựa vào tên thuốc đã chọn
-    const selectedName = watch("name");
-    const selectedMedication = medications.find((m) => m.name === selectedName);
+    const selectedMedicationId = watch("medicationIdentifier");
+
+    const getAllMedications = async () => {
+        const medications = await getAllMedicationsFromDb();
+        setMedications(medications);
+        setMedicationsOptions(medications.map((med) => ({
+            label: med.name,
+            value: med.identifier.toString(),
+        })));
+    }
+
+    useEffect(() => {
+        getAllMedications().then(() => null);
+    }, []);
+
+    useEffect(() => {
+        const med = medications.find(
+            (m) => m.identifier === Number(selectedMedicationId)
+        );
+        setSelectedMedication(med);
+    }, [selectedMedicationId]);
 
     // Tự động cập nhật các trường dựa theo thuốc đã chọn hoặc cần sửa
     useEffect(() => {
         if (isEditing) {
             const m = medications.find(
-                (item) => item.identifier === medicationEditing?.medicationId
+                (item) => item.identifier === medicationEditing?.medicationIdentifier
             )
             if (m === undefined) return;
 
-            setValue("name", m.name ?? "");
+            setValue("medicationIdentifier", m.identifier ?? "");
             setValue("quantity", medicationEditing?.quantity);
             setValue("doseForm", SNOMEDCT_FORM_CODES[m.doseForm] || "");
             setValue("dosageInstruction", medicationEditing?.dosageInstruction);
@@ -62,7 +82,7 @@ export default function PrescribedMedicationForm() {
         if (selectedMedication) {
             setValue("doseForm", SNOMEDCT_FORM_CODES[selectedMedication.doseForm] || "");
         }
-    }, [isEditing, medicationEditing, selectedMedication, setValue]);
+    }, [isEditing, medicationEditing, selectedMedication]);
 
     function cancel() {
         medicationEditingContext?.setMedicationEditing(undefined);
@@ -71,36 +91,36 @@ export default function PrescribedMedicationForm() {
 
     const onSubmit: SubmitHandler<PrescriptionInputs> = async (data) => {
         medicationEditingContext?.setMedicationEditing(undefined);
-        const selectedName = data.name;
-        const selectedMedication = medications.find((m) => m.name === selectedName);
 
-        if (!selectedMedication) {
-            return;
-        }
+        const selectedMedication = medications.find(
+            (m) => m.identifier === Number(data.medicationIdentifier)
+        );
+
+        if (!selectedMedication) return;
 
         const payload: PrescribedMedication = {
             quantity: data.quantity,
             dosageInstruction: data.dosageInstruction,
-            medicationId: selectedMedication.identifier,
-            note: "",
+            medicationIdentifier: selectedMedication.identifier,
         };
+
         const medicationList = medicationsContext?.medications || [];
 
         // Xử lý khi chỉnh sửa vẫn muốn giữ nguyên thứ tự cũ
         if (isEditing) {
             const index = medicationList.findIndex(
-                (m) => m.medicationId === medicationEditing?.medicationId
+                (m) => m.medicationIdentifier === medicationEditing?.medicationIdentifier
             );
             medicationList[index] = payload;
             medicationsContext?.setMedications(medicationList);
+            setSelectedMedication(undefined);
             reset();
             return;
         }
 
         // Xử lý khi thêm
         medicationsContext?.setMedications([...medicationList, payload]);
-
-        log.debug("PrescribedMedicationForm " + payload);
+        setSelectedMedication(undefined);
         reset();
     };
 
@@ -111,15 +131,19 @@ export default function PrescribedMedicationForm() {
                 <div className={`col-span-6 ${isEditing ? "disabled" : ""}`}>
                     <Controller
                         control={control}
-                        name="name"
-                        rules={{ required: "Chọn thuốc" }}
-                        render={({ field }) => (
+                        name="medicationIdentifier"
+                        rules={{required: "Chọn thuốc"}}
+                        render={({field}) => (
                             <SelectSearchInput
                                 label="Tên thuốc"
-                                value={medicationsOptions.find((opt) => opt.value === field.value)}
+                                value={ field.value ?
+                                    medicationsOptions.find(
+                                        (opt) => opt.value === field.value.toString())
+                                    : undefined
+                                }
                                 onChange={(selected) => field.onChange(selected?.value ?? "")}
                                 options={medicationsOptions}
-                                error={errors.name}
+                                error={errors.medicationIdentifier}
                             />
                         )}
                     />

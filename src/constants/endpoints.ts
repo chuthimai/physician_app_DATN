@@ -45,4 +45,9 @@ export const ENDPOINTS = {
 
     // Appointment
     GET_APPOINTMENTS: "appointments/by-user",
+
+    // Prescription
+    CREATE_PRESCRIPTION: "medicines/prescriptions",
+    GET_ALL_MEDICINE: "medicines",
+
 }

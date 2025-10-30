@@ -8,6 +8,7 @@ import {CloseRecordDialog} from "@/features/diagnosis/components/dialog/CloseRec
 import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {useToast} from "@/hooks/useToast.ts";
+import usePatientInfo from "@/hooks/api/usePatientInfo.ts";
 
 export default function DiagnosisPage() {
     const [openCloseRecordDialog, setOpenCloseRecordDialog] = useState(false);
@@ -16,18 +17,22 @@ export default function DiagnosisPage() {
     const patientRecordIdContext = useContext(PatientRecordIdContext);
     const patientRecordId = patientRecordIdContext?.patientRecordId;
 
+    const {getPatientInfo, error} = usePatientInfo();
+
     const { showToastError } = useToast();
 
-    const handleStorageChange = () => {
+    const handleStorageChange = async () => {
         const patientRecordIdRaw = localStorage.getItem("patientRecordId");
         if (patientRecordIdRaw?.startsWith("BA")) {
             const patientRecordId = Number(patientRecordIdRaw?.split("BA")[1]);
 
             if (!isNaN(patientRecordId)) {
                 patientRecordIdContext?.setPatientRecordId(patientRecordId);
-                return;
+                await getPatientInfo(patientRecordId);
+                if (!error) return;
             }
         }
+
         showToastError("Mã vạch không hợp lệ");
         patientRecordIdContext?.setPatientRecordId(undefined);
     };

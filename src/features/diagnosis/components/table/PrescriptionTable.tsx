@@ -29,14 +29,14 @@ export default function PrescriptionTable({ onOpenChange }: Props) {
     // -------------------- render ----------------------
     function deleteMedication(medicationId: number) {
         medicationsContext?.setMedications(prescribedMedications.filter(
-            (medication) => medication.medicationId !== medicationId)
+            (medication) => medication.medicationIdentifier !== medicationId)
         );
     }
 
     function editMedication(medicationId: number) {
         medicationEditingContext?.setMedicationEditing(
             prescribedMedications.find(
-                (medication) => medication.medicationId === medicationId)
+                (medication) => medication.medicationIdentifier === medicationId)
         )
         onOpenChange(false);
     }
@@ -63,11 +63,11 @@ export default function PrescriptionTable({ onOpenChange }: Props) {
             </TableHeader>
             <TableBody>
                 {prescribedMedications.map((medication) => (
-                    <TableRow key={ medication.medicationId }>
+                    <TableRow key={ medication.medicationIdentifier }>
                         <TableCell className="font-medium text-center whitespace-pre-wrap break-words">
                             {
                                 medications.find(
-                                    (m) => m.identifier === medication.medicationId
+                                    (m) => m.identifier === medication.medicationIdentifier
                                 )?.name
                             }
                         </TableCell>
@@ -76,7 +76,7 @@ export default function PrescriptionTable({ onOpenChange }: Props) {
                             {
                                 SNOMEDCT_FORM_CODES[
                                     medications.find(
-                                        (m) => m.identifier === medication.medicationId
+                                        (m) => m.identifier === medication.medicationIdentifier
                                     )?.doseForm || ""
                                 ]
                             }
@@ -85,14 +85,14 @@ export default function PrescriptionTable({ onOpenChange }: Props) {
                         <TableCell className="text-left">
                             <ButtonEdit
                                 label={"Sửa"}
-                                onClick={() => {editMedication(medication.medicationId)}}
+                                onClick={() => {editMedication(medication.medicationIdentifier)}}
                                 className={"font-bold"}
                             />
                         </TableCell>
                         <TableCell className="text-left w-[50px]">
                             <ButtonDelete
                                 label={"Xoá"}
-                                onClick={() => {deleteMedication(medication.medicationId)}}
+                                onClick={() => {deleteMedication(medication.medicationIdentifier)}}
                                 className={"font-bold"}
                             />
                         </TableCell>

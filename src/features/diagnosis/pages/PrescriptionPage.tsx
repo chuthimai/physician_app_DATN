@@ -2,9 +2,18 @@ import PrescribedMedicationForm from "@/features/diagnosis/components/form/Presc
 import ButtonInfo from "@/components/button/ButtonInfo.tsx";
 import {useDialog} from "@/features/diagnosis/hooks/useDialog.ts";
 import PrescriptionDialog from "@/features/diagnosis/components/dialog/PrescriptionDialog.tsx";
+import {PatientContext} from "@/providers/patient/PatientContext.tsx";
+import {useContext} from "react";
 
 export default function PrescriptionPage() {
     const { open, openDialog, setOpen } = useDialog();
+    const patientContext = useContext(PatientContext);
+
+    if (patientContext?.patient === undefined) {
+        return <div className="w-full h-16 flex items-center justify-center">
+            Chưa xác định bệnh nhân
+        </div>
+    }
 
     return <div className="flex flex-col ">
         <div className="flex gap-4 items-center justify-center mb-4 relative">

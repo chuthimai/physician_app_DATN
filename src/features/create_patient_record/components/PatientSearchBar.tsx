@@ -16,7 +16,7 @@ export default function PatientSearchBar(){
     const [openScan, setOpenScan] = useState(false);
 
     const [ keyword, setKeyword ] = useState<string>("");
-    const { loading, searchPatients } = useSearchPatient();
+    const { loading, searchPatientsByName } = useSearchPatient();
     const [localResults, setLocalResults] = useState<PatientResponse[]>([]);
     const [openOverlay, setOpenOverlay] = useState(false);
     const [mode, setMode] = useState<"inline" | "modal">("inline");
@@ -28,7 +28,7 @@ export default function PatientSearchBar(){
             return;
         }
         try {
-            const data = await searchPatients(cleanKeyword);
+            const data = await searchPatientsByName(cleanKeyword);
             if (!data) {
                 setLocalResults([]);
                 return;
@@ -56,7 +56,7 @@ export default function PatientSearchBar(){
 
 
     const handleSearch = async (keyword: string) => {
-        await searchPatients(keyword);
+        await searchPatientsByName(keyword);
         setMode("modal");
         setOpenOverlay(true);
     };

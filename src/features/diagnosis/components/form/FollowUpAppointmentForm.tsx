@@ -1,14 +1,13 @@
-import useDate from "@/hooks/useDate.ts";
-import {useEffect, useState} from "react";
-import {useToast} from "@/hooks/useToast.ts";
+import {useContext, useEffect} from "react";
 import {Controller, type SubmitHandler, useForm} from "react-hook-form";
-import log from "loglevel";
 import {toast} from "react-toastify";
 import TextInput from "@/components/input/TextInput.tsx";
 import DateInput from "@/components/input/DateInput.tsx";
 import SelectInput from "@/components/input/SelectInput.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
+import {PatientContext} from "@/providers/patient/PatientContext.tsx";
+import useNumber from "@/hooks/useNumber.ts";
 
 type PatientInputs = {
     citizenId: string;
@@ -27,9 +26,9 @@ type PatientInputs = {
 };
 
 export default function FollowUpAppointmentForm() {
-    const { formattedDateOfBirth } = useDate();
-    const [patientInfo, setPatientInfo] = useState<string | null>(null);
-    const { showToastError } = useToast();
+    const { toTwelveDigitString } = useNumber();
+
+    const patientContext = useContext(PatientContext);
 
     const {
         register,
@@ -41,6 +40,13 @@ export default function FollowUpAppointmentForm() {
         control
     } = useForm<PatientInputs>({
         defaultValues: {
+            citizenId: !patientContext?.patient?.identifier ? "" :
+                patientContext.patient.identifier >= 10 ** 13 ?
+                    "" : toTwelveDigitString(patientContext?.patient?.identifier),
+            name: !patientContext?.patient?.name ? "" : patientContext.patient.name,
+            dob: !patientContext?.patient?.birthDate ? "" : patientContext.patient.birthDate.toISOString(),
+            gender: patientContext?.patient?.gender ? "male" : "female" ,
+            address: !patientContext?.patient?.address ? "" : patientContext.patient.address,
             doctorNote:
                 "Hẹn khám lại vào ngày ... tại phòng ... hoặc đến bất kỳ thời gian nào trước ngày hẹn khám lại nếu có dấu hiệu triệu chứng bất thường.\nGiấy hẹn tái khám có giá trị sử dụng 01 lần trong thời gian 10 ngày làm việc, kể từ ngày hẹn khám lại.",
         },
@@ -51,10 +57,6 @@ export default function FollowUpAppointmentForm() {
     const locationFollowUp = watch("locationFollowUp");
 
     //--------------------------------- action ---------------------------------
-    const handleStorageChange = () => {
-        setPatientInfo(localStorage.getItem("patientInfo"));
-    };
-
     useEffect(() => {
         if (followUpDate && locationFollowUp) {
             const dateParts = followUpDate.split("-");
@@ -68,36 +70,6 @@ export default function FollowUpAppointmentForm() {
             setValue("doctorNote", note, { shouldValidate: true });
         }
     }, [followUpDate, locationFollowUp, setValue]);
-
-    useEffect(() => {
-        document.addEventListener("scanned", handleStorageChange);
-        return () => {
-            document.removeEventListener("scanned", handleStorageChange);
-        };
-    }, []);
-
-    useEffect(() => {
-        reset();
-        try {
-            if (patientInfo === undefined) return;
-            if (patientInfo !== null) {
-                const [citizenId, , name, dob, gender, address] =
-                patientInfo.split("|") || [];
-
-                reset({
-                    citizenId,
-                    name,
-                    dob: formattedDateOfBirth(dob),
-                    gender: gender === "Nam" ? "male" : "female",
-                    address,
-                });
-            }
-        } catch (e) {
-            log.error(e);
-            showToastError("Dữ liệu không hợp lệ");
-            return;
-        }
-    }, [patientInfo]);
 
     const onSubmit: SubmitHandler<PatientInputs> = async (data) => {
         console.log("Đang gửi dữ liệu:", data);

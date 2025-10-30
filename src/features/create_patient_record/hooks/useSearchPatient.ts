@@ -8,7 +8,7 @@ export default function useSearchPatient() {
     const { request, loading, error } = useApi<PatientResponse[]>();
     const [results, setResults] = useState<PatientResponse[]>([]);
 
-    const searchPatients = async (name: string) => {
+    const searchPatientsByName = async (name: string) => {
         try {
             const data = await request("get", ENDPOINTS.SEARCH_PATIENT, undefined, {
                 name: name.trim(),
@@ -20,5 +20,5 @@ export default function useSearchPatient() {
         }
     };
 
-    return { results: results, loading, error, searchPatients };
+    return { results, loading, error, searchPatientsByName };
 }
