@@ -1,4 +1,4 @@
-import type Specimen from "@/features/lab_get_specimens/types/Specimen.ts";
+import type Specimen from "@/features/lab_taking_specimens/types/Specimen.ts";
 import {Controller, type SubmitHandler, useForm} from "react-hook-form";
 import SelectSearchInput from "@/components/input/SelectSearchInput.tsx";
 import {
@@ -7,9 +7,10 @@ import {
     specimenTypeOptions
 } from "@/constants/lab_get_specimens/options.ts";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
-import {useToast} from "@/hooks/useToast.ts";
 import {useState} from "react";
 import ButtonEdit from "@/components/button/ButtonEdit.tsx";
+import useSpecimen from "@/features/lab_inspection_specimens/hooks/useSpecimen.ts";
+import type UpdateSpecimenParams from "@/features/lab_taking_specimens/types/UpdateSpecimenParams.ts";
 
 type SpecimenViewProps = {
     specimen: Specimen,
@@ -18,7 +19,7 @@ type SpecimenViewProps = {
 type SpecimenInputs = {
     type: string;
     condition: string;
-    status: string;
+    state: string;
 };
 
 export default function SpecimenView({specimen}: SpecimenViewProps) {
@@ -28,13 +29,20 @@ export default function SpecimenView({specimen}: SpecimenViewProps) {
         formState: { errors, isSubmitting },
     } = useForm<SpecimenInputs>();
 
-    const {showToastSuccess} = useToast();
     const [isEditing, setIsEditing] = useState(false);
 
+    const {updateSpecimen} = useSpecimen();
+
     const onSubmit: SubmitHandler<SpecimenInputs> = async (data) => {
-        console.log("Submitting...", data);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        showToastSuccess("Submitted!")
+        const params: UpdateSpecimenParams = {
+            identifier: specimen.identifier,
+            type: data.type,
+            condition: data.condition,
+            state: data.state,
+            close: true
+        }
+
+        await updateSpecimen(params);
         setIsEditing(false);
     };
 
@@ -56,7 +64,7 @@ export default function SpecimenView({specimen}: SpecimenViewProps) {
                                   onChange={(selected) => field.onChange(selected?.value ?? "")}
                                   options={specimenTypeOptions}
                                   error={errors.type}
-                                  disabled={!isEditing}
+                                  disabled={true}
                               />
                           )}
                       />
@@ -84,16 +92,16 @@ export default function SpecimenView({specimen}: SpecimenViewProps) {
                   <div className="flex-1">
                       <Controller
                           control={control}
-                          name="status"
+                          name="state"
                           rules={{ required: "Vui lòng chọn tình trạng hiện tại của mẫu" }}
-                          defaultValue={specimen.status}
+                          defaultValue={specimen.state}
                           render={({ field }) => (
                               <SelectSearchInput
                                   label="Tình trạng hiện tại"
                                   value={specimenStatusOptions.find((opt) => opt.value === field.value)}
                                   onChange={(selected) => field.onChange(selected?.value ?? "")}
                                   options={specimenStatusOptions}
-                                  error={errors.status}
+                                  error={errors.state}
                                   disabled={!isEditing}
                               />
                           )}

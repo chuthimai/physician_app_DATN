@@ -9,13 +9,13 @@ export default function useServiceForm() {
     const {request, loading, error} = useApi<ServiceFormResponse>();
     const {showToastError, showToastSuccess} = useToast();
 
-    const getServiceForm = async (patientRecordId?: number | null) => {
+    const getServiceForm = async (patientRecordId?: number | null | string) => {
         if (!patientRecordId) {
             showToastError("Chưa xác định bệnh nhân")
             return;
         }
         try {
-            return await request("get", `${ENDPOINTS.GET_SERVICE_FORM}/${patientRecordId}`);
+            return await request("get", `${ENDPOINTS.GET_SERVICE_FORM_BY_PATIENT_RECORD_ID}/${patientRecordId}`);
         } catch (e) {
             if (!(e instanceof Error)) return;
             log.error(`getServiceForm: ${e.message}`);
@@ -45,7 +45,7 @@ export default function useServiceForm() {
 
     const sendServiceForm = async (payload: ServiceFormSubmitParams) => {
         try {
-            await request("post", ENDPOINTS.SEND_SERVICE_FORM, payload);
+            await request("post", `${ENDPOINTS.SEND_SERVICE_FORM}/${payload.serviceReportIdentifier}`, payload);
             showToastSuccess("Gửi thành công");
         } catch (e) {
             if (!(e instanceof Error)) return;

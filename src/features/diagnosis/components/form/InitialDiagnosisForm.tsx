@@ -8,8 +8,10 @@ import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordId
 
 export default function InitialDiagnosisForm() {
     const {getServiceForm, sendServiceForm} = useServiceForm();
-    const [form, setForm] = useState<AssessmentItem[]>([]);
+
     const patientRecordIdContext = useContext(PatientRecordIdContext);
+
+    const [form, setForm] = useState<AssessmentItem[]>([]);
     const [serviceRecordId, setServiceRecordId] = useState<number | undefined>(undefined);
 
     const fetchForm = async () => {

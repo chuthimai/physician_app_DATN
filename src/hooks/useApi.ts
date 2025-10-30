@@ -27,9 +27,9 @@ export function useApi<T>() {
                     showToastError("Không có quyền truy cập (403).");
                     break;
 
-                case 404:
-                    showToastError("Không tìm thấy tài nguyên (404).");
-                    break;
+                // case 404:
+                //     showToastError("Không tìm thấy tài nguyên (404).");
+                //     break;
 
                 case 408:
                     showToastError("Kết nối quá hạn, thử lại sau (408).");

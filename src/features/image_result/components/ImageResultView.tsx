@@ -21,16 +21,24 @@ export default function ImageResultView({imageReport}: ImageResultViewProps) {
         >
             <h3 className="font-bold">Báo cáo số {imageReport.identifier}</h3>
             <div className="space-y-1">
-                <div className="flex">
-                    <div className="w-50 text-gray-700">Người thực hiện</div>
-                    <div className="flex-1">
-                        BS. {"Nguyen Van A"}
+                { imageReport.serviceReport.performer?.name &&
+                    <div className="flex">
+                        <div className="w-50 text-gray-700">Người thực hiện</div>
+                        <div className="flex-1">
+                            BS. {imageReport.serviceReport.performer?.name}
+                        </div>
                     </div>
-                </div>
-                <div className="flex">
-                    <div className="w-50 text-gray-700">Thời điểm thực hiện</div>
-                    <div className="flex-1">{formattedFullDate(new Date(imageReport.effectiveTime))}</div>
-                </div>
+                }
+
+                {
+                    imageReport.serviceReport.effectiveTime &&
+                    <div className="flex">
+                        <div className="w-50 text-gray-700">Thời điểm thực hiện</div>
+                        <div className="flex-1">
+                            {formattedFullDate(new Date(imageReport.serviceReport.effectiveTime))}
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     );

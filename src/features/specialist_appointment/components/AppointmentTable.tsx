@@ -36,7 +36,6 @@ export default function AppointmentTable({
             physicianIdentifier: appointment.physician?.identifier,
         }
         onClickSaveAppointment(params);
-        console.log(appointment);
     }
 
     function handleUpdate(appointment: Appointment) {

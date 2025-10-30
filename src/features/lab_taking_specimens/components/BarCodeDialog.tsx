@@ -7,13 +7,16 @@ import {
 } from "@/components/ui/dialog.tsx";
 import Barcode from "react-barcode";
 import useNumber from "@/hooks/useNumber.ts";
+import type Specimen from "../types/Specimen";
+
 interface BarCodeDialogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
+    specimen: Specimen | undefined;
 }
 
-export default function BarCodeDialog({open, onOpenChange} : BarCodeDialogProps) {
-    const { toTwelveDigitString } = useNumber();
+export default function BarCodeDialog({open, onOpenChange, specimen} : BarCodeDialogProps) {
+    const { toFiveDigitString } = useNumber();
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -24,9 +27,10 @@ export default function BarCodeDialog({open, onOpenChange} : BarCodeDialogProps)
                         <div className={"flex justify-center"}>
                             <div>
                                 <Barcode
-                                    value={`XN${toTwelveDigitString(1234567891012)}`}
+                                    value={`XN${toFiveDigitString(specimen?.identifier || 0)}`}
                                     displayValue
                                     fontSize={14}
+                                    format="CODE128"
                                 />
                             </div>
                         </div>

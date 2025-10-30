@@ -7,6 +7,9 @@ import ButtonSave from "@/components/button/ButtonSave.tsx";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";
 import PrescriptionTable from "@/features/diagnosis/components/table/PrescriptionTable.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
+import type CreatePrescriptionParams from "@/features/diagnosis/type/CreatePrescriptionParams.ts";
+import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
+import usePrescription from "@/features/diagnosis/hooks/usePrescription.ts";
 
 type Props = {
     open: boolean;
@@ -20,6 +23,10 @@ type PrescriptionInputs = {
 export default function PrescriptionDialog({ open, onOpenChange }: Props) {
     const medicationsContext = useContext(MedicationsContext);
     const prescribedMedications = medicationsContext?.medications || [];
+    const patientRecordIdContext = useContext(PatientRecordIdContext);
+
+    const {createPrescription, error} = usePrescription();
+
     const {
         register,
         handleSubmit,
@@ -29,19 +36,25 @@ export default function PrescriptionDialog({ open, onOpenChange }: Props) {
     const {showToastError} = useToast();
 
     const onSubmit: SubmitHandler<PrescriptionInputs> = async (data) => {
+        if (!patientRecordIdContext?.patientRecordId) return;
+
         const note = data.note;
-        // TODO: delete
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         if (medicationsContext?.medications === undefined || medicationsContext?.medications.length === 0) {
             onOpenChange(false);
             showToastError("Chưa có thuốc nào được thêm");
             return;
         }
 
-        // TODO: Thêm logic api lưu danh sách thuốc trên server
-        console.log("Submitted!");
-        console.log("Medications: ", prescribedMedications);
-        console.log("Note: ", note);
+        const params: CreatePrescriptionParams = {
+            patientRecordIdentifier: Number(patientRecordIdContext.patientRecordId),
+            instructions: prescribedMedications,
+            advice: note,
+        }
+
+        await createPrescription(params);
+        if (error) return;
+
         medicationsContext?.setMedications([]);
         onOpenChange(false);
         reset();

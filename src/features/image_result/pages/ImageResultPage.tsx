@@ -1,6 +1,7 @@
 import DiagnosisMenu from "@/components/diagnosis/diagnosis_menu/DiagnosisMenu.tsx";
 import {Outlet, useLocation} from "react-router-dom";
 import {MenuItem} from "@/components/diagnosis/diagnosis_menu/MenuItem.tsx";
+import SelectImageServiceForm from "@/features/image_result/components/SelectImageServiceForm.tsx";
 
 export default function ImageResultPage() {
     const activePath = useLocation().pathname;
@@ -19,6 +20,10 @@ export default function ImageResultPage() {
                     />
                 </div>
             }
+
+            <div className={`${showImageResultMenuItem ? "hidden" : ""}`}>
+                <SelectImageServiceForm/>
+            </div>
 
         </div>
         <div className="flex-1 overflow-y-auto items-center justify-center bg-white px-16 pt-8 mt-4 pb-32 rounded-lg shadow-md border-2 border-gray-200">

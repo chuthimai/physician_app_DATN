@@ -1,7 +1,7 @@
 import {createContext} from "react";
 
 export type PatientRecordIdContextType = {
-    patientRecordId: number | null | undefined;
+    patientRecordId: number | null | undefined | string;
     setPatientRecordId: (r: number | null | undefined) => void;
 };
 

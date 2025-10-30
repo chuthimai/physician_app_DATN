@@ -1,18 +1,28 @@
-import { useState } from "react";
+import React, {useContext, useState } from "react";
 import { Plus, X } from "lucide-react";
 import PreviewImageDialog from "@/features/add_image/components/PreviewImageDialog.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
+import useUploadImage from "../hooks/useUploadImages";
+import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 
-export default function ImageUploader() {
+type AddImageFormProps = {
+    imageReportId?: number,
+    setShowAddImageForm: (showAddImageForm: boolean) => void;
+}
+
+export default function AddImageForm({imageReportId, setShowAddImageForm}: AddImageFormProps) {
     const [images, setImages] = useState<File[]>([]);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [openPreview, setOpenPreview] = useState(false);
+
+    const patientRecordIdContext = useContext(PatientRecordIdContext);
+    const {uploadImages, error} = useUploadImage();
 
     const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files.length > 0) {
             const newImages = Array.from(files);
-            setImages((prev) => [...prev, ...newImages]); // Giới hạn 4 ảnh
+            setImages((prev) => [...prev, ...newImages]);
         }
     };
 
@@ -24,6 +34,17 @@ export default function ImageUploader() {
         setPreviewUrl(url);
         setOpenPreview(true);
     };
+
+    const onClickSave = async () => {
+        if (!imageReportId) return;
+        await uploadImages(imageReportId, images);
+        if (error) return;
+        setImages([]);
+        setPreviewUrl(null);
+        setOpenPreview(false);
+        setShowAddImageForm(false);
+        patientRecordIdContext?.setPatientRecordId(undefined);
+    }
 
     return (
         <div className="flex flex-col gap-4">
@@ -77,8 +98,7 @@ export default function ImageUploader() {
                 <ButtonSave
                     label={"Lưu"}
                     className={"w-full"}
-                    // TODO: Thêm lưu nhiều ảnh
-                    onClick={() => {}}
+                    onClick={onClickSave}
                 />
             </div>
         </div>

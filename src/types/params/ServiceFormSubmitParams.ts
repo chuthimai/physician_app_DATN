@@ -11,8 +11,8 @@ export default interface ServiceFormSubmitParams {
 
     // Diagnosis Report
     type?: string,
-    severity?: string,
-    conclusion?: string,
+    severity: string,
+    conclusion: string,
 
     // Image Report
     focus?: string,

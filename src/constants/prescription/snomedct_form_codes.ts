@@ -8,5 +8,6 @@ export const SNOMEDCT_FORM_CODES : Record<string, string> = {
         "385219001": "Dung dịch tiêm",
         "385108007": "Kem bôi",
         "385100003": "Thuốc mỡ",
-        "385133007": "Bột hít"
+        "385133007": "Bột hít",
+        "385157007": "Ống hít"
 } as const;

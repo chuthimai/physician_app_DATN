@@ -9,8 +9,10 @@ import {useToast} from "@/hooks/useToast.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {useService} from "@/features/add_services/hooks/useService.ts";
 import type {AddServiceParams} from "@/features/add_services/types/AddServiceParams.ts";
+import {PatientContext} from "@/providers/patient/PatientContext.tsx";
 
 export default function AddServicesPage() {
+    const patientContext = useContext(PatientContext);
     const servicesContext = useContext(ServicesContext);
     const recordIdContext = useContext(PatientRecordIdContext);
     const {addService} = useService();
@@ -29,7 +31,7 @@ export default function AddServicesPage() {
         if (!recordIdContext?.patientRecordId) return;
 
         const params: AddServiceParams = {
-            patientRecordIdentifier: recordIdContext.patientRecordId,
+            patientRecordIdentifier: Number(recordIdContext?.patientRecordId),
             serviceIdentifiers: servicesContext.services.map((s) => s.identifier),
         }
 
@@ -37,9 +39,9 @@ export default function AddServicesPage() {
         servicesContext?.setServices([]);
     }
 
-    if (!recordIdContext?.patientRecordId) {
+    if (!patientContext?.patient) {
         return <div className="w-full h-full flex items-center justify-center">
-            Chưa xác định bệnh án
+            Chưa xác định bệnh nhân
         </div>
     }
 

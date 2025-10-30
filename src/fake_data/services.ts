@@ -33,7 +33,6 @@ export const services: Service[] = [
         "name": "Khám nội tổng quát",
         "active": true,
         "type": "Khám bệnh",
-        "extraDetails": "Khám sức khỏe toàn diện bởi bác sĩ nội khoa.",
         "price": 300000,
         "location": "Phòng 201"
     },
@@ -42,7 +41,6 @@ export const services: Service[] = [
         "name": "Xét nghiệm máu cơ bản",
         "active": true,
         "type": "Xét nghiệm",
-        "extraDetails": "Bao gồm công thức máu, đường huyết, mỡ máu.",
         "price": 450000,
         "location": "Phòng xét nghiệm A"
     },
@@ -51,7 +49,6 @@ export const services: Service[] = [
         "name": "Siêu âm bụng tổng quát",
         "active": true,
         "type": "Chẩn đoán hình ảnh",
-        "extraDetails": "Siêu âm gan, mật, tụy, thận, bàng quang.",
         "price": 500000,
         "location": "Khu chẩn đoán hình ảnh"
     },
@@ -60,7 +57,6 @@ export const services: Service[] = [
         "name": "Điện tim đồ (ECG)",
         "active": true,
         "type": "Chẩn đoán hình ảnh",
-        "extraDetails": "Đánh giá nhịp tim, dẫn truyền điện tim.",
         "price": 200000,
         "location": "Phòng điện tim"
     },
@@ -69,7 +65,6 @@ export const services: Service[] = [
         "name": "Xét nghiệm nước tiểu",
         "active": true,
         "type": "Xét nghiệm",
-        "extraDetails": "Phân tích thành phần nước tiểu.",
         "price": 150000,
         "location": "Phòng xét nghiệm B"
     }

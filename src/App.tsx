@@ -3,10 +3,12 @@ import SideBar from "./components/sidebar/SideBar.tsx";
 import {Colors} from "@/constants/colors.ts";
 import useAuth from "@/features/auth/hooks/useAuth.ts";
 import ButtonLogout from "@/components/button/ButtonLogout.tsx";
+import {useAppInitializer} from "@/hooks/useAppInitializer.ts";
 
 
 function App() {
     const { logout } = useAuth();
+    useAppInitializer();
 
     return (
         <div className="flex flex-col h-screen min-w-[768px] min-h-[600px]">

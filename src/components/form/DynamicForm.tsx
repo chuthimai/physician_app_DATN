@@ -35,20 +35,19 @@ export default function DynamicForm({ assessmentItems, onClickSubmit, type, serv
 
         const serviceFormSubmit: ServiceFormSubmitParams = {
             serviceReportIdentifier: serviceRecordId,
-            category: data.category,
-            method: data.method,
+            category: data.category || "demo",
+            method: data.method || "demo",
             effectiveTime: formatLocalDate(new Date()),  // TODO: fix after
             assessmentResults: result,
 
             type: type,
-            severity: data.severity,
-            conclusion: data.conclusion,
+            severity: data.severity || "demo",
+            conclusion: data.conclusion || "demo",
 
-            focus: data.focus,
-            interpretation: data.interpretation,
+            focus: data.focus || "demo",
+            interpretation: data.interpretation || "demo",
             media: undefined,
         }
-
         onClickSubmit(serviceFormSubmit);
         reset();
     };

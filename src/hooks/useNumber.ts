@@ -3,5 +3,12 @@ export default function useNumber() {
         return String(num).padStart(12, "0");
     }
 
-    return { toTwelveDigitString }
+    function toFiveDigitString(num: number): string {
+        return String(num).padStart(5, "0");
+    }
+
+    return {
+        toTwelveDigitString,
+        toFiveDigitString,
+    }
 }

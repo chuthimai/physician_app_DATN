@@ -72,20 +72,20 @@ export default function RenderAssessmentItems({
                     <table className="w-full border border-gray-300 text-sm mb-4">
                         <thead className="bg-gray-100">
                         <tr>
-                            <th className="border px-3 py-2 text-left w-1/4">
+                            <th className="border px-3 py-2 w-1/4 text-center">
                                 Chỉ số xét nghiệm
                             </th>
-                            <th className="border px-3 py-2 text-left w-1/4">Kết quả</th>
-                            <th className="border px-3 py-2 text-left w-1/4">
+                            <th className="border px-3 py-2 w-1/4  text-center">Kết quả</th>
+                            <th className="border px-3 py-2 w-1/4 text-center">
                                 Chỉ số bình thường
                             </th>
-                            <th className="border px-3 py-2 text-left w-1/4">Đơn vị</th>
+                            <th className="border px-3 py-2 w-1/4 text-center">Đơn vị</th>
                         </tr>
                         </thead>
                         <tbody>
                         {indicatorChildren.map((child) => (
                             <tr key={child.identifier}>
-                                <td className="border px-3 py-2">{child.name}</td>
+                                <td className="border px-3 py-2 text-center">{child.name}</td>
                                 <td className="border px-3 py-2">
                                     <TextInput
                                         type={"number"}
@@ -100,12 +100,12 @@ export default function RenderAssessmentItems({
                                         </p>
                                     )}
                                 </td>
-                                <td className="border px-3 py-2">
+                                <td className="border px-3 py-2 text-center">
                                     {child.measurementItem
                                         ? `${child.measurementItem.minimum} - ${child.measurementItem.maximum}`
                                         : "-"}
                                 </td>
-                                <td className="border px-3 py-2">
+                                <td className="border px-3 py-2 text-center">
                                     {child.measurementItem?.unit || "-"}
                                 </td>
                             </tr>

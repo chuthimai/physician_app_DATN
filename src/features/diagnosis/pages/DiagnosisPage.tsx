@@ -3,13 +3,46 @@ import {Outlet} from "react-router-dom";
 import DiagnosisMenu from "@/components/diagnosis/diagnosis_menu/DiagnosisMenu.tsx";
 import ButtonScan from "../../../components/button/ButtonScan.tsx";
 import {MenuItem} from "@/components/diagnosis/diagnosis_menu/MenuItem.tsx";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {CloseRecordDialog} from "@/features/diagnosis/components/dialog/CloseRecordDialog.tsx";
 import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
+import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
+import {useToast} from "@/hooks/useToast.ts";
+import usePatientInfo from "@/hooks/api/usePatientInfo.ts";
 
 export default function DiagnosisPage() {
     const [openCloseRecordDialog, setOpenCloseRecordDialog] = useState(false);
     const [openScan, setOpenScan] = useState(false);
+
+    const patientRecordIdContext = useContext(PatientRecordIdContext);
+    const patientRecordId = patientRecordIdContext?.patientRecordId;
+
+    const {getPatientInfo, error} = usePatientInfo();
+
+    const { showToastError } = useToast();
+
+    const handleStorageChange = async () => {
+        const patientRecordIdRaw = localStorage.getItem("patientRecordId");
+        if (patientRecordIdRaw?.startsWith("BA")) {
+            const patientRecordId = Number(patientRecordIdRaw?.split("BA")[1]);
+
+            if (!isNaN(patientRecordId)) {
+                patientRecordIdContext?.setPatientRecordId(patientRecordId);
+                await getPatientInfo(patientRecordId);
+                if (!error) return;
+            }
+        }
+
+        showToastError("Mã vạch không hợp lệ");
+        patientRecordIdContext?.setPatientRecordId(undefined);
+    };
+
+    useEffect(() => {
+        document.addEventListener("scanned", handleStorageChange);
+        return () => {
+            document.removeEventListener("scanned", handleStorageChange);
+        };
+    }, [patientRecordId]);
 
     return <div className="flex flex-col h-screen">
         <PatientCurrent/>

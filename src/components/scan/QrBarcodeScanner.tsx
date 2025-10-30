@@ -14,12 +14,12 @@ export function QrBarcodeScanner({resultName, open, onOpenChange, onLoadingChang
     const scannerRef = useRef<Html5Qrcode | null>(null);
 
     useEffect(() => {
-        startScanner().then(r => {console.log(r)});
+        startScanner().then(() => null);
     }, []);
 
     useEffect(() => {
         if (!open) {
-            stopScanner().then(r => {console.log(r)});
+            stopScanner().then(() => null);
         }
     }, [open]);
 

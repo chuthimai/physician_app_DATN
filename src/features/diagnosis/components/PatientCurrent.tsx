@@ -13,16 +13,20 @@ export default function PatientCurrent() {
             Bệnh nhân tiếp theo
         </div>
         <div className={`${Colors.TextTertiary} font-bold flex flex-col items-center`}>
-            <div>{patientContext?.patient === undefined ? "Chưa xác định bệnh nhân" : patientContext.patient.name}</div>
-            <div>
-                <div onClick={() => setOpenCurrentRecordDialog(true)} className={`${Colors.TextLinkDetail} ${Colors.TextLinkDetailHover} underline text-sm italic`}>
-                    Chi tiết
-                </div>
-                <CurrentPatientRecordDialog
-                    open={openCurrentRecordDialog}
-                    onOpenChange={setOpenCurrentRecordDialog}
-                />
-            </div>
+            <div>{patientContext?.patient === undefined ? "Chưa xác định bệnh nhân" : patientContext?.patient.name}</div>
+            {
+                patientContext?.patient && (
+                    <div>
+                        <div onClick={() => setOpenCurrentRecordDialog(true)} className={`${Colors.TextLinkDetail} ${Colors.TextLinkDetailHover} underline text-sm italic`}>
+                            Chi tiết
+                        </div>
+                        <CurrentPatientRecordDialog
+                            open={openCurrentRecordDialog}
+                            onOpenChange={setOpenCurrentRecordDialog}
+                        />
+                    </div>
+                )
+            }
 
         </div>
         <div className="flex justify-end">
