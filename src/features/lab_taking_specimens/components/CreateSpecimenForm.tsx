@@ -41,7 +41,7 @@ export default function CreateSpecimenForm({specimen, setSpecimen}: CreateSpecim
         const params: UpdateSpecimenParams = {
             identifier: specimen.identifier,
             type: data.type,
-            condition: data.type,
+            condition: data.condition,
             state: data.state,
             close: false,
         }

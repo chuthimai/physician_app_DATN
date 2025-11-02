@@ -28,7 +28,7 @@ export default function SelectLabServiceForm({setSpecimens} : SelectLabServiceFo
         if (!servicesResponse) return;
 
         const options: Option[] = servicesResponse.map((s) => ({
-            label: `${s.name} (${s.location})`,
+            label: `${s.name}`,
             value: s.identifier.toString(),
         }));
 

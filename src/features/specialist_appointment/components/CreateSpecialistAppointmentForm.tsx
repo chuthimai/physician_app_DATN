@@ -45,7 +45,10 @@ export default function CreateSpecialistAppointmentForm(
 
     // ------------------------- function ------------------------------
     const fetchSpecialties = async () => {
-        const specialties = await getSpecialties();
+        const specialties = await getSpecialties()
+            .then((r) => r.filter(
+                (e) => e.name.toLowerCase().includes("chuyên khoa")
+            ));
 
         const specialtyOptions: Option[] = specialties.map((s) => ({
             label: s.name,
@@ -56,7 +59,9 @@ export default function CreateSpecialistAppointmentForm(
     };
 
     const fetchPhysiciansWorkScheduleBySpecialty = async () => {
-        const params: PhysiciansWorkScheduleBySpecialtyParams = {specialtyIdentifier: Number.parseInt(specialistSelected)};
+        const params: PhysiciansWorkScheduleBySpecialtyParams = {
+            specialtyIdentifier: Number.parseInt(specialistSelected)
+        };
         const physiciansWorkScheduleBySpecialty = await getPhysiciansWorkScheduleBySpecialty(params);
 
         const options: Option[] = physiciansWorkScheduleBySpecialty.map((s) => ({
@@ -95,15 +100,17 @@ export default function CreateSpecialistAppointmentForm(
 
     const onSubmit: SubmitHandler<AddSpecialistAppointmentInputs> = async (data) => {
         const selectedSpecialist = specialistOptions.find((s) => s.value === data.specialist);
+        console.log("1>>>>>>>>>>");
+        console.log(physiciansWorkScheduleBySpecialty);
         const selectedPhysicianWorkSchedule = physiciansWorkScheduleBySpecialty.find((p) => p.identifier === parseInt(data.physicianWorkSchedule));
-
+        console.log(selectedPhysicianWorkSchedule);
         if (!selectedSpecialist || !selectedPhysicianWorkSchedule) {
             toast.error("Vui lòng chọn chuyên khoa và bác sĩ");
             return;
         }
 
         const params: CreateSpecialtyServiceRecordParams = {
-            workScheduleIdentifier: selectedPhysicianWorkSchedule.identifier,
+            workScheduleIdentifier: selectedPhysicianWorkSchedule.workSchedule.identifier,
             physicianIdentifier: selectedPhysicianWorkSchedule.staff?.identifier,
             patientRecordIdentifier: Number(patientRecordIdContext?.patientRecordId),
         }

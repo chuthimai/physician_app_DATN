@@ -19,7 +19,7 @@ export default function SelectImageServiceForm() {
         if (!servicesResponse) return;
 
         const options: Option[] = servicesResponse.map((s) => ({
-            label: `${s.name} (${s.location})`,
+            label: `${s.name}`,
             value: s.identifier.toString(),
         }));
 

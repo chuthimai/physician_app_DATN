@@ -35,8 +35,11 @@ export default function ServiceForm() {
     const fetchServices = async (type?: string) => {
         const servicesResponse = await getServiceByType(type);
         if (!servicesResponse) return;
-        const services = servicesResponse.filter((s) => s.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION
-                && s.type !== SERVICE_TYPES.GENERAL_CONSULTATION)
+        const services = servicesResponse
+                .filter(
+                    (s) => s.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION
+                        && s.type !== SERVICE_TYPES.GENERAL_CONSULTATION
+                )
             || [];
 
         setServices(services);
@@ -85,9 +88,16 @@ export default function ServiceForm() {
                         render={({ field }) => (
                             <SelectSearchInput
                                 label="Loại dịch vụ"
-                                value={serviceTypeOptions.find((opt) => opt.value === field.value)}
+                                value={
+                                serviceTypeOptions
+                                    .find((opt) => opt.value === field.value)
+                                }
                                 onChange={(selected) => field.onChange(selected?.value ?? "")}
-                                options={serviceTypeOptions}
+                                options={
+                                serviceTypeOptions
+                                    .filter((e) => e.label !== SERVICE_TYPES.GENERAL_CONSULTATION
+                                        && e.label !== SERVICE_TYPES.SPECIALIST_CONSULTATION)
+                            }
                             />
                         )}
                     />
