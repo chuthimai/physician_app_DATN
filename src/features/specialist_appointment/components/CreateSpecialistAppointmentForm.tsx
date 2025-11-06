@@ -63,8 +63,15 @@ export default function CreateSpecialistAppointmentForm(
             specialtyIdentifier: Number.parseInt(specialistSelected)
         };
         const physiciansWorkScheduleBySpecialty = await getPhysiciansWorkScheduleBySpecialty(params);
+        let physiciansWorkSchedule: StaffWorkSchedule[] = [];
+        if (selectedAppointment) {
+            physiciansWorkSchedule = physiciansWorkScheduleBySpecialty.filter(
+                (ws) => ws.workSchedule.date === selectedAppointment.workSchedule.date
+                    && ws.workSchedule.shift.identifier === selectedAppointment.workSchedule.shift.identifier
+            );
+        }
 
-        const options: Option[] = physiciansWorkScheduleBySpecialty.map((s) => ({
+        const options: Option[] = physiciansWorkSchedule.map((s) => ({
             label: `BS.${s.staff?.name} (${s.workSchedule.shift.name} ${s.workSchedule.date})`,
             value: s.identifier.toString(),
         }));
@@ -95,7 +102,7 @@ export default function CreateSpecialistAppointmentForm(
             setPhysicianOptions([]);
             return;
         }
-        fetchPhysiciansWorkScheduleBySpecialty();
+        fetchPhysiciansWorkScheduleBySpecialty().then(() => null);
     }, [specialistSelected]);
 
     const onSubmit: SubmitHandler<AddSpecialistAppointmentInputs> = async (data) => {
