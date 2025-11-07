@@ -1,4 +1,4 @@
-import {ROLES} from "./roles";
+import {imagingPhysician, labPhysician} from "./roles";
 import {type JSX} from "react";
 import {
     MdMedicalServices,
@@ -51,10 +51,6 @@ export type Item = {
     iconFill?: JSX.Element;
 };
 
-type SideBarMenuConfig = {
-    [role: string]: Item[];
-};
-
 const generalItems: Item[] = [
     {label: "Trang chủ", path: "/trang-chu", icon: <HomeOutline className={iconStyle}/>, iconFill: <HomeSolid className={iconStyle}/>,},
     {label: "Đổi mật khẩu", path: "/doi-mat-khau", icon: <KeyOutline className={iconStyle}/>, iconFill: <KeySolid className={iconStyle}/>,},
@@ -67,42 +63,49 @@ const generalItems: Item[] = [
     },
 ];
 
-export const sideBarMenus: SideBarMenuConfig = {
-    [ROLES.ATTENDING_PHYSICIAN]: [
-        ...generalItems,
-        {
-            label: "Chức năng",
-            children: [
-                {label: "Tạo bệnh án", path: "/tao-benh-an", icon: <MdOutlineNoteAdd className={iconStyle}/>, iconFill: <MdNoteAdd className={iconStyle}/>,},
-                {label: "Khám bệnh", path: "/kham-benh", icon: <HeartOutline className={iconStyle}/>, iconFill: <HeartSolid className={iconStyle}/>,},
-                {label: "Chỉ định chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <CiMedicalCrossOutline className={iconStyle}/>, iconFill: <CiMedicalCross className={iconStyle}/>,},
-                {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <MdOutlineMedicalServices className={iconStyle}/>, iconFill: <MdMedicalServices className={iconStyle}/>,},
-                {label: "Xem hồ sơ bệnh án", path: "/xem-tat-ca-benh-an", icon: <FolderOpenOutline className={iconStyle}/>, iconFill: <FolderOpenSolid className={iconStyle}/>,},
-                {label: "Giấy chuyển viện", path: "/giay-chuyen-vien", icon: <MdOutlineDescription className={iconStyle}/>, iconFill: <MdDescription className={iconStyle}/>,},
-            ]
-        }
-    ],
+export function getSideBarMenus(role: string): Item[] {
+    if (labPhysician.includes(role)) {
+        return [
+            ...generalItems,
+            {
+                label: "Chức năng",
+                children: [
+                    {label: "Lấy mẫu xét nghiệm", path: "/lay-mau-xet-nghiem", icon: <BeakerOutline className={iconStyle}/>, iconFill: <BeakerSolid className={iconStyle}/>,},
+                    {label: "Kiểm tra mẫu xét nghiệm", path: "/kiem-tra-mau-xet-nghiem", icon: <RiTestTubeLine className={iconStyle}/>, iconFill: <RiTestTubeFill className={iconStyle}/>,},
+                    {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem", icon: <ClipboardDocumentOutline className={iconStyle}/>, iconFill: <ClipboardDocumentSolid className={iconStyle}/>,},
+                ]
+            }
+        ];
+    }
 
-    [ROLES.LAB_PHYSICIAN]: [
-        ...generalItems,
-        {
-            label: "Chức năng",
-            children: [
-                {label: "Lấy mẫu xét nghiệm", path: "/lay-mau-xet-nghiem", icon: <BeakerOutline className={iconStyle}/>, iconFill: <BeakerSolid className={iconStyle}/>,},
-                {label: "Kiểm tra mẫu xét nghiệm", path: "/kiem-tra-mau-xet-nghiem", icon: <RiTestTubeLine className={iconStyle}/>, iconFill: <RiTestTubeFill className={iconStyle}/>,},
-                {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem", icon: <ClipboardDocumentOutline className={iconStyle}/>, iconFill: <ClipboardDocumentSolid className={iconStyle}/>,},
-            ]
-        }
-    ],
+    else if (imagingPhysician.includes(role)) {
+        return [
+            ...generalItems,
+            {
+                label: "Chức năng",
+                children: [
+                    {label: "Thực hiện kỹ thuật", path: "/thuc-hien-ky-thuat", icon: <ImageOutline className={iconStyle}/>, iconFill: <ImageSolid className={iconStyle}/>,},
+                    {label: "Kết quả hình ảnh", path: "/ket-qua-hinh-anh", icon: <ClipboardDocumentOutline className={iconStyle}/>, iconFill: <ClipboardDocumentSolid className={iconStyle}/>,},
+                ]
+            }
+        ];
+    }
 
-    [ROLES.IMAGING_PHYSICIAN]: [
-        ...generalItems,
-        {
-            label: "Chức năng",
-            children: [
-                {label: "Thực hiện kỹ thuật", path: "/thuc-hien-ky-thuat", icon: <ImageOutline className={iconStyle}/>, iconFill: <ImageSolid className={iconStyle}/>,},
-                {label: "Kết quả hình ảnh", path: "/ket-qua-hinh-anh", icon: <ClipboardDocumentOutline className={iconStyle}/>, iconFill: <ClipboardDocumentSolid className={iconStyle}/>,},
-            ]
-        }
-    ],
-};
+    else if (role.includes("PHYSICIAN")) {
+        return [
+            ...generalItems,
+            {
+                label: "Chức năng",
+                children: [
+                    {label: "Tạo bệnh án", path: "/tao-benh-an", icon: <MdOutlineNoteAdd className={iconStyle}/>, iconFill: <MdNoteAdd className={iconStyle}/>,},
+                    {label: "Khám bệnh", path: "/kham-benh", icon: <HeartOutline className={iconStyle}/>, iconFill: <HeartSolid className={iconStyle}/>,},
+                    {label: "Chỉ định chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <CiMedicalCrossOutline className={iconStyle}/>, iconFill: <CiMedicalCross className={iconStyle}/>,},
+                    {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <MdOutlineMedicalServices className={iconStyle}/>, iconFill: <MdMedicalServices className={iconStyle}/>,},
+                    {label: "Xem hồ sơ bệnh án", path: "/xem-tat-ca-benh-an", icon: <FolderOpenOutline className={iconStyle}/>, iconFill: <FolderOpenSolid className={iconStyle}/>,},
+                    {label: "Giấy chuyển viện", path: "/giay-chuyen-vien", icon: <MdOutlineDescription className={iconStyle}/>, iconFill: <MdDescription className={iconStyle}/>,},
+                ]
+            }
+        ];
+    }
+    return [];
+}

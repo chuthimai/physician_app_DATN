@@ -13,7 +13,7 @@ export default function ProfileInfo() {
                 Ngày sinh: {userContext?.user?.birthDate ? formatLocalDate(userContext?.user?.birthDate): "Chưa có thông tin"}
             </p>
             <p>
-                Giới tính: {userContext?.user?.gender === true ? "Nam" : "Nữ"}
+                Giới tính: {userContext?.user?.gender ? "Nam" : "Nữ"}
             </p>
             <p>Địa chỉ: {userContext?.user?.address || "Chưa có thông tin"}</p>
             <p>Ngày bắt đầu làm việc: {userContext?.user?.startDate ? formatLocalDate(userContext?.user?.startDate) : "Chưa có thông tin"}</p>

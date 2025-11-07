@@ -6,7 +6,7 @@ export interface CreatePatientRecordResponse {
     patient: {
         name: string,
         email: string | null,
-        gender: string,
+        gender: boolean,
         birthDate: Date,
         // address: string,
         telecom: string | null,

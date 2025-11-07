@@ -1,12 +1,12 @@
 import {useApi} from "@/hooks/useApi.ts";
-import type {PatientResponse} from "@/features/create_patient_record/types/PatientResponse.ts";
 import {useState} from "react";
 import log from "loglevel";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
+import type Patient from "@/types/models/Patient.ts";
 
 export default function useSearchPatient() {
-    const { request, loading, error } = useApi<PatientResponse[]>();
-    const [results, setResults] = useState<PatientResponse[]>([]);
+    const { request, loading, error } = useApi<Patient[]>();
+    const [results, setResults] = useState<Patient[]>([]);
 
     const searchPatientsByName = async (name: string) => {
         try {

@@ -5,7 +5,6 @@ import {useService} from "@/features/add_services/hooks/useService.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {ServiceImageIdContext} from "@/providers/services/ServiceImageIdContext.tsx";
 
-
 export default function SelectImageServiceForm() {
     const labType = SERVICE_TYPES.IMAGING_SCAN;
     const [imageServiceOptions, setImageServiceOptions] = useState<Option[]>([]);

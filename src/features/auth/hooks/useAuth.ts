@@ -27,7 +27,7 @@ export default function useAuth() {
                 telecom: response.telecom,
                 email: response.email,
                 birthDate: new Date(response.birthDate),
-                gender: response.gender === "1",
+                gender: response.gender,
                 photo: response.photo,
                 role: response.role,
                 address: response.address,

@@ -21,7 +21,7 @@ export default function usePatientRecord() {
             const patient: Patient = {
                 identifier: response.patientIdentifier,
                 name: response.patient.name,
-                gender: response.patient.gender === "1",
+                gender: response.patient.gender,
                 birthDate: new Date(response.patient.birthDate),
                 telecom: response.patient.telecom,
             }

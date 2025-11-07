@@ -3,5 +3,5 @@ export const SERVICE_TYPES = {
     GENERAL_CONSULTATION: 'Sơ bộ',
     SPECIALIST_CONSULTATION: 'Chuyên khoa',
     LABORATORY_TEST: 'Xét nghiệm',
-    IMAGING_SCAN: 'Chụp chiếu',
+    IMAGING_SCAN: 'Chẩn đoán hình ảnh',
 };

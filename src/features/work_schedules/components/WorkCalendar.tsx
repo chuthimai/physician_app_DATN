@@ -16,7 +16,7 @@ export function WorkCalendar({ events }: Props) {
 
 
     return (
-        <div className="h-full">
+        <div className="h-full w-full">
             <Calendar
                 localizer={localizer}
                 events={events}
@@ -53,7 +53,7 @@ export function WorkCalendar({ events }: Props) {
                         if (currentView === "month") {
                             return (
                                 <div
-                                    className={`px-2 py-1 rounded-md text-white text-sm overflow-hidden text-ellipsis whitespace-nowrap`}
+                                    className={`px-2 py-1 rounded-md text-white text-sm overflow-hidden text-ellipsis whitespace-nowrap max-w-[200px] md:max-w-[100px]`}
                                     onMouseEnter={(ev) => {
                                         if (timeoutRef.current) clearTimeout(timeoutRef.current);
                                         const rect = (ev.target as HTMLElement).getBoundingClientRect();

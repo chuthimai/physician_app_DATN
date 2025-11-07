@@ -1,4 +1,4 @@
-import {ROLES} from "../constants/roles.ts";
+import {imagingPhysician, labPhysician} from "../constants/roles.ts";
 import type {Route} from "./types.ts";
 import {getAttendingPhysicianRoute} from "./role_routes/attending_physician_route.tsx";
 import {getLabPhysicianRoute} from "./role_routes/lab_physician_route.tsx";
@@ -27,13 +27,12 @@ export function getRoleRoutes(role: string): Route[] {
             element: <WorkSchedulesPage/>,
         }
     ]
-    switch (role) {
-        case ROLES.ATTENDING_PHYSICIAN:
-            return [...paths, ...getAttendingPhysicianRoute()];
-        case ROLES.LAB_PHYSICIAN:
-            return [...paths, ...getLabPhysicianRoute()];
-        case ROLES.IMAGING_PHYSICIAN:
-            return [...paths, ...getImagingPhysicianRoute()];
+    if (labPhysician.includes(role)) {
+        return [...paths, ...getLabPhysicianRoute()];
+    } else if (imagingPhysician.includes(role)) {
+        return [...paths, ...getImagingPhysicianRoute()];
+    } else if (role.includes("PHYSICIAN")) {
+        return [...paths, ...getAttendingPhysicianRoute()];
     }
 
     return [];
