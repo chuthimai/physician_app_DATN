@@ -10,7 +10,7 @@ import {
 import ButtonDelete from "@/components/button/ButtonDelete.tsx";
 import {useContext} from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
-import type {Service} from "@/features/add_services/types/Service.ts";
+import type {Service} from "@/types/models/Service.ts";
 
 export default function ServicesTable() {
     const servicesContext = useContext(ServicesContext);
@@ -34,7 +34,7 @@ export default function ServicesTable() {
             <TableRow>
                 <TableHead className="w-[150px] text-center">Tên dịch vụ</TableHead>
                 <TableHead className="w-[150px] text-center">Loại dịch vụ</TableHead>
-                <TableHead className="w-[100px] text-center">Địa điểm</TableHead>
+                <TableHead className="w-[100px] text-center">Đề nghị</TableHead>
                 <TableHead className="text-center"></TableHead>
             </TableRow>
         </TableHeader>

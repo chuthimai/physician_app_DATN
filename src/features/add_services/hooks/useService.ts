@@ -1,6 +1,6 @@
 import {useApi} from "@/hooks/useApi.ts";
 import {useToast} from "@/hooks/useToast.ts";
-import type {Service} from "@/features/add_services/types/Service.ts";
+import type {Service} from "@/types/models/Service.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type {AddServiceParams} from "@/features/add_services/types/AddServiceParams.ts";

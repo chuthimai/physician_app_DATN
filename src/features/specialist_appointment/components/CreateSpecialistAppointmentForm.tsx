@@ -13,10 +13,12 @@ import type CreateSpecialtyServiceRecordParams
     from "@/features/specialist_appointment/types/CreateSpecialtyServiceRecordParams.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import type {Option} from "@/types/others/Option.ts";
+import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 
 type AddSpecialistAppointmentInputs = {
     specialist: string;
     physicianWorkSchedule: string;
+    proposal: string;
 };
 
 type CreateSpecialistAppointmentFormProps = {
@@ -33,6 +35,7 @@ export default function CreateSpecialistAppointmentForm(
         watch,
         formState: {errors, isSubmitting},
         reset,
+        register,
     } = useForm<AddSpecialistAppointmentInputs>();
 
     const [physicianOptions, setPhysicianOptions] = useState<Option[]>([]);
@@ -45,10 +48,7 @@ export default function CreateSpecialistAppointmentForm(
 
     // ------------------------- function ------------------------------
     const fetchSpecialties = async () => {
-        const specialties = await getSpecialties()
-            .then((r) => r.filter(
-                (e) => e.name.toLowerCase().includes("chuyên khoa")
-            ));
+        const specialties = await getSpecialties();
 
         const specialtyOptions: Option[] = specialties.map((s) => ({
             label: s.name,
@@ -63,12 +63,15 @@ export default function CreateSpecialistAppointmentForm(
             specialtyIdentifier: Number.parseInt(specialistSelected)
         };
         const physiciansWorkScheduleBySpecialty = await getPhysiciansWorkScheduleBySpecialty(params);
-        let physiciansWorkSchedule: StaffWorkSchedule[] = [];
+
+        let physiciansWorkSchedule: StaffWorkSchedule[];
         if (selectedAppointment) {
             physiciansWorkSchedule = physiciansWorkScheduleBySpecialty.filter(
                 (ws) => ws.workSchedule.date === selectedAppointment.workSchedule.date
                     && ws.workSchedule.shift.identifier === selectedAppointment.workSchedule.shift.identifier
             );
+        } else {
+            physiciansWorkSchedule = physiciansWorkScheduleBySpecialty;
         }
 
         const options: Option[] = physiciansWorkSchedule.map((s) => ({
@@ -107,10 +110,8 @@ export default function CreateSpecialistAppointmentForm(
 
     const onSubmit: SubmitHandler<AddSpecialistAppointmentInputs> = async (data) => {
         const selectedSpecialist = specialistOptions.find((s) => s.value === data.specialist);
-        console.log("1>>>>>>>>>>");
-        console.log(physiciansWorkScheduleBySpecialty);
         const selectedPhysicianWorkSchedule = physiciansWorkScheduleBySpecialty.find((p) => p.identifier === parseInt(data.physicianWorkSchedule));
-        console.log(selectedPhysicianWorkSchedule);
+
         if (!selectedSpecialist || !selectedPhysicianWorkSchedule) {
             toast.error("Vui lòng chọn chuyên khoa và bác sĩ");
             return;
@@ -129,43 +130,55 @@ export default function CreateSpecialistAppointmentForm(
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-12 gap-2">
-                {/* Chuyên khoa */}
-                <div className="col-span-5">
-                    <Controller
-                        control={control}
-                        name="specialist"
-                        rules={{required: "Chọn chuyên khoa"}}
-                        render={({field}) => (
-                            <SelectSearchInput
-                                label="Chuyên khoa"
-                                value={specialistOptions.find((opt) => opt.value === field.value)}
-                                onChange={(selected) => field.onChange(selected?.value ?? "")}
-                                options={specialistOptions}
-                                error={errors.specialist}
+                <div className={"col-span-10"}>
+                    <div className="flex gap-2">
+                        {/* Chuyên khoa */}
+                        <div className="flex-1">
+                            <Controller
+                                control={control}
+                                name="specialist"
+                                rules={{required: "Chọn chuyên khoa"}}
+                                render={({field}) => (
+                                    <SelectSearchInput
+                                        label="Chuyên khoa"
+                                        value={specialistOptions.find((opt) => opt.value === field.value)}
+                                        onChange={(selected) => field.onChange(selected?.value ?? "")}
+                                        options={specialistOptions}
+                                        error={errors.specialist}
+                                    />
+                                )}
                             />
-                        )}
-                    />
+                        </div>
+
+                        {/* Bác sĩ */}
+                        <div className="flex-1">
+                            <Controller
+                                control={control}
+                                name="physicianWorkSchedule"
+                                rules={{required: "Chọn bác sĩ"}}
+                                render={({field}) => (
+                                    <SelectSearchInput
+                                        label="Bác sĩ"
+                                        value={physicianOptions.find((opt) => opt.value === field.value)}
+                                        onChange={(selected) => field.onChange(selected?.value ?? "")}
+                                        options={physicianOptions}
+                                        error={errors.physicianWorkSchedule}
+                                    />
+                                )}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <TextAreaInput
+                            label={"Đề nghị"}
+                            error={errors.proposal}
+                            {...register("proposal", { required: "Không được để trống" })}
+                        />
+                    </div>
                 </div>
 
-                {/* Bác sĩ */}
-                <div className="col-span-5">
-                    <Controller
-                        control={control}
-                        name="physicianWorkSchedule"
-                        rules={{required: "Chọn bác sĩ"}}
-                        render={({field}) => (
-                            <SelectSearchInput
-                                label="Bác sĩ"
-                                value={physicianOptions.find((opt) => opt.value === field.value)}
-                                onChange={(selected) => field.onChange(selected?.value ?? "")}
-                                options={physicianOptions}
-                                error={errors.physicianWorkSchedule}
-                            />
-                        )}
-                    />
-                </div>
 
-                <div className="col-span-2 flex items-center justify-center w-full">
+                <div className="col-span-2 flex items-start justify-center w-full p-6">
                     <ButtonSave label="Đặt" isSubmitting={isSubmitting}/>
                 </div>
             </div>

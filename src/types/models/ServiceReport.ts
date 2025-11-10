@@ -1,4 +1,4 @@
-import type {Service} from "@/features/add_services/types/Service.ts";
+import type {Service} from "@/types/models/Service.ts";
 import type AssessmentResult from "@/types/models/AssessmentResult.ts";
 import type Physician from "@/types/models/Physician.ts";
 import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
