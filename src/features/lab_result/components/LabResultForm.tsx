@@ -52,7 +52,7 @@ export default function LabResultForm({specimenId, setLoading}: LabResultFormPro
             return;
         }
 
-        await sendServiceForm(data);
+        await sendServiceForm(data, SERVICE_TYPES.LABORATORY_TEST);
         specimenIdContext?.setSpecimenId(undefined);
     };
 

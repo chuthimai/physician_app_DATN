@@ -30,7 +30,7 @@ export default function DoImageResultForm({form}: DoImageResultFormProps) {
             return;
         }
 
-        await sendServiceForm(data);
+        await sendServiceForm(data, SERVICE_TYPES.IMAGING_SCAN);
         navigator("/ket-qua-hinh-anh");
     };
 

@@ -18,4 +18,7 @@ export default interface ServiceFormSubmitParams {
     focus?: string,
     interpretation?: string,
     media?: ImageStudy[],
+
+    // Đóng report
+    isClosed: boolean,
 }

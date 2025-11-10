@@ -1,8 +1,8 @@
-import ClinicalDiagnosisForm from "../components/form/ClinicalDiagnosisForm.tsx";
+import SpecialistDiagnosisForm from "../components/form/SpecialistDiagnosisForm.tsx";
 import {useContext} from "react";
 import {PatientContext} from "@/providers/patient/PatientContext.tsx";
 
-export default function ClinicalDiagnosisPage() {
+export default function SpecialistDiagnosisPage() {
     const patientContext = useContext(PatientContext);
 
     if (patientContext?.patient === undefined) {
@@ -13,6 +13,6 @@ export default function ClinicalDiagnosisPage() {
 
     return <div className="flex flex-col">
         <h2 className="text-2xl font-bold text-center mb-4">Chuẩn đoán lâm sàng</h2>
-        <ClinicalDiagnosisForm/>
+        <SpecialistDiagnosisForm/>
     </div>
 }

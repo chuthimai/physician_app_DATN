@@ -4,7 +4,7 @@ export const ENDPOINTS = {
 
     // Records
     CREATE_RECORDS: "records/",
-    CLOSE_RECORDS: "",
+    CLOSE_RECORDS: "/records/close",
 
     // Patients
     SEARCH_PATIENT: "users/by-name",
@@ -21,7 +21,10 @@ export const ENDPOINTS = {
 
     // Report
     GET_SERVICE_FORM_BY_PATIENT_RECORD_ID: "reports/by-patient-record-identifier",
-    SEND_SERVICE_FORM: "reports/update-diagnosis-report-result",
+    // Send service form
+    SEND_SERVICE_FORM_DIAGNOSIS: "reports/update-diagnosis-report-result",
+    SEND_SERVICE_FORM_LAB: "reports/update-laboratory-report-result",
+    SEND_SERVICE_FORM_IMAGING: "reports/update-imaging-report-result",
     GET_SERVICE_FORM_BY_REPORT_ID: "reports/by-service-report-identifier",
     GET_SERVICE_FORM_BY_SPECIMEN_ID: "reports/by-specimen-identifier",
     GET_IMAGE_REPORTS_BY_SERVICE_ID: "reports/imaging-reports",

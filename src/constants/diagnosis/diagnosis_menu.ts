@@ -21,8 +21,7 @@ export function getDiagnosisMenus(role: string): Item[] {
     if (role.includes("PHYSICIAN")) {
         return [
             {label: "Sơ bộ", path: "/kham-benh/chuan-doan/so-bo"},
-            {label: "Lâm sàng", path: "/kham-benh/chuan-doan/lam-sang"},
-            {label: "Xác định", path: "/kham-benh/chuan-doan/xac-dinh"},
+            {label: "Chuyên khoa", path: "/kham-benh/chuan-doan/chuyen-khoa"},
             {label: "Kê thuốc", path: "/kham-benh/ke-thuoc"},
             {label: "Hẹn tái khám", path: "/kham-benh/hen-tai-kham"},
         ];

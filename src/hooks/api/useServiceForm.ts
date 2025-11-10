@@ -4,6 +4,7 @@ import type ServiceFormResponse from "@/types/responses/ServiceFormResponse.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
+import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 
 export default function useServiceForm() {
     const {request, loading, error} = useApi<ServiceFormResponse>();
@@ -43,9 +44,17 @@ export default function useServiceForm() {
         }
     }
 
-    const sendServiceForm = async (payload: ServiceFormSubmitParams) => {
+    const sendServiceForm = async (payload: ServiceFormSubmitParams, type: string) => {
+        let url = "";
+        if (type === SERVICE_TYPES.SPECIALIST_CONSULTATION) url = ENDPOINTS.SEND_SERVICE_FORM_DIAGNOSIS;
+        else if(type === SERVICE_TYPES.GENERAL_CONSULTATION) url = ENDPOINTS.SEND_SERVICE_FORM_DIAGNOSIS;
+        else if(type === SERVICE_TYPES.LABORATORY_TEST) url = ENDPOINTS.SEND_SERVICE_FORM_LAB;
+        else if(type === SERVICE_TYPES.IMAGING_SCAN) url = ENDPOINTS.SEND_SERVICE_FORM_IMAGING;
+
         try {
-            await request("post", `${ENDPOINTS.SEND_SERVICE_FORM}/${payload.serviceReportIdentifier}`, payload);
+            if (url === "") return;
+
+            await request("post", `${url}/${payload.serviceReportIdentifier}`, payload);
             showToastSuccess("Gửi thành công");
         } catch (e) {
             if (!(e instanceof Error)) return;

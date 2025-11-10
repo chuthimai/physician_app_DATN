@@ -34,7 +34,7 @@ export default function InitialDiagnosisForm() {
     }, []);
 
     const onSubmit = async (data: ServiceFormSubmitParams) => {
-        await sendServiceForm(data);
+        await sendServiceForm(data, SERVICE_TYPES.GENERAL_CONSULTATION);
     };
 
     if (!serviceRecordId) return <div/>;

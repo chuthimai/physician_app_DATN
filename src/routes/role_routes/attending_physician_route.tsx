@@ -2,8 +2,7 @@ import type {Route} from "../types.ts";
 import {CreatePatientRecordPage} from "../../features/create_patient_record/pages/CreatePatientRecordPage.tsx";
 import DiagnosisPage from "../../features/diagnosis/pages/DiagnosisPage.tsx";
 import InitialDiagnosisPage from "../../features/diagnosis/pages/InitialDiagnosisPage.tsx";
-import ClinicalDiagnosisPage from "../../features/diagnosis/pages/ClinicalDiagnosisPage.tsx";
-import FinalDiagnosisPage from "../../features/diagnosis/pages/FinalDiagnosisPage.tsx";
+import SpecialistDiagnosisPage from "../../features/diagnosis/pages/SpecialistDiagnosisPage.tsx";
 import PrescriptionPage from "../../features/diagnosis/pages/PrescriptionPage.tsx";
 import AddServicesPage from "@/features/add_services/pages/AddServicesPage.tsx";
 import {
@@ -33,12 +32,8 @@ export function getAttendingPhysicianRoute(): Route[] {
                     element: <InitialDiagnosisPage/>,
                 },
                 {
-                    path: "chuan-doan/lam-sang",
-                    element: <ClinicalDiagnosisPage/>,
-                },
-                {
-                    path: "chuan-doan/xac-dinh",
-                    element: <FinalDiagnosisPage/>,
+                    path: "chuan-doan/chuyen-khoa",
+                    element: <SpecialistDiagnosisPage/>,
                 },
                 {
                     path: "ke-thuoc",

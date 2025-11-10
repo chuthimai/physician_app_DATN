@@ -6,11 +6,11 @@ import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 
-export default function DiagnosisForm() {
+export default function SpecialistDiagnosisForm() {
     const {getServiceForm, sendServiceForm} = useServiceForm();
     const [form, setForm] = useState<AssessmentItem[]>([]);
-    const patientRecordIdContext = useContext(PatientRecordIdContext);
     const [serviceRecordId, setServiceRecordId] = useState<number | undefined>(undefined);
+    const patientRecordIdContext = useContext(PatientRecordIdContext);
 
     const fetchForm = async () => {
         const data = await getServiceForm(patientRecordIdContext?.patientRecordId);
@@ -18,7 +18,6 @@ export default function DiagnosisForm() {
             setForm([]);
             return;
         }
-
         if (data.serviceReport.service.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION) {
             setForm([]);
             return;
@@ -33,7 +32,7 @@ export default function DiagnosisForm() {
     }, []);
 
     const onSubmit = async (data: ServiceFormSubmitParams) => {
-        await sendServiceForm(data);
+        await sendServiceForm(data, SERVICE_TYPES.SPECIALIST_CONSULTATION);
     };
 
     if (!serviceRecordId) return <div/>;
@@ -43,7 +42,7 @@ export default function DiagnosisForm() {
             serviceRecordId={serviceRecordId}
             assessmentItems={form}
             onClickSubmit={onSubmit}
-            type={SERVICE_TYPES.GENERAL_CONSULTATION}
+            type={SERVICE_TYPES.SPECIALIST_CONSULTATION}
         />
     );
 }

@@ -17,8 +17,7 @@ export const useClosePatientRecord = () => {
             return
         }
         try {
-            // TODO: Sửa API sau
-            await request("post", ENDPOINTS.CLOSE_RECORDS);
+            await request("post", `${ENDPOINTS.CLOSE_RECORDS}/${patientRecordIdContext?.patientRecordId}`);
             showToastSuccess("Đóng bệnh án thành công")
         } catch (e) {
             if (!(e instanceof Error)) return;
