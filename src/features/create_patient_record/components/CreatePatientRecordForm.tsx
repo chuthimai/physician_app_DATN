@@ -21,8 +21,8 @@ type PatientInputs = {
     gender: string;
     address: string;
     phone: string;
-    hasTransferPaper: boolean;
-    hasInsurance: boolean;
+    havingTransferForm: boolean;
+    havingHealInsurance: boolean;
 };
 
 export default function CreatePatientRecordForm() {
@@ -65,8 +65,8 @@ export default function CreatePatientRecordForm() {
                     gender: gender === "Nam" ? "male" : "female",
                     address,
                     phone: phone === undefined ? "" : phone.toString(),
-                    hasTransferPaper: false,
-                    hasInsurance: false,
+                    havingTransferForm: false,
+                    havingHealInsurance: false,
                 });
             }
             setPatientInfo(null);
@@ -89,6 +89,8 @@ export default function CreatePatientRecordForm() {
             birthDate: data.dob,
             address: data.address,
             password: generatePassword(),
+            havingTransferForm: data.havingTransferForm,
+            havingHealInsurance: data.havingHealInsurance,
         }
 
         await createPatientRecord(createPatientParams);
@@ -103,8 +105,8 @@ export default function CreatePatientRecordForm() {
             gender:"male",
             address: "",
             phone: "",
-            hasTransferPaper: false,
-            hasInsurance: false,
+            havingTransferForm: false,
+            havingHealInsurance: false,
         });
     }
 
@@ -196,16 +198,16 @@ export default function CreatePatientRecordForm() {
 
                 <div className="col-span-3">
                     <Controller
-                        name="hasInsurance"
+                        name="havingHealInsurance"
                         control={control}
                         render={({ field }) => (
                             <div className="flex items-center space-x-2">
                                 <Checkbox
-                                    id="hasInsurance"
+                                    id="havingHealInsurance"
                                     checked={field.value === undefined ? false : field.value}
                                     onCheckedChange={(checked) => field.onChange(checked === true)}
                                 />
-                                <Label htmlFor="hasInsurance">Có bảo hiểm</Label>
+                                <Label htmlFor="havingHealInsurance">Có bảo hiểm</Label>
                             </div>
                         )}
                     />
@@ -213,16 +215,16 @@ export default function CreatePatientRecordForm() {
 
                 <div className="col-span-3">
                     <Controller
-                        name="hasTransferPaper"
+                        name="havingTransferForm"
                         control={control}
                         render={({ field }) => (
                             <div className="flex items-center space-x-2">
                                 <Checkbox
-                                    id="hasTransferPaper"
+                                    id="havingTransferForm"
                                     checked={field.value === undefined ? false : field.value}
                                     onCheckedChange={(checked) => field.onChange(checked === true)}
                                 />
-                                <Label htmlFor="hasTransferPaper">Có giấy chuyển viện</Label>
+                                <Label htmlFor="havingTransferForm">Có giấy chuyển viện</Label>
                             </div>
                         )}
                     />
