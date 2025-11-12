@@ -18,7 +18,7 @@ import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 type AddSpecialistAppointmentInputs = {
     specialist: string;
     physicianWorkSchedule: string;
-    proposal: string;
+    request: string;
 };
 
 type CreateSpecialistAppointmentFormProps = {
@@ -121,6 +121,7 @@ export default function CreateSpecialistAppointmentForm(
             workScheduleIdentifier: selectedPhysicianWorkSchedule.workSchedule.identifier,
             physicianIdentifier: selectedPhysicianWorkSchedule.staff?.identifier,
             patientRecordIdentifier: Number(patientRecordIdContext?.patientRecordId),
+            request: data.request,
         }
         onClickSaveAppointment(params);
         reset();
@@ -171,8 +172,8 @@ export default function CreateSpecialistAppointmentForm(
                     <div>
                         <TextAreaInput
                             label={"Đề nghị"}
-                            error={errors.proposal}
-                            {...register("proposal", { required: "Không được để trống" })}
+                            error={errors.request}
+                            {...register("request", { required: "Không được để trống" })}
                         />
                     </div>
                 </div>
