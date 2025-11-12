@@ -11,6 +11,7 @@ import ButtonDelete from "@/components/button/ButtonDelete.tsx";
 import {useContext} from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 import type {Service} from "@/types/models/Service.ts";
+import type {AddedService} from "@/features/add_services/types/AddedService.ts";
 
 export default function ServicesTable() {
     const servicesContext = useContext(ServicesContext);
@@ -42,14 +43,14 @@ export default function ServicesTable() {
 
         </div>
         <TableBody>
-            {servicesContext?.services.map((service: Service) => (
+            {servicesContext?.services.map((service: AddedService) => (
                 <TableRow key={ service.identifier }>
                     <TableCell className="font-medium text-center whitespace-pre-wrap break-words">
                         {service.name}
                     </TableCell>
                     <TableCell className="text-center">{service.type}</TableCell>
                     <TableCell className="text-left whitespace-pre-wrap break-words">
-                        {service.location}
+                        {service.request}
                     </TableCell>
                     <TableCell className="text-left w-[50px]">
                         <ButtonDelete

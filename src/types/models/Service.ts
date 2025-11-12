@@ -1,3 +1,5 @@
+import type AssessmentItemResponse from "@/types/responses/AssessmentItemResponse.ts";
+
 export interface Service {
     identifier: number,
     name: string,
@@ -6,4 +8,5 @@ export interface Service {
     price: number,
     location?: string,
     note?: string,
+    assessmentItems?: AssessmentItemResponse[],  // TODO: delete after
 }

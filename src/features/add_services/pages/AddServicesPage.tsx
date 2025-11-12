@@ -8,7 +8,7 @@ import {useForm} from "react-hook-form";
 import {useToast} from "@/hooks/useToast.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {useService} from "@/features/add_services/hooks/useService.ts";
-import type {AddServiceParams} from "@/features/add_services/types/AddServiceParams.ts";
+import type {AddServiceParams, ServiceInfo} from "@/features/add_services/types/AddServiceParams.ts";
 import {PatientContext} from "@/providers/patient/PatientContext.tsx";
 
 export default function AddServicesPage() {
@@ -19,7 +19,7 @@ export default function AddServicesPage() {
 
     const {
         handleSubmit,
-        formState: { isSubmitting }
+        formState: {isSubmitting}
     } = useForm();
     const {showToastError} = useToast();
 
@@ -32,8 +32,16 @@ export default function AddServicesPage() {
 
         const params: AddServiceParams = {
             patientRecordIdentifier: Number(recordIdContext?.patientRecordId),
-            serviceIdentifiers: servicesContext.services.map((s) => s.identifier),
+            serviceInfo: servicesContext.services.map((s) => {
+                const serviceInfo: ServiceInfo = {
+                    serviceIdentifier: s.identifier,
+                    serviceRequest: s.request,
+                }
+                return serviceInfo;
+            }),
         }
+        console.log("AddServicesPage \n 1 >>>>>>>>>")
+        console.log(servicesContext.services);
 
         await addService(params);
         servicesContext?.setServices([]);
@@ -64,7 +72,9 @@ export default function AddServicesPage() {
 
             <ButtonCancel
                 label={"Xoá tất cả"}
-                onClick={() => {servicesContext?.setServices([])}}
+                onClick={() => {
+                    servicesContext?.setServices([])
+                }}
                 className="font-bold"
             />
         </div>

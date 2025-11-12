@@ -1,5 +1,5 @@
 import type {Service} from "@/types/models/Service.ts";
 
-interface AddedService  extends Service {
-    proposal?: string,
+export interface AddedService extends Service {
+    request: string,
 }

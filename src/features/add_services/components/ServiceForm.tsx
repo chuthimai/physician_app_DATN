@@ -14,7 +14,7 @@ import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 type AddServiceInputs = {
     type: string;
     serviceId: string;
-    proposal: string;
+    request: string;
 };
 
 export default function ServiceForm() {
@@ -72,9 +72,10 @@ export default function ServiceForm() {
 
         const service = services.find((s) => s.identifier === Number(data.serviceId));
         if (!service) return;
+        const addedService = {...service, request: data.request};
         servicesContext?.setServices(
             [...(servicesContext?.services || []),
-                service
+                addedService
             ]);
         reset();
     };
@@ -130,8 +131,8 @@ export default function ServiceForm() {
                     <div>
                         <TextAreaInput
                             label={"Đề nghị"}
-                            error={errors.proposal}
-                            {...register("proposal", { required: "Không được để trống" })}
+                            error={errors.request}
+                            {...register("request", { required: "Không được để trống" })}
                         />
                     </div>
                 </div>
