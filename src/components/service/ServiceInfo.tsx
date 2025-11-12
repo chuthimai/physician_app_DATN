@@ -76,6 +76,10 @@ export default function ServiceInfo({
                     <div className="w-50 text-gray-700">Loại xét nghiệm</div>
                     <div className="flex-1">{serviceInfo?.serviceReport.service.name || "Không có thông tin"}</div>
                 </div>
+                <div className="flex">
+                    <div className="w-50 text-gray-700">Đề nghị</div>
+                    <div className="flex-1">{serviceInfo?.serviceReport.request || "Không có thông tin"}</div>
+                </div>
 
                 <div className="flex">
                     <div className="w-50 text-gray-700">Người chỉ định</div>

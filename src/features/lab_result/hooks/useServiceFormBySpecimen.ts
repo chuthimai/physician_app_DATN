@@ -5,7 +5,7 @@ import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import {useContext} from "react";
 import {SpecimenIdContext} from "@/providers/specimen/SpecimenIdContext.tsx";
-import useMapper from "@/features/medical_records/hooks/useMapper.ts";
+import useMapper from "@/hooks/useMapper.ts";
 
 export default function useServiceFormBySpecimen() {
     const {request, loading, error} = useApi<ServiceFormResponse>();

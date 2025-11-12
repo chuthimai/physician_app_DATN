@@ -5,7 +5,7 @@ import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordId
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type {PatientRecordResponse} from "@/features/medical_records/types/PatientRecordResponse.ts";
-import useMapper from "@/features/medical_records/hooks/useMapper.ts";
+import useMapper from "@/hooks/useMapper.ts";
 import type {PatientRecord} from "@/types/models/PatientRecord.ts";
 
 export default function useDetailMedicalRecord() {

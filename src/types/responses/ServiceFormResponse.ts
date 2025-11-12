@@ -12,6 +12,7 @@ export default interface ServiceFormResponse {
             assessmentItems: AssessmentItemResponse[]
         },
         requester?: Physician,
+        request: string,
     }
     interpretation?: string,
     isPaid?: boolean,

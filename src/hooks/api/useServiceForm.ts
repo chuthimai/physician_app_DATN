@@ -5,7 +5,7 @@ import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
-import useMapper from "@/features/medical_records/hooks/useMapper.ts";
+import useMapper from "@/hooks/useMapper.ts";
 
 export default function useServiceForm() {
     const {request, loading, error} = useApi<ServiceFormResponse>();
