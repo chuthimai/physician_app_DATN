@@ -1,4 +1,4 @@
-import type AssessmentItem from "@/types/models/AssessmentItem.ts";
+import type AssessmentItemResponse from "@/types/responses/AssessmentItemResponse.ts";
 import type Physician from "@/types/models/Physician.ts";
 import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
 
@@ -9,7 +9,7 @@ export default interface ServiceFormResponse {
         service: {
             type: string,
             name: string,
-            assessmentItems: AssessmentItem[]
+            assessmentItems: AssessmentItemResponse[]
         },
         requester?: Physician,
     }

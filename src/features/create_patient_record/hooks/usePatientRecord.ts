@@ -23,6 +23,7 @@ export default function usePatientRecord() {
                 name: response.patient.name,
                 gender: response.patient.gender,
                 birthDate: new Date(response.patient.birthDate),
+                address: response.patient.address,
                 telecom: response.patient.telecom,
             }
             patientContext?.setPatient(patient);

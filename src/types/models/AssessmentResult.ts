@@ -1,7 +1,9 @@
-import type AssessmentItem from "@/types/models/AssessmentItem.ts";
+import type MeasurementItem from "@/types/models/MeasurementItem.ts";
 
-export default interface AssessmentResult {
+export interface AssessmentResult {
     identifier: number,
-    value: string,
-    evaluationItems?: AssessmentItem[],
+    name: string,
+    value?: string,
+    assessmentResults?: AssessmentResult[],
+    measurementItem?: MeasurementItem,
 }

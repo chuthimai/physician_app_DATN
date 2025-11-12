@@ -1,25 +1,35 @@
 import type {Service} from "@/types/models/Service.ts";
-import type AssessmentResult from "@/types/models/AssessmentResult.ts";
 import type Physician from "@/types/models/Physician.ts";
+import type {AssessmentResult} from "@/types/models/AssessmentResult.ts";
 import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
 
-export default interface ServiceReport {
+export interface ServiceReport {
     identifier: number,
-    category?: string,
-    method?: string,
+    category: string,
+    method: string,
+    status: string,
+    effectiveTime?: Date,
     service?: Service,
-    indicators?: AssessmentResult[],
-    status?: string,
-    effectiveTime?: string,
     performer?: Physician,
-    requester?: Physician,
+    assessmentResults: AssessmentResult[],
 
+    imageReport?: ImageReport,
+    diagnosisReport?: DiagnosisReport,
+    laboratoryReport?: LaboratoryReport,
+}
+
+interface ImageReport {
+    focus?: string,
     interpretation?: string,
     media?: ImageStudy[],
-    focus?: string,
+}
 
-    conclusion?: string,
-    severity?: string,
+interface DiagnosisReport {
     type?: string,
-    recordedTime?: string,
+    severity: string,
+    conclusion: string,
+}
+
+interface LaboratoryReport {
+    interpretation?: string,
 }

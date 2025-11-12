@@ -2,7 +2,7 @@ import type AssessmentItemParams from "@/types/params/AssessmentItemParams.ts";
 import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
 
 export default interface ServiceFormSubmitParams {
-    // ServiceReport
+    // ServiceReportResponse
     serviceReportIdentifier: number,
     category: string,
     method: string,

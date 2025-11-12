@@ -1,30 +1,28 @@
 import DynamicForm from "@/components/form/DynamicForm.tsx";
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
 import {useContext, useEffect, useState} from "react";
-import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
+import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 export default function SpecialistDiagnosisForm() {
     const {getServiceForm, sendServiceForm} = useServiceForm();
-    const [form, setForm] = useState<AssessmentItem[]>([]);
-    const [serviceRecordId, setServiceRecordId] = useState<number | undefined>(undefined);
+    const [serviceReport, setServiceReport] = useState<ServiceReport | undefined>(undefined);
     const patientRecordIdContext = useContext(PatientRecordIdContext);
 
     const fetchForm = async () => {
         const data = await getServiceForm(patientRecordIdContext?.patientRecordId);
         if (!data) {
-            setForm([]);
+            setServiceReport(undefined);
             return;
         }
-        if (data.serviceReport.service.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION) {
-            setForm([]);
+        if (data.service?.type !== SERVICE_TYPES.GENERAL_CONSULTATION) {
+            setServiceReport(undefined);
             return;
         }
 
-        setForm(data.serviceReport.service.assessmentItems);
-        setServiceRecordId(data.identifier);
+        setServiceReport(data);
     };
 
     useEffect(() => {
@@ -35,12 +33,11 @@ export default function SpecialistDiagnosisForm() {
         await sendServiceForm(data, SERVICE_TYPES.SPECIALIST_CONSULTATION);
     };
 
-    if (!serviceRecordId) return <div/>;
+    if (!serviceReport) return <div/>;
 
     return (
         <DynamicForm
-            serviceRecordId={serviceRecordId}
-            assessmentItems={form}
+            serviceReport={serviceReport}
             onClickSubmit={onSubmit}
             type={SERVICE_TYPES.SPECIALIST_CONSULTATION}
         />
