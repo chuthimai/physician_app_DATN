@@ -3,8 +3,9 @@ export const ENDPOINTS = {
     LOGIN: "auth/login?role",
 
     // Records
-    CREATE_RECORDS: "records/",
+    CREATE_RECORDS: "records",
     CLOSE_RECORDS: "/records/close",
+    GET_DETAIL_RECORD: "records",
 
     // Patients
     SEARCH_PATIENT: "users/by-name",

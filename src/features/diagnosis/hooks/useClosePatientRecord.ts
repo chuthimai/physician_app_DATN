@@ -1,13 +1,13 @@
-import {useApi} from "@/hooks/useApi.ts";
 import type {CreatePatientRecordResponse} from "@/features/create_patient_record/types/CreatePatientRecordResponse.ts";
 import {useToast} from "@/hooks/useToast.ts";
 import {useContext} from "react";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
+import {useApiLongTime} from "@/hooks/useApiLongTime.ts";
 
 export const useClosePatientRecord = () => {
-    const { request, loading, error } = useApi<CreatePatientRecordResponse>();
+    const { request, loading, error } = useApiLongTime<CreatePatientRecordResponse>();
     const {showToastSuccess, showToastError} = useToast();
     const patientRecordIdContext = useContext(PatientRecordIdContext);
 
