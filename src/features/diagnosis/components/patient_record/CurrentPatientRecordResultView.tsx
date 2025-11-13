@@ -6,13 +6,16 @@ type Props = {
 }
 
 export default function CurrentPatientRecordResultView({patientRecord}: Props) {
-    if (patientRecord.pathUrl) {
-        return <iframe src={patientRecord.pathUrl} width="100%" height="100%"/>
+    if (patientRecord.exportFileName) {
+        return <iframe
+            className="w-full h-[80vh]"
+            src={patientRecord.exportFileName}
+        />
     }
 
     return (
         <div className="space-y-3 w-full">
-            {patientRecord.serviceReports.map((r) => (
+            {patientRecord.serviceReports?.map((r) => (
                 <ServiceReportCard key={r.identifier} serviceReport={r} />
             ))}
         </div>

@@ -7,7 +7,7 @@ export interface PatientRecordResponse {
     havingTransferForm: boolean,
     havingHealInsurance: boolean,
     createTime: Date,
-    serviceReports: ServiceReportResponse[],
+    serviceReports?: ServiceReportResponse[],
     prescription?: Prescription,
-    pathUrl?: string,
+    exportFileName?: string,
 }

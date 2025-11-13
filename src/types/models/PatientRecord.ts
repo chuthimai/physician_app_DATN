@@ -7,5 +7,5 @@ export interface PatientRecord {
     createdTime: Date,
     serviceReports: ServiceReport[],
     prescription?: Prescription,
-    pathUrl?: string,
+    exportFileName?: string,
 }

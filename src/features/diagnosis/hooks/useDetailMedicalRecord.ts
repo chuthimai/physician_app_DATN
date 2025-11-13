@@ -22,9 +22,9 @@ export default function useDetailMedicalRecord() {
                 identifier: data.identifier,
                 status: data.status,
                 createdTime: data.createTime,
-                serviceReports: data.serviceReports.map(mapServiceReport),
+                serviceReports: data.serviceReports?.map(mapServiceReport) || [],
                 prescription: data.prescription,
-                pathUrl: data.pathUrl,
+                exportFileName: data.exportFileName,
             };
             return patientRecord;
         } catch (e) {
