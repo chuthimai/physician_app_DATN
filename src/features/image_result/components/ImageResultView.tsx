@@ -1,9 +1,9 @@
-import type ImageReport from "@/features/image_result/types/ImageReport.ts";
 import {useNavigate} from "react-router-dom";
 import useDate from "@/hooks/useDate.ts";
+import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 type ImageResultViewProps = {
-    imageReport: ImageReport
+    imageReport: ServiceReport
 }
 
 export default function ImageResultView({imageReport}: ImageResultViewProps) {
@@ -21,21 +21,19 @@ export default function ImageResultView({imageReport}: ImageResultViewProps) {
         >
             <h3 className="font-bold">Báo cáo số {imageReport.identifier}</h3>
             <div className="space-y-1">
-                { imageReport.serviceReport.performer?.name &&
-                    <div className="flex">
-                        <div className="w-50 text-gray-700">Người thực hiện</div>
-                        <div className="flex-1">
-                            BS. {imageReport.serviceReport.performer?.name}
-                        </div>
+                <div className="flex">
+                    <div className="w-50 text-gray-700">Người thực hiện</div>
+                    <div className="flex-1">
+                        BS. {imageReport.performer?.name}
                     </div>
-                }
+                </div>
 
                 {
-                    imageReport.serviceReport.effectiveTime &&
+                    imageReport.effectiveTime &&
                     <div className="flex">
                         <div className="w-50 text-gray-700">Thời điểm thực hiện</div>
                         <div className="flex-1">
-                            {formattedFullDate(new Date(imageReport.serviceReport.effectiveTime))}
+                            {formattedFullDate(new Date(imageReport.effectiveTime))}
                         </div>
                     </div>
                 }

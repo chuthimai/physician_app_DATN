@@ -16,13 +16,19 @@ export default interface ServiceReportResponse {
     performer?: Physician,
     requester?: Physician,
 
-    // image
-    interpretation?: string,
-    media?: ImageStudy[],
-    focus?: string,
+    diagnosisReport?: {
+        conclusion?: string,
+        severity?: string,
+        type?: string,
+    },
 
-    // diagnosis
-    conclusion?: string,
-    severity?: string,
-    type?: string,
+    imagingReport?: {
+        interpretation?: string,
+        images?: ImageStudy[],
+        focus?: string,
+    },
+
+    laboratoryReport?: {
+        interpretation?: string,
+    }
 }

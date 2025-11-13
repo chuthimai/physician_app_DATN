@@ -19,7 +19,12 @@ export default function useMapper() {
             effectiveTime: data.effectiveTime ? new Date(data.effectiveTime) : undefined,
             service: data.service,
             performer: data.performer,
-            assessmentResults,
+            assessmentResults: assessmentResults,
+
+            request: data.request,
+            imagingReport: data.imagingReport,
+            diagnosisReport: data.diagnosisReport,
+            laboratoryReport: data.laboratoryReport,
         };
     }
 
@@ -30,7 +35,7 @@ export default function useMapper() {
         // Tạo map rỗng trước
         const mapById = new Map<number, AssessmentResult>();
 
-        // 1️⃣ Tạo object cho từng assessmentItem, lưu reference vào map
+        // Tạo object cho từng assessmentItem, lưu reference vào map
         for (const item of assessmentItems) {
             const node: AssessmentResult = {
                 identifier: item.identifier,
@@ -41,15 +46,13 @@ export default function useMapper() {
             mapById.set(item.identifier, node);
         }
 
-        // 2️⃣ Gán giá trị value (vì mapById đã chứa đúng reference)
+        // Gán giá trị value (vì mapById đã chứa đúng reference)
         for (const res of resultResponses) {
             const target = mapById.get(res.assessmentItemIdentifier);
             if (target) target.value = res.value;
         }
-        console.log("1 >>>>>>>>>>>");
-        console.log(mapById);
 
-        // 3️⃣ Xây dựng cây cha - con (cũng dùng chính reference trong map)
+        // Xây dựng cây cha - con (cũng dùng chính reference trong map)
         const roots: AssessmentResult[] = [];
         for (const item of assessmentItems) {
             const node = mapById.get(item.identifier);
@@ -62,8 +65,6 @@ export default function useMapper() {
                 parent?.assessmentResults?.push(node);
             }
         }
-        console.log("2 >>>>>>>>>>>");
-        console.log(roots);
 
         return roots;
     }

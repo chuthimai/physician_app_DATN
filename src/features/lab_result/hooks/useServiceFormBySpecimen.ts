@@ -27,6 +27,10 @@ export default function useServiceFormBySpecimen() {
                 showToastError("Không có quyền truy cập");
                 return;
             }
+            if (e.message === "Specimen not found") {
+                showToastError("Không tìm thấy mẫu");
+                return;
+            }
 
             showToastError("Có lỗi xảy ra");
         }

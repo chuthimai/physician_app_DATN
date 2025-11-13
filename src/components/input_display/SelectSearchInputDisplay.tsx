@@ -33,7 +33,7 @@ export default function SelectSearchInputDisplay({
                                               subtitle,
                                               options,
                                               value,
-                                              disabled = false,
+                                              disabled = true,
                                               className,
                                           }: Props) {
     const [open, setOpen] = React.useState(false);

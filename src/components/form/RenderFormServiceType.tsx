@@ -71,6 +71,7 @@ export default function RenderFormServiceType({
                     control={control}
                     name="severity"
                     rules={{required: "Vui lòng chọn mức độ"}}
+                    defaultValue={serviceReport.diagnosisReport?.severity}
                     render={({field}) => (
                         <SelectSearchInput
                             label="Mức độ nghiêm trọng"
@@ -78,6 +79,7 @@ export default function RenderFormServiceType({
                             onChange={(selected) => field.onChange(selected?.value ?? "")}
                             options={severityOptions}
                             error={errors.severity}
+                            disabled={!serviceReport.diagnosisReport?.severity}
                         />
                     )}
                 />
@@ -86,6 +88,7 @@ export default function RenderFormServiceType({
             <div className="col-span-12">
                 <TextAreaInput
                     label={"Kết luận"}
+                    defaultValue={serviceReport.diagnosisReport?.conclusion ?? ""}
                     {...register("conclusion")}
                 />
             </div>
@@ -95,6 +98,7 @@ export default function RenderFormServiceType({
     if (type === SERVICE_TYPES.LABORATORY_TEST) {
         return <TextAreaInput
             label={"Diễn giải kết quả"}
+            defaultValue={serviceReport.laboratoryReport?.interpretation ?? ""}
             error={errors.interpretation}
             {...register("interpretation", {
                 validate: (v) => v.trim() !== "" || "Trường này không được để trống",
@@ -107,6 +111,7 @@ export default function RenderFormServiceType({
             <TextAreaInput
                 label={"Đối tượng được quan sát"}
                 error={errors.focus}
+                defaultValue={serviceReport.imagingReport?.focus ?? ""}
                 {...register("focus", {
                     validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                 })}
@@ -114,6 +119,7 @@ export default function RenderFormServiceType({
             <TextAreaInput
                 label={"Diễn giải kết quả"}
                 error={errors.interpretation}
+                defaultValue={serviceReport.imagingReport?.interpretation}
                 {...register("interpretation", {
                     validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                 })}

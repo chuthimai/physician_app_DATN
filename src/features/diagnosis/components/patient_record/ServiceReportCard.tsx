@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { ServiceReport } from "@/types/models/ServiceReport";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import RenderServiceReportResult from "@/components/service_report/RenderServiceReportResult.tsx";
+import {observationMethodToVn} from "@/constants/diagnosis/observation_method.ts";
 
 type Props = {
     serviceReport: ServiceReport;
@@ -22,14 +23,14 @@ export default function ServiceReportCard({ serviceReport }: Props) {
                         {serviceReport.service?.name ?? "Không rõ dịch vụ"}
                     </h3>
                     <p className="text-sm text-gray-600">
-                        Phương pháp: <span className="font-medium">{serviceReport.method}</span> •
+                        Phương pháp: <span className="font-medium">{observationMethodToVn(serviceReport.method)}</span> •
                         Trạng thái:{" "}
                         <span
                             className={`font-medium ${
                                 serviceReport.status === "final" ? "text-green-600" : "text-yellow-600"
                             }`}
                         >
-              {serviceReport.status}
+              {serviceReport.status === "final" ? "Hoàn thành" : "Chưa hoàn thành"}
             </span>
                         {serviceReport.effectiveTime && (
                             <>

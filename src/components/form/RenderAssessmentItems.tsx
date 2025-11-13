@@ -31,7 +31,7 @@ export default function RenderAssessmentItems({
             (child) => !child.measurementItem
         );
 
-        const isReadOnly = !!item.value;
+        const isReadOnly = item.value !== undefined && item.value !== null && item.value !== "";
 
         return (
             <div key={item.identifier} className={`mb-6`}>

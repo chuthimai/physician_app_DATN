@@ -12,7 +12,7 @@ export default function SpecialistDiagnosisPage() {
     }
 
     return <div className="flex flex-col">
-        <h2 className="text-2xl font-bold text-center mb-4">Chuẩn đoán lâm sàng</h2>
+        <h2 className="text-2xl font-bold text-center mb-4">Chuẩn đoán chuyên khoa</h2>
         <SpecialistDiagnosisForm/>
     </div>
 }

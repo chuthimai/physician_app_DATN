@@ -40,8 +40,6 @@ export default function AddServicesPage() {
                 return serviceInfo;
             }),
         }
-        console.log("AddServicesPage \n 1 >>>>>>>>>")
-        console.log(servicesContext.services);
 
         await addService(params);
         servicesContext?.setServices([]);

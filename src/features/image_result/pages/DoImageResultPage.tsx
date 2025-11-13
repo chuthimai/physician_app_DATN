@@ -29,7 +29,7 @@ export default function DoImageResultPage() {
 
     return <div className="flex flex-col gap-2">
         <div>
-            <ImagePreviewGrid images={ serviceReport?.imageReport?.media ?? []}/>
+            <ImagePreviewGrid images={ serviceReport?.imagingReport?.images ?? []}/>
         </div>
         <div>
             <DoImageResultForm

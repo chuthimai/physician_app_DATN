@@ -1,20 +1,8 @@
-import type AssessmentItemResponse from "@/types/responses/AssessmentItemResponse.ts";
-import type Physician from "@/types/models/Physician.ts";
-import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
+import type ServiceReportResponse from "@/features/medical_records/types/ServiceReportResponse.ts";
 
 export default interface ServiceFormResponse {
     identifier: number,
-    serviceReport: {
-        identifier: number,
-        service: {
-            type: string,
-            name: string,
-            assessmentItems: AssessmentItemResponse[]
-        },
-        requester?: Physician,
-        request: string,
-    }
+    serviceReport: ServiceReportResponse,
     interpretation?: string,
     isPaid?: boolean,
-    images?: ImageStudy[],
 }

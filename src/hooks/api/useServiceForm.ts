@@ -19,11 +19,15 @@ export default function useServiceForm() {
         }
         try {
             const data = await request("get", `${ENDPOINTS.GET_SERVICE_FORM_BY_PATIENT_RECORD_ID}/${patientRecordId}`);
+            if (!data) return;
             return mapServiceReport(data);
         } catch (e) {
             if (!(e instanceof Error)) return;
             log.error(`getServiceForm: ${e.message}`);
-            if (e.message) {
+            if (e.message == "Service report not found") {
+                showToastError("Không tìm thấy dịch vụ");
+                return;
+            } else  {
                 showToastError("Có lỗi xảy ra");
                 return;
             }
@@ -40,8 +44,12 @@ export default function useServiceForm() {
             return mapServiceReport(data);
         } catch (e) {
             if (!(e instanceof Error)) return;
-            log.error(`getServiceForm: ${e.message}`);
-            if (e.message) {
+            log.error(`getServiceFormByReportId: ${e.message}`);
+
+            if (e.message == "Service report not found") {
+                showToastError("Không tìm thấy dịch vụ");
+                return;
+            } else  {
                 showToastError("Có lỗi xảy ra");
                 return;
             }

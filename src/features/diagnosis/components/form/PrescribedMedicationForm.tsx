@@ -47,6 +47,7 @@ export default function PrescribedMedicationForm() {
 
     const getAllMedications = async () => {
         const medications = await getAllMedicationsFromDb();
+
         setMedications(medications);
         setMedicationsOptions(medications.map((med) => ({
             label: med.name,

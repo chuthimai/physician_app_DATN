@@ -46,15 +46,17 @@ export default function CurrentPatientRecordDialog({open, onOpenChange}: Current
                     <DialogDescription
                         className="max-h-[70vh] overflow-y-auto pr-2"
                     >
-                        {loading && (
-                            <Loading/>
-                        )}
-                        {!loading && patientRecord === undefined && (
-                            <div>Không có thông tin</div>
-                        )}
-                        {!loading && patientRecord && (
-                            <CurrentPatientRecordResultView patientRecord={patientRecord}/>
-                        )}
+                        <div className="flex justify-center items-center mb-4">
+                            {loading && (
+                                <Loading/>
+                            )}
+                            {!loading && patientRecord === undefined && (
+                                <div>Không có thông tin</div>
+                            )}
+                            {!loading && patientRecord && (
+                                <CurrentPatientRecordResultView patientRecord={patientRecord}/>
+                            )}
+                        </div>
                     </DialogDescription>
                 </DialogHeader>
             </DialogContent>

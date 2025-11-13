@@ -67,12 +67,12 @@ export default function RenderFormServiceTypeResult({
         return <div className={"flex flex-col gap-4"}>
             <TextAreaInputDisplay
                 label={"Đối tượng được quan sát"}
-                defaultValue={serviceReport.imageReport?.focus}
+                defaultValue={serviceReport.imagingReport?.focus ?? ""}
                 disabled={true}
             />
             <TextAreaInputDisplay
                 label={"Diễn giải kết quả"}
-                defaultValue={serviceReport.imageReport?.interpretation}
+                defaultValue={serviceReport.imagingReport?.interpretation}
                 disabled={true}
             />
         </div>

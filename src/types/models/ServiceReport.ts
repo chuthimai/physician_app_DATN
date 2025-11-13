@@ -12,24 +12,21 @@ export interface ServiceReport {
     service?: Service,
     performer?: Physician,
     assessmentResults: AssessmentResult[],
+    request?: string,
 
-    imageReport?: ImageReport,
-    diagnosisReport?: DiagnosisReport,
-    laboratoryReport?: LaboratoryReport,
-}
+    imagingReport?: {
+        focus?: string,
+        interpretation?: string,
+        images?: ImageStudy[],
+    },
 
-interface ImageReport {
-    focus?: string,
-    interpretation?: string,
-    media?: ImageStudy[],
-}
+    diagnosisReport?: {
+        type?: string,
+        severity?: string,
+        conclusion?: string,
+    },
 
-interface DiagnosisReport {
-    type?: string,
-    severity: string,
-    conclusion: string,
-}
-
-interface LaboratoryReport {
-    interpretation?: string,
+    laboratoryReport?: {
+        interpretation?: string,  // LaboratoryReport
+    }
 }

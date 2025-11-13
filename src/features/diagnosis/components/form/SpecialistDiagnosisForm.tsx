@@ -17,7 +17,7 @@ export default function SpecialistDiagnosisForm() {
             setServiceReport(undefined);
             return;
         }
-        if (data.service?.type !== SERVICE_TYPES.GENERAL_CONSULTATION) {
+        if (data.service?.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION) {
             setServiceReport(undefined);
             return;
         }

@@ -11,7 +11,7 @@ export default function CurrentPatientRecordResultView({patientRecord}: Props) {
     }
 
     return (
-        <div className="space-y-3">
+        <div className="space-y-3 w-full">
             {patientRecord.serviceReports.map((r) => (
                 <ServiceReportCard key={r.identifier} serviceReport={r} />
             ))}
