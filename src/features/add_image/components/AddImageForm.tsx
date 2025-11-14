@@ -72,7 +72,26 @@ export default function AddImageForm({imageReportId, setShowAddImageForm}: AddIm
                         );
                     })}
 
-                    <label className="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg h-28 cursor-pointer hover:bg-gray-100 transition">
+                    <div className="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg h-28 cursor-pointer hover:bg-gray-100 transition"
+                         onDragOver={(e) => {
+                             e.preventDefault();
+                             e.currentTarget.classList.add("bg-gray-100");
+                         }}
+                         onDragLeave={(e) => {
+                             e.preventDefault();
+                             e.currentTarget.classList.remove("bg-gray-100");
+                         }}
+                         onDrop={(e) => {
+                             e.preventDefault();
+                             e.currentTarget.classList.remove("bg-gray-100");
+
+                             const files = e.dataTransfer.files;
+                             if (files && files.length > 0) {
+                                 const newImages = Array.from(files);
+                                 setImages((prev) => [...prev, ...newImages]);
+                             }
+                         }}
+                    >
                         <Plus className="w-6 h-6 text-gray-500" />
                         <input
                             type="file"
@@ -81,7 +100,7 @@ export default function AddImageForm({imageReportId, setShowAddImageForm}: AddIm
                             onChange={handleAddImage}
                             className="hidden"
                         />
-                    </label>
+                    </div>
                 </div>
 
                 {/* Hiển thị ảnh phóng to */}
