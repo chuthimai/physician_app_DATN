@@ -70,8 +70,19 @@ export default function RenderFormServiceType({
                 <Controller
                     control={control}
                     name="severity"
-                    rules={{required: "Vui lòng chọn mức độ"}}
-                    defaultValue={serviceReport.diagnosisReport?.severity}
+                    rules={{
+                        validate: (value) => {
+                            if (type === SERVICE_TYPES.GENERAL_CONSULTATION) {
+                                return value ? true : "Vui lòng chọn mức độ";
+                            }
+                            return true; // không bắt buộc
+                        }
+                    }}
+                    defaultValue={
+                        serviceReport.diagnosisReport?.severity === "unknow" ?
+                            undefined :
+                            serviceReport.diagnosisReport?.severity
+                    }
                     render={({field}) => (
                         <SelectSearchInput
                             label="Mức độ nghiêm trọng"
@@ -79,7 +90,6 @@ export default function RenderFormServiceType({
                             onChange={(selected) => field.onChange(selected?.value ?? "")}
                             options={severityOptions}
                             error={errors.severity}
-                            disabled={!serviceReport.diagnosisReport?.severity}
                         />
                     )}
                 />
@@ -89,7 +99,14 @@ export default function RenderFormServiceType({
                 <TextAreaInput
                     label={"Kết luận"}
                     defaultValue={serviceReport.diagnosisReport?.conclusion ?? ""}
-                    {...register("conclusion")}
+                    {...register("conclusion", {
+                        validate: (value) => {
+                        if (type === SERVICE_TYPES.GENERAL_CONSULTATION) {
+                        return value ? true : "Vui lòng điền kết luận";
+                    }
+                        return true; // không bắt buộc
+                    }
+                    })}
                 />
             </div>
         </div>

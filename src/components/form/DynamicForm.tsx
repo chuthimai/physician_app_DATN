@@ -44,7 +44,7 @@ export default function DynamicForm({
         const category = type === SERVICE_TYPES.LABORATORY_TEST ?
             OBSERVATION_CATEGORY_CODE.LABORATORY :
             type === SERVICE_TYPES.IMAGING_SCAN ?
-                OBSERVATION_CATEGORY_CODE.IMAGING : "";
+                OBSERVATION_CATEGORY_CODE.IMAGING : data.category;
 
         const serviceFormSubmit: ServiceFormSubmitParams = {
             // Service Report
@@ -55,8 +55,8 @@ export default function DynamicForm({
 
             // Diagnosis Report
             type: type,
-            severity: data.severity ?? "",
-            conclusion: data.conclusion ?? "",
+            severity: data.severity === "" ? "unknow" : data.severity,
+            conclusion: data.conclusion === "" ? "Chưa có dữ liệu" : data.conclusion,
 
             // Image Report
             focus: data.focus ?? "",
