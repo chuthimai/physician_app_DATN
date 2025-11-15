@@ -25,6 +25,7 @@ export default function CurrentPatientRecordDialog({open, onOpenChange}: Current
     const {loading, getDetailMedicalRecord} = useDetailMedicalRecord();
 
     const fetchDetailMedicalRecord = async () => {
+        if (!open) return;
         if (patientRecordIdContext?.patientRecordId === undefined) return;
         const data = await getDetailMedicalRecord();
         setPatientRecord(data);
@@ -32,7 +33,7 @@ export default function CurrentPatientRecordDialog({open, onOpenChange}: Current
 
     useEffect(() => {
         fetchDetailMedicalRecord().then(() => null);
-    }, [patientRecordIdContext?.patientRecordId]);
+    }, [open]);
 
     return <div className="flex flex-col">
         <Dialog open={open} onOpenChange={onOpenChange}>
