@@ -7,4 +7,6 @@ export interface CreatePatientRecordParams {
     birthDate: string,
     address: string,
     password: string,
+    havingTransferForm: boolean,
+    havingHealInsurance: boolean,
 }

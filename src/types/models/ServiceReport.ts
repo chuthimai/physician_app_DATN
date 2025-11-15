@@ -1,25 +1,32 @@
-import type {Service} from "@/features/add_services/types/Service.ts";
-import type AssessmentResult from "@/types/models/AssessmentResult.ts";
+import type {Service} from "@/types/models/Service.ts";
 import type Physician from "@/types/models/Physician.ts";
+import type {AssessmentResult} from "@/types/models/AssessmentResult.ts";
 import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
 
-export default interface ServiceReport {
+export interface ServiceReport {
     identifier: number,
-    category?: string,
-    method?: string,
+    category: string,
+    method: string,
+    status: string,
+    effectiveTime?: Date,
     service?: Service,
-    indicators?: AssessmentResult[],
-    status?: string,
-    effectiveTime?: string,
     performer?: Physician,
-    requester?: Physician,
+    assessmentResults: AssessmentResult[],
+    request?: string,
 
-    interpretation?: string,
-    media?: ImageStudy[],
-    focus?: string,
+    imagingReport?: {
+        focus?: string,
+        interpretation?: string,
+        images?: ImageStudy[],
+    },
 
-    conclusion?: string,
-    severity?: string,
-    type?: string,
-    recordedTime?: string,
+    diagnosisReport?: {
+        type?: string,
+        severity?: string,
+        conclusion?: string,
+    },
+
+    laboratoryReport?: {
+        interpretation?: string,  // LaboratoryReport
+    }
 }

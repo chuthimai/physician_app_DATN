@@ -1,52 +1,69 @@
 import {useForm, type SubmitHandler} from "react-hook-form";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
-import type AssessmentItem from "@/types/models/AssessmentItem.ts";
+import {OBSERVATION_CATEGORY_CODE} from "@/constants/diagnosis/observation_category_code.ts";
 import type AssessmentItemParams from "@/types/params/AssessmentItemParams.ts";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
-import useDate from "@/hooks/useDate.ts";
 import RenderFormServiceType from "@/components/form/RenderFormServiceType.tsx";
 import RenderAssessmentItems from "@/components/form/RenderAssessmentItems.tsx";
+import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
+import type {ServiceReport} from "@/types/models/ServiceReport.ts";
+import {OBSERVATION_METHOD} from "@/constants/diagnosis/observation_method.ts";
 
 type DynamicFormInputs = Record<string, string>;
 
 type DynamicFormProps = {
-    serviceRecordId: number,
-    assessmentItems: AssessmentItem[],
+    serviceReport?: ServiceReport,
     type?: string,
-    onClickSubmit: (data: ServiceFormSubmitParams)  => void;
+    onClickSubmit: (data: ServiceFormSubmitParams) => void;
 };
 
-export default function DynamicForm({ assessmentItems, onClickSubmit, type, serviceRecordId }: DynamicFormProps) {
+export default function DynamicForm({
+                                        serviceReport,
+                                        onClickSubmit,
+                                        type,
+                                    }: DynamicFormProps) {
     const {
         register,
         handleSubmit,
         control,
-        formState: { errors, isSubmitting },
+        formState: {errors, isSubmitting},
         reset,
     } = useForm<DynamicFormInputs>();
 
-    const {formatLocalDate} = useDate();
-
     const onSubmit: SubmitHandler<DynamicFormInputs> = async (data) => {
+        let isClose = true;
         const result: AssessmentItemParams[] = Object.entries(data).map(([key, value]) => ({
             assessmentItemIdentifier: Number(key),
             assessmentResultValue: value,
         })).filter((item) => !isNaN(item.assessmentItemIdentifier));
 
+        if (type === SERVICE_TYPES.SPECIALIST_CONSULTATION) {
+            if (data.conclusion === "") isClose = false;
+        }
+
+        const category = type === SERVICE_TYPES.LABORATORY_TEST ?
+            OBSERVATION_CATEGORY_CODE.LABORATORY :
+            type === SERVICE_TYPES.IMAGING_SCAN ?
+                OBSERVATION_CATEGORY_CODE.IMAGING : data.category;
+
         const serviceFormSubmit: ServiceFormSubmitParams = {
-            serviceReportIdentifier: serviceRecordId,
-            category: data.category || "demo",
-            method: data.method || "demo",
-            effectiveTime: formatLocalDate(new Date()),  // TODO: fix after
+            // Service Report
+            serviceReportIdentifier: serviceReport?.identifier ?? 0,
+            category: category,
+            method: data.method ?? OBSERVATION_METHOD.INSPECTION,
             assessmentResults: result,
 
+            // Diagnosis Report
             type: type,
-            severity: data.severity || "demo",
-            conclusion: data.conclusion || "demo",
+            severity: data.severity === "" ? "unknow" : data.severity,
+            conclusion: data.conclusion === "" ? "Chưa có dữ liệu" : data.conclusion,
 
-            focus: data.focus || "demo",
-            interpretation: data.interpretation || "demo",
+            // Image Report
+            focus: data.focus ?? "",
+            interpretation: data.interpretation ?? "",
             media: undefined,
+
+            isClosed: isClose,
         }
         onClickSubmit(serviceFormSubmit);
         reset();
@@ -54,8 +71,11 @@ export default function DynamicForm({ assessmentItems, onClickSubmit, type, serv
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div>
+                <b>Đề nghị: </b> {serviceReport?.request ?? "Không có thông tin"}
+            </div>
             <RenderAssessmentItems
-                items={assessmentItems}
+                items={serviceReport?.assessmentResults ?? []}
                 errors={errors}
                 register={register}
             />
@@ -65,9 +85,10 @@ export default function DynamicForm({ assessmentItems, onClickSubmit, type, serv
                 control={control}
                 errors={errors}
                 register={register}
+                serviceReport={serviceReport}
             />
             <div className="flex items-center justify-center mt-6">
-                <ButtonSave label="Lưu" isSubmitting={isSubmitting} className="w-full" />
+                <ButtonSave label="Lưu" isSubmitting={isSubmitting} className="w-full"/>
             </div>
         </form>
     );

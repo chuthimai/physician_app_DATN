@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {UserContext} from "@/providers/user/UserContext.tsx";
 import useServiceInfo from "@/hooks/api/useServiceInfo.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
-import type ServiceFormResponse from "@/types/responses/ServiceFormResponse.ts";
+import type {ServiceInfoResponse} from "@/types/responses/ServiceInfoResponse.ts";
 
 type ServiceInfoProps = {
     setLoading: (loading: boolean) => void;
@@ -22,7 +22,7 @@ export default function ServiceInfo({
     const patientRecordId = useContext(PatientRecordIdContext)?.patientRecordId;
 
     const {getServiceInfo, loading} = useServiceInfo();
-    const [serviceInfo, setServiceInfo] = useState<ServiceFormResponse | undefined>(undefined);
+    const [serviceInfo, setServiceInfo] = useState<ServiceInfoResponse | undefined>(undefined);
 
     const fetchServiceInfo = async () => {
         if (!patientRecordId) return;
@@ -65,21 +65,26 @@ export default function ServiceInfo({
                 </div>
             </div>
         );
+    } else {
+        setReportId(serviceInfo.identifier);
     }
 
-    setReportId(serviceInfo.serviceReport.identifier);
     return (
         <div>
             <h3 className="font-bold mb-1">Thông tin dịch vụ</h3>
             <div className="space-y-1">
                 <div className="flex">
                     <div className="w-50 text-gray-700">Loại xét nghiệm</div>
-                    <div className="flex-1">{serviceInfo?.serviceReport.service.name || "Không có thông tin"}</div>
+                    <div className="flex-1">{serviceInfo.service?.name || "Không có thông tin"}</div>
+                </div>
+                <div className="flex">
+                    <div className="w-50 text-gray-700">Đề nghị</div>
+                    <div className="flex-1">{serviceInfo?.request || "Không có thông tin"}</div>
                 </div>
 
                 <div className="flex">
                     <div className="w-50 text-gray-700">Người chỉ định</div>
-                    <div className="flex-1">BS. {serviceInfo?.serviceReport.requester?.name || "Không có thông tin"}</div>
+                    <div className="flex-1">BS. {serviceInfo?.requester?.name || "Không có thông tin"}</div>
                 </div>
 
                 <div className="flex">

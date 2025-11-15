@@ -6,7 +6,7 @@ export interface LoginResponse {
     name: string,
     telecom: string | null,
     email: string | null,
-    gender: string,
+    gender: boolean,
     birthDate: Date,
     photo: string | null,
     role: string,

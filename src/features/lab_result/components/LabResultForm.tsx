@@ -1,6 +1,5 @@
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
 import {useContext, useEffect, useState} from "react";
-import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import DynamicForm from "@/components/form/DynamicForm.tsx";
@@ -8,6 +7,7 @@ import useServiceFormBySpecimen from "@/features/lab_result/hooks/useServiceForm
 import {SpecimenIdContext} from "@/providers/specimen/SpecimenIdContext.tsx";
 import useSpecimenReport from "@/features/lab_result/hooks/useSpecimenReport.ts";
 import {useToast} from "@/hooks/useToast.ts";
+import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 type LabResultFormProps = {
     specimenId: number;
@@ -19,8 +19,7 @@ export default function LabResultForm({specimenId, setLoading}: LabResultFormPro
     const {getServiceFormBySpecimen} = useServiceFormBySpecimen();
     const {updateReporter, error} = useSpecimenReport();
 
-    const [form, setForm] = useState<AssessmentItem[]>([]);
-    const [serviceRecordId, setServiceRecordId] = useState<number | undefined>(undefined);
+    const [serviceReport, setServiceReport] = useState<ServiceReport | undefined>(undefined);
     const specimenIdContext = useContext(SpecimenIdContext);
 
     const {showToastError} = useToast();
@@ -30,12 +29,10 @@ export default function LabResultForm({specimenId, setLoading}: LabResultFormPro
         const data = await getServiceFormBySpecimen(specimenId);
         setLoading(false);
         if (!data) {
-            setForm([]);
+            setServiceReport(undefined);
             return;
         }
-
-        setForm(data.serviceReport.service.assessmentItems);
-        setServiceRecordId(data.serviceReport.identifier);
+        setServiceReport(data);
     };
 
     useEffect(() => {
@@ -43,25 +40,24 @@ export default function LabResultForm({specimenId, setLoading}: LabResultFormPro
     }, [specimenId]);
 
     const onSubmit = async (data: ServiceFormSubmitParams) => {
-        if (!serviceRecordId) return;
+        if (!serviceReport) return;
 
-        await updateReporter(serviceRecordId);
+        await updateReporter(serviceReport.identifier);
         if (error) {
             specimenIdContext?.setSpecimenId(undefined);
             showToastError('Có lỗi xảy ra');
             return;
         }
 
-        await sendServiceForm(data);
+        await sendServiceForm(data, SERVICE_TYPES.LABORATORY_TEST);
         specimenIdContext?.setSpecimenId(undefined);
     };
 
-    if (!serviceRecordId) return <div/>;
+    if (!serviceReport?.identifier) return <div/>;
 
     return (
         <DynamicForm
-            serviceRecordId={serviceRecordId}
-            assessmentItems={form}
+            serviceReport={serviceReport}
             onClickSubmit={onSubmit}
             type={SERVICE_TYPES.LABORATORY_TEST}
         />

@@ -5,19 +5,19 @@ import {useEffect, useState} from "react";
 import useSearchPatient from "../hooks/useSearchPatient.ts";
 import SearchOverlay from "@/features/create_patient_record/components/SearchOverlay.tsx";
 import UserCard from "@/features/create_patient_record/components/UserCard.tsx";
-import type {PatientResponse} from "@/features/create_patient_record/types/PatientResponse.ts";
 import useDate from "@/hooks/useDate.ts";
 import useNumber from "@/hooks/useNumber.ts";
+import type Patient from "@/types/models/Patient.ts";
 
-export default function PatientSearchBar(){
+export default function PatientSearchBar() {
     const {compactDateOfBirth} = useDate();
     const {toTwelveDigitString} = useNumber();
 
     const [openScan, setOpenScan] = useState(false);
 
-    const [ keyword, setKeyword ] = useState<string>("");
-    const { loading, searchPatientsByName } = useSearchPatient();
-    const [localResults, setLocalResults] = useState<PatientResponse[]>([]);
+    const [keyword, setKeyword] = useState<string>("");
+    const {loading, searchPatientsByName} = useSearchPatient();
+    const [localResults, setLocalResults] = useState<Patient[]>([]);
     const [openOverlay, setOpenOverlay] = useState(false);
     const [mode, setMode] = useState<"inline" | "modal">("inline");
 
@@ -61,8 +61,13 @@ export default function PatientSearchBar(){
         setOpenOverlay(true);
     };
 
-    const onSelectPatient = (patient: PatientResponse) => {
-        const patientInfoString = `${toTwelveDigitString(patient.identifier)}||${patient.name}|${compactDateOfBirth(patient.birthDate)}|${patient.gender === "1" ? "Nam" : "Nữ"}|${patient.address === undefined ? "" : patient.address}||${patient.telecom}`;
+    const onSelectPatient = (patient: Patient) => {
+        const patientInfoString = `${toTwelveDigitString(patient.identifier)}||` +
+            `${patient.name}|` +
+            `${compactDateOfBirth(patient.birthDate.toString())}|` +
+            `${patient.gender ? "Nam" : "Nữ"}|` +
+            `${patient.address === undefined ? "" : patient.address}||` +
+            `${patient.telecom}`;
         localStorage.setItem("patientInfo", patientInfoString);
         document.dispatchEvent(new Event("scanned"));
         setOpenOverlay(false);

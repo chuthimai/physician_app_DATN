@@ -1,11 +1,11 @@
 import ImageResultView from "@/features/image_result/components/ImageResultView.tsx";
 import useImageReport from "@/features/image_result/hooks/useImageReport.ts";
-import type ImageReport from "@/features/image_result/types/ImageReport.ts";
 import {useContext, useEffect, useState} from "react";
 import {ServiceImageIdContext} from "@/providers/services/ServiceImageIdContext.tsx";
+import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 export default function ImageReportsPage() {
-    const [imageReports, setImageReports] = useState<ImageReport[]>([]);
+    const [imageReports, setImageReports] = useState<ServiceReport[]>([]);
     const {getImageReportsByService} = useImageReport();
     const serviceImageIdContext = useContext(ServiceImageIdContext);
     const serviceId = serviceImageIdContext?.serviceImageId;

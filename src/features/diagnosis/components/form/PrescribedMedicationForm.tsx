@@ -12,6 +12,7 @@ import {SNOMEDCT_FORM_CODES} from "@/constants/prescription/snomedct_form_codes.
 import type {Option} from "@/types/others/Option.ts";
 import useMedication from "@/features/diagnosis/hooks/useMedication.ts";
 import type Medication from "@/features/diagnosis/type/Medication.ts";
+import {useToast} from "@/hooks/useToast.ts";
 
 type PrescriptionInputs = {
     medicationIdentifier: number;
@@ -41,6 +42,8 @@ export default function PrescribedMedicationForm() {
     const medicationEditingContext = useContext(MedicationEditingContext);
     const medicationEditing = medicationEditingContext?.medicationEditing;
     const isEditing = !!medicationEditing;
+
+    const {showToastWarning} = useToast();
 
     // Lấy đối tượng thuốc dựa vào tên thuốc đã chọn
     const selectedMedicationId = watch("medicationIdentifier");
@@ -75,12 +78,12 @@ export default function PrescribedMedicationForm() {
 
             setValue("medicationIdentifier", m.identifier ?? "");
             setValue("quantity", medicationEditing?.quantity);
-            setValue("doseForm", SNOMEDCT_FORM_CODES[m.doseForm] || "");
+            setValue("doseForm", SNOMEDCT_FORM_CODES[m.code] || "");
             setValue("dosageInstruction", medicationEditing?.dosageInstruction);
             return;
         }
         if (selectedMedication) {
-            setValue("doseForm", SNOMEDCT_FORM_CODES[selectedMedication.doseForm] || "");
+            setValue("doseForm", SNOMEDCT_FORM_CODES[selectedMedication.code] || "");
         }
     }, [isEditing, medicationEditing, selectedMedication]);
 
@@ -119,6 +122,11 @@ export default function PrescribedMedicationForm() {
         }
 
         // Xử lý khi thêm
+        if (medicationList.find((m) => m.medicationIdentifier === payload.medicationIdentifier)) {
+            setSelectedMedication(undefined);
+            showToastWarning("Thuốc đã được kê");
+            return;
+        }
         medicationsContext?.setMedications([...medicationList, payload]);
         setSelectedMedication(undefined);
         reset();

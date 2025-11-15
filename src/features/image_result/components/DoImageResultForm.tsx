@@ -1,17 +1,17 @@
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
-import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import DynamicForm from "@/components/form/DynamicForm";
 import {useNavigate, useParams} from "react-router-dom";
 import useSpecimenReport from "@/features/lab_result/hooks/useSpecimenReport.ts";
 import {useToast} from "@/hooks/useToast.ts";
+import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 type DoImageResultFormProps = {
-    form: AssessmentItem[];
+    serviceReport?: ServiceReport;
 }
 
-export default function DoImageResultForm({form}: DoImageResultFormProps) {
+export default function DoImageResultForm({serviceReport}: DoImageResultFormProps) {
     const params = useParams();
     const serviceRecordId = Number(params.reportId);
     const navigator = useNavigate();
@@ -30,7 +30,7 @@ export default function DoImageResultForm({form}: DoImageResultFormProps) {
             return;
         }
 
-        await sendServiceForm(data);
+        await sendServiceForm(data, SERVICE_TYPES.IMAGING_SCAN);
         navigator("/ket-qua-hinh-anh");
     };
 
@@ -38,8 +38,7 @@ export default function DoImageResultForm({form}: DoImageResultFormProps) {
 
     return (
         <DynamicForm
-            serviceRecordId={serviceRecordId}
-            assessmentItems={form}
+            serviceReport={serviceReport}
             onClickSubmit={onSubmit}
             type={SERVICE_TYPES.IMAGING_SCAN}
         />

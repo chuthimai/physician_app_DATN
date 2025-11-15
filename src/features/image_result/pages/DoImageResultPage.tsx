@@ -3,13 +3,13 @@ import ImagePreviewGrid from "@/features/image_result/components/ImagePreviewGri
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
-import type ServiceFormResponse from "@/types/responses/ServiceFormResponse.ts";
+import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 export default function DoImageResultPage() {
     const params = useParams();
     const serviceRecordId = Number(params.reportId)
     const {getServiceFormByReportId, error} = useServiceForm();
-    const [serviceReport, setServiceReport] = useState<ServiceFormResponse | undefined>(undefined);
+    const [serviceReport, setServiceReport] = useState<ServiceReport | undefined>(undefined);
 
     const fetchServiceReport = async () => {
         const data = await getServiceFormByReportId(serviceRecordId);
@@ -29,11 +29,11 @@ export default function DoImageResultPage() {
 
     return <div className="flex flex-col gap-2">
         <div>
-            <ImagePreviewGrid images={ serviceReport?.images ?? []}/>
+            <ImagePreviewGrid images={ serviceReport?.imagingReport?.images ?? []}/>
         </div>
         <div>
             <DoImageResultForm
-                form={ serviceReport?.serviceReport.service.assessmentItems ?? []}
+                serviceReport={serviceReport}
             />
         </div>
     </div>

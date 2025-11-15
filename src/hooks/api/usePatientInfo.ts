@@ -4,11 +4,10 @@ import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type Patient from "@/types/models/Patient.ts";
 import {PatientContext} from "@/providers/patient/PatientContext.tsx";
-import type {PatientResponse} from "@/features/lab_taking_specimens/types/PatientResponse.ts";
 
 export default function usePatientInfo() {
     const patientContext = useContext(PatientContext);
-    const { request, loading, error } = useApi<PatientResponse>();
+    const { request, loading, error } = useApi<Patient>();
 
     const getPatientInfo = async (patientRecordId: number) => {
         try {
@@ -18,7 +17,7 @@ export default function usePatientInfo() {
                 name: response.name,
                 telecom: response.telecom,
                 birthDate: new Date(response.birthDate),
-                gender: response.gender === "1",
+                gender: response.gender,
                 address: response.address,
             };
             patientContext?.setPatient(patient);

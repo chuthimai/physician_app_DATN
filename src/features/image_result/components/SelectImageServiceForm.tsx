@@ -5,7 +5,6 @@ import {useService} from "@/features/add_services/hooks/useService.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {ServiceImageIdContext} from "@/providers/services/ServiceImageIdContext.tsx";
 
-
 export default function SelectImageServiceForm() {
     const labType = SERVICE_TYPES.IMAGING_SCAN;
     const [imageServiceOptions, setImageServiceOptions] = useState<Option[]>([]);
@@ -19,7 +18,7 @@ export default function SelectImageServiceForm() {
         if (!servicesResponse) return;
 
         const options: Option[] = servicesResponse.map((s) => ({
-            label: `${s.name} (${s.location})`,
+            label: `${s.name}`,
             value: s.identifier.toString(),
         }));
 

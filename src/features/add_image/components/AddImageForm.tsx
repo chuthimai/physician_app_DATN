@@ -1,4 +1,4 @@
-import React, {useContext, useState } from "react";
+import React, {useContext, useRef, useState} from "react";
 import { Plus, X } from "lucide-react";
 import PreviewImageDialog from "@/features/add_image/components/PreviewImageDialog.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
@@ -14,9 +14,10 @@ export default function AddImageForm({imageReportId, setShowAddImageForm}: AddIm
     const [images, setImages] = useState<File[]>([]);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [openPreview, setOpenPreview] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const patientRecordIdContext = useContext(PatientRecordIdContext);
-    const {uploadImages, error} = useUploadImage();
+    const {uploadImages, error, loading} = useUploadImage();
 
     const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -72,7 +73,27 @@ export default function AddImageForm({imageReportId, setShowAddImageForm}: AddIm
                         );
                     })}
 
-                    <label className="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg h-28 cursor-pointer hover:bg-gray-100 transition">
+                    <div className="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg h-28 cursor-pointer hover:bg-gray-100 transition"
+                         onClick={() => inputRef.current?.click()}
+                         onDragOver={(e) => {
+                             e.preventDefault();
+                             e.currentTarget.classList.add("bg-gray-100");
+                         }}
+                         onDragLeave={(e) => {
+                             e.preventDefault();
+                             e.currentTarget.classList.remove("bg-gray-100");
+                         }}
+                         onDrop={(e) => {
+                             e.preventDefault();
+                             e.currentTarget.classList.remove("bg-gray-100");
+
+                             const files = e.dataTransfer.files;
+                             if (files && files.length > 0) {
+                                 const newImages = Array.from(files);
+                                 setImages((prev) => [...prev, ...newImages]);
+                             }
+                         }}
+                    >
                         <Plus className="w-6 h-6 text-gray-500" />
                         <input
                             type="file"
@@ -80,8 +101,9 @@ export default function AddImageForm({imageReportId, setShowAddImageForm}: AddIm
                             multiple
                             onChange={handleAddImage}
                             className="hidden"
+                            ref={inputRef}
                         />
-                    </label>
+                    </div>
                 </div>
 
                 {/* Hiển thị ảnh phóng to */}
@@ -98,6 +120,7 @@ export default function AddImageForm({imageReportId, setShowAddImageForm}: AddIm
                 <ButtonSave
                     label={"Lưu"}
                     className={"w-full"}
+                    isSubmitting={loading}
                     onClick={onClickSave}
                 />
             </div>

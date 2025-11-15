@@ -1,31 +1,28 @@
 import DynamicForm from "@/components/form/DynamicForm.tsx";
 import useServiceForm from "@/hooks/api/useServiceForm.ts";
 import {useContext, useEffect, useState} from "react";
-import type AssessmentItem from "@/types/models/AssessmentItem.ts";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
+import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
-export default function DiagnosisForm() {
+export default function SpecialistDiagnosisForm() {
     const {getServiceForm, sendServiceForm} = useServiceForm();
-    const [form, setForm] = useState<AssessmentItem[]>([]);
+    const [serviceReport, setServiceReport] = useState<ServiceReport | undefined>(undefined);
     const patientRecordIdContext = useContext(PatientRecordIdContext);
-    const [serviceRecordId, setServiceRecordId] = useState<number | undefined>(undefined);
 
     const fetchForm = async () => {
         const data = await getServiceForm(patientRecordIdContext?.patientRecordId);
         if (!data) {
-            setForm([]);
+            setServiceReport(undefined);
+            return;
+        }
+        if (data.service?.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION) {
+            setServiceReport(undefined);
             return;
         }
 
-        if (data.serviceReport.service.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION) {
-            setForm([]);
-            return;
-        }
-
-        setForm(data.serviceReport.service.assessmentItems);
-        setServiceRecordId(data.identifier);
+        setServiceReport(data);
     };
 
     useEffect(() => {
@@ -33,17 +30,16 @@ export default function DiagnosisForm() {
     }, []);
 
     const onSubmit = async (data: ServiceFormSubmitParams) => {
-        await sendServiceForm(data);
+        await sendServiceForm(data, SERVICE_TYPES.SPECIALIST_CONSULTATION);
     };
 
-    if (!serviceRecordId) return <div/>;
+    if (!serviceReport) return <div/>;
 
     return (
         <DynamicForm
-            serviceRecordId={serviceRecordId}
-            assessmentItems={form}
+            serviceReport={serviceReport}
             onClickSubmit={onSubmit}
-            type={SERVICE_TYPES.GENERAL_CONSULTATION}
+            type={SERVICE_TYPES.SPECIALIST_CONSULTATION}
         />
     );
 }

@@ -7,12 +7,14 @@ import { serviceTypeOptions } from "@/constants/add_services/options";
 import type {Option} from "@/types/others/Option.ts";
 import {useService} from "@/features/add_services/hooks/useService.ts";
 import {useToast} from "@/hooks/useToast.ts";
-import type {Service} from "@/features/add_services/types/Service.ts";
+import type {Service} from "@/types/models/Service.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
+import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 
 type AddServiceInputs = {
     type: string;
     serviceId: string;
+    request: string;
 };
 
 export default function ServiceForm() {
@@ -22,6 +24,7 @@ export default function ServiceForm() {
         watch,
         formState: { errors, isSubmitting },
         reset,
+        register,
     } = useForm<AddServiceInputs>();
 
     const [ serviceOptions, setServiceOptions ] = useState<Option[]>([]);
@@ -35,8 +38,11 @@ export default function ServiceForm() {
     const fetchServices = async (type?: string) => {
         const servicesResponse = await getServiceByType(type);
         if (!servicesResponse) return;
-        const services = servicesResponse.filter((s) => s.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION
-                && s.type !== SERVICE_TYPES.GENERAL_CONSULTATION)
+        const services = servicesResponse
+                .filter(
+                    (s) => s.type !== SERVICE_TYPES.SPECIALIST_CONSULTATION
+                        && s.type !== SERVICE_TYPES.GENERAL_CONSULTATION
+                )
             || [];
 
         setServices(services);
@@ -66,9 +72,10 @@ export default function ServiceForm() {
 
         const service = services.find((s) => s.identifier === Number(data.serviceId));
         if (!service) return;
+        const addedService = {...service, request: data.request};
         servicesContext?.setServices(
             [...(servicesContext?.services || []),
-                service
+                addedService
             ]);
         reset();
     };
@@ -77,41 +84,60 @@ export default function ServiceForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-12 gap-2">
-                {/* Loại dịch vụ */}
-                <div className="col-span-5">
-                    <Controller
-                        control={control}
-                        name="type"
-                        render={({ field }) => (
-                            <SelectSearchInput
-                                label="Loại dịch vụ"
-                                value={serviceTypeOptions.find((opt) => opt.value === field.value)}
-                                onChange={(selected) => field.onChange(selected?.value ?? "")}
-                                options={serviceTypeOptions}
+                <div className={"col-span-10"}>
+                    <div className={"flex gap-2"}>
+                        {/* Loại dịch vụ */}
+                        <div className="flex-1">
+                            <Controller
+                                control={control}
+                                name="type"
+                                render={({ field }) => (
+                                    <SelectSearchInput
+                                        label="Loại dịch vụ"
+                                        value={
+                                            serviceTypeOptions
+                                                .find((opt) => opt.value === field.value)
+                                        }
+                                        onChange={(selected) => field.onChange(selected?.value ?? "")}
+                                        options={
+                                            serviceTypeOptions
+                                                .filter((e) => e.label !== SERVICE_TYPES.GENERAL_CONSULTATION
+                                                    && e.label !== SERVICE_TYPES.SPECIALIST_CONSULTATION)
+                                        }
+                                    />
+                                )}
                             />
-                        )}
-                    />
+                        </div>
+
+                        {/* Tên dịch vụ */}
+                        <div className={`flex-1`}>
+                            <Controller
+                                control={control}
+                                name="serviceId"
+                                rules={{ required: "Chọn dịch vụ" }}
+                                render={({ field }) => (
+                                    <SelectSearchInput
+                                        label="Dịch vụ"
+                                        value={serviceOptions.find((opt) => opt.value === field.value)}
+                                        onChange={(selected) => field.onChange(selected?.value ?? "")}
+                                        options={serviceOptions}
+                                        error={errors.serviceId}
+                                    />
+                                )}
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <TextAreaInput
+                            label={"Đề nghị"}
+                            error={errors.request}
+                            {...register("request", { required: "Không được để trống" })}
+                        />
+                    </div>
                 </div>
 
-                {/* Tên dịch vụ */}
-                <div className={`col-span-5`}>
-                    <Controller
-                        control={control}
-                        name="serviceId"
-                        rules={{ required: "Chọn dịch vụ" }}
-                        render={({ field }) => (
-                            <SelectSearchInput
-                                label="Dịch vụ"
-                                value={serviceOptions.find((opt) => opt.value === field.value)}
-                                onChange={(selected) => field.onChange(selected?.value ?? "")}
-                                options={serviceOptions}
-                                error={errors.serviceId}
-                            />
-                        )}
-                    />
-                </div>
-
-                <div className="col-span-2 flex items-center justify-center w-full">
+                <div className="col-span-2 flex items-start justify-center w-full p-6">
                     <ButtonSave label={"Thêm"} isSubmitting={isSubmitting} />
                 </div>
 

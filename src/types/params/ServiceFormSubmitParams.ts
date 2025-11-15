@@ -2,7 +2,7 @@ import type AssessmentItemParams from "@/types/params/AssessmentItemParams.ts";
 import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
 
 export default interface ServiceFormSubmitParams {
-    // ServiceReport
+    // ServiceReportResponse
     serviceReportIdentifier: number,
     category: string,
     method: string,
@@ -18,4 +18,7 @@ export default interface ServiceFormSubmitParams {
     focus?: string,
     interpretation?: string,
     media?: ImageStudy[],
+
+    // Đóng report
+    isClosed: boolean,
 }

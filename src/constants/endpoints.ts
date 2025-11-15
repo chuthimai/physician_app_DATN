@@ -3,8 +3,9 @@ export const ENDPOINTS = {
     LOGIN: "auth/login?role",
 
     // Records
-    CREATE_RECORDS: "records/",
-    CLOSE_RECORDS: "",
+    CREATE_RECORDS: "records",
+    CLOSE_RECORDS: "/records/close",
+    GET_DETAIL_RECORD: "records",
 
     // Patients
     SEARCH_PATIENT: "users/by-name",
@@ -21,15 +22,20 @@ export const ENDPOINTS = {
 
     // Report
     GET_SERVICE_FORM_BY_PATIENT_RECORD_ID: "reports/by-patient-record-identifier",
-    SEND_SERVICE_FORM: "reports/update-diagnosis-report-result",
     GET_SERVICE_FORM_BY_REPORT_ID: "reports/by-service-report-identifier",
     GET_SERVICE_FORM_BY_SPECIMEN_ID: "reports/by-specimen-identifier",
     GET_IMAGE_REPORTS_BY_SERVICE_ID: "reports/imaging-reports",
+
+    // Send service form
+    SEND_SERVICE_FORM_DIAGNOSIS: "reports/update-diagnosis-report-result",
+    SEND_SERVICE_FORM_LAB: "reports/update-laboratory-report-result",
+    SEND_SERVICE_FORM_IMAGING: "reports/update-imaging-report-result",
 
     // Service
     CREATE_SPECIALTY_SERVICE: "records/update-specialty-consultation",
     GET_SERVICE_BY_TYPE: "billing/services-by-type",
     ADD_SERVICE_TO_RECORD: "records/update-test-and-scan",
+    GET_SERVICE_INFO: "reports/check-payment-status/by-patient-record-identifier",
 
     // Specimen
     CREATE_SPECIMEN: "/reports/specimens",

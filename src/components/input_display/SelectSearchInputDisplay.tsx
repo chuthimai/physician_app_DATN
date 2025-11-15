@@ -1,0 +1,103 @@
+"use client";
+
+import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import type {Option} from "@/types/others/Option.ts";
+
+type Props = {
+    label: string;
+    options: Option[];
+    value?: Option;
+    disabled?: boolean;
+    className?: string;
+    subtitle?: string;
+};
+
+export default function SelectSearchInputDisplay({
+                                              label,
+                                              subtitle,
+                                              options,
+                                              value,
+                                              disabled = true,
+                                              className,
+                                          }: Props) {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+        <div className={`${className || "mb-4"}`}>
+            <label className="block text-gray-600 mb-1">{label}</label>
+            <Popover open={open && !disabled} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                    <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={open}
+                        disabled={disabled}
+                        className={cn(
+                            "w-full justify-between border transition-all",
+                            disabled
+                                ? "opacity-50 cursor-not-allowed"
+                                : "border-gray-400 font-medium hover:border-gray-600 hover:text-black",
+                        )}
+                    >
+                        {value?.label || `Chọn ${subtitle === undefined ? label.toLowerCase() : subtitle.toLowerCase()}...`}
+                        <ChevronsUpDown className="h-4 w-4 opacity-50" />
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                    className="p-0 w-[var(--radix-popover-trigger-width)]"
+                    align="start"
+                >
+                    <Command
+                        filter={(value, search) => {
+                            // Lấy label của option tương ứng
+                            const opt = options.find((o) => o.value === value);
+                            if (!opt) return 0;
+
+                            // Chuyển về lowercase để tìm kiếm không phân biệt hoa thường
+                            return opt.label.toLowerCase().includes(search.toLowerCase()) ? 1 : 0;
+                        }}
+                    >
+                        <CommandInput placeholder="Tìm kiếm..." className="h-9" />
+                        <CommandList>
+                            <CommandEmpty>Không tìm thấy.</CommandEmpty>
+                            <CommandGroup>
+                                {options.map((opt) => (
+                                    <CommandItem
+                                        key={opt.value}
+                                        value={opt.value}
+                                    >
+                                        {opt.label}
+                                        <Check
+                                            className={cn(
+                                                "ml-auto h-4 w-4",
+                                                value?.value === opt.value
+                                                    ? "opacity-100"
+                                                    : "opacity-0"
+                                            )}
+                                        />
+                                    </CommandItem>
+                                ))}
+                            </CommandGroup>
+                        </CommandList>
+                    </Command>
+                </PopoverContent>
+            </Popover>
+        </div>
+    );
+}

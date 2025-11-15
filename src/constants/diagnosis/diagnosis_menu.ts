@@ -1,28 +1,31 @@
-import { ROLES } from "../roles.ts";
+import {imagingPhysician, labPhysician} from "../roles.ts";
 
 export type Item = {
     label: string;
     path: string;
 };
 
-type DiagnosisMenuConfig = {
-    [role: string]: Item[];
-};
+export function getDiagnosisMenus(role: string): Item[] {
+    if (labPhysician.includes(role)) {
+        return [
+            {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem"},
+        ];
+    }
 
-export const diagnosisMenus: DiagnosisMenuConfig = {
-    [ROLES.ATTENDING_PHYSICIAN]: [
-        {label: "Sơ bộ", path: "/kham-benh/chuan-doan/so-bo"},
-        {label: "Lâm sàng", path: "/kham-benh/chuan-doan/lam-sang"},
-        {label: "Xác định", path: "/kham-benh/chuan-doan/xac-dinh"},
-        {label: "Kê thuốc", path: "/kham-benh/ke-thuoc"},
-        {label: "Hẹn tái khám", path: "/kham-benh/hen-tai-kham"},
-    ],
+    if (imagingPhysician.includes(role)) {
+        return [
+            {label: "Báo cáo hình ảnh", path: "/ket-qua-hinh-anh"},
+        ];
+    }
 
-    [ROLES.LAB_PHYSICIAN]: [
-        {label: "Kết quả xét nghiệm", path: "/ket-qua-xet-nghiem"},
-    ],
+    if (role.includes("PHYSICIAN")) {
+        return [
+            {label: "Sơ bộ", path: "/kham-benh/chuan-doan/so-bo"},
+            {label: "Chuyên khoa", path: "/kham-benh/chuan-doan/chuyen-khoa"},
+            {label: "Kê thuốc", path: "/kham-benh/ke-thuoc"},
+            {label: "Hẹn tái khám", path: "/kham-benh/hen-tai-kham"},
+        ];
+    }
 
-    [ROLES.IMAGING_PHYSICIAN]: [
-        {label: "Báo cáo hình ảnh", path: "/ket-qua-hinh-anh"},
-    ],
-};
+    return [];
+}
