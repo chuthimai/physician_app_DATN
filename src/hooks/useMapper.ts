@@ -41,6 +41,7 @@ export default function useMapper() {
                 identifier: item.identifier,
                 name: item.name,
                 value: undefined,
+                measurementItem: item.measurementItem,
                 assessmentResults: [],
             };
             mapById.set(item.identifier, node);

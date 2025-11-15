@@ -50,9 +50,6 @@ export default function PrescribedMedicationForm() {
 
     const getAllMedications = async () => {
         const medications = await getAllMedicationsFromDb();
-        console.log("getAllMedications");
-        console.log("1 >>>>>>>>>");
-        console.log(medications);
         setMedications(medications);
         setMedicationsOptions(medications.map((med) => ({
             label: med.name,

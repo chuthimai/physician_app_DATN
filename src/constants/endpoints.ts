@@ -35,6 +35,7 @@ export const ENDPOINTS = {
     CREATE_SPECIALTY_SERVICE: "records/update-specialty-consultation",
     GET_SERVICE_BY_TYPE: "billing/services-by-type",
     ADD_SERVICE_TO_RECORD: "records/update-test-and-scan",
+    GET_SERVICE_INFO: "reports/check-payment-status/by-patient-record-identifier",
 
     // Specimen
     CREATE_SPECIMEN: "/reports/specimens",

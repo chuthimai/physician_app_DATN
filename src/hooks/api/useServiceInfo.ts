@@ -1,16 +1,16 @@
 import {useApi} from "@/hooks/useApi.ts";
 import {useToast} from "@/hooks/useToast.ts";
-import type ServiceFormResponse from "@/types/responses/ServiceFormResponse.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
+import type {ServiceInfoResponse} from "@/types/responses/ServiceInfoResponse.ts";
 
 export default function useServiceInfo() {
-    const {request, loading, error} = useApi<ServiceFormResponse>();
+    const {request, loading, error} = useApi<ServiceInfoResponse>();
     const {showToastError} = useToast();
 
     const getServiceInfo = async (patientRecordId: number) => {
         try {
-            return await request("get", `${ENDPOINTS.GET_SERVICE_FORM_BY_PATIENT_RECORD_ID}/${patientRecordId}`);
+            return await request("get", `${ENDPOINTS.GET_SERVICE_INFO}/${patientRecordId}`);
         } catch (e) {
             if (!(e instanceof Error)) return;
             log.error(`getServiceInfo: ${e.message}`);
