@@ -23,11 +23,12 @@ type AddSpecialistAppointmentInputs = {
 
 type CreateSpecialistAppointmentFormProps = {
     selectedAppointment: Appointment | null | undefined;
+    setSelectAppointment: (appointment: Appointment | null) => void;
     onClickSaveAppointment: (params: CreateSpecialtyServiceRecordParams) => void;
 };
 
 export default function CreateSpecialistAppointmentForm(
-    {selectedAppointment, onClickSaveAppointment}: CreateSpecialistAppointmentFormProps
+    {selectedAppointment, setSelectAppointment, onClickSaveAppointment}: CreateSpecialistAppointmentFormProps
 ) {
     const {
         control,
@@ -40,10 +41,13 @@ export default function CreateSpecialistAppointmentForm(
 
     const [physicianOptions, setPhysicianOptions] = useState<Option[]>([]);
     const [specialistOptions, setSpecialistOptions] = useState<Option[]>([]);
+
     const [physiciansWorkScheduleBySpecialty, setPhysiciansWorkScheduleBySpecialty] = useState<StaffWorkSchedule[]>([]);
     const specialistSelected = watch("specialist");
+
     const {getSpecialties} = useSpecialty();
     const {getPhysiciansWorkScheduleBySpecialty} = usePhysiciansWorkScheduleBySpecialty();
+
     const patientRecordIdContext = useContext(PatientRecordIdContext);
 
     // ------------------------- function ------------------------------
@@ -58,9 +62,9 @@ export default function CreateSpecialistAppointmentForm(
         setSpecialistOptions(specialtyOptions);
     };
 
-    const fetchPhysiciansWorkScheduleBySpecialty = async () => {
+    const fetchPhysiciansWorkScheduleBySpecialty = async (specialtyId: string) => {
         const params: PhysiciansWorkScheduleBySpecialtyParams = {
-            specialtyIdentifier: Number.parseInt(specialistSelected)
+            specialtyIdentifier: Number.parseInt(specialtyId)
         };
         const physiciansWorkScheduleBySpecialty = await getPhysiciansWorkScheduleBySpecialty(params);
 
@@ -81,6 +85,7 @@ export default function CreateSpecialistAppointmentForm(
 
         setPhysicianOptions(options);
         setPhysiciansWorkScheduleBySpecialty(physiciansWorkScheduleBySpecialty);
+        return physiciansWorkScheduleBySpecialty;
     };
 
     // Gọi tất cả chuyên khoa khi khởi tạo
@@ -88,16 +93,26 @@ export default function CreateSpecialistAppointmentForm(
         fetchSpecialties().then(() => null);
     }, []);
 
-    // Prefill dữ liệu khi có appointment
+    // Điền dữ liệu khi có lịch đặt vs bác sỹ
     useEffect(() => {
         if (!selectedAppointment) return;
-        if (selectedAppointment.physician) {
-            reset({
-                specialist: selectedAppointment.physician.medicalSpecialty?.identifier.toString(),
-                physicianWorkSchedule: selectedAppointment.physician.identifier.toString(),
+
+        if (selectedAppointment.physician?.specialty && selectedAppointment.workSchedule) {
+            fetchPhysiciansWorkScheduleBySpecialty(selectedAppointment.physician.specialty.identifier.toString())
+                .then((physiciansWorkScheduleBySpecialty) => {
+                reset({
+                    specialist: selectedAppointment.physician.specialty?.identifier.toString() ?? "",
+                    physicianWorkSchedule: physiciansWorkScheduleBySpecialty.find(
+                        (p) =>
+                            p.staff?.identifier === selectedAppointment.physician.identifier &&
+                            p.workSchedule.identifier === selectedAppointment.workSchedule.identifier
+                    )?.identifier.toString() ?? "",
+                    request: "",
+                });
             });
+            return;
         }
-    }, [selectedAppointment, reset]);
+    }, [selectedAppointment]);
 
     // Cập nhật danh sách bác sĩ khi chọn chuyên khoa
     useEffect(() => {
@@ -105,12 +120,15 @@ export default function CreateSpecialistAppointmentForm(
             setPhysicianOptions([]);
             return;
         }
-        fetchPhysiciansWorkScheduleBySpecialty().then(() => null);
+        setSelectAppointment(null);
+        fetchPhysiciansWorkScheduleBySpecialty(specialistSelected).then(() => null);
     }, [specialistSelected]);
 
     const onSubmit: SubmitHandler<AddSpecialistAppointmentInputs> = async (data) => {
         const selectedSpecialist = specialistOptions.find((s) => s.value === data.specialist);
-        const selectedPhysicianWorkSchedule = physiciansWorkScheduleBySpecialty.find((p) => p.identifier === parseInt(data.physicianWorkSchedule));
+        const selectedPhysicianWorkSchedule = physiciansWorkScheduleBySpecialty.find(
+            (p) => p.identifier === parseInt(data.physicianWorkSchedule)
+        );
 
         if (!selectedSpecialist || !selectedPhysicianWorkSchedule) {
             toast.error("Vui lòng chọn chuyên khoa và bác sĩ");

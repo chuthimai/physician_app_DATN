@@ -4,5 +4,5 @@ export default interface Physician {
     identifier: number,
     name: string,
     gender?: boolean,
-    medicalSpecialty?: MedicalSpecialty,
+    specialty?: MedicalSpecialty,
 }

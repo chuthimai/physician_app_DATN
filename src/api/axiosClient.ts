@@ -22,7 +22,7 @@ if (import.meta.env.VITE_NODE_ENV === "development") {
     });
 
     axiosClient.interceptors.response.use(res => {
-        // log.info("Response:", res.data);
+        log.info("Response:", res.data);
         return res;
     });
 }
