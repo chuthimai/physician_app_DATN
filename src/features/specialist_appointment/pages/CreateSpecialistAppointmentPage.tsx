@@ -46,6 +46,7 @@ export function CreateSpecialistAppointmentPage() {
     return <div className="flex flex-col">
         <CreateSpecialistAppointmentForm
             selectedAppointment={selectedAppointment}
+            setSelectAppointment={setSelectedAppointment}
             onClickSaveAppointment={onClickSaveAppointment}
         />
         {appointments.length > 0 && <div className="flex flex-col">
@@ -55,7 +56,6 @@ export function CreateSpecialistAppointmentPage() {
             <AppointmentTable
                 appointments={appointments}
                 setSelectedAppointment={setSelectedAppointment}
-                onClickSaveAppointment={onClickSaveAppointment}
             />
         </div>}
     </div>
