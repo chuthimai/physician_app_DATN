@@ -10,6 +10,7 @@ import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 import type CreatePrescriptionParams from "@/features/diagnosis/type/CreatePrescriptionParams.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import usePrescription from "@/features/diagnosis/hooks/usePrescription.ts";
+import {SUGGESTIONS} from "@/constants/suggestions.ts";
 
 type Props = {
     open: boolean;
@@ -71,6 +72,7 @@ export default function PrescriptionDialog({ open, onOpenChange }: Props) {
                         label={"Lời dặn của bác sỹ"}
                         error={errors.note}
                         className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
+                        suggestions={SUGGESTIONS.PRESCRIPTION}
                         {...register("note", {
                             validate: () => true,
                         })}

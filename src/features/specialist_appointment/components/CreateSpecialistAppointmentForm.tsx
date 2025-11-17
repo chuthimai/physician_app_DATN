@@ -14,6 +14,7 @@ import type CreateSpecialtyServiceRecordParams
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import type {Option} from "@/types/others/Option.ts";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
+import {SUGGESTIONS} from "@/constants/suggestions.ts";
 
 type AddSpecialistAppointmentInputs = {
     specialist: string;
@@ -191,6 +192,7 @@ export default function CreateSpecialistAppointmentForm(
                         <TextAreaInput
                             label={"Đề nghị"}
                             error={errors.request}
+                            suggestions={SUGGESTIONS.REQUEST_SPECIALIST_APPOINTMENT}
                             {...register("request", { required: "Không được để trống" })}
                         />
                     </div>

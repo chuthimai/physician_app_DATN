@@ -72,7 +72,12 @@ export default function DynamicForm({
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
-                <b>Đề nghị: </b> {serviceReport?.request ?? "Không có thông tin"}
+                <b>Đề nghị: </b>
+                {
+                    !serviceReport?.request || serviceReport.request === ""
+                        ? "Không có thông tin"
+                        : serviceReport?.request
+                }
             </div>
             <RenderAssessmentItems
                 items={serviceReport?.assessmentResults ?? []}
