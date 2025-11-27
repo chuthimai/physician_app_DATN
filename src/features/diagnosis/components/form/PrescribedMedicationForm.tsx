@@ -13,6 +13,7 @@ import type {Option} from "@/types/others/Option.ts";
 import useMedication from "@/features/diagnosis/hooks/useMedication.ts";
 import type Medication from "@/features/diagnosis/type/Medication.ts";
 import {useToast} from "@/hooks/useToast.ts";
+import {SUGGESTIONS} from "@/constants/suggestions.ts";
 
 type PrescriptionInputs = {
     medicationIdentifier: number;
@@ -197,6 +198,7 @@ export default function PrescribedMedicationForm() {
                     <TextAreaInput
                         label="Cách dùng"
                         className={"w-full h-30 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"}
+                        suggestions={SUGGESTIONS.DOSAGE_INSTRUCTION}
                         error={errors.dosageInstruction}
                         {...register("dosageInstruction", {
                             validate: (v) => v.trim() !== "" || "Trường này không được để trống",

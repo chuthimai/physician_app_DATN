@@ -393,6 +393,20 @@ const assessmentItemSuggestions = [
     "Không có",
 ]
 
+const medicationSuggestions = [
+    "mỗi ngày",
+    "viên",
+    "gói",
+    "uống vào",
+    "buổi sáng",
+    "buổi trưa",
+    "buổi tối",
+    "trước ăn",
+    "sau ăn",
+    "phút",
+    "giờ"
+]
+
 const prescriptionSuggestions = [
     // Chung
     "Uống thuốc đúng liều, đúng giờ theo hướng dẫn.",
@@ -462,4 +476,5 @@ export const SUGGESTIONS = {
     FOCUS_IMAGING: focusImagingSuggestions,
     ASSESSMENT_ITEM: assessmentItemSuggestions,
     PRESCRIPTION: prescriptionSuggestions,
+    DOSAGE_INSTRUCTION: medicationSuggestions,
 };
