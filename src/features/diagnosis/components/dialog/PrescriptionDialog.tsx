@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {MedicationsContext} from "@/providers/medications/MedicationsContext.tsx";
 import {type SubmitHandler, useForm} from "react-hook-form";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import {Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import ButtonCancel from "@/components/button/ButtonCancel.tsx";

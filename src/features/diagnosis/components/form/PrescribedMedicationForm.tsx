@@ -12,7 +12,7 @@ import {SNOMEDCT_FORM_CODES} from "@/constants/prescription/snomedct_form_codes.
 import type {Option} from "@/types/others/Option.ts";
 import useMedication from "@/features/diagnosis/hooks/useMedication.ts";
 import type Medication from "@/features/diagnosis/type/Medication.ts";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import {SUGGESTIONS} from "@/constants/suggestions.ts";
 
 type PrescriptionInputs = {

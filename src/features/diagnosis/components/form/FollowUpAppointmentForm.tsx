@@ -7,7 +7,7 @@ import SelectInput from "@/components/input/SelectInput.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 import {PatientContext} from "@/providers/patient/PatientContext.tsx";
-import useNumber from "@/hooks/useNumber.ts";
+import useNumber from "@/lib/utils/useNumber.ts";
 
 type PatientInputs = {
     citizenId: string;

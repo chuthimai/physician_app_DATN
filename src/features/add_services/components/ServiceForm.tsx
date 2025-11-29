@@ -6,7 +6,7 @@ import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 import { serviceTypeOptions } from "@/constants/add_services/options";
 import type {Option} from "@/types/others/Option.ts";
 import {useService} from "@/features/add_services/hooks/useService.ts";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import type {Service} from "@/types/models/Service.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";

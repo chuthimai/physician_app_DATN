@@ -1,10 +1,10 @@
-import useServiceForm from "@/hooks/api/useServiceForm.ts";
+import useServiceForm from "@/hooks/useServiceForm.ts";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import DynamicForm from "@/components/form/DynamicForm";
 import {useNavigate, useParams} from "react-router-dom";
 import useSpecimenReport from "@/features/lab_result/hooks/useSpecimenReport.ts";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 type DoImageResultFormProps = {

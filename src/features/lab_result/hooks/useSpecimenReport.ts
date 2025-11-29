@@ -1,4 +1,4 @@
-import {useApi} from "@/hooks/useApi.ts";
+import {useApi} from "@/lib/api/useApi.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type Specimen from "@/features/lab_taking_specimens/types/Specimen.ts";

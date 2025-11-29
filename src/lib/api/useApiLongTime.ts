@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
-import { axiosClientLongTime } from "../api/axiosClientLongTime";
+import { axiosClientLongTime } from "../../api/axiosClientLongTime.ts";
 import type { AxiosError } from "axios";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 
 type ApiError = {
     message: string;

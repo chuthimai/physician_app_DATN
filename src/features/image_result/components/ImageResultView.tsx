@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import useDate from "@/hooks/useDate.ts";
+import useDate from "@/lib/utils/useDate.ts";
 import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 type ImageResultViewProps = {

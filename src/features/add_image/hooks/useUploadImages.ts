@@ -1,7 +1,7 @@
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
-import {useMediaApi} from "@/hooks/useMediaApi.ts";
+import {useMediaApi} from "@/lib/api/useMediaApi.ts";
 
 export default function useUploadImage() {
     const {request, loading, error} = useMediaApi();

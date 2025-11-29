@@ -1,4 +1,4 @@
-import useServiceForm from "@/hooks/api/useServiceForm.ts";
+import useServiceForm from "@/hooks/useServiceForm.ts";
 import {useContext, useEffect, useState} from "react";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
@@ -6,7 +6,7 @@ import DynamicForm from "@/components/form/DynamicForm.tsx";
 import useServiceFormBySpecimen from "@/features/lab_result/hooks/useServiceFormBySpecimen.ts";
 import {SpecimenIdContext} from "@/providers/specimen/SpecimenIdContext.tsx";
 import useSpecimenReport from "@/features/lab_result/hooks/useSpecimenReport.ts";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 type LabResultFormProps = {

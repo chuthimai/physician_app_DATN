@@ -1,11 +1,11 @@
-import {useApi} from "@/hooks/useApi.ts";
-import {useToast} from "@/hooks/useToast.ts";
+import {useApi} from "@/lib/api/useApi.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import {useContext} from "react";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type {PatientRecordResponse} from "@/features/medical_records/types/PatientRecordResponse.ts";
-import useMapper from "@/hooks/useMapper.ts";
+import useMapper from "@/lib/utils/useMapper.ts";
 import type {PatientRecord} from "@/types/models/PatientRecord.ts";
 
 export default function useDetailMedicalRecord() {

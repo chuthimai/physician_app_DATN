@@ -6,13 +6,13 @@ import ButtonSave from "../../../components/button/ButtonSave.tsx";
 import {useEffect, useState} from "react";
 import {Label} from "@/components/ui/label.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
-import useDate from "@/hooks/useDate.ts";
+import useDate from "@/lib/utils/useDate.ts";
 import log from "loglevel";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import type {CreatePatientRecordParams} from "../types/CreatePatientRecordParams.ts";
 import usePatientRecord from "@/features/create_patient_record/hooks/usePatientRecord.ts";
-import useNumber from "@/hooks/useNumber.ts";
-import {usePassword} from "@/hooks/usePassword.ts";
+import useNumber from "@/lib/utils/useNumber.ts";
+import {usePassword} from "@/lib/utils/usePassword.ts";
 
 type PatientInputs = {
     citizenId: string;

@@ -1,8 +1,8 @@
-import {useApi} from "@/hooks/useApi.ts";
+import {useApi} from "@/lib/api/useApi.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
-import {useToast} from "@/hooks/useToast.ts";
-import useMapper from "@/hooks/useMapper.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
+import useMapper from "@/lib/utils/useMapper.ts";
 import type ServiceFormResponse from "@/types/responses/ServiceFormResponse.ts";
 
 export default function useImageReport() {

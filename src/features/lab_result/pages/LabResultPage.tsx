@@ -2,7 +2,7 @@ import DiagnosisMenu from "@/components/diagnosis/diagnosis_menu/DiagnosisMenu.t
 import ButtonScan from "@/components/button/ButtonScan.tsx";
 import LabResultForm from "@/features/lab_result/components/LabResultForm.tsx";
 import {useContext, useEffect, useState} from "react";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import {SpecimenIdContext} from "@/providers/specimen/SpecimenIdContext";
 import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
 import Loading from "@/components/loading/Loading.tsx";

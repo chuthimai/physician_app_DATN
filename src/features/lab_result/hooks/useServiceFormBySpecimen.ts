@@ -1,11 +1,11 @@
-import {useApi} from "@/hooks/useApi.ts";
-import {useToast} from "@/hooks/useToast.ts";
+import {useApi} from "@/lib/api/useApi.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import type ServiceFormResponse from "@/types/responses/ServiceFormResponse.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import {useContext} from "react";
 import {SpecimenIdContext} from "@/providers/specimen/SpecimenIdContext.tsx";
-import useMapper from "@/hooks/useMapper.ts";
+import useMapper from "@/lib/utils/useMapper.ts";
 
 export default function useServiceFormBySpecimen() {
     const {request, loading, error} = useApi<ServiceFormResponse>();

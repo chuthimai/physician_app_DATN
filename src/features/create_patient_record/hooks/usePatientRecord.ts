@@ -1,7 +1,7 @@
-import {useApi} from "@/hooks/useApi.ts";
+import {useApi} from "@/lib/api/useApi.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import type {CreatePatientRecordResponse} from "@/features/create_patient_record/types/CreatePatientRecordResponse.ts";
 import type {CreatePatientRecordParams} from "@/features/create_patient_record/types/CreatePatientRecordParams.ts";
 import {useContext} from "react";

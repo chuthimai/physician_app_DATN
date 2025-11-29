@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "@/providers/user/UserContext.tsx";
-import useServiceInfo from "@/hooks/api/useServiceInfo.ts";
+import useServiceInfo from "@/hooks/useServiceInfo.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import type {ServiceInfoResponse} from "@/types/responses/ServiceInfoResponse.ts";
 
