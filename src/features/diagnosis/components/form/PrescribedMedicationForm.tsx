@@ -44,7 +44,7 @@ export default function PrescribedMedicationForm() {
     const medicationEditing = medicationEditingContext?.medicationEditing;
     const isEditing = !!medicationEditing;
 
-    const {showToastWarning} = useToast();
+    const {showToastWarning, showToastSuccess} = useToast();
 
     // Lấy đối tượng thuốc dựa vào tên thuốc đã chọn
     const selectedMedicationId = watch("medicationIdentifier");
@@ -129,6 +129,7 @@ export default function PrescribedMedicationForm() {
             return;
         }
         medicationsContext?.setMedications([...medicationList, payload]);
+        showToastSuccess("Đã thêm vào danh sách");
         setSelectedMedication(undefined);
         reset();
     };
