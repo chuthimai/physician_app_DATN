@@ -12,6 +12,7 @@ import FollowUpAppointmentPage from "@/features/diagnosis/pages/FollowUpAppointm
 import TransferLetterPage from "@/features/transfer_letter/pages/TransferLetterPage.tsx";
 import ApproveTransferLetterPage from "@/features/transfer_letter/pages/ApproveTransferLetterPage.tsx";
 import CreateTransferLetterPage from "@/features/transfer_letter/pages/CreateTransferLetterPage.tsx";
+import MedicalRecordsPage from "@/features/medical_records/pages/MedicalRecordsPage.tsx";
 
 export function getAttendingPhysicianRoute(): Route[] {
     return [
@@ -51,7 +52,7 @@ export function getAttendingPhysicianRoute(): Route[] {
         },
         {
             path: "xem-tat-ca-benh-an",
-            element: <div>Xem tat ca benh an</div>
+            element: <MedicalRecordsPage/>
         },
         {
             path: "giay-chuyen-vien",

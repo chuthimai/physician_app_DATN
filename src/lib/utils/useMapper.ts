@@ -1,8 +1,8 @@
-import type ServiceReportResponse from "@/features/medical_records/types/ServiceReportResponse.ts";
+import type ServiceReportResponse from "@/features/diagnosis/type/ServiceReportResponse.ts";
 import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 import type AssessmentItemResponse from "@/types/responses/AssessmentItemResponse.ts";
 import type {AssessmentResult} from "@/types/models/AssessmentResult.ts";
-import type AssessmentResultResponse from "@/features/medical_records/types/AssessmentResultResponse.ts";
+import type AssessmentResultResponse from "@/features/diagnosis/type/AssessmentResultResponse.ts";
 
 export default function useMapper() {
     const mapServiceReport = function (data: ServiceReportResponse): ServiceReport {

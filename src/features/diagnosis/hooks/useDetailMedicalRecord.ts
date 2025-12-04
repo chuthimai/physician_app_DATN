@@ -4,7 +4,7 @@ import {useContext} from "react";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
-import type {PatientRecordResponse} from "@/features/medical_records/types/PatientRecordResponse.ts";
+import type {PatientRecordResponse} from "@/features/diagnosis/type/PatientRecordResponse.ts";
 import useMapper from "@/lib/utils/useMapper.ts";
 import type {PatientRecord} from "@/types/models/PatientRecord.ts";
 

@@ -8,7 +8,7 @@ type ImageResultViewProps = {
 
 export default function ImageResultView({imageReport}: ImageResultViewProps) {
     const navigator = useNavigate();
-    const {formattedFullDate} = useDate();
+    const {formattedFullDateTime} = useDate();
 
     const handleClick = () => {
         navigator(`/ket-qua-hinh-anh/ket-qua/${imageReport.identifier}`);
@@ -33,7 +33,7 @@ export default function ImageResultView({imageReport}: ImageResultViewProps) {
                     <div className="flex">
                         <div className="w-50 text-gray-700">Thời điểm thực hiện</div>
                         <div className="flex-1">
-                            {formattedFullDate(new Date(imageReport.effectiveTime))}
+                            {formattedFullDateTime(new Date(imageReport.effectiveTime))}
                         </div>
                     </div>
                 }
