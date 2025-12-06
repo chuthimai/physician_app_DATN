@@ -1,6 +1,6 @@
 import {openMedicationDB, STORE_NAME} from "@/db/indexDbClient";
 import type Medication from "../type/Medication";
-import {useApi} from "@/hooks/useApi.ts";
+import {useApi} from "@/lib/api/useApi.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import {CACHE_EXPIRY} from "@/constants/prescription/call_api_constants.ts";

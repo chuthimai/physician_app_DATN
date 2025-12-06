@@ -2,7 +2,7 @@ import DoImageResultForm from "@/features/image_result/components/DoImageResultF
 import ImagePreviewGrid from "@/features/image_result/components/ImagePreviewGrid.tsx";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import useServiceForm from "@/hooks/api/useServiceForm.ts";
+import useServiceForm from "@/hooks/useServiceForm.ts";
 import type {ServiceReport} from "@/types/models/ServiceReport.ts";
 
 export default function DoImageResultPage() {

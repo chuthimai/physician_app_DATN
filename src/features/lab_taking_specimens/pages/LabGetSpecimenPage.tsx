@@ -6,7 +6,7 @@ import ConfirmLabService from "@/features/lab_taking_specimens/components/Confir
 import Loading from "@/components/loading/Loading.tsx";
 import type Specimen from "@/features/lab_taking_specimens/types/Specimen.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 
 export default function LabGetSpecimenPage() {
     const [openScan, setOpenScan] = useState(false);

@@ -5,7 +5,7 @@ import ButtonCancel from "@/components/button/ButtonCancel.tsx";
 import {useContext} from "react";
 import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 import {useForm} from "react-hook-form";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {useService} from "@/features/add_services/hooks/useService.ts";
 import type {AddServiceParams, ServiceInfo} from "@/features/add_services/types/AddServiceParams.ts";

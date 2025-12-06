@@ -5,8 +5,8 @@ import {
     MdOutlineMedicalServices,
     MdNoteAdd,
     MdOutlineNoteAdd,
-    MdDescription,
-    MdOutlineDescription,
+    // MdDescription,
+    // MdOutlineDescription,
 } from "react-icons/md";
 
 import { CiMedicalCross as CiMedicalCrossOutline } from "react-icons/ci";
@@ -102,7 +102,7 @@ export function getSideBarMenus(role: string): Item[] {
                     {label: "Chỉ định chuyên khoa", path: "/tao-lich-kham-chuyen-khoa", icon: <CiMedicalCrossOutline className={iconStyle}/>, iconFill: <CiMedicalCross className={iconStyle}/>,},
                     {label: "Chỉ định dịch vụ", path: "/chi-dinh-dich-vu", icon: <MdOutlineMedicalServices className={iconStyle}/>, iconFill: <MdMedicalServices className={iconStyle}/>,},
                     {label: "Xem hồ sơ bệnh án", path: "/xem-tat-ca-benh-an", icon: <FolderOpenOutline className={iconStyle}/>, iconFill: <FolderOpenSolid className={iconStyle}/>,},
-                    {label: "Giấy chuyển viện", path: "/giay-chuyen-vien", icon: <MdOutlineDescription className={iconStyle}/>, iconFill: <MdDescription className={iconStyle}/>,},
+                    // {label: "Giấy chuyển viện", path: "/giay-chuyen-vien", icon: <MdOutlineDescription className={iconStyle}/>, iconFill: <MdDescription className={iconStyle}/>,},
                 ]
             }
         ];

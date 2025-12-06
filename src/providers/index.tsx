@@ -7,6 +7,7 @@ import {PatientRecordIdProvider} from "@/providers/patient_record/PatientRecordI
 import {PatientProvider} from "@/providers/patient/PatientProvider.tsx";
 import {ServiceImageIdProvider} from "@/providers/services/ServiceImageIdProvider.tsx";
 import {ServiceLabIdProvider} from "@/providers/services/ServiceLabIdProvider.tsx";
+import {MedicalRecordCodeGetAllProvider} from "@/providers/medical_record/MedicalRecordCodeGetAllProvider.tsx";
 
 export const AppProviders = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -18,7 +19,9 @@ export const AppProviders = ({ children }: { children: React.ReactNode }) => {
                             <PatientProvider>
                                 <ServiceImageIdProvider>
                                     <ServiceLabIdProvider>
-                                        {children}
+                                        <MedicalRecordCodeGetAllProvider>
+                                            {children}
+                                        </MedicalRecordCodeGetAllProvider>
                                     </ServiceLabIdProvider>
                                 </ServiceImageIdProvider>
                             </PatientProvider>

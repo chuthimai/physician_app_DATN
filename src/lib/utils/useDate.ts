@@ -47,6 +47,6 @@ export default function useDate() {
         formatLocalDate,
         parseLocalDate,
         compactDateOfBirth,
-        formattedFullDate: formattedFullDateTime,
+        formattedFullDateTime,
     }
 }

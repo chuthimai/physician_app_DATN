@@ -5,8 +5,8 @@ import {useEffect, useState} from "react";
 import useSearchPatient from "../hooks/useSearchPatient.ts";
 import SearchOverlay from "@/features/create_patient_record/components/SearchOverlay.tsx";
 import UserCard from "@/features/create_patient_record/components/UserCard.tsx";
-import useDate from "@/hooks/useDate.ts";
-import useNumber from "@/hooks/useNumber.ts";
+import useDate from "@/lib/utils/useDate.ts";
+import useNumber from "@/lib/utils/useNumber.ts";
 import type Patient from "@/types/models/Patient.ts";
 
 export default function PatientSearchBar() {

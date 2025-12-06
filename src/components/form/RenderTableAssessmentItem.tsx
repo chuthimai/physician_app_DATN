@@ -33,7 +33,7 @@ export default function RenderTableAssessmentItem({indicators, errors, register}
                             <TextInput
                                 type={"number"}
                                 label={""}
-                                defaultValue={child.value ?? ""}
+                                defaultValue={child.value ?? "0.0"}
                                 disabled={childIsReadOnly}
                                 {...register(`${child.identifier}`, {
                                     validate: (v) => v.trim() !== "" || "Trường này không được để trống",

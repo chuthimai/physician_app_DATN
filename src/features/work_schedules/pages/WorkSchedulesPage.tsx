@@ -10,7 +10,7 @@ export default function WorkSchedulesPage() {
     const { getStaffWorkSchedules } = useStaffWorkSchedules();
     const [events, setEvents] = useState<EventCalendar[]>([]);
     const params: GetStaffWorkSchedulesParams = {
-        physicianIdentifier: userContext?.user?.id || 0
+        physicianIdentifier: Number(userContext?.user?.id) || 0
     };
 
     const fetchStaffWorkSchedules = async () => {

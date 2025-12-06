@@ -8,13 +8,14 @@ import {
     TableRow,
 } from "@/components/ui/table.tsx"
 
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {MedicationsContext} from "@/providers/medications/MedicationsContext.tsx";
 import ButtonEdit from "@/components/button/ButtonEdit.tsx";
 import ButtonDelete from "@/components/button/ButtonDelete.tsx";
-import {medications} from "@/fake_data/medications.ts";
 import {MedicationEditingContext} from "@/providers/medications/MedicationEditingContext.tsx";
 import {SNOMEDCT_FORM_CODES} from "@/constants/prescription/snomedct_form_codes.ts";
+import type Medication from "@/features/diagnosis/type/Medication.ts";
+import useMedication from "@/features/diagnosis/hooks/useMedication.ts";
 
 type Props = {
     onOpenChange: (open: boolean) => void;
@@ -23,8 +24,10 @@ type Props = {
 export default function PrescriptionTable({ onOpenChange }: Props) {
     const medicationsContext = useContext(MedicationsContext);
     const prescribedMedications = medicationsContext?.medications || [];
+    const [medications, setMedications] = useState<Medication[]>([]);
 
     const medicationEditingContext = useContext(MedicationEditingContext);
+    const {getAllMedicationsFromDb} = useMedication();
 
     // -------------------- render ----------------------
     function deleteMedication(medicationId: number) {
@@ -40,6 +43,15 @@ export default function PrescriptionTable({ onOpenChange }: Props) {
         )
         onOpenChange(false);
     }
+
+    const getAllMedications = async () => {
+        const medications = await getAllMedicationsFromDb();
+        setMedications(medications);
+    }
+
+    useEffect(() => {
+        getAllMedications().then(() => null);
+    }, []);
 
     // -------------------- view ----------------------
     return (

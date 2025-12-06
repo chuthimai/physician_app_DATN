@@ -2,6 +2,7 @@ import {type FieldErrors, type UseFormRegister} from "react-hook-form";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 import type {AssessmentResult} from "@/types/models/AssessmentResult.ts";
 import RenderTableAssessmentItem from "@/components/form/RenderTableAssessmentItem.tsx";
+import {SUGGESTIONS} from "@/constants/suggestions.ts";
 
 type DynamicFormInputs = Record<string, string>;
 
@@ -69,6 +70,7 @@ export default function RenderAssessmentItems({
                                     label={item.name}
                                     defaultValue={item.value ?? ""}
                                     disabled={isReadOnly}
+                                    suggestions={SUGGESTIONS.ASSESSMENT_ITEM}
                                     error={errors[`${item.identifier}`]}
                                     className="w-full h-20 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 mt-1"
                                     {...register(`${item.identifier}`, {

@@ -6,10 +6,11 @@ import {ServicesContext} from "@/providers/services/ServicesContext.tsx";
 import { serviceTypeOptions } from "@/constants/add_services/options";
 import type {Option} from "@/types/others/Option.ts";
 import {useService} from "@/features/add_services/hooks/useService.ts";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import type {Service} from "@/types/models/Service.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
+import {SUGGESTIONS} from "@/constants/suggestions.ts";
 
 type AddServiceInputs = {
     type: string;
@@ -132,6 +133,7 @@ export default function ServiceForm() {
                         <TextAreaInput
                             label={"Đề nghị"}
                             error={errors.request}
+                            suggestions={SUGGESTIONS.REQUEST_ADD_SERVICE}
                             {...register("request", { required: "Không được để trống" })}
                         />
                     </div>

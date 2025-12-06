@@ -6,7 +6,7 @@ import {
     DialogTitle
 } from "@/components/ui/dialog.tsx";
 import Barcode from "react-barcode";
-import useNumber from "@/hooks/useNumber.ts";
+import useNumber from "@/lib/utils/useNumber.ts";
 import type Specimen from "../types/Specimen";
 
 interface BarCodeDialogProps {

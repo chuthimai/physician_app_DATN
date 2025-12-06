@@ -1,7 +1,7 @@
 import type {Service} from "@/types/models/Service.ts";
 import type Physician from "@/types/models/Physician.ts";
 import type ImageStudy from "@/features/image_result/types/ImageStudy.ts";
-import type AssessmentResultResponse from "@/features/medical_records/types/AssessmentResultResponse.ts";
+import type AssessmentResultResponse from "@/features/diagnosis/type/AssessmentResultResponse.ts";
 
 export default interface ServiceReportResponse {
     identifier: number,

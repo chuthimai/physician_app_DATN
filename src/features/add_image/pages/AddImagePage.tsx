@@ -3,7 +3,7 @@ import ButtonScan from "@/components/button/ButtonScan.tsx";
 import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
 import ConfirmImageService from "@/features/add_image/components/ConfirmImageService.tsx";
 import AddImageForm from "@/features/add_image/components/AddImageForm.tsx";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import Loading from "@/components/loading/Loading.tsx";
 

@@ -1,8 +1,8 @@
-import {useApi} from "@/hooks/useApi.ts";
+import {useApi} from "@/lib/api/useApi.ts";
 import type CreatePrescriptionParams from "@/features/diagnosis/type/CreatePrescriptionParams.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
-import {useToast} from "@/hooks/useToast.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 
 export default function usePrescription() {
     const {request, loading, error} = useApi();

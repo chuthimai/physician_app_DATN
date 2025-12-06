@@ -1,5 +1,5 @@
 import DynamicForm from "@/components/form/DynamicForm.tsx";
-import useServiceForm from "@/hooks/api/useServiceForm.ts";
+import useServiceForm from "@/hooks/useServiceForm.ts";
 import {useContext, useEffect, useState} from "react";
 import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams.ts";
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";

@@ -1,5 +1,5 @@
-import useDate from "@/hooks/useDate.ts";
-import usePatientInfo from "@/hooks/api/usePatientInfo.ts";
+import useDate from "@/lib/utils/useDate.ts";
+import usePatientInfo from "@/hooks/usePatientInfo.ts";
 import {useContext, useEffect} from "react";
 import { PatientContext } from "@/providers/patient/PatientContext.tsx";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";

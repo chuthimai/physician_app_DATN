@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import {Colors} from "./constants/colors.ts";
+import {Colors} from "../constants/colors.ts";
 
 export default function NotFoundPage() {
     return (

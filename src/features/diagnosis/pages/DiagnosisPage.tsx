@@ -7,8 +7,8 @@ import {useContext, useEffect, useState} from "react";
 import {CloseRecordDialog} from "@/features/diagnosis/components/dialog/CloseRecordDialog.tsx";
 import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
-import {useToast} from "@/hooks/useToast.ts";
-import usePatientInfo from "@/hooks/api/usePatientInfo.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
+import usePatientInfo from "@/hooks/usePatientInfo.ts";
 
 export default function DiagnosisPage() {
     const [openCloseRecordDialog, setOpenCloseRecordDialog] = useState(false);

@@ -3,7 +3,7 @@ import SideBar from "./components/sidebar/SideBar.tsx";
 import {Colors} from "@/constants/colors.ts";
 import useAuth from "@/features/auth/hooks/useAuth.ts";
 import ButtonLogout from "@/components/button/ButtonLogout.tsx";
-import {useAppInitializer} from "@/hooks/useAppInitializer.ts";
+import {useAppInitializer} from "@/lib/utils/useAppInitializer.ts";
 
 
 function App() {

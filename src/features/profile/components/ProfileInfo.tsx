@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import {UserContext} from "@/providers/user/UserContext.tsx";
-import useDate from "@/hooks/useDate.ts";
+import useDate from "@/lib/utils/useDate.ts";
 
 export default function ProfileInfo() {
     const userContext = useContext(UserContext);

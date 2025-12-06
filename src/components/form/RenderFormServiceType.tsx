@@ -6,6 +6,7 @@ import {categoryOptions, methodOptions, severityOptions} from "@/constants/diagn
 import {OBSERVATION_CATEGORY_CODE} from "@/constants/diagnosis/observation_category_code.ts";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 import type {ServiceReport} from "@/types/models/ServiceReport";
+import {SUGGESTIONS} from "@/constants/suggestions.ts";
 
 type DynamicFormInputs = Record<string, string>;
 
@@ -99,6 +100,7 @@ export default function RenderFormServiceType({
                 <TextAreaInput
                     label={"Kết luận"}
                     defaultValue={serviceReport.diagnosisReport?.conclusion ?? ""}
+                    suggestions={SUGGESTIONS.GENERAL_CONSULTATION}
                     {...register("conclusion", {
                         validate: (value) => {
                         if (type === SERVICE_TYPES.GENERAL_CONSULTATION) {
@@ -116,6 +118,7 @@ export default function RenderFormServiceType({
         return <TextAreaInput
             label={"Diễn giải kết quả"}
             defaultValue={serviceReport.laboratoryReport?.interpretation ?? ""}
+            suggestions={SUGGESTIONS.INTERPRETATION_LAB_REPORT}
             error={errors.interpretation}
             {...register("interpretation", {
                 validate: (v) => v.trim() !== "" || "Trường này không được để trống",
@@ -129,6 +132,7 @@ export default function RenderFormServiceType({
                 label={"Đối tượng được quan sát"}
                 error={errors.focus}
                 defaultValue={serviceReport.imagingReport?.focus ?? ""}
+                suggestions={SUGGESTIONS.FOCUS_IMAGING}
                 {...register("focus", {
                     validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                 })}
@@ -137,6 +141,7 @@ export default function RenderFormServiceType({
                 label={"Diễn giải kết quả"}
                 error={errors.interpretation}
                 defaultValue={serviceReport.imagingReport?.interpretation}
+                suggestions={SUGGESTIONS.INTERPRETATION_IMAGING_REPORT}
                 {...register("interpretation", {
                     validate: (v) => v.trim() !== "" || "Trường này không được để trống",
                 })}

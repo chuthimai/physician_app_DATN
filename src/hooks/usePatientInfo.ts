@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {useApi} from "@/hooks/useApi.ts";
+import {useApi} from "@/lib/api/useApi.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import log from "loglevel";
 import type Patient from "@/types/models/Patient.ts";

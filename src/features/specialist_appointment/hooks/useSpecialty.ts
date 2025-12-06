@@ -1,5 +1,5 @@
-import {useApi} from "@/hooks/useApi.ts";
-import {useToast} from "@/hooks/useToast.ts";
+import {useApi} from "@/lib/api/useApi.ts";
+import {useToast} from "@/lib/utils/useToast.ts";
 import {ENDPOINTS} from "@/constants/endpoints.ts";
 import type MedicalSpecialty from "@/types/models/MedicalSpecialty.ts";
 import log from "loglevel";

@@ -1,4 +1,4 @@
-import type ServiceReportResponse from "@/features/medical_records/types/ServiceReportResponse.ts";
+import type ServiceReportResponse from "@/features/diagnosis/type/ServiceReportResponse.ts";
 
 export default interface ServiceFormResponse {
     identifier: number,

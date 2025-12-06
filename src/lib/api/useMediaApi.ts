@@ -1,17 +1,17 @@
 import { useState, useCallback } from "react";
-import { axiosClient } from "../api/axiosClient";
 import type { AxiosError } from "axios";
-import {useToast} from "@/hooks/useToast.ts";
+import { axiosMultipartClient } from "../../api/axiosMultipartClient.ts";
+import { useToast } from "@/lib/utils/useToast.ts";
 
 type ApiError = {
     message: string;
     statusCode: number;
 };
 
-export function useApi<T>() {
+export function useMediaApi<T>() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<ApiError | null>(null);
-    const {showToastError} = useToast();
+    const { showToastError } = useToast();
 
     // --- Hàm xử lý lỗi chung ---
     const handleGeneralError = useCallback(
@@ -22,19 +22,15 @@ export function useApi<T>() {
                 case 401:
                     showToastError("Chưa đăng nhập hoặc phiên đăng nhập đã hết hạn (401).");
                     break;
-
                 case 403:
                     showToastError("Không có quyền truy cập (403).");
                     break;
-
-                // case 404:
-                //     showToastError("Không tìm thấy tài nguyên (404).");
-                //     break;
-
+                case 404:
+                    showToastError("Không tìm thấy tài nguyên (404).");
+                    break;
                 case 408:
                     showToastError("Kết nối quá hạn, thử lại sau (408).");
                     break;
-
                 case 500:
                     showToastError("Lỗi server nội bộ (500).");
                     break;
@@ -43,22 +39,25 @@ export function useApi<T>() {
         [showToastError],
     );
 
-
+    // --- Hàm gửi request multipart ---
     const request = useCallback(
         async (
-            method: "get" | "post" | "put" | "delete",
+            method: "post" | "put",
             url: string,
-            data?: unknown,
+            formData: FormData,
             params?: Record<string, unknown>
         ) => {
             setLoading(true);
             setError(null);
             try {
-                const res = await axiosClient.request<T>({
+                const res = await axiosMultipartClient.request<T>({
                     method,
                     url,
-                    data,
+                    data: formData,
                     params,
+                    headers: {
+                        // Không cần set Content-Type ở đây — axios tự thêm boundary
+                    },
                 });
                 return res.data;
             } catch (err) {
@@ -70,8 +69,7 @@ export function useApi<T>() {
                         message: string;
                     }>;
                     apiError = {
-                        message:
-                            axiosErr.response?.data?.message || axiosErr.message || "Error",
+                        message: axiosErr.response?.data?.message || axiosErr.message || "Error",
                         statusCode: axiosErr.response?.status || 500,
                     };
                 } else {
