@@ -5,7 +5,7 @@ import {
 } from "recharts";
 
 // ===== FAKE DATA =====
-import {imagingPerService, imagingStatsSummary} from "@/fakedata/doctorStatsData.ts";
+import {imagingPerServiceDay, imagingStatsSummary} from "@/fakedata/doctorStatsData.ts";
 import {COLORS_DASHBOARD} from "@/constants/dashboard/colors.ts";
 import {TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
 import {Tabs, TabsContent} from "@radix-ui/react-tabs";
@@ -48,7 +48,7 @@ export default function GeneralDashboard() {
                         </CardHeader>
                         <CardContent>
                             <ResponsiveContainer width="100%" height={300}>
-                                <BarChart data={imagingPerService}>
+                                <BarChart data={imagingPerServiceDay}>
                                     <XAxis dataKey="service"/>
                                     <YAxis domain={[0, (dataMax: number) => Math.ceil(dataMax * 1.1)]}/>
                                     <Tooltip formatter={(value: number) => [`${value}`, "Số lượng"]}/>
