@@ -1,4 +1,4 @@
-import {type TextareaHTMLAttributes, useState} from "react";
+import React, {type TextareaHTMLAttributes, useState} from "react";
 import type {FieldError} from "react-hook-form";
 
 interface TextAreaInputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -62,7 +62,7 @@ export function TextAreaInput({
         if (lastWord.length > 0) {
             setFiltered(
                 suggestions.filter(s =>
-                    s.toLowerCase().includes(lastWord)
+                    s.toLowerCase().startsWith(lastWord)
                 )
             );
         } else {
@@ -80,7 +80,7 @@ export function TextAreaInput({
 
         if (props.onChange) {
             const event = {
-                target: { value: newText }
+                target: { name: props.name, value: newText }
             } as React.ChangeEvent<HTMLTextAreaElement>;
 
             props.onChange(event);

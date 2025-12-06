@@ -28,89 +28,95 @@ const requestAddServiceSuggestions = [
     "MRI cột sống thắt lưng",
     "Điện tâm đồ",
     "Đo loãng xương DEXA",
+    "Khám chung",
+    "Bình thường",
+    "Không có",
 ];
 
 const requestSpecialistAppointmentSuggestions = [
-        // Nội tổng quát
-        "Khám nội tổng quát đánh giá toàn thân",
-        "Khám nội tổng quát do mệt mỏi kéo dài",
-        "Khám nội tổng quát do sụt cân không rõ nguyên nhân",
-        "Khám nội tổng quát do sốt kéo dài",
-        "Khám nội đánh giá bệnh lý chuyển hoá",
+    // Nội tổng quát
+    "Khám nội tổng quát đánh giá toàn thân",
+    "Khám nội tổng quát do mệt mỏi kéo dài",
+    "Khám nội tổng quát do sụt cân không rõ nguyên nhân",
+    "Khám nội tổng quát do sốt kéo dài",
+    "Khám nội đánh giá bệnh lý chuyển hoá",
 
-        // Tim mạch
-        "Khám tim mạch do đau ngực",
-        "Khám tim mạch do khó thở khi gắng sức",
-        "Khám tim mạch do hồi hộp, đánh trống ngực",
-        "Khám tim mạch do tăng huyết áp",
-        "Khám tim mạch đánh giá rối loạn nhịp",
-        "Khám tim mạch do phù chân",
+    // Tim mạch
+    "Khám tim mạch do đau ngực",
+    "Khám tim mạch do khó thở khi gắng sức",
+    "Khám tim mạch do hồi hộp, đánh trống ngực",
+    "Khám tim mạch do tăng huyết áp",
+    "Khám tim mạch đánh giá rối loạn nhịp",
+    "Khám tim mạch do phù chân",
 
-        // Hô hấp
-        "Khám hô hấp do ho kéo dài",
-        "Khám hô hấp do khó thở",
-        "Khám hô hấp do khò khè tái diễn",
-        "Khám hô hấp do nghi ngờ viêm phổi",
-        "Khám hô hấp đánh giá hen phế quản",
+    // Hô hấp
+    "Khám hô hấp do ho kéo dài",
+    "Khám hô hấp do khó thở",
+    "Khám hô hấp do khò khè tái diễn",
+    "Khám hô hấp do nghi ngờ viêm phổi",
+    "Khám hô hấp đánh giá hen phế quản",
 
-        // Tiêu hoá
-        "Khám tiêu hoá do đau bụng thượng vị",
-        "Khám tiêu hoá do tiêu chảy kéo dài",
-        "Khám tiêu hoá do táo bón mạn",
-        "Khám tiêu hoá do đầy hơi khó tiêu",
-        "Khám tiêu hoá đánh giá trào ngược dạ dày",
+    // Tiêu hoá
+    "Khám tiêu hoá do đau bụng thượng vị",
+    "Khám tiêu hoá do tiêu chảy kéo dài",
+    "Khám tiêu hoá do táo bón mạn",
+    "Khám tiêu hoá do đầy hơi khó tiêu",
+    "Khám tiêu hoá đánh giá trào ngược dạ dày",
 
-        // Cơ xương khớp
-        "Khám cơ xương khớp do đau vai gáy",
-        "Khám cơ xương khớp do đau lưng",
-        "Khám cơ xương khớp do đau gối khi vận động",
-        "Khám cơ xương khớp do tê buồn chân tay",
-        "Khám cơ xương khớp đánh giá thoái hoá khớp",
+    // Cơ xương khớp
+    "Khám cơ xương khớp do đau vai gáy",
+    "Khám cơ xương khớp do đau lưng",
+    "Khám cơ xương khớp do đau gối khi vận động",
+    "Khám cơ xương khớp do tê buồn chân tay",
+    "Khám cơ xương khớp đánh giá thoái hoá khớp",
 
-        // Thần kinh
-        "Khám thần kinh do đau đầu kéo dài",
-        "Khám thần kinh do chóng mặt",
-        "Khám thần kinh do yếu liệt nửa người",
-        "Khám thần kinh do co giật",
-        "Khám thần kinh đánh giá bệnh lý dây thần kinh ngoại biên",
+    // Thần kinh
+    "Khám thần kinh do đau đầu kéo dài",
+    "Khám thần kinh do chóng mặt",
+    "Khám thần kinh do yếu liệt nửa người",
+    "Khám thần kinh do co giật",
+    "Khám thần kinh đánh giá bệnh lý dây thần kinh ngoại biên",
 
-        // Tai – Mũi – Họng
-        "Khám tai mũi họng do viêm họng tái diễn",
-        "Khám tai mũi họng do nghẹt mũi kéo dài",
-        "Khám tai mũi họng do ù tai",
-        "Khám tai mũi họng do viêm xoang nghi ngờ",
-        "Khám tai mũi họng do giảm thính lực",
+    // Tai – Mũi – Họng
+    "Khám tai mũi họng do viêm họng tái diễn",
+    "Khám tai mũi họng do nghẹt mũi kéo dài",
+    "Khám tai mũi họng do ù tai",
+    "Khám tai mũi họng do viêm xoang nghi ngờ",
+    "Khám tai mũi họng do giảm thính lực",
 
-        // Mắt
-        "Khám mắt do mờ mắt",
-        "Khám mắt do đau nhức hốc mắt",
-        "Khám mắt do dị vật mắt",
-        "Khám mắt đánh giá tật khúc xạ",
+    // Mắt
+    "Khám mắt do mờ mắt",
+    "Khám mắt do đau nhức hốc mắt",
+    "Khám mắt do dị vật mắt",
+    "Khám mắt đánh giá tật khúc xạ",
 
-        // Da liễu
-        "Khám da liễu do phát ban",
-        "Khám da liễu do ngứa kéo dài",
-        "Khám da liễu do mụn trứng cá",
-        "Khám da liễu do tổn thương da nghi ngờ nhiễm trùng",
+    // Da liễu
+    "Khám da liễu do phát ban",
+    "Khám da liễu do ngứa kéo dài",
+    "Khám da liễu do mụn trứng cá",
+    "Khám da liễu do tổn thương da nghi ngờ nhiễm trùng",
 
-        // Nội tiết
-        "Khám nội tiết do tăng cân không rõ nguyên nhân",
-        "Khám nội tiết đánh giá đái tháo đường",
-        "Khám nội tiết do nghi suy giáp",
-        "Khám nội tiết đánh giá rối loạn hormon",
+    // Nội tiết
+    "Khám nội tiết do tăng cân không rõ nguyên nhân",
+    "Khám nội tiết đánh giá đái tháo đường",
+    "Khám nội tiết do nghi suy giáp",
+    "Khám nội tiết đánh giá rối loạn hormon",
 
-        // Phụ khoa
-        "Khám phụ khoa do khí hư bất thường",
-        "Khám phụ khoa do rối loạn kinh nguyệt",
-        "Khám phụ khoa đánh giá viêm nhiễm",
-        "Khám phụ khoa trước thai kỳ",
+    // Phụ khoa
+    "Khám phụ khoa do khí hư bất thường",
+    "Khám phụ khoa do rối loạn kinh nguyệt",
+    "Khám phụ khoa đánh giá viêm nhiễm",
+    "Khám phụ khoa trước thai kỳ",
 
-        // Tiết niệu
-        "Khám tiết niệu do tiểu buốt",
-        "Khám tiết niệu do tiểu máu",
-        "Khám tiết niệu do đau hông lưng",
-        "Khám tiết niệu đánh giá sỏi thận",
-    ];
+    // Tiết niệu
+    "Khám tiết niệu do tiểu buốt",
+    "Khám tiết niệu do tiểu máu",
+    "Khám tiết niệu do đau hông lưng",
+    "Khám tiết niệu đánh giá sỏi thận",
+
+    "Bình thường",
+    "Không có",
+];
 
 const generalConsultationSuggestions = [
     "Bệnh nhân tỉnh, tiếp xúc tốt, sinh hiệu ổn định",
@@ -158,6 +164,9 @@ const generalConsultationSuggestions = [
     "Cần theo dõi thêm hoặc thực hiện xét nghiệm cận lâm sàng",
     "Khuyến nghị chẩn đoán chuyên khoa nếu có dấu hiệu bất thường",
     "Kết luận sơ bộ: ổn định, chưa phát hiện tổn thương rõ",
+    "Chưa phát hiện bất thường nghiêm trọng",
+    "Bình thường",
+    "Không có",
 ];
 
 const interpretationLabReportSuggestions = [
@@ -192,6 +201,8 @@ const interpretationLabReportSuggestions = [
     "Một số chỉ số bất thường, đề nghị đánh giá chuyên khoa phù hợp",
     "Kết quả xét nghiệm phù hợp với chẩn đoán lâm sàng ban đầu",
     "Không phát hiện dấu hiệu viêm cấp / mạn tính đáng kể",
+    "Bình thường",
+    "Không có",
 ];
 
 const interpretationImagingReportSuggestions = [
@@ -220,6 +231,8 @@ const interpretationImagingReportSuggestions = [
     "Tổn thương nghi ngờ, đề nghị đánh giá chuyên khoa",
     "Hình ảnh phù hợp với chẩn đoán lâm sàng ban đầu",
     "Chưa phát hiện dấu hiệu cấp cứu trên phim/scan",
+    "Bình thường",
+    "Không có",
 ];
 
 const focusImagingSuggestions = [
@@ -390,6 +403,7 @@ const assessmentItemSuggestions = [
     "Khám nhi: biểu hiện bệnh lý thường gặp ở trẻ",
     "Khám nhi: tiêm chủng đầy đủ / chưa đầy đủ",
 
+    "Bình thường",
     "Không có",
 ]
 
