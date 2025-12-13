@@ -14,7 +14,7 @@ interface CurrentPatientRecordDialogProps {
 }
 
 
-export default function CurrentMedicalRecordDialog({
+export default function MedicalRecordDialog({
                                                        open,
                                                        onOpenChange,
                                                        medicalRecord
@@ -35,7 +35,7 @@ export default function CurrentMedicalRecordDialog({
                         <div className="flex justify-center items-center mb-4">
                             <iframe
                                 className="w-full h-[80vh]"
-                                src={medicalRecord.exportFileName}
+                                src={medicalRecord.link}
                             />
                         </div>
                     </DialogDescription>
