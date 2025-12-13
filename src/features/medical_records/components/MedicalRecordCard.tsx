@@ -1,7 +1,7 @@
 import type {MedicalRecordResponse} from "@/features/medical_records/types/MedicalRecordResponse.ts";
 import useDate from "@/lib/utils/useDate.ts";
 import {useState} from "react";
-import CurrentMedicalRecordDialog from "@/features/medical_records/components/CurrentMedicalRecordDialog.tsx";
+import MedicalRecordDialog from "@/features/medical_records/components/MedicalRecordDialog.tsx";
 
 interface MedicalRecordCardProps {
     medicalRecord: MedicalRecordResponse,
@@ -25,7 +25,7 @@ export default function MedicalRecordCard({medicalRecord}: MedicalRecordCardProp
                     <p>{`Thời gian tạo: ${formattedFullDateTime(medicalRecord.createTime)}`}</p>
                 </div>
             </div>
-            <CurrentMedicalRecordDialog
+            <MedicalRecordDialog
                 open={openMedicalRecordDialog}
                 onOpenChange={setOpenMedicalRecordDialog}
                 medicalRecord={medicalRecord}

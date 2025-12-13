@@ -30,12 +30,16 @@ export default function MedicalRecordsPage() {
             setLoading(false);
             return
         }
-        const medicalRecords = await getAllMedicalRecordFromAllHospital(code);
+        const medicalRecords = await getAllMedicalRecordFromAllHospital(
+            Number(code.split("|")[0]).toString()
+        );
         if (!medicalRecords) {
             setLoading(false);
             setMedicalRecords([]);
             return
         }
+        console.log("1 >>>>>>>");
+        console.log(medicalRecords);
         const uniqueHospitals = Array.from(
             new Map(
                 medicalRecords.map(e => [e.hospital.identifier, e.hospital])
@@ -81,7 +85,8 @@ export default function MedicalRecordsPage() {
         }
         <div className={`flex gap-4 ${loading ? "hidden" : ""}`}>
             <div className="flex-1">
-                <div className={`flex gap-4 items-center justify-center px-8 pb-4 ${hospitalOptions.length === 0 ? "hidden" : ""}`}>
+                <div
+                    className={`flex gap-4 items-center justify-center px-8 pb-4 ${hospitalOptions.length === 0 && showMedicalRecords.length === 0 ? "hidden" : ""}`}>
                     <div>Chọn bệnh viện</div>
                     <div className={"flex-1"}>
                         <SelectSearchInput
@@ -90,7 +95,7 @@ export default function MedicalRecordsPage() {
                             value={hospitalOptions.find(v => v.value === selectedHospitalId?.toString())}
                             onChange={selectItem => setSelectedHospitalId(
                                 selectItem?.value !== undefined ?
-                                    Number(selectItem?.value):
+                                    Number(selectItem?.value) :
                                     undefined
                             )}
                             options={hospitalOptions}
@@ -115,14 +120,22 @@ export default function MedicalRecordsPage() {
                 />
             </div>
         </div>
-        <div className="flex-1 overflow-y-auto items-center justify-center px-8 pb-32 rounded-lg">
-            <div className="flex flex-col gap-1">
-                {
-                    showMedicalRecords.map((medicalRecord) => {
-                        return <MedicalRecordCard medicalRecord={medicalRecord} key={medicalRecord.identifier.toString()}/>
-                    })
-                }
+        {showMedicalRecords.length === 0 ?
+            <div className={`flex-1 items-center justify-center px-8 pb-4 ${loading ? "hidden" : ""}`}>
+                <div className="flex items-center justify-center h-full text-gray-400">
+                    Không có dữ liệu
+                </div>
+            </div> :
+            <div className="flex-1 overflow-y-auto items-center justify-center px-8 pb-32 rounded-lg">
+                <div className="flex flex-col gap-1">
+                    {
+                        showMedicalRecords.map((medicalRecord) => {
+                            return <MedicalRecordCard medicalRecord={medicalRecord}
+                                                      key={medicalRecord.identifier.toString()}/>
+                        })
+                    }
+                </div>
             </div>
-        </div>
+        }
     </div>
 }
