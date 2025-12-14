@@ -24,7 +24,7 @@ export default function useDetailMedicalRecord() {
                 createdTime: data.createTime,
                 serviceReports: data.serviceReports?.map(mapServiceReport) || [],
                 prescription: data.prescription,
-                exportFileName: data.link,
+                exportFileName: data.exportFileName,
             };
             return patientRecord;
         } catch (e) {
