@@ -111,7 +111,7 @@ export default function MedicalRecordsPage() {
                 <ButtonScan
                     label={"Quét"}
                     onClick={() => setOpenScan(true)}
-                    className="font-bold"
+                    className="font-bold mx-8"
                 />
                 <ScanDialog
                     open={openScan}
@@ -126,7 +126,7 @@ export default function MedicalRecordsPage() {
                     Không có dữ liệu
                 </div>
             </div> :
-            <div className="flex-1 overflow-y-auto items-center justify-center px-8 pb-32 rounded-lg">
+            <div className={`flex-1 overflow-y-auto items-center justify-center px-8 pb-32 rounded-lg ${loading ? "hidden" : ""}`}>
                 <div className="flex flex-col gap-1">
                     {
                         showMedicalRecords.map((medicalRecord) => {

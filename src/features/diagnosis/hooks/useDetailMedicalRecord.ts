@@ -21,7 +21,7 @@ export default function useDetailMedicalRecord() {
             const patientRecord: PatientRecord = {
                 identifier: data.identifier,
                 status: data.status,
-                createdTime: data.createTime,
+                createdTime: data.createdTime,
                 serviceReports: data.serviceReports?.map(mapServiceReport) || [],
                 prescription: data.prescription,
                 exportFileName: data.exportFileName,

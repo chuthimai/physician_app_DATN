@@ -5,9 +5,10 @@ import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import type {ServiceReport} from "@/types/models/ServiceReport.ts";
+import Loading from "@/components/loading/Loading.tsx";
 
 export default function InitialDiagnosisForm() {
-    const {getServiceForm, sendServiceForm} = useServiceForm();
+    const {getServiceForm, sendServiceForm, loading} = useServiceForm();
     const patientRecordIdContext = useContext(PatientRecordIdContext);
     const [serviceReport, setServiceReport] = useState<ServiceReport | undefined>(undefined);
 
@@ -31,9 +32,11 @@ export default function InitialDiagnosisForm() {
 
     const onSubmit = async (data: ServiceFormSubmitParams) => {
         await sendServiceForm(data, SERVICE_TYPES.GENERAL_CONSULTATION);
+        await fetchForm();
     };
 
     if (!serviceReport) return <div/>;
+    if (loading) return <Loading/>;
 
     return (
         <DynamicForm

@@ -70,7 +70,25 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
         onOpenChange(false);
     }
 
-    if (loading) return <Loading/>;
+    if (loading) return (
+        <Dialog open={open} onOpenChange={onOpenChange}>
+            <DialogContent className="sm:max-w-[425px]">
+                <Loading/>
+                <DialogFooter>
+                    <ButtonCancel
+                        label={"Huỷ"}
+                        onClick={() => onOpenChange(false)}
+                    />
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <ButtonSave
+                            label={"Xác nhận"}
+                            isSubmitting={isSubmitting}
+                        />
+                    </form>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+    );
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>

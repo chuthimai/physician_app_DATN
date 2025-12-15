@@ -78,7 +78,7 @@ export default function PhysicianStatsDashboard() {
                                                 return [value, customNames[name] || name];
                                             }}
                                         />
-                                        <Bar dataKey="patients"/>
+                                        <Bar dataKey="patients" fill={COLORS_DASHBOARD[1]}/>
                                     </BarChart>
                                 </ResponsiveContainer>
                             </CardContent>

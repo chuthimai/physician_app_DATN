@@ -31,6 +31,7 @@ export default function SpecialistDiagnosisForm() {
 
     const onSubmit = async (data: ServiceFormSubmitParams) => {
         await sendServiceForm(data, SERVICE_TYPES.SPECIALIST_CONSULTATION);
+        await fetchForm();
     };
 
     if (!serviceReport) return <div/>;
