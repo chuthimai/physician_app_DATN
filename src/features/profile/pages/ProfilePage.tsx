@@ -14,25 +14,39 @@ export default function ProfilePage() {
 
                         {/* ROW 1: HEADER (full width) */}
                         <div>
-                            <ProfileHeader />
+                            <ProfileHeader/>
                         </div>
-                        <hr className="my-2" />
+                        <hr className="my-2"/>
 
                         {/* ROW 2: 2 CỘT SCROLL RIÊNG */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 overflow-hidden">
 
                             {/* LEFT COLUMN */}
                             <div className="bg-white rounded-2xl p-6 overflow-y-auto">
-                                <ProfileContact />
-                                <hr className="my-4" />
-                                <ProfileInfo />
+                                <ProfileContact/>
+                                <hr className="my-4"/>
+                                <ProfileInfo/>
                             </div>
 
                             {/* RIGHT COLUMN */}
-                            <div className="bg-white rounded-2xl border p-6 overflow-y-auto">
-                                <QualificationListView />
-                            </div>
+                            <div className="relative bg-white rounded-2xl border overflow-hidden py-4 px-6">
 
+                                {/* CONTENT (scroll) */}
+                                <h3 className="font-semibold mb-4">Bằng cấp/Chứng chỉ hành nghề</h3>
+                                <div className="pb-6 overflow-y-auto h-full">
+                                    <QualificationListView/>
+                                </div>
+
+                                {/* OVERLAY FADE */}
+                                <div className="
+                                    pointer-events-none
+                                    absolute bottom-0 left-0 right-0 h-full
+                                    bg-gradient-to-t
+                                    from-gray-100/40 from-[0%]
+                                    via-gray-100/0 via-[30%]
+                                    to-gray-100/0 to-[100%]
+                                "/>
+                            </div>
                         </div>
                     </div>
 
