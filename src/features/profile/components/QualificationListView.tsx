@@ -6,8 +6,7 @@ export default function QualificationListView() {
     const userContext = useContext(UserContext);
 
     return (
-        <div className="my-2">
-            <h3 className="font-semibold mb-1">Bằng cấp/Chứng chỉ hành nghề</h3>
+        <div className="">
             {
                 userContext?.user?.qualifications.map(
                     (qualification) =>
