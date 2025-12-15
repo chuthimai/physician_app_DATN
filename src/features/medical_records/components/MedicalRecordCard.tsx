@@ -22,7 +22,7 @@ export default function MedicalRecordCard({medicalRecord}: MedicalRecordCardProp
                     <h3 className="font-semibold text-lg">
                         {`${medicalRecord.hospital.name}`}
                     </h3>
-                    <p>{`Thời gian tạo: ${formattedFullDateTime(medicalRecord.createTime)}`}</p>
+                    <p>{`Thời gian tạo: ${formattedFullDateTime(medicalRecord.createdTime)}`}</p>
                 </div>
             </div>
             <MedicalRecordDialog

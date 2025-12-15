@@ -3,7 +3,7 @@ import type {MedicalRecordResponse} from "@/features/medical_records/types/Medic
 export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     {
         identifier: 1,
-        createTime: new Date("2025-01-10T09:15:00Z"),
+        createdTime: new Date("2025-01-10T09:15:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 101,
@@ -12,7 +12,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 2,
-        createTime: new Date("2025-01-12T11:00:00Z"),
+        createdTime: new Date("2025-01-12T11:00:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 102,
@@ -21,7 +21,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 3,
-        createTime: new Date("2025-01-14T08:45:00Z"),
+        createdTime: new Date("2025-01-14T08:45:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 101, // Trùng bệnh viện
@@ -30,7 +30,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 4,
-        createTime: new Date("2025-01-16T13:30:00Z"),
+        createdTime: new Date("2025-01-16T13:30:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 103,
@@ -39,7 +39,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 5,
-        createTime: new Date("2025-01-17T10:10:00Z"),
+        createdTime: new Date("2025-01-17T10:10:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 102, // Trùng bệnh viện
@@ -48,7 +48,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 6,
-        createTime: new Date("2025-01-20T15:20:00Z"),
+        createdTime: new Date("2025-01-20T15:20:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 104,
@@ -57,7 +57,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 7,
-        createTime: new Date("2025-01-22T07:55:00Z"),
+        createdTime: new Date("2025-01-22T07:55:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 103, // Trùng bệnh viện
@@ -66,7 +66,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 8,
-        createTime: new Date("2025-01-25T09:40:00Z"),
+        createdTime: new Date("2025-01-25T09:40:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 105,
@@ -75,7 +75,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 9,
-        createTime: new Date("2025-01-26T16:00:00Z"),
+        createdTime: new Date("2025-01-26T16:00:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 106,
@@ -84,7 +84,7 @@ export const medicalRecordHospitalData: MedicalRecordResponse[] = [
     },
     {
         identifier: 10,
-        createTime: new Date("2025-01-28T12:25:00Z"),
+        createdTime: new Date("2025-01-28T12:25:00Z"),
         link: "https://pdfobject.com/pdf/sample.pdf",
         hospital: {
             identifier: 101, // Trùng bệnh viện
