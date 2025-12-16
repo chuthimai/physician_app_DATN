@@ -5,9 +5,10 @@ import type ServiceFormSubmitParams from "@/types/params/ServiceFormSubmitParams
 import {SERVICE_TYPES} from "@/constants/add_services/service_types.ts";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import type {ServiceReport} from "@/types/models/ServiceReport.ts";
+import Loading from "@/components/loading/Loading.tsx";
 
 export default function SpecialistDiagnosisForm() {
-    const {getServiceForm, sendServiceForm} = useServiceForm();
+    const {getServiceForm, sendServiceForm, loading} = useServiceForm();
     const [serviceReport, setServiceReport] = useState<ServiceReport | undefined>(undefined);
     const patientRecordIdContext = useContext(PatientRecordIdContext);
 
@@ -35,6 +36,9 @@ export default function SpecialistDiagnosisForm() {
     };
 
     if (!serviceReport) return <div/>;
+    if (loading) return <div className="flex justify-center items-center">
+        <Loading/>
+    </div>;
 
     return (
         <DynamicForm
