@@ -112,7 +112,10 @@ export default function PhysicianStatsDashboard() {
                                                 <BarChart
                                                     data={convertAndFillMissingDates(summaryReportByMonth?.patientStatsByDate)}>
                                                     <XAxis dataKey="date"/>
-                                                    <YAxis domain={[0, (dataMax: number) => Math.ceil(dataMax * 1.1)]}/>
+                                                    <YAxis
+                                                        domain={[0, (dataMax: number) => Math.ceil(dataMax * 1.1)]}
+                                                        allowDecimals={false}
+                                                    />
                                                     <Tooltip
                                                         formatter={(value: number, name: string) => {
                                                             const customNames: { [key: string]: string } = {

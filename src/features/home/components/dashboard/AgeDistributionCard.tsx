@@ -65,9 +65,12 @@ export default function AgeDistributionCard({ dataDay, dataWeek, dataMonth }: Pr
             <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                     <BarChart data={data}>
-                        <XAxis dataKey="ageRange" />
+                        <XAxis
+                            dataKey="ageRange"
+                        />
                         <YAxis
                             domain={[0, (dataMax: number) => Math.ceil(dataMax * 1.1)]}
+                            allowDecimals={false}
                         />
                         <Tooltip
                             formatter={(value: number, name: string) => {
