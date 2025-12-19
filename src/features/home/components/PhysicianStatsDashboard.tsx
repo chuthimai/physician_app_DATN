@@ -28,7 +28,7 @@ export default function PhysicianStatsDashboard() {
     } = useSummaryReport();
     const {
         convertAndFillMissingDates,
-        convertServiceGroupObjectToArray,
+        convertDiseaseGroupObjectToArray,
         convertGenderObjectToArray,
         convertAgeData,
     } = useConvertData();
@@ -185,9 +185,9 @@ export default function PhysicianStatsDashboard() {
                 <TabsContent value="disease" className="space-y-6 mt-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <ServiceSpecialtyCart
-                            dataDay={convertServiceGroupObjectToArray(summaryReportByDay?.serviceGroups)}
-                            dataWeek={convertServiceGroupObjectToArray(summaryReportByWeek?.serviceGroups)}
-                            dataMonth={convertServiceGroupObjectToArray(summaryReportByMonth?.serviceGroups)}
+                            dataDay={convertDiseaseGroupObjectToArray(summaryReportByDay?.serviceGroups)}
+                            dataWeek={convertDiseaseGroupObjectToArray(summaryReportByWeek?.serviceGroups)}
+                            dataMonth={convertDiseaseGroupObjectToArray(summaryReportByMonth?.serviceGroups)}
                             loading={loading}
                         />
 

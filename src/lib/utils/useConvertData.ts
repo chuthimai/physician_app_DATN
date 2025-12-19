@@ -42,12 +42,21 @@ export const useConvertData = () => {
         })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     }
 
-    function convertGroupObjectToArray(obj?: Record<string, number>) {
+    function convertDiseaseGroupObjectToArray(obj?: Record<string, number>) {
         if (!obj) return [];
         return Object.entries(obj)
             .filter(([group]) => group !== "Khám sơ bộ")
             .map(([group, count]) => ({
                 group,
+                count,
+            }));
+    }
+
+    function convertServiceGroupObjectToArray(obj?: Record<string, number>) {
+        if (!obj) return [];
+        return Object.entries(obj)
+            .map(([service, count]) => ({
+                service,
                 count,
             }));
     }
@@ -79,9 +88,10 @@ export const useConvertData = () => {
 
     return {
         convertAndFillMissingDates,
-        convertServiceGroupObjectToArray: convertGroupObjectToArray,
+        convertDiseaseGroupObjectToArray,
         convertGenderObjectToArray,
         convertAgeData,
         convertAndSortDataDateNumber,
+        convertServiceGroupObjectToArray,
     };
 };
