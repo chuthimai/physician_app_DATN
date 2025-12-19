@@ -8,31 +8,58 @@ import {
     ResponsiveContainer,
 } from "recharts";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import {ageDistributionDay, ageDistributionMonth} from "@/fakedata/doctorStatsData.ts";
 import {COLORS_DASHBOARD} from "@/constants/dashboard/colors.ts";
 
-export default function AgeDistributionCard() {
-    const [mode, setMode] = useState<"day" | "month">("day");
+type Props = {
+    dataDay: {ageRange: string, count: number}[],
+    dataWeek: {ageRange: string, count: number}[],
+    dataMonth: {ageRange: string, count: number}[],
+}
 
-    const data = mode === "day" ? ageDistributionDay : ageDistributionMonth;
+export default function AgeDistributionCard({ dataDay, dataWeek, dataMonth }: Props) {
+    const [filter, setFilter] = useState<"day" | "week" | "month">("month");
+
+    const data =
+        filter === "day"
+            ? dataDay
+            : filter === "week"
+                ? dataWeek
+                : dataMonth;
 
     return (
         <Card>
             <CardHeader className="flex justify-between items-center">
-                <CardTitle>Phân bố độ tuổi bệnh nhân {mode === "day" ? "theo ngày" : "theo tháng"}</CardTitle>
+                <CardTitle>Phân bố độ tuổi bệnh nhân {filter === "day" ? "theo ngày" : filter === "week" ? "theo tuần" : "theo tháng"}</CardTitle>
                 <div className="space-x-2">
-                    <button
-                        className={`px-2 py-1 rounded ${mode === "day" ? "bg-black text-white" : "bg-gray-200"}`}
-                        onClick={() => setMode("day")}
-                    >
-                        Ngày
-                    </button>
-                    <button
-                        className={`px-2 py-1 rounded ${mode === "month" ? "bg-black text-white" : "bg-gray-200"}`}
-                        onClick={() => setMode("month")}
-                    >
-                        Tháng
-                    </button>
+                    <div className="bg-white shadow rounded flex overflow-hidden">
+
+                        <button
+                            className={`px-3 py-1 text-sm border-r
+                        ${filter === "day" ? "bg-black text-white" : "text-black"}
+                    `}
+                            onClick={() => setFilter("day")}
+                        >
+                            Ngày
+                        </button>
+
+                        <button
+                            className={`px-3 py-1 text-sm border-r
+                        ${filter === "week" ? "bg-black text-white" : "text-black"}
+                    `}
+                            onClick={() => setFilter("week")}
+                        >
+                            Tuần
+                        </button>
+
+                        <button
+                            className={`px-3 py-1 text-sm
+                        ${filter === "month" ? "bg-black text-white" : "text-black"}
+                    `}
+                            onClick={() => setFilter("month")}
+                        >
+                            Tháng
+                        </button>
+                    </div>
                 </div>
             </CardHeader>
             <CardContent>
