@@ -9,9 +9,11 @@ import {
 } from "@/features/specialist_appointment/hooks/useSpecialistAppointment.ts";
 import type CreateSpecialtyServiceRecordParams
     from "@/features/specialist_appointment/types/CreateSpecialtyServiceRecordParams.ts";
+import { PatientRecordStateContext } from "@/providers/patient_record/PatientRecordStateContext.tsx";
 
 export function CreateSpecialistAppointmentPage() {
     const patientContext = useContext(PatientContext);
+    const patientRecordStateContext = useContext(PatientRecordStateContext);
     const [appointments, setAppointments] = useState<Appointment[]>([]);
     const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
     const {createSpecialtyService, getSpecialistAppointmentByUser} = useSpecialistAppointment();
@@ -40,6 +42,12 @@ export function CreateSpecialistAppointmentPage() {
     if (!patientContext?.patient) {
         return <div className="w-full h-full flex items-center justify-center">
             Chưa xác định bệnh nhân
+        </div>
+    }
+
+    if (patientRecordStateContext?.isClose) {
+        return <div className="w-full h-full flex items-center justify-center">
+            Bệnh án đã đóng, không thể chỉ định chuyên khoa
         </div>
     }
 

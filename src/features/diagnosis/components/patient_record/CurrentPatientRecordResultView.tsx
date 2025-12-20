@@ -6,7 +6,7 @@ type Props = {
 }
 
 export default function CurrentPatientRecordResultView({patientRecord}: Props) {
-    if (patientRecord.exportFileName) {
+    if (patientRecord.status && patientRecord.exportFileName) {
         return <iframe
             className="w-full h-[80vh]"
             src={patientRecord.exportFileName}

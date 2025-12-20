@@ -16,16 +16,18 @@ import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordId
 import useDetailMedicalRecord from "@/features/diagnosis/hooks/useDetailMedicalRecord.ts";
 import Loading from "@/components/loading/Loading.tsx";
 import {useToast} from "@/lib/utils/useToast.ts";
+import {PatientRecordStateContext} from "@/providers/patient_record/PatientRecordStateContext.tsx";
 
 interface CloseRecordDialogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    setIsCloseActive: (isCloseActive: boolean) => void;
 }
 
-export function CloseRecordDialog({open, onOpenChange, setIsCloseActive}: CloseRecordDialogProps) {
+export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) {
     const [patientRecord, setPatientRecord] = useState<PatientRecord | undefined>(undefined);
     const patientRecordIdContext = useContext(PatientRecordIdContext);
+    const patientRecordStateContext = useContext(PatientRecordStateContext);
+
     const {loading, getDetailMedicalRecord} = useDetailMedicalRecord();
     const {showToastError, showToastSuccess} = useToast();
 
@@ -47,7 +49,7 @@ export function CloseRecordDialog({open, onOpenChange, setIsCloseActive}: CloseR
     const {closePatientRecord} = useClosePatientRecord();
 
     const onSubmit = async () => {
-        setIsCloseActive(false);
+        patientRecordStateContext?.setPatientRecordState(true);
         if (patientRecord?.status == true) {
             showToastError("Bệnh án đã đóng");
             onOpenChange(false);
@@ -64,7 +66,7 @@ export function CloseRecordDialog({open, onOpenChange, setIsCloseActive}: CloseR
             if (!checkServiceDone) {
                 showToastError("Chưa thực hiện xong dịch vụ");
                 onOpenChange(false);
-                setIsCloseActive(true);
+                patientRecordStateContext?.setPatientRecordState(false);
                 return;
             }
         }

@@ -9,19 +9,35 @@ import {ScanDialog} from "@/components/scan/ScanDialog.tsx";
 import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordIdContext.tsx";
 import {useToast} from "@/lib/utils/useToast.ts";
 import usePatientInfo from "@/hooks/usePatientInfo.ts";
+import {PatientRecordStateContext} from "@/providers/patient_record/PatientRecordStateContext.tsx";
+import useDetailMedicalRecord from "@/features/diagnosis/hooks/useDetailMedicalRecord.ts";
 
 export default function DiagnosisPage() {
     const [openCloseRecordDialog, setOpenCloseRecordDialog] = useState(false);
     const [openScan, setOpenScan] = useState(false);
 
-    const [isCloseActive, setIsCloseActive] = useState<boolean>(false);
-
     const patientRecordIdContext = useContext(PatientRecordIdContext);
     const patientRecordId = patientRecordIdContext?.patientRecordId;
+    const patientRecordStateContext = useContext(PatientRecordStateContext);
 
     const {getPatientInfo, error} = usePatientInfo();
+    const {getDetailMedicalRecord} = useDetailMedicalRecord();
 
     const { showToastError } = useToast();
+
+    const fetchDetailMedicalRecord = async () => {
+        if (!patientRecordId) return;
+        if (patientRecordIdContext?.patientRecordId === undefined) return;
+        const data = await getDetailMedicalRecord();
+        console.log("1.1 >>>>>>>");
+        console.log(data?.status);
+        patientRecordStateContext?.setPatientRecordState(data?.status);
+    }
+
+    useEffect(() => {
+        console.log("1 >>>>>>>");
+        fetchDetailMedicalRecord().then(() => null);
+    }, [patientRecordId]);
 
     const handleStorageChange = async () => {
         const patientRecordIdRaw = localStorage.getItem("patientRecordId");
@@ -30,7 +46,6 @@ export default function DiagnosisPage() {
 
             if (!isNaN(patientRecordId)) {
                 patientRecordIdContext?.setPatientRecordId(patientRecordId);
-                setIsCloseActive(true);
                 await getPatientInfo(patientRecordId);
                 if (!error) return;
             }
@@ -51,20 +66,21 @@ export default function DiagnosisPage() {
         <PatientCurrent/>
         <div className="flex gap-4">
             <div>
-                <DiagnosisMenu/>
+                <DiagnosisMenu
+                    isActive={!patientRecordStateContext?.isClose}
+                />
             </div>
             <div>
                 <MenuItem
                     label={"Đóng bệnh án"}
                     active={false}
-                    disabled={!isCloseActive}
+                    disabled={patientRecordStateContext?.isClose}
                     onClick={() => setOpenCloseRecordDialog(true)
                 }
                 />
                 <CloseRecordDialog
                     open={openCloseRecordDialog}
                     onOpenChange={setOpenCloseRecordDialog}
-                    setIsCloseActive={setIsCloseActive}
                 />
             </div>
             <div className={"flex-1"}/>
