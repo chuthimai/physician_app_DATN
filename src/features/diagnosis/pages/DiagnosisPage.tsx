@@ -14,6 +14,8 @@ export default function DiagnosisPage() {
     const [openCloseRecordDialog, setOpenCloseRecordDialog] = useState(false);
     const [openScan, setOpenScan] = useState(false);
 
+    const [isCloseActive, setIsCloseActive] = useState<boolean>(false);
+
     const patientRecordIdContext = useContext(PatientRecordIdContext);
     const patientRecordId = patientRecordIdContext?.patientRecordId;
 
@@ -28,6 +30,7 @@ export default function DiagnosisPage() {
 
             if (!isNaN(patientRecordId)) {
                 patientRecordIdContext?.setPatientRecordId(patientRecordId);
+                setIsCloseActive(true);
                 await getPatientInfo(patientRecordId);
                 if (!error) return;
             }
@@ -54,12 +57,14 @@ export default function DiagnosisPage() {
                 <MenuItem
                     label={"Đóng bệnh án"}
                     active={false}
+                    disabled={!isCloseActive}
                     onClick={() => setOpenCloseRecordDialog(true)
                 }
                 />
                 <CloseRecordDialog
                     open={openCloseRecordDialog}
                     onOpenChange={setOpenCloseRecordDialog}
+                    setIsCloseActive={setIsCloseActive}
                 />
             </div>
             <div className={"flex-1"}/>

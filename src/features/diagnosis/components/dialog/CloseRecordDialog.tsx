@@ -20,13 +20,14 @@ import {useToast} from "@/lib/utils/useToast.ts";
 interface CloseRecordDialogProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
+    setIsCloseActive: (isCloseActive: boolean) => void;
 }
 
-export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) {
+export function CloseRecordDialog({open, onOpenChange, setIsCloseActive}: CloseRecordDialogProps) {
     const [patientRecord, setPatientRecord] = useState<PatientRecord | undefined>(undefined);
     const patientRecordIdContext = useContext(PatientRecordIdContext);
     const {loading, getDetailMedicalRecord} = useDetailMedicalRecord();
-    const {showToastError} = useToast();
+    const {showToastError, showToastSuccess} = useToast();
 
     const fetchDetailMedicalRecord = async () => {
         if (!open) return;
@@ -46,6 +47,7 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
     const {closePatientRecord} = useClosePatientRecord();
 
     const onSubmit = async () => {
+        setIsCloseActive(false);
         if (patientRecord?.status == true) {
             showToastError("Bệnh án đã đóng");
             onOpenChange(false);
@@ -62,12 +64,15 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
             if (!checkServiceDone) {
                 showToastError("Chưa thực hiện xong dịch vụ");
                 onOpenChange(false);
+                setIsCloseActive(true);
                 return;
             }
         }
 
-        await closePatientRecord();
+        // TODO: Thêm thông báo thành công vì chắc chắn sẽ đc xử lý
         onOpenChange(false);
+        showToastSuccess("Đóng bệnh án thành công");
+        await closePatientRecord();
     }
 
     if (loading) return (
@@ -82,7 +87,7 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <ButtonSave
                             label={"Xác nhận"}
-                            isSubmitting={isSubmitting}
+                            // isSubmitting={isSubmitting}
                         />
                     </form>
                 </DialogFooter>
