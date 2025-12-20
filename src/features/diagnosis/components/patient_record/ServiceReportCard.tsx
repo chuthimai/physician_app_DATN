@@ -12,7 +12,7 @@ export default function ServiceReportCard({ serviceReport }: Props) {
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div className="border border-gray-300 rounded-xl mb-4 shadow-sm bg-white">
+        <div className="border border-gray-300 rounded-xl shadow-sm bg-white">
             {/* Header */}
             <div
                 className="flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50"

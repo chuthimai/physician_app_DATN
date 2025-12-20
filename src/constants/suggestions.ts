@@ -113,8 +113,6 @@ const requestSpecialistAppointmentSuggestions = [
     "Khám tiết niệu do tiểu máu",
     "Khám tiết niệu do đau hông lưng",
     "Khám tiết niệu đánh giá sỏi thận",
-
-    "Bình thường",
     "Không có",
 ];
 

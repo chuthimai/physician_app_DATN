@@ -25,7 +25,6 @@ export default function ServiceForm() {
         watch,
         formState: { errors, isSubmitting },
         reset,
-        register,
     } = useForm<AddServiceInputs>();
 
     const [ serviceOptions, setServiceOptions ] = useState<Option[]>([]);
@@ -130,11 +129,23 @@ export default function ServiceForm() {
                     </div>
 
                     <div>
-                        <TextAreaInput
-                            label={"Đề nghị"}
-                            error={errors.request}
-                            suggestions={SUGGESTIONS.REQUEST_ADD_SERVICE}
-                            {...register("request", { required: "Không được để trống" })}
+                        <Controller
+                            name="request"
+                            control={control}
+                            defaultValue=""
+                            rules={{
+                                required: "Không được để trống",
+                            }}
+                            render={({ field, fieldState }) => (
+                                <TextAreaInput
+                                    label="Đề nghị"
+                                    suggestions={SUGGESTIONS.REQUEST_ADD_SERVICE}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    onBlur={field.onBlur}
+                                    error={fieldState.error}
+                                />
+                            )}
                         />
                     </div>
                 </div>

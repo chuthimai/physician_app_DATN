@@ -26,6 +26,7 @@ export const ENDPOINTS = {
     GET_SERVICE_FORM_BY_REPORT_ID: "reports/by-service-report-identifier",
     GET_SERVICE_FORM_BY_SPECIMEN_ID: "reports/by-specimen-identifier",
     GET_IMAGE_REPORTS_BY_SERVICE_ID: "reports/imaging-reports",
+    GET_SUMMARY_REPORT: "reports/summary-reports",
 
     // Send service form
     SEND_SERVICE_FORM_DIAGNOSIS: "reports/update-diagnosis-report-result",
@@ -56,5 +57,6 @@ export const ENDPOINTS = {
     // Prescription
     CREATE_PRESCRIPTION: "medicines/prescriptions",
     GET_ALL_MEDICINE: "medicines",
+    GET_PRESCRIPTION_BY_ID: "medicines/prescriptions",
 
 }
