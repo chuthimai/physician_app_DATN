@@ -1,4 +1,4 @@
-import {type FieldErrors, type UseFormRegister} from "react-hook-form";
+import {type Control, Controller, type FieldErrors, type UseFormRegister} from "react-hook-form";
 import {TextAreaInput} from "@/components/input/TextAreaInput.tsx";
 import type {AssessmentResult} from "@/types/models/AssessmentResult.ts";
 import RenderTableAssessmentItem from "@/components/form/RenderTableAssessmentItem.tsx";
@@ -11,6 +11,7 @@ type RenderAssessmentItemsProps = {
     level?: number;
     errors: FieldErrors<DynamicFormInputs>;
     register: UseFormRegister<DynamicFormInputs>;
+    control: Control<DynamicFormInputs>;
 };
 
 export default function RenderAssessmentItems({
@@ -18,6 +19,7 @@ export default function RenderAssessmentItems({
                                                   level = 0,
                                                   errors,
                                                   register,
+                                                  control,
                                               }: RenderAssessmentItemsProps) {
 
     const indicatorItems = items.filter(
@@ -60,22 +62,32 @@ export default function RenderAssessmentItems({
                                     items={item.assessmentResults ?? []}
                                     errors={errors}
                                     register={register}
+                                    control={control}
                                 />
                             </div>
                         )}
 
                         {!hasChildren && (
                             <div className="mb-3">
-                                <TextAreaInput
-                                    label={item.name}
+                                <Controller
+                                    name={`${item.identifier}`}
+                                    control={control}
                                     defaultValue={item.value ?? ""}
-                                    disabled={isReadOnly}
-                                    suggestions={SUGGESTIONS.ASSESSMENT_ITEM}
-                                    error={errors[`${item.identifier}`]}
-                                    className="w-full h-20 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 mt-1"
-                                    {...register(`${item.identifier}`, {
+                                    rules={{
                                         validate: (v) => v.trim() !== "" || "Trường này không được để trống",
-                                    })}
+                                    }}
+                                    render={({ field, fieldState }) => (
+                                        <TextAreaInput
+                                            label={item.name}
+                                            disabled={isReadOnly}
+                                            className="w-full h-20 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 mt-1"
+                                            suggestions={SUGGESTIONS.ASSESSMENT_ITEM}
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                            onBlur={field.onBlur}
+                                            error={fieldState.error}
+                                        />
+                                    )}
                                 />
                             </div>
                         )}

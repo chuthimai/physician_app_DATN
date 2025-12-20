@@ -14,7 +14,7 @@ type RenderFormServiceTypeProps = {
     type?: string,
     control: Control<DynamicFormInputs>,
     errors: FieldErrors<DynamicFormInputs>,
-    register: UseFormRegister<DynamicFormInputs>,
+    register?: UseFormRegister<DynamicFormInputs>,
     serviceReport?: ServiceReport,
 };
 
@@ -22,7 +22,7 @@ export default function RenderFormServiceType({
                                                   type,
                                                   control,
                                                   errors,
-                                                  register,
+                                                  // register,
                                                   serviceReport
                                               }: RenderFormServiceTypeProps) {
     if (!serviceReport) return <div/>;
@@ -97,56 +97,100 @@ export default function RenderFormServiceType({
             </div>
 
             <div className="col-span-12">
-                <TextAreaInput
-                    label={"Kết luận"}
+                <Controller
+                    name="conclusion"
+                    control={control}
                     defaultValue={serviceReport.diagnosisReport?.conclusion ?? ""}
-                    suggestions={SUGGESTIONS.GENERAL_CONSULTATION}
-                    {...register("conclusion", {
+                    rules={{
                         validate: (value) => {
-                        if (type === SERVICE_TYPES.GENERAL_CONSULTATION) {
-                        return value ? true : "Vui lòng điền kết luận";
-                    }
-                        return true; // không bắt buộc
-                    }
-                    })}
+                            if (type === SERVICE_TYPES.GENERAL_CONSULTATION) {
+                                return value ? true : "Vui lòng điền kết luận";
+                            }
+                            return true;
+                        }
+                    }}
+                    render={({ field, fieldState }) => (
+                        <TextAreaInput
+                            label="Kết luận"
+                            suggestions={SUGGESTIONS.GENERAL_CONSULTATION}
+                            value={field.value}
+                            onChange={field.onChange}
+                            onBlur={field.onBlur}
+                            error={fieldState.error}
+                        />
+                    )}
                 />
             </div>
         </div>
     );
 
     if (type === SERVICE_TYPES.LABORATORY_TEST) {
-        return <TextAreaInput
-            label={"Diễn giải kết quả"}
+        return <Controller
+            name="interpretation"
+            control={control}
             defaultValue={serviceReport.laboratoryReport?.interpretation ?? ""}
-            suggestions={SUGGESTIONS.INTERPRETATION_LAB_REPORT}
-            error={errors.interpretation}
-            {...register("interpretation", {
+            rules={{
                 validate: (v) => v.trim() !== "" || "Trường này không được để trống",
-            })}
+            }}
+            render={({ field, fieldState }) => (
+                <TextAreaInput
+                    label="Diễn giải kết quả"
+                    suggestions={SUGGESTIONS.INTERPRETATION_LAB_REPORT}
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    error={fieldState.error}
+                />
+            )}
         />
+
     }
 
     if (type === SERVICE_TYPES.IMAGING_SCAN) {
-        return <div className={"flex flex-col gap-4"}>
-            <TextAreaInput
-                label={"Đối tượng được quan sát"}
-                error={errors.focus}
+        return <div className="flex flex-col gap-4">
+
+            {/* Đối tượng được quan sát */}
+            <Controller
+                name="focus"
+                control={control}
                 defaultValue={serviceReport.imagingReport?.focus ?? ""}
-                suggestions={SUGGESTIONS.FOCUS_IMAGING}
-                {...register("focus", {
+                rules={{
                     validate: (v) => v.trim() !== "" || "Trường này không được để trống",
-                })}
+                }}
+                render={({ field, fieldState }) => (
+                    <TextAreaInput
+                        label="Đối tượng được quan sát"
+                        suggestions={SUGGESTIONS.FOCUS_IMAGING}
+                        value={field.value}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        error={fieldState.error}
+                    />
+                )}
             />
-            <TextAreaInput
-                label={"Diễn giải kết quả"}
-                error={errors.interpretation}
-                defaultValue={serviceReport.imagingReport?.interpretation}
-                suggestions={SUGGESTIONS.INTERPRETATION_IMAGING_REPORT}
-                {...register("interpretation", {
+
+            {/* Diễn giải kết quả */}
+            <Controller
+                name="interpretation"
+                control={control}
+                defaultValue={serviceReport.imagingReport?.interpretation ?? ""}
+                rules={{
                     validate: (v) => v.trim() !== "" || "Trường này không được để trống",
-                })}
+                }}
+                render={({ field, fieldState }) => (
+                    <TextAreaInput
+                        label="Diễn giải kết quả"
+                        suggestions={SUGGESTIONS.INTERPRETATION_IMAGING_REPORT}
+                        value={field.value}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        error={fieldState.error}
+                    />
+                )}
             />
+
         </div>
+
     }
 
     return <div/>;

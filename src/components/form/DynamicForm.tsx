@@ -83,6 +83,7 @@ export default function DynamicForm({
                 items={serviceReport?.assessmentResults ?? []}
                 errors={errors}
                 register={register}
+                control={control}
             />
 
             <RenderFormServiceType

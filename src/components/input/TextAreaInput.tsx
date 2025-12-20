@@ -1,4 +1,4 @@
-import React, {type TextareaHTMLAttributes, useState} from "react";
+import React, {type TextareaHTMLAttributes, useEffect, useState} from "react";
 import type {FieldError} from "react-hook-form";
 
 interface TextAreaInputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -18,8 +18,19 @@ export function TextAreaInput({
                                   ...props
                               }: TextAreaInputProps) {
     const [filtered, setFiltered] = useState<string[]>([]);
-    const [text, setText] = useState(defaultValue ?? "");
     const [highlightIndex, setHighlightIndex] = useState(-1);
+
+    useEffect(() => {
+        if (defaultValue) {
+            if (props.onChange) {
+                const event = {
+                    target: { name: props.name, value: defaultValue }
+                } as React.ChangeEvent<HTMLTextAreaElement>;
+
+                props.onChange(event);
+            }
+        }
+    }, []);
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (filtered.length === 0) return;
@@ -55,7 +66,6 @@ export function TextAreaInput({
         props.onChange?.(e);
 
         const v = e.target.value;
-        setText(v);
 
         const lastWord = v.split(/\s+/).pop()?.toLowerCase() ?? "";
 
@@ -71,11 +81,11 @@ export function TextAreaInput({
     };
 
     const chooseSuggestion = (s: string) => {
-        const parts = text.split(/\s+/);
+        const text = props.value ?? "";
+        const parts = text.toString().split(/\s+/);
         parts.pop();
         const newText = [...parts, s].join(" ");
 
-        setText(newText);
         setFiltered([]);
 
         if (props.onChange) {
@@ -98,7 +108,7 @@ export function TextAreaInput({
                 className={`text-sm w-full h-20 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400 ${
                     error ? "border-red-500" : ""
                 }`}
-                value={text}
+                value={props.value ?? ""}
                 onKeyDown={handleKeyDown}
                 onChange={handleChange}
             />

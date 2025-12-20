@@ -37,7 +37,6 @@ export default function CreateSpecialistAppointmentForm(
         watch,
         formState: {errors, isSubmitting},
         reset,
-        register,
     } = useForm<AddSpecialistAppointmentInputs>();
 
     const [physicianOptions, setPhysicianOptions] = useState<Option[]>([]);
@@ -189,11 +188,19 @@ export default function CreateSpecialistAppointmentForm(
                         </div>
                     </div>
                     <div>
-                        <TextAreaInput
-                            label={"Đề nghị"}
-                            error={errors.request}
-                            suggestions={SUGGESTIONS.REQUEST_SPECIALIST_APPOINTMENT}
-                            {...register("request", { required: "Không được để trống" })}
+                        <Controller
+                            control={control}
+                            name="request"
+                            rules={{ required: "Không được để trống" }}
+                            render={({ field }) => (
+                                <TextAreaInput
+                                    label="Đề nghị"
+                                    error={errors.request}
+                                    suggestions={SUGGESTIONS.REQUEST_SPECIALIST_APPOINTMENT}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
                         />
                     </div>
                 </div>
