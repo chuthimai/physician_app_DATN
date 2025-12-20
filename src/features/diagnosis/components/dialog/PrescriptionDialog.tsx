@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {MedicationsContext} from "@/providers/medications/MedicationsContext.tsx";
-import {type SubmitHandler, useForm} from "react-hook-form";
+import {Controller, type SubmitHandler, useForm} from "react-hook-form";
 import {useToast} from "@/lib/utils/useToast.ts";
 import {Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
 import ButtonSave from "@/components/button/ButtonSave.tsx";
@@ -29,9 +29,9 @@ export default function PrescriptionDialog({ open, onOpenChange }: Props) {
     const {createPrescription, error} = usePrescription();
 
     const {
-        register,
         handleSubmit,
-        formState: {errors, isSubmitting},
+        formState: {isSubmitting},
+        control,
         reset,
     } = useForm<PrescriptionInputs>();
     const {showToastError} = useToast();
@@ -68,14 +68,21 @@ export default function PrescriptionDialog({ open, onOpenChange }: Props) {
                 <DialogHeader>
                     <DialogTitle>Đơn thuốc</DialogTitle>
                     <PrescriptionTable onOpenChange={onOpenChange}/>
-                    <TextAreaInput
-                        label={"Lời dặn của bác sỹ"}
-                        error={errors.note}
-                        className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
-                        suggestions={SUGGESTIONS.PRESCRIPTION}
-                        {...register("note", {
-                            validate: () => true,
-                        })}
+
+                    <Controller
+                        name="note"
+                        control={control}
+                        defaultValue="Dùng theo đúng chỉ dẫn, nếu có bất thường đến bệnh viện khám lại ngay"        // default khi tạo mới
+                        render={({ field, fieldState }) => (
+                            <TextAreaInput
+                                label="Lời dặn của bác sỹ"
+                                error={fieldState.error}
+                                suggestions={SUGGESTIONS.PRESCRIPTION}
+                                value={field.value}
+                                onChange={field.onChange}
+                                onBlur={field.onBlur}
+                            />
+                        )}
                     />
                 </DialogHeader>
                 <div className="grid gap-4">

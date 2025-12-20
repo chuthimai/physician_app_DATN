@@ -9,5 +9,6 @@ export interface PatientRecordResponse {
     createdTime: Date,
     serviceReports?: ServiceReportResponse[],
     prescription?: Prescription,
+    prescriptionIdentifier?: number,
     exportFileName?: string,
 }

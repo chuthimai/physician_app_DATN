@@ -10,9 +10,11 @@ import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordId
 import {useService} from "@/features/add_services/hooks/useService.ts";
 import type {AddServiceParams, ServiceInfo} from "@/features/add_services/types/AddServiceParams.ts";
 import {PatientContext} from "@/providers/patient/PatientContext.tsx";
+import {PatientRecordStateContext} from "@/providers/patient_record/PatientRecordStateContext.tsx";
 
 export default function AddServicesPage() {
     const patientContext = useContext(PatientContext);
+    const patientRecordStateContext = useContext(PatientRecordStateContext);
     const servicesContext = useContext(ServicesContext);
     const recordIdContext = useContext(PatientRecordIdContext);
     const {addService} = useService();
@@ -48,6 +50,12 @@ export default function AddServicesPage() {
     if (!patientContext?.patient) {
         return <div className="w-full h-full flex items-center justify-center">
             Chưa xác định bệnh nhân
+        </div>
+    }
+
+    if (patientRecordStateContext?.isClose) {
+        return <div className="w-full h-full flex items-center justify-center">
+            Bệnh án này đã đóng, không thể thêm dịch vụ
         </div>
     }
 

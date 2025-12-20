@@ -4,7 +4,11 @@ import {MenuItem} from "./MenuItem.tsx";
 import {useContext} from "react";
 import {UserContext} from "@/providers/user/UserContext.tsx";
 
-export default function DiagnosisMenu() {
+type DiagnosisMenuProps = {
+    isActive?: boolean;
+}
+
+export default function DiagnosisMenu({isActive=true} : DiagnosisMenuProps) {
     const userContext = useContext(UserContext);
     const role = userContext?.user?.role || "";
     const items = getDiagnosisMenus(role);
@@ -12,13 +16,24 @@ export default function DiagnosisMenu() {
     const navigate = useNavigate();
 
     return <div className="flex gap-4">
-        {items.map((item) => (
-            <MenuItem
-                label={item.label}
-                active={activePath === item.path}
-                onClick={() => navigate(item.path)}
-                key={item.label}
-            />
-        ))}
+        {items.map((item) => {
+            if (item.label === "Hẹn tái khám") return (
+                <MenuItem
+                    label={item.label}
+                    active={activePath === item.path}
+                    onClick={() => navigate(item.path)}
+                    key={item.label}
+                />
+            );
+            return (
+                <MenuItem
+                    label={item.label}
+                    active={activePath === item.path}
+                    disabled={!isActive}
+                    onClick={() => navigate(item.path)}
+                    key={item.label}
+                />
+            );
+        })}
     </div>
 }

@@ -196,14 +196,24 @@ export default function PrescribedMedicationForm() {
 
                 {/* Cách dùng */}
                 <div className="col-span-12">
-                    <TextAreaInput
-                        label="Cách dùng"
-                        className={"w-full h-30 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"}
-                        suggestions={SUGGESTIONS.DOSAGE_INSTRUCTION}
-                        error={errors.dosageInstruction}
-                        {...register("dosageInstruction", {
+                    <Controller
+                        name="dosageInstruction"
+                        control={control}
+                        defaultValue={`Ngày uống ... lần, mỗi lần ... sau/trước ăn`}    // hoặc default từ data
+                        rules={{
                             validate: (v) => v.trim() !== "" || "Trường này không được để trống",
-                        })}
+                        }}
+                        render={({ field, fieldState }) => (
+                            <TextAreaInput
+                                label="Cách dùng"
+                                className="w-full h-30 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
+                                suggestions={SUGGESTIONS.DOSAGE_INSTRUCTION}
+                                value={field.value}
+                                onChange={field.onChange}
+                                onBlur={field.onBlur}
+                                error={fieldState.error}
+                            />
+                        )}
                     />
                 </div>
             </div>

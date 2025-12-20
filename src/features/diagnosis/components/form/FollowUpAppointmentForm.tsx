@@ -44,7 +44,7 @@ export default function FollowUpAppointmentForm() {
                 patientContext.patient.identifier >= 10 ** 13 ?
                     "" : toTwelveDigitString(patientContext?.patient?.identifier),
             name: !patientContext?.patient?.name ? "" : patientContext.patient.name,
-            dob: !patientContext?.patient?.birthDate ? "" : patientContext.patient.birthDate.toISOString(),
+            dob: !patientContext?.patient?.birthDate ? "" : new Date(patientContext.patient.birthDate).toISOString(),
             gender: patientContext?.patient?.gender ? "male" : "female" ,
             address: !patientContext?.patient?.address ? "" : patientContext.patient.address,
             doctorNote:
@@ -184,10 +184,22 @@ export default function FollowUpAppointmentForm() {
                 </div>
 
                 <div className="col-span-12">
-                    <TextAreaInput
-                        label="Chẩn đoán"
-                        error={errors.diagnosis}
-                        {...register("diagnosis", { required: "Không được để trống" })}
+                    <Controller
+                        name="diagnosis"
+                        control={control}
+                        defaultValue=""
+                        rules={{
+                            required: "Không được để trống",
+                        }}
+                        render={({ field, fieldState }) => (
+                            <TextAreaInput
+                                label="Chẩn đoán"
+                                value={field.value}
+                                onChange={field.onChange}
+                                onBlur={field.onBlur}
+                                error={fieldState.error}
+                            />
+                        )}
                     />
                 </div>
 
@@ -228,13 +240,22 @@ export default function FollowUpAppointmentForm() {
                 </div>
 
                 <div className="col-span-12">
-                    <TextAreaInput
-                        className={"w-full h-40 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"}
-                        label="Lời dặn của bác sĩ"
-                        error={errors.doctorNote}
-                        defaultValue={"" +
-                            "Giấy hẹn tái khám có giá trị sử dụng 01 lần trong thời gian 10 ngày làm , kể từ ngày hẹn khám lại."}
-                        {...register("doctorNote")}
+                    <Controller
+                        name="doctorNote"
+                        control={control}
+                        defaultValue={
+                            "Giấy hẹn tái khám có giá trị sử dụng 01 lần trong thời gian 10 ngày làm , kể từ ngày hẹn khám lại."
+                        }
+                        render={({ field, fieldState }) => (
+                            <TextAreaInput
+                                className="w-full h-40 border px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-dark-400"
+                                label="Lời dặn của bác sĩ"
+                                value={field.value}
+                                onChange={field.onChange}
+                                onBlur={field.onBlur}
+                                error={fieldState.error}
+                            />
+                        )}
                     />
                 </div>
             </div>

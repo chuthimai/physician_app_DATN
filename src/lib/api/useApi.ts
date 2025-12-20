@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { axiosClient } from "../../api/axiosClient.ts";
+import { axiosClient } from "@/api/axiosClient.ts";
 import type { AxiosError } from "axios";
 import {useToast} from "@/lib/utils/useToast.ts";
 
@@ -8,7 +8,7 @@ type ApiError = {
     statusCode: number;
 };
 
-export function useApi<T>() {
+export function useApi<TResponse, TBody = unknown, TParams = unknown>() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<ApiError | null>(null);
     const {showToastError} = useToast();
@@ -48,13 +48,13 @@ export function useApi<T>() {
         async (
             method: "get" | "post" | "put" | "delete",
             url: string,
-            data?: unknown,
-            params?: Record<string, unknown>
+            data?: TBody,
+            params?: TParams,
         ) => {
             setLoading(true);
             setError(null);
             try {
-                const res = await axiosClient.request<T>({
+                const res = await axiosClient.request<TResponse>({
                     method,
                     url,
                     data,

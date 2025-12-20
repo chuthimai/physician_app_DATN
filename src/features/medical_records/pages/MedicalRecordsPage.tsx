@@ -38,8 +38,6 @@ export default function MedicalRecordsPage() {
             setMedicalRecords([]);
             return
         }
-        console.log("1 >>>>>>>");
-        console.log(medicalRecords);
         const uniqueHospitals = Array.from(
             new Map(
                 medicalRecords.map(e => [e.hospital.identifier, e.hospital])
