@@ -57,5 +57,6 @@ export const ENDPOINTS = {
     // Prescription
     CREATE_PRESCRIPTION: "medicines/prescriptions",
     GET_ALL_MEDICINE: "medicines",
+    GET_PRESCRIPTION_BY_ID: "medicines/prescriptions",
 
 }

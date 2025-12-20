@@ -29,13 +29,10 @@ export default function DiagnosisPage() {
         if (!patientRecordId) return;
         if (patientRecordIdContext?.patientRecordId === undefined) return;
         const data = await getDetailMedicalRecord();
-        console.log("1.1 >>>>>>>");
-        console.log(data?.status);
         patientRecordStateContext?.setPatientRecordState(data?.status);
     }
 
     useEffect(() => {
-        console.log("1 >>>>>>>");
         fetchDetailMedicalRecord().then(() => null);
     }, [patientRecordId]);
 

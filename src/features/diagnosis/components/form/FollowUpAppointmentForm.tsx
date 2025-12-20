@@ -44,7 +44,7 @@ export default function FollowUpAppointmentForm() {
                 patientContext.patient.identifier >= 10 ** 13 ?
                     "" : toTwelveDigitString(patientContext?.patient?.identifier),
             name: !patientContext?.patient?.name ? "" : patientContext.patient.name,
-            dob: !patientContext?.patient?.birthDate ? "" : patientContext.patient.birthDate.toISOString(),
+            dob: !patientContext?.patient?.birthDate ? "" : new Date(patientContext.patient.birthDate).toISOString(),
             gender: patientContext?.patient?.gender ? "male" : "female" ,
             address: !patientContext?.patient?.address ? "" : patientContext.patient.address,
             doctorNote:
