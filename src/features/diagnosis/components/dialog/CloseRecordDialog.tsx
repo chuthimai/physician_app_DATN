@@ -48,12 +48,11 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
     } = useForm();
     const {closePatientRecord} = useClosePatientRecord();
 
-    const onSubmit = async () => {
-        patientRecordStateContext?.setPatientRecordState(true);
+    const isClosable = () => {
         if (patientRecord?.status == true) {
             showToastError("Bệnh án đã đóng");
             onOpenChange(false);
-            return;
+            return false;
         }
         if (patientRecord?.serviceReports) {
             let checkServiceDone = true;
@@ -67,9 +66,15 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
                 showToastError("Chưa thực hiện xong dịch vụ");
                 onOpenChange(false);
                 patientRecordStateContext?.setPatientRecordState(false);
-                return;
+                return false;
             }
         }
+        return true;
+    }
+
+    const onSubmit = async () => {
+        patientRecordStateContext?.setPatientRecordState(true);
+        if (!isClosable()) return;
 
         // TODO: Thêm thông báo thành công vì chắc chắn sẽ đc xử lý
         onOpenChange(false);
