@@ -55,11 +55,20 @@ export default function ServiceForm() {
     };
 
     useEffect(() => {
-        if (selectedServiceType === undefined || selectedServiceType === "--- Tất cả ---") {
-            fetchServices().then(() => null);
-        } else {
-            fetchServices(selectedServiceType).then(() => null);
-        }
+        fetchServices().then(() => null);
+    }, []);
+
+    useEffect(() => {
+        const options: Option[] = services
+            .filter((s) => {
+                if (s.type === "--- Tất cả ---") return true;
+                return s.type === selectedServiceType;
+            })
+            .map((s) => ({
+            label: s.name,
+            value: s.identifier.toString(),
+        }));
+        setServiceOptions(options);
     }, [selectedServiceType]);
 
     const onSubmit: SubmitHandler<AddServiceInputs> = async (data) => {
