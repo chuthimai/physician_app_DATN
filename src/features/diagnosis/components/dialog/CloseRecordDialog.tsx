@@ -29,7 +29,7 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
     const patientRecordStateContext = useContext(PatientRecordStateContext);
 
     const {loading, getDetailMedicalRecord} = useDetailMedicalRecord();
-    const {showToastError, showToastSuccess} = useToast();
+    const {showToastError} = useToast();
 
     const fetchDetailMedicalRecord = async () => {
         if (!open) return;
@@ -76,9 +76,9 @@ export function CloseRecordDialog({open, onOpenChange}: CloseRecordDialogProps) 
         patientRecordStateContext?.setPatientRecordState(true);
         if (!isClosable()) return;
 
-        // TODO: Thêm thông báo thành công vì chắc chắn sẽ đc xử lý
+        // TODO: Server khi nhận đc tin sẽ trả về luôn, đưa request vào hàng đợi.
+        //  Ở đây coi như khi server nhận đc thì chắc chắn sẽ thực hiện đóng thành công
         onOpenChange(false);
-        showToastSuccess("Đóng bệnh án thành công");
         await closePatientRecord();
     }
 
