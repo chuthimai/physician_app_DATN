@@ -13,15 +13,17 @@ export const useClosePatientRecord = () => {
 
     const closePatientRecord = async () => {
         if (!patientRecordIdContext?.patientRecordId) {
-            return
+            return false;
         }
         try {
             await request("post", `${ENDPOINTS.CLOSE_RECORDS}/${patientRecordIdContext?.patientRecordId}`);
             showToastSuccess("Đóng bệnh án thành công");
+            return true;
         } catch (e) {
-            if (!(e instanceof Error)) return;
+            if (!(e instanceof Error)) return false;
             log.error(`closePatientRecord: ${e.message}`);
             showToastError("Đóng bệnh án thất bại");
+            return false;
         }
     };
 

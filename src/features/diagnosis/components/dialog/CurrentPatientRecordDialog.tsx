@@ -12,7 +12,7 @@ import {PatientRecordIdContext} from "@/providers/patient_record/PatientRecordId
 import Loading from "@/components/loading/Loading.tsx";
 import CurrentPatientRecordResultView
     from "@/features/diagnosis/components/patient_record/CurrentPatientRecordResultView.tsx";
-import {PatientRecordStateContext} from "@/providers/patient_record/PatientRecordStateContext.tsx";
+// import {PatientRecordStateContext} from "@/providers/patient_record/PatientRecordStateContext.tsx";
 
 interface CurrentPatientRecordDialogProps {
     open: boolean;
@@ -25,14 +25,14 @@ export default function CurrentPatientRecordDialog({open, onOpenChange}: Current
     const patientRecordIdContext = useContext(PatientRecordIdContext);
     const {loading, getDetailMedicalRecord} = useDetailMedicalRecord();
 
-    const patientRecordStateContext = useContext(PatientRecordStateContext);
+    // const patientRecordStateContext = useContext(PatientRecordStateContext);
 
     const fetchDetailMedicalRecord = async () => {
         if (!open) return;
         if (patientRecordIdContext?.patientRecordId === undefined) return;
         const data = await getDetailMedicalRecord();
         setPatientRecord(data);
-        patientRecordStateContext?.setPatientRecordState(data?.status);
+        // patientRecordStateContext?.setPatientRecordState(data?.status);
     }
 
     useEffect(() => {
@@ -68,3 +68,7 @@ export default function CurrentPatientRecordDialog({open, onOpenChange}: Current
         </Dialog>
     </div>
 }
+
+// TODO: Những phần comment là khi xem bệnh án hiện tại nếu chưa đóng
+//  thì set trạng thái có thể đóng tuy nhiên sẽ gây ra request thừa nếu
+//  request đang ở trong hàng đợi
