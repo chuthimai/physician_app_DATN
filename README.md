@@ -1,4 +1,5 @@
 # Physician App
+
 Ứng dụng này sử dụng trong công việc khám chữa bệnh của bác sĩ.
 
 ## Tính năng chính
@@ -11,6 +12,7 @@
     - **Bác sĩ chẩn đoán hình ảnh (Imaging Physician)**: Thực hiện kỹ thuật, nhập kết quả hình ảnh.
 
 ## Cấu trúc thư mục kiểu feature-based architecture (tổ chức theo tính năng)
+
 ```aiignore
 src/
 ├── features/
@@ -54,36 +56,82 @@ src/
 ├── stores/                        # Zustand/Redux store
 └── app.tsx
 ```
+
 ## Rule code
+
 - Code chia theo các features với ý nghĩa như sơ đồ trên
 - Để gọi API:
-  - Cần code hook để gọi API riêng cho từng tính năng (sử dụng lại hookApi chung trong src/hooks)
-  - Kiểu dữ liệu nhận/gửi khai báo trong /types của từng tính năng
+    - Cần code hook để gọi API riêng cho từng tính năng (sử dụng lại hookApi chung trong src/hooks)
+    - Kiểu dữ liệu nhận/gửi khai báo trong /types của từng tính năng
 - Xử lý lỗi/loading:
-  - Xử lý lỗi trong hook
-  - Xử lý loading ở UI
+    - Xử lý lỗi trong hook
+    - Xử lý loading ở UI
+
+## Usecase tổng quan
+
+<img src="readme_assets/tổng quan hệ thống khám bệnh.jpg" width="500"/>
+
+## Sơ đồ lớp
+
+<img src="readme_assets/Class Diagram1.jpg" width="800"/>
+
+## CSDL trên server
+
+<img src="readme_assets/Entity Relationship Diagram2.jpg" width="800"/>
+
+## Sơ đồ triển khai
+
+| Sơ đồ triển khai chung                                                     | Sơ đồ triển khai chi tiết cho HIS                                   |
+|----------------------------------------------------------------------------|---------------------------------------------------------------------|
+| <img src="readme_assets/Deployment Diagram - Blockchain.jpg" width="300"/> | <img src="readme_assets/Deployment Diagram - HIS.jpg" width="500"/> | 
+
+## Kết quả sau khi chạy
+
+|                                 |                                 |
+|---------------------------------|---------------------------------|
+| ![1.png](readme_assets/1.png)   | ![2.png](readme_assets/2.png)   |
+| ![3.png](readme_assets/3.png)   | ![4.png](readme_assets/4.png)   |
+| ![5.png](readme_assets/5.png)   | ![6.png](readme_assets/6.png)   |
+| ![7.png](readme_assets/7.png)   | ![8.png](readme_assets/8.png)   |
+| ![9.png](readme_assets/9.png)   | ![10.png](readme_assets/10.png) |
+| ![11.png](readme_assets/11.png) | ![12.png](readme_assets/12.png) |
+| ![13.png](readme_assets/13.png) | ![14.png](readme_assets/14.png) |
+| ![15.png](readme_assets/15.png) | ![16.png](readme_assets/16.png) |
+| ![17.png](readme_assets/17.png) | ![18.png](readme_assets/18.png) |
+
+---
 
 ## Cài đặt & chạy dự án
+
 1. Clone repo
+
 ```bash
 git clone https://github.com/chuthimai/physician_app_DATN.git
 ```
+
 2. Cài dependencies
+
 ```bash
 npm install
 ```
+
 3. Tạo file môi trường
 
-    Cập nhật các giá trị trong .env:
+   Cập nhật các giá trị trong .env:
+
 ```text
 VITE_API_BASE_URL=...
 VITE_NODE_ENV=development
 ```
+
 4. Chạy dự án
+
 ```bash
 npm run dev
 ```
+
 5. Build production
+
 ```bash
 npm run build
 ```
